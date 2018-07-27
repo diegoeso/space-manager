@@ -1,0 +1,58 @@
+{
+  "_from": "@claviska/jquery-alertable",
+  "_id": "@claviska/jquery-alertable@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha1-4ot2K5TMc2zV/ru6khTaR7LKz88=",
+  "_location": "/@claviska/jquery-alertable",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@claviska/jquery-alertable",
+    "name": "@claviska/jquery-alertable",
+    "escapedName": "@claviska%2fjquery-alertable",
+    "scope": "@claviska",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@claviska/jquery-alertable/-/jquery-alertable-1.0.2.tgz",
+  "_shasum": "e28b762b94cc736cd5febbba9214da47b2cacfcf",
+  "_spec": "@claviska/jquery-alertable",
+  "_where": "/Users/diego/GDSoft/laravel/space-manager-v2",
+  "author": {
+    "name": "Cory LaViska"
+  },
+  "bugs": {
+    "url": "https://github.com/claviska/jquery-alertable/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "jquery": ">= 1.8.x"
+  },
+  "deprecated": false,
+  "description": "Minimal alert and confirmation alternatives.",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-help": "^1.6.1",
+    "gulp-jshint": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0"
+  },
+  "homepage": "https://github.com/claviska/jquery-alertable",
+  "license": "MIT",
+  "name": "@claviska/jquery-alertable",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claviska/jquery-alertable.git"
+  },
+  "version": "1.0.2"
+}

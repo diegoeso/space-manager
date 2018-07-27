@@ -1,0 +1,22 @@
+{
+  "name": "@claviska/jquery-alertable",
+  "description": "Minimal alert and confirmation alternatives.",
+  "version": "1.0.2",
+  "author": "Cory LaViska",
+  "homepage": "https://github.com/claviska/jquery-alertable",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claviska/jquery-alertable.git"
+  },
+  "dependencies": {
+    "jquery": ">= 1.8.x"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-help": "^1.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  }
+}

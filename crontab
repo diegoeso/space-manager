@@ -1,0 +1,1 @@
+* * * * * php /space-manager-v2/artisan schedule:run >> /dev/null 2>&1
