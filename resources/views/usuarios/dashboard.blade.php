@@ -310,6 +310,7 @@
         </div>
     </div>
 </div>
+{{-- Modal Solicitud --}}
 <div aria-labelledby="myModalLabel" class="modal fade" data-backdrop="static" data-keyboard="false" id="myModal" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -327,7 +328,7 @@
                             <strong>
                                 Nombre:
                             </strong>
-                            <p id="solicitante">
+                            <p class="lead" id="solicitante">
                             </p>
                         </div>
                     </div>
@@ -336,7 +337,7 @@
                             <strong>
                                 Espacio:
                             </strong>
-                            <p id="espacio">
+                            <p class="lead" id="espacio">
                             </p>
                         </div>
                     </div>
@@ -345,7 +346,7 @@
                             <strong>
                                 Actividad Academica:
                             </strong>
-                            <p id="actividadAcademica">
+                            <p class="lead" id="actividadAcademica">
                             </p>
                         </div>
                     </div>
@@ -354,7 +355,7 @@
                             <strong>
                                 Fecha de Inicio:
                             </strong>
-                            <p id="fechaInicio">
+                            <p class="lead" id="fechaInicio">
                             </p>
                         </div>
                     </div>
@@ -363,7 +364,7 @@
                             <strong>
                                 Fecha de Finalizacion:
                             </strong>
-                            <p id="fechaFin">
+                            <p class="lead" id="fechaFin">
                             </p>
                         </div>
                     </div>
@@ -372,7 +373,7 @@
                             <strong>
                                 Hora de Inicio:
                             </strong>
-                            <p id="horaInicio">
+                            <p class="lead" id="horaInicio">
                             </p>
                         </div>
                     </div>
@@ -381,7 +382,7 @@
                             <strong>
                                 Hora de Finalizacion:
                             </strong>
-                            <p id="horaFin">
+                            <p class="lead" id="horaFin">
                             </p>
                         </div>
                     </div>
@@ -399,7 +400,7 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- Modal Horario -->
 <div aria-labelledby="myModalLabel" class="modal fade" data-backdrop="static" data-keyboard="false" id="infoHorario" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

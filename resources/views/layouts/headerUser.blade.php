@@ -106,6 +106,7 @@
                         </li>
                     </ul>
                 </li>
+                {{--
                 <li class="dropdown user user-menu" style="margin-right: 10px;">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <img alt="User Image" class="user-image" src="{{ Storage::url(Auth::user()->foto) }}">
@@ -148,6 +149,64 @@
                                     <i class="fa fa-user">
                                     </i>
                                     Profile
+                                </a>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-danger btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out">
+                                    </i>
+                                    {{ __('Logout') }}
+                                </a>
+                                <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                --}}
+                <li class="dropdown user user-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <img alt="User Image" class="user-image" src="{{ Storage::url(Auth::user()->foto) }}">
+                            <span class="hidden-xs text-capitalize">
+                                {{ Auth::user()->nombre .' '. Auth::user()->apellidoP}}
+                            </span>
+                        </img>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="user-header">
+                            <img alt="User Image" class="img-circle" src="{{ Storage::url(Auth::user()->foto) }}">
+                                <p class="text-capitalize">
+                                    {{ Auth::user()->nombreCompleto }}
+                                    <small class="lead">
+                                        @switch(Auth::user()->tipoCuenta)
+                                          @case(0)
+                                              Administrador
+                                              @break
+                                          @case(1)
+                                              Responsable de Area
+                                              @break
+                                          @case(2)
+                                              Profesor
+                                              @break
+                                          @case(3)
+                                              Alumno
+                                              @break
+                                          @default
+                                              Tipo de Usuario no definido
+                                        @endswitch
+                                    </small>
+                                </p>
+                            </img>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a class="btn btn-primary btn-flat" href="{{ route('perfil') }}">
+                                    <i class="fa fa-user">
+                                    </i>
+                                    Perfil
                                 </a>
                             </div>
                             <div class="pull-right">
