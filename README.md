@@ -71,15 +71,18 @@ php artisan serve
 La ejecucion de las migraciones crean 4 tipos de usuarios
 
 ```
-[alumno@gmail.com]
-[profesor@gmail.com]
-[responsable@gmail.com]
-[admin@gmail.com]
+	alumno@gmail.com
+
+	profesor@gmail.com
+	
+	responsable@gmail.com
+	
+	admin@gmail.com
 ```
 
 ## Autor
 
-* **Diego Enrique Sánchez Ordoñez**  - (https://www.facebook.com/diego.enriqueSO)
+* **Diego Enrique Sánchez Ordoñez**  - https://www.facebook.com/diego.enriqueSO
 
 
 ## License
