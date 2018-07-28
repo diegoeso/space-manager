@@ -36,8 +36,8 @@ DB_DATABASE=space-manager
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-6.-Datos semilla para pruebas del sistema
-Ejecutar en terminal 
+6.-Datos semilla para pruebas del sistema ejecutar en terminal 
+
 ```
 php artisan migrate:install --seed   ó   php artisan migrate:refresh --seed
 ```
@@ -62,7 +62,7 @@ agregar la siguiente linea de codigo
 php artisan serve
 ```
 
-Abrir 
+#Abrir 
  > http://127.0.0.1:8000 
  
 
@@ -71,13 +71,13 @@ Abrir
 La ejecucion de las migraciones crean 4 tipos de usuarios
 
 ```
-alumno@gmail.com
-profesor@gmail.com
-responsable@gmail.com
-admin@gmail.com
+[alumno@gmail.com]
+[profesor@gmail.com]
+[responsable@gmail.com]
+[admin@gmail.com]
 ```
 
-## Authors
+## Autor
 
 * **Diego Enrique Sánchez Ordoñez**  - (https://www.facebook.com/diego.enriqueSO)
 
