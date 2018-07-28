@@ -44,8 +44,38 @@ trait Alertas
         return Toastr::success('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $solicitud->fechaInicio->format('l j F') . ' ' . $solicitud->horaInicio . '<br/>', '¡Aprobada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
     }
 
+    public function solicitudRechazadaAdmin($solicitud)
+    {
+        Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombre . ' ' . $solicitud->solicitanteAdmin->apellidoP . ' ' . $solicitud->solicitanteAdmin->apellidoM . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $solicitud->fechaInicio->format('l j F') . ' ' . $solicitud->horaInicio . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+    public function solicitudRechazadaUsu($solicitud)
+    {
+        Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitante->nombre . ' ' . $solicitud->solicitante->apellidoP . ' ' . $solicitud->solicitante->apellidoM . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '' . '<br/>' . 'Fecha: ' . $solicitud->fechaInicio->format('l j F') . ' ' . $solicitud->horaInicio . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+
+    public function solicitudCanceladaAdmin($solicitud)
+    {
+        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+
+    public function solicitudCanceladaUsu($solicitud)
+    {
+        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+
     public function solicitudAprobada()
     {
         return Toastr::success('¡Esta solicitud ya ha sido aprobada!', '¡Aprobada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+
+    public function solicitudRechazada()
+    {
+        Toastr::warning('La solicitud ya ha sido rechazada', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+    }
+
+    public function solicitudCancelada()
+    {
+        Toastr::warning('La solicitud ya ha sido cancelada', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        return back();
     }
 }

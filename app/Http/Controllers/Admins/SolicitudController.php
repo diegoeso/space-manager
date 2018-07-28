@@ -10,21 +10,20 @@ use App\Notificacion;
 use App\Services\PayUService\Exception;
 use App\Solicitud;
 use App\Traits\Alertas;
+use App\Traits\Email;
 use App\User;
 use App\Usuario;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Mail;
-use Toastr;
 use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
 {
 
     use Alertas;
-
+    use Email;
     public function __construct()
     {
         $this->middleware('auth');
@@ -375,11 +374,7 @@ class SolicitudController extends Controller
                         $this->notificacion($id);
                         $this->crearEvaluacion($solicitud->id);
                         try {
-                            Mail::send('mail.solicitudAprobada', $data, function ($message) use ($data) {
-                                $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-                                $message->to($data['email'], $data['nombre']);
-                                $message->subject('Solicitud');
-                            });
+                            $this->enviarEmailSolicitudAprobada($data);
                         } catch (\Exception $e) {
                             Log::notice('No se pudo enviar correo de notificacion a: ' . $usuario->nombre . ' ' . $usuario->apellidoP);
                             Log::critical('Error al conectar al servidor de correo  ' . $e->getMessage());
@@ -415,8 +410,6 @@ class SolicitudController extends Controller
                 $data['espacio']     = $espacio->nombre;
 
                 if ($solicitud->estado != 2) {
-                    $fechaI            = $solicitud->fechaInicio->format('l j F');
-                    $horaI             = $solicitud->horaInicio;
                     $solicitud->estado = 2;
                     $solicitud->motivo = 'Fechas y Horas translapadas';
                     $data['motivo']    = $solicitud->motivo;
@@ -424,17 +417,11 @@ class SolicitudController extends Controller
                         // notificacion
                         $id = $solicitud->id;
                         $this->notificacion($id);
-                        Mail::send('mail.solicitudRechazada', $data, function ($message) use ($data) {
-                            $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-                            $message->to($data['email'], $data['nombre']);
-                            $message->subject('Solicitud');
-                        });
-                        // Datos de users
+                        $this->enviarEmailSolicitudRechazada($data);
                         if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
-                            Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombre . ' ' . $solicitud->solicitanteAdmin->apellidoP . ' ' . $solicitud->solicitanteAdmin->apellidoM . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                            $this->solicitudRechazadaAdmin($solicitud);
                         } else {
-                            // Datos de usuarios
-                            Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitante->nombre . ' ' . $solicitud->solicitante->apellidoP . ' ' . $solicitud->solicitante->apellidoM . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '' . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                            $this->solicituAprobadaUsu($solicitud);
                         }
                     }
                 }
@@ -463,8 +450,6 @@ class SolicitudController extends Controller
         $data['espacio']     = $espacio->nombre;
 
         if ($solicitud->estado != 2) {
-            $fechaI            = $solicitud->fechaInicio->format('l j F');
-            $horaI             = $solicitud->horaInicio;
             $solicitud->estado = 2;
             $solicitud->motivo = $request->motivo;
             $data['motivo']    = $solicitud->motivo;
@@ -472,29 +457,22 @@ class SolicitudController extends Controller
                 $id = $solicitud->id;
                 $this->notificacion($id);
                 try {
-
-                    Mail::send('mail.solicitudRechazada', $data, function ($message) use ($data) {
-                        $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-                        $message->to($data['email'], $data['nombre']);
-                        $message->subject('Solicitud');
-                    });
+                    $this->enviarEmailSolicitudRechazada($data);
                 } catch (\Exception $e) {
                     Log::notice('No se pudo enviar correo de notificacion a: ' . $usuario->nombre . ' ' . $usuario->apellidoP);
                     Log::critical('Error al conectar al servidor de correo  ' . $e->getMessage());
-
                 }
-
                 if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
                     // datos de users
-                    Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                    $this->solicitudRechazadaAdmin($solicitud);
                 } else {
                     // datos de usuarios
-                    Toastr::warning('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Rechazada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                    $this->solicitudRechazadaUsu($solicitud);
                 }
                 return back();
             }
         }
-        Toastr::warning('La solicitud ya ha sido rechazada', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        $this->solicitudRechazada();
         return back();
     }
 
@@ -526,30 +504,23 @@ class SolicitudController extends Controller
                 $id = $solicitud->id;
                 $this->notificacion($id);
                 try {
-
-                    Mail::send('mail.solicitudCancelada', $data, function ($message) use ($data) {
-                        $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-                        $message->to($data['email'], $data['nombre']);
-                        $message->subject('Solicitud');
-                    });
+                    $this->enviarEmailSolicitudCancelada($data);
                 } catch (\Exception $e) {
                     Log::notice('No se pudo enviar correo de notificacion a: ' . $usuario->nombre . ' ' . $usuario->apellidoP);
                     Log::critical('Error al conectar al servidor de correo  ' . $e->getMessage());
                 }
-
                 if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
                     // datos de users
-                    Toastr::error('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                    $this->solicitudCanceladaAdmin($solicitud);
                 } else {
                     // datos de usuarios
-                    Toastr::error('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                    $this->solicitudCanceladaUsu($solicitud);
                 }
                 return back();
             }
         }
 
-        Toastr::warning('La solicitud ya ha sido cancelada', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
-        return back();
+        $this->solicitudCancelada();
     }
 
     public function crearEvaluacion($id)

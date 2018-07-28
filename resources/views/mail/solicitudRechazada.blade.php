@@ -45,7 +45,9 @@
                         ha sido rechazada por el siguiente motivo:
                         <br/>
                         <br/>
-                        <em class="text-justify">{{ $motivo }}</em>
+                        <em class="text-justify">
+                            {{ $motivo }}
+                        </em>
                     </p>
                     <br/>
                     <p class="lead text-center">
