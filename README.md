@@ -11,75 +11,78 @@ Sistema para el control y administracion de los espacios academicos para la Unid
 * PDO PHP Extension
 * Ctype PHP Extension
 * JSON PHP Extension
-
+* MySQL
 
 ### Instalación
+1.- Proyecto
 ```
 git clone https://github.com/diegoeso/space-manager.git 
 ```
+2.- Instalar
 Ubicarse en la carpeta del proyecto
 ```
 composer install
 ```
+3.- Configurar
+En caso de no existir crear el archivo ".env" en la raiz del proyecto
 
-And repeat
+4.- Crear llave de encriptación
+```
+php artisan key:generate
+```
+5.-Configurar Base de Datos
+```
+DB_DATABASE=space-manager
+DB_USERNAME=root
+DB_PASSWORD=
+```
+6.-Datos semilla para pruebas del sistema
+Ejecutar en terminal 
+```
+php artisan migrate:install --seed   ó   php artisan migrate:refresh --seed
+```
+El cual creara datos ficticios para comprobar el funcionamiento del sistema, no incluir "--seed" para agregar solo las tablas sin datos
+
+7.- Configurar CRONTAB para la ejecucion de las "schedule" (CRONJOB's)
+Ejecutar en la terminal:
+```
+crontab -e
+```
+agregar la siguiente linea de codigo 
+```
+* * * * * php /nombre-de-la-carpeta-del-proyecto/artisan schedule:run >> /dev/null 2>&1
+```
+
+## Ejecucion
+
+1.- Iniciar MySQL y Apache
+
+2.- Iniciar servidor de laravel
+```
+php artisan serve
+```
+
+Abrir 
+ > http://127.0.0.1:8000 
+ 
+
+### Iniciar el sistema
+
+La ejecucion de las migraciones crean 4 tipos de usuarios
 
 ```
-until finished
+alumno@gmail.com
+profesor@gmail.com
+responsable@gmail.com
+admin@gmail.com
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Diego Enrique Sánchez Ordoñez**  - (https://www.facebook.com/diego.enriqueSO)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
