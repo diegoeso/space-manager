@@ -62,7 +62,7 @@ agregar la siguiente linea de codigo
 php artisan serve
 ```
 
-#Abrir 
+3.- Abrir 
  > http://127.0.0.1:8000 
  
 
