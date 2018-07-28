@@ -19,13 +19,13 @@ Sistema para el control y administracion de los espacios academicos para la Unid
 git clone https://github.com/diegoeso/space-manager.git 
 ```
 2.- Instalar
-
+<br/>
 Ubicarse en la carpeta del proyecto
 ```
 composer install
 ```
 3.- Configurar
-
+<br/>
 En caso de no existir crear el archivo ".env" en la raiz del proyecto
 
 4.- Crear llave de encriptación
