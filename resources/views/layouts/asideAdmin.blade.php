@@ -405,8 +405,9 @@
             @endif
           
             {{-- Reportes --}}
+          {{--
             <li>
-                <a href="">
+                <a href="{{ route('reportes.index') }}">
                     <i class="fa fa-pie-chart">
                     </i>
                     <span>
@@ -414,6 +415,7 @@
                     </span>
                 </a>
             </li>
+            --}}
             {{-- Roles y permisos --}}
             @can('roles.index', Model::class)
             <li>

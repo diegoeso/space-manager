@@ -169,6 +169,7 @@
                 </a>
             </li>
             {{-- Reportes --}}
+            {{--
             <li>
                 <a href="#">
                     <i class="fa fa-pie-chart">
@@ -187,6 +188,7 @@
                     </span>
                 </a>
             </li>
+            --}}
         </ul>
     </section>
     <!-- /.sidebar -->

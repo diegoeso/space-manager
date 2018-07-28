@@ -1,27 +1,25 @@
 # Space Manager Unidad Academica Profesional Tianguistenco UAEMex
 
-One Paragraph of project description goes here
+Sistema para el control y administracion de los espacios academicos para la Unidad Academica Profesional Tianguistenco.
 
-## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Prerequerimientos
 
-### Prerequisites
+* Laravel
+* PHP >= 7.1.3
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Ctype PHP Extension
+* JSON PHP Extension
 
-What things you need to install the software and how to install them
 
+### Instalación
 ```
-Give examples
+git clone https://github.com/diegoeso/space-manager.git 
 ```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+Ubicarse en la carpeta del proyecto
 ```
-Give the example
+composer install
 ```
 
 And repeat

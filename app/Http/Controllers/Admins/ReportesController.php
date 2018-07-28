@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Solicitud;
+use DB;
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller
@@ -14,7 +16,9 @@ class ReportesController extends Controller
      */
     public function index()
     {
-
+        $graficas = Solicitud::select(DB::raw('count(*) as total, espacio_id'))
+            ->where('tipoRegistro', 0)->groupBy('espacio_id')->get();
+        return view('admins.reportes.index', compact('graficas'));
     }
 
     /**

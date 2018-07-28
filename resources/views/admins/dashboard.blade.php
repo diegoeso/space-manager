@@ -480,50 +480,6 @@
 
     });
     
-    // function calendarioEventos(calendario,carrera) {
-    //     $('#calendar'+calendario+'').fullCalendar({
-    //         defaultView: 'agendaWeek',
-    //         navLinks: true,
-    //         lang: 'es',
-    //         minTime: "07:00:00",
-    //         maxTime: "18:00:00",
-    //         hiddenDays: [ 0 ],
-    //         businessHours: {
-    //             start: '07:00', // hora final
-    //             end: '18:00', // hora inicial
-    //             dow: [ 1, 2, 3, 4, 5, 6 ] // dias de semana, 0=Domingo
-    //         },
-    //         header    : {
-    //             left  : 'prev,next today',
-    //             center: 'title',
-    //             right : 'month,agendaWeek,agendaDay,listWeek'
-    //         },
-            
-    //         buttonText: {
-    //             today: 'Hoy',
-    //             month: 'Mes',
-    //             week : 'Semana',
-    //             day  : 'Dia',
-    //             listWeek :'Lista'
-    //         },
-    //         events : '/admin/actividades/actividadesFullCalendar/'+carrera+'',
-    //         weekNumbers: true,
-    //         eventLimit: true, 
-    //         timeFormat: 'hh(:mm)t',
-    //         nowIndicator: true,
-    //         eventClick: function(calEvent, jsEvent, view) {
-    //             $('#infoActividad').html('');
-    //             $('#infoActividad').append('<p class="lead text-center">'+calEvent.title+'</p>');
-    //             // alert('Event: ' + calEvent.title);
-    //             // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-    //             // alert('View: ' + view.name);
-    //             $('#ModalAdd').modal('show');
-    //             // change the border color just for fun
-    //             // $(this).css('border-color', 'red');
-
-    //           }
-    //     }); 
-    // }
 
     function espaciosAcademicos(idA)
     {

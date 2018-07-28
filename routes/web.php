@@ -94,6 +94,8 @@ Route::prefix('admin')->group(function () {
     Route::get('solicitudes-elementos/{id}/aprobar', 'Admins\SolicitudElementosController@aprobar')->name('solicitudes-elementos.aprobar');
     Route::put('solicitudes-elementos/{id}/rechazar', 'Admins\SolicitudElementosController@rechazar')->name('solicitudes-elementos.rechazar');
     Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
+
+    Route::resource('reportes', 'Admins\ReportesController');
 });
 
 /**
