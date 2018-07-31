@@ -331,8 +331,6 @@ class SolicitudController extends Controller
         $espacio_id  = $solicitud->espacio_id;
         $estado      = $solicitud->estado;
 
-        // dd($solicitud);
-
         $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
             ->where('estado', $estado)
             ->where('espacio_id', $espacio_id)
@@ -343,85 +341,74 @@ class SolicitudController extends Controller
             ->where('estado', $estado)
             ->get();
 
-        foreach ($solicitudesPendientes as $solicitud) {
-            if ($solicitud->id == $id) {
-                $solicitud = Solicitud::find($id);
-                if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
-                    $usuario = User::find($solicitud->usuarioSolicitud);
-                } else {
-                    $usuario = Usuario::find($solicitud->usuarioSolicitud);
-                }
-                $espacio             = Espacio::find($solicitud->espacio_id);
-                $data['id']          = $usuario->id;
-                $data['nombre']      = $usuario->nombre;
-                $data['apellidoP']   = $usuario->apellidoP;
-                $data['email']       = $usuario->email;
-                $data['fechaInicio'] = $solicitud->fechaInicio;
-                $data['fechaFin']    = $solicitud->fechaFin;
-                $data['horaInicio']  = $solicitud->horaInicio;
-                $data['horaFin']     = $solicitud->horaFin;
-                $data['espacio']     = $espacio->nombre;
-                $data['motivo']      = $solicitud->motivo;
-
-                //que no esta aprobada aun
-                if ($solicitud->estado != 1) {
-                    $fechaI                     = $solicitud->fechaInicio->format('l j F');
-                    $horaI                      = $solicitud->horaInicio;
-                    $solicitud->estado          = 1;
-                    $solicitud->aproboSolicitud = Auth::user()->id;
-                    if ($solicitud->save()) {
-                        $id = $solicitud->id;
-                        $this->notificacion($id);
-                        $this->crearEvaluacion($solicitud->id);
+        foreach ($solicitudesPendientes as $solicitudP) {
+            if ($solicitudP->id == $id) {
+                $solicitudAprobada   = Solicitud::find($id);
+                $data['id']          = $solicitudAprobada->tipoUsuario($solicitudAprobada)->id;
+                $data['nombre']      = $solicitudAprobada->tipoUsuario($solicitudAprobada)->nombre;
+                $data['apellidoP']   = $solicitudAprobada->tipoUsuario($solicitudAprobada)->apellidoP;
+                $data['email']       = $solicitudAprobada->tipoUsuario($solicitudAprobada)->email;
+                $data['fechaInicio'] = $solicitudAprobada->fechaInicio;
+                $data['fechaFin']    = $solicitudAprobada->fechaFin;
+                $data['horaInicio']  = $solicitudAprobada->horaInicio;
+                $data['horaFin']     = $solicitudAprobada->horaFin;
+                $data['espacio']     = $solicitudAprobada->espacio->nombre;
+                if ($solicitudAprobada->estado != 1) {
+                    $solicitudAprobada->estado          = 1;
+                    $solicitudAprobada->aproboSolicitud = Auth::user()->id;
+                    if ($solicitudAprobada->save()) {
+                        $this->notificacion($solicitudAprobada->id);
+                        $this->crearEvaluacion($solicitudAprobada->id);
                         try {
                             $this->enviarEmailSolicitudAprobada($data);
                         } catch (\Exception $e) {
-                            Log::notice('No se pudo enviar correo de notificacion a: ' . $usuario->nombre . ' ' . $usuario->apellidoP);
+                            Log::notice('No se pudo enviar correo de notificacion a: ' . $solicitudAprobada->tipoUsuario($solicitudAprobada)->fullName);
                             Log::critical('Error al conectar al servidor de correo  ' . $e->getMessage());
                         }
-
-                        if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
+                        if ($solicitudAprobada->tipoUsuario == 0 || $solicitudAprobada->tipoUsuario == 1) {
                             // datos de users
-                            $this->solicituAprobadaAdmin($solicitud);
+                            $this->solicituAprobadaAdmin($solicitudAprobada);
                         } else {
                             // datos de usuarios
-                            $this->solicituAprobadaUsu($solicitud);
+                            $this->solicituAprobadaUsu($solicitudAprobada);
                         }
                     }
                 } else {
                     $this->solicitudAprobada();
                 }
-            } else {
-                $solicitud = Solicitud::find($solicitud->id);
-                $espacio   = Espacio::find($solicitud->espacio_id);
-                if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
-                    $usuario = User::find($solicitud->usuarioSolicitud);
-                } else {
-                    $usuario = Usuario::find($solicitud->usuarioSolicitud);
-                }
-                $data['id']          = $usuario->id;
-                $data['nombre']      = $usuario->nombre;
-                $data['apellidoP']   = $usuario->apellidoP;
-                $data['email']       = $usuario->email;
-                $data['fechaInicio'] = $solicitud->fechaInicio;
-                $data['fechaFin']    = $solicitud->fechaFin;
-                $data['horaInicio']  = $solicitud->horaInicio;
-                $data['horaFin']     = $solicitud->horaFin;
-                $data['espacio']     = $espacio->nombre;
+                break;
+            }
+        }
+        foreach ($solicitudesPendientes as $solicitudR) {
+            if ($solicitudR->id != $id) {
+                $solicitudRechazada  = Solicitud::find($solicitudR->id);
+                $data['id']          = $solicitudRechazada->tipoUsuario($solicitudRechazada)->id;
+                $data['nombre']      = $solicitudRechazada->tipoUsuario($solicitudRechazada)->nombre;
+                $data['apellidoP']   = $solicitudRechazada->tipoUsuario($solicitudRechazada)->apellidoP;
+                $data['email']       = $solicitudRechazada->tipoUsuario($solicitudRechazada)->email;
+                $data['fechaInicio'] = $solicitudRechazada->fechaInicio;
+                $data['fechaFin']    = $solicitudRechazada->fechaFin;
+                $data['horaInicio']  = $solicitudRechazada->horaInicio;
+                $data['horaFin']     = $solicitudRechazada->horaFin;
+                $data['espacio']     = $solicitudRechazada->espacio->nombre;
+                if ($solicitudRechazada->estado != 1) {
+                    $solicitudRechazada->estado = 2;
+                    $solicitudRechazada->motivo = 'Fechas y Horas translapadas';
+                    $data['motivo']             = $solicitudRechazada->motivo;
+                    if ($solicitudRechazada->save()) {
 
-                if ($solicitud->estado != 2) {
-                    $solicitud->estado = 2;
-                    $solicitud->motivo = 'Fechas y Horas translapadas';
-                    $data['motivo']    = $solicitud->motivo;
-                    if ($solicitud->save()) {
                         // notificacion
-                        $id = $solicitud->id;
-                        $this->notificacion($id);
-                        $this->enviarEmailSolicitudRechazada($data);
-                        if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
-                            $this->solicitudRechazadaAdmin($solicitud);
+                        $this->notificacion($solicitudRechazada->id);
+                        try {
+                            $this->enviarEmailSolicitudRechazada($data);
+                        } catch (\Exception $e) {
+                            Log::notice('No se pudo enviar correo de notificacion a: ' . $solicitudAprobada->tipoUsuario($solicitudAprobada)->fullName);
+                            Log::critical('Error al conectar al servidor de correo  ' . $e->getMessage());
+                        }
+                        if ($solicitudRechazada->tipoUsuario == 0 || $solicitudRechazada->tipoUsuario == 1) {
+                            $this->solicitudRechazadaAdmin($solicitudRechazada);
                         } else {
-                            $this->solicituAprobadaUsu($solicitud);
+                            $this->solicitudRechazadaUsu($solicitudRechazada);
                         }
                     }
                 }

@@ -30,4 +30,13 @@ trait Email
             $message->subject('Solicitud');
         });
     }
+
+    public function enviarEmailRegistro($data)
+    {
+        Mail::send('mail.register', $data, function ($message) use ($data) {
+            $message->from('contacto@gdsoft.com.mx', 'Space Manager');
+            $message->to($data['email'], $data['nombre']);
+            $message->subject('Confirmacion de Correo Electronico');
+        });
+    }
 }

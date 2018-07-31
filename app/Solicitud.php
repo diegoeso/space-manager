@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\User;
+use App\Usuario;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
 
@@ -118,6 +120,15 @@ class Solicitud extends Model
             default:
                 return 'Sin Carrera';
                 break;
+        }
+    }
+
+    public function tipoUsuario($solicitud)
+    {
+        if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
+            return $usuario = User::find($solicitud->usuarioSolicitud);
+        } else {
+            return $usuario = Usuario::find($solicitud->usuarioSolicitud);
         }
     }
 

@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Mensaje;
 use App\Solicitud;
 use App\SolicitudElementos;
+use App\Traits\Email;
 use App\Usuario;
 use Auth;
-use Mail;
 
 class HomeController extends Controller
 {
-
+    use Email;
     public function __construct()
     {
         $this->middleware('auth:usuario');
@@ -55,11 +55,7 @@ class HomeController extends Controller
             if ($usuario->envioEmail == 1) {
                 return view('mail.confirmacion', compact('usuario'));
             }
-            Mail::send('mail.register', $data, function ($message) use ($data) {
-                $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-                $message->to($data['email'], $data['nombre']);
-                $message->subject('Confirmacion de Correo Electronico');
-            });
+            $this->enviarEmailRegistro($data);
             $usuario->envioEmail = 1;
             $usuario->save();
             return view('mail.confirmacion', compact('usuario'));
@@ -94,11 +90,12 @@ class HomeController extends Controller
         $data['confirmacion']       = $usuario->confirmacion;
         $data['codigoConfirmacion'] = $usuario->codigoConfirmacion;
         $data['tipoCuenta']         = $usuario->tipoCuenta;
-        Mail::send('mail.register', $data, function ($message) use ($data) {
-            $message->from('contacto@gdsoft.com.mx', 'Space Manager');
-            $message->to($data['email'], $data['nombre']);
-            $message->subject('Confirmacion de Correo Electronico');
-        });
+        // Mail::send('mail.register', $data, function ($message) use ($data) {
+        //     $message->from('contacto@gdsoft.com.mx', 'Space Manager');
+        //     $message->to($data['email'], $data['nombre']);
+        //     $message->subject('Confirmacion de Correo Electronico');
+        // });
+        $this->enviarEmailRegistro($data);
         Toastr::success('¡Te hemos enviado un nuevo correo de confirmacion!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
         return back();
     }

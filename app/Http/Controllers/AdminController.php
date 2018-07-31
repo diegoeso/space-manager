@@ -78,39 +78,4 @@ class AdminController extends Controller
             return back();
         }
     }
-
-    // Guardar evento
-    public function store(Request $request)
-    {
-
-        $fechaInicio                    = date("Y-m-d", strtotime($request->fechaInicio));
-        $fechaFin                       = date("Y-m-d", strtotime($request->fechaFin));
-        $solicitud                      = new Solicitud;
-        $solicitud->fechaInicio         = $fechaInicio;
-        $solicitud->fechaFin            = $fechaFin;
-        $solicitud->permanente          = $request->permanente;
-        $solicitud->horaInicio          = $request->horaInicio;
-        $solicitud->horaFin             = $request->horaFin;
-        $solicitud->actividadAcademica  = $request->actividadAcademica;
-        $solicitud->asistentesEstimados = $request->asistentesEstimados;
-        $solicitud->usuarioSolicitud    = Auth::user()->id;
-        $solicitud->tipoUsuario         = Auth::user()->tipoCuenta;
-        $solicitud->espacio_id          = $request->espacio_id;
-        $solicitud->area_id             = $request->area_id;
-
-        // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
-        if ($solicitud->save()) {
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
-            }
-            $solicitud->elementosSolicitud()->sync($manyToMany);
-            Toastr::success('¡Registro exitoso!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
-            return back();
-        } else {
-            Toastr::error('¡Error al realizar el registro!', '¡Error!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
-            return back();
-        }
-    }
-
 }

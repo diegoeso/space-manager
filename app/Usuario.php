@@ -41,6 +41,7 @@ class Usuario extends Authenticatable
     {
         return $this->nombre . ' ' . $this->apellidoP . ' ' . $this->apellidoM;
     }
+
     public function solicitud()
     {
         return $this->hasMany(Solicitudes::class, 'usuarioSolicitud');
