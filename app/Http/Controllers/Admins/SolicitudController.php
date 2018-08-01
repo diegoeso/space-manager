@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Area;
+use App\Elemento;
 use App\Espacio;
 use App\Evaluaciones;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ use App\User;
 use App\Usuario;
 use Auth;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
@@ -85,6 +87,7 @@ class SolicitudController extends Controller
             $this->solicitudExistente();
             return back();
         }
+
         $solicitud                      = new Solicitud;
         $solicitud->fechaInicio         = $fechaInicio;
         $solicitud->fechaFin            = $fechaFin;
@@ -102,9 +105,15 @@ class SolicitudController extends Controller
         if ($solicitud->save()) {
             $manyToMany = array();
             for ($i = 0; $i < count($request->cantidad); $i++) {
+                // Restar elementos solicitados
+                $elemento              = Elemento::find($request->elemento_id[$i]);
+                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                $elemento->save();
+
                 $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
             }
             $solicitud->elementosSolicitud()->sync($manyToMany);
+
             $id = $solicitud->id;
             $this->notificacion($id);
             $this->registroExitoso();
@@ -134,32 +143,24 @@ class SolicitudController extends Controller
             $notificacion->save();
         }
 
-        $solicitud   = Solicitud::find($notificacion->solicitud->id);
-        $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
-        $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
-        $espacio_id  = $solicitud->espacio_id;
-        $estado      = $solicitud->estado;
+        $solicitud = Solicitud::find($notificacion->solicitud->id);
+
+        $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
+        $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
+        $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
+        $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
+        $data['espacio_id']  = $solicitud->espacio_id;
+        $data['estado']      = $solicitud->estado;
 
         $total = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
 
         $bandera = null;
-        if ($estado == 1 || $estado == 2 || $estado == 3) {
-
+        if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
             $bandera = 0;
             return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
         } else {
-            $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
-                ->where('estado', $estado)
-                ->where('espacio_id', $espacio_id)
-                ->whereBetween('horaInicio', [$horaInicio, $horaFin])
-                ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
-                ->where('espacio_id', $espacio_id)
-                ->where('estado', $estado)
-                ->where('fechaInicio', $fechaInicio)
-                ->get();
-            $bandera = 1;
+            $solicitudesPendientes = Solicitud::registroTranslapado($data);
+            $bandera               = 1;
             return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
         }
     }
@@ -173,32 +174,39 @@ class SolicitudController extends Controller
     public function show($id)
     {
 
-        $solicitud   = Solicitud::find($id);
-        $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
-        $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
-        $espacio_id  = $solicitud->espacio_id;
-        $estado      = $solicitud->estado;
+        $solicitud = Solicitud::find($id);
+        // $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
+        // $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
+        // $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
+        // $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
+        // $espacio_id  = $solicitud->espacio_id;
+        // $estado      = $solicitud->estado;
+        $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
+        $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
+        $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
+        $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
+        $data['espacio_id']  = $solicitud->espacio_id;
+        $data['estado']      = $solicitud->estado;
 
         $total = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
 
         $bandera = null;
-        if ($estado == 1 || $estado == 2 || $estado == 3) {
+        if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
             $bandera = 0;
             return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
         } else {
-            $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
-                ->where('estado', $estado)
-                ->where('espacio_id', $espacio_id)
-                ->whereBetween('horaInicio', [$horaInicio, $horaFin])
-                ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
-                ->where('espacio_id', $espacio_id)
-                ->where('estado', $estado)
-                ->where('fechaInicio', $fechaInicio)
-                ->get();
+            // $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
+            //     ->where('estado', $estado)
+            //     ->where('espacio_id', $espacio_id)
+            //     ->whereBetween('horaInicio', [$horaInicio, $horaFin])
+            //     ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
+            //     ->where('espacio_id', $espacio_id)
+            //     ->where('estado', $estado)
+            //     ->where('fechaInicio', $fechaInicio)
+            //     ->get();
             // dd($total);
-            $bandera = 1;
+            $solicitudesPendientes = Solicitud::registroTranslapado($data);
+            $bandera               = 1;
             return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
         }
     }
@@ -239,6 +247,14 @@ class SolicitudController extends Controller
         if ($solicitud->save()) {
             $manyToMany = array();
             for ($i = 0; $i < count($request->cantidad); $i++) {
+                $elemento    = Elemento::find($request->elemento_id[$i]);
+                $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
+                if (count($solicitados) > 0) {
+                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                }
+                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                $elemento->save();
+
                 $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
             }
             $solicitud->elementosSolicitud()->sync($manyToMany);
@@ -323,27 +339,19 @@ class SolicitudController extends Controller
     public function aprobar($id)
     {
         $solicitud = Solicitud::find($id);
-        // $solicitud   = Solicitud::where('id', $id);
-        $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
-        $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
-        $espacio_id  = $solicitud->espacio_id;
-        $estado      = $solicitud->estado;
 
-        $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
-            ->where('estado', $estado)
-            ->where('espacio_id', $espacio_id)
-            ->whereBetween('horaInicio', [$horaInicio, $horaFin])
-            ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
-            ->where('espacio_id', $espacio_id)
-            ->where('fechaInicio', $fechaInicio)
-            ->where('estado', $estado)
-            ->get();
-
+        $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
+        $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
+        $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
+        $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
+        $data['espacio_id']  = $solicitud->espacio_id;
+        $data['estado']      = $solicitud->estado;
+        // scope model Solicitud
+        $solicitudesPendientes = Solicitud::registroTranslapado($data);
         foreach ($solicitudesPendientes as $solicitudP) {
             if ($solicitudP->id == $id) {
-                $solicitudAprobada   = Solicitud::find($id);
+                $solicitudAprobada = Solicitud::find($id);
+                // Email
                 $data['id']          = $solicitudAprobada->tipoUsuario($solicitudAprobada)->id;
                 $data['nombre']      = $solicitudAprobada->tipoUsuario($solicitudAprobada)->nombre;
                 $data['apellidoP']   = $solicitudAprobada->tipoUsuario($solicitudAprobada)->apellidoP;
@@ -396,9 +404,9 @@ class SolicitudController extends Controller
                     $solicitudRechazada->motivo = 'Fechas y Horas translapadas';
                     $data['motivo']             = $solicitudRechazada->motivo;
                     if ($solicitudRechazada->save()) {
-
                         // notificacion
                         $this->notificacion($solicitudRechazada->id);
+
                         try {
                             $this->enviarEmailSolicitudRechazada($data);
                         } catch (\Exception $e) {
@@ -443,6 +451,13 @@ class SolicitudController extends Controller
             if ($solicitud->save()) {
                 $id = $solicitud->id;
                 $this->notificacion($id);
+                $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
+                foreach ($elementosSolicitados as $el) {
+                    $elemento              = Elemento::find($el->elemento_id);
+                    $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
+                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                    $elemento->save();
+                }
                 try {
                     $this->enviarEmailSolicitudRechazada($data);
                 } catch (\Exception $e) {
@@ -490,6 +505,13 @@ class SolicitudController extends Controller
             if ($solicitud->save()) {
                 $id = $solicitud->id;
                 $this->notificacion($id);
+                $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
+                foreach ($elementosSolicitados as $el) {
+                    $elemento              = Elemento::find($el->elemento_id);
+                    $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
+                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                    $elemento->save();
+                }
                 try {
                     $this->enviarEmailSolicitudCancelada($data);
                 } catch (\Exception $e) {
@@ -506,8 +528,8 @@ class SolicitudController extends Controller
                 return back();
             }
         }
-
         $this->solicitudCancelada();
+        return back();
     }
 
     public function crearEvaluacion($id)

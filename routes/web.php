@@ -96,8 +96,10 @@ Route::prefix('admin')->group(function () {
     Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
 
     Route::resource('reportes', 'Admins\ReportesController');
+
 });
 
+Route::get('pdf', 'Admins\PDFController@crearPDF');
 /**
  * Login para usuarios tipo Profesor y Alumnos
  */
@@ -136,6 +138,9 @@ Route::get('/admin/solicitudes/elementos-espacio/{id}', 'Admins\AJAXController@e
 Route::get('/admin/solicitudes/detalles/{id}', 'Admins\AJAXController@detallesSolicitud');
 Route::get('/admin/solicitudes/solicitudesFullCalendar/{estado}', 'Admins\AJAXController@solicitudesFullCalendar');
 Route::get('/admin/solicitudes/solicitudesFullCalendarUsuarios/{carrera}', 'Admins\AJAXController@solicitudesFullCalendarUsuarios');
+
+// actualizar inventario de elementos al eliminar elemento de la solicitud
+Route::get('/admin/solicitudes/editarElemento/{id}/cantidad/{cantidad}', 'Admins\AJAXController@editarElemento');
 
 Route::get('/admin/calendario/calendarioEscolar/{carrera}', 'Admins\AJAXController@calendarioEscolar');
 // Mostrar informacion de la solicitud seleccionada (usuarios)

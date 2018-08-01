@@ -38,7 +38,7 @@
          var mesI = fechaInicio.substring(3, 5);
          var diaF = fechaFin.substring(0, 2);
          var mesF = fechaFin.substring(3, 5);
-         console.log(diaI + ' ' + diaF + ' ' + mesI + ' ' + mesF);
+         // console.log(diaI + ' ' + diaF + ' ' + mesI + ' ' + mesF);
          if (diaF < diaI) {
              if (mesF <= mesI) {
                  toastr["warning"]('La fecha de finalizacion ' + fechaFin + ' no puede ser menor a la de inicio')
@@ -55,7 +55,7 @@
      });
      $("#area_id").change(function() {
          var idA = $('#area_id').val();
-         console.log('Area : ' + idA);
+         // console.log('Area : ' + idA);
          $('#datosEspacio').html('');
          $('#espacio_id').html('');
          $('#elementosEspacio').html('');
@@ -67,7 +67,7 @@
              $('#elementosEspacio').html('');
          }
          $('#elementosEspacio').html('');
-         console.log(value);
+         // console.log(value);
          infoEspacio(value);
          // elementosEspacio(value);
      });
@@ -87,10 +87,10 @@
              event.preventDefault();
              var idCategoria = $('#categoria_id' + cont + '').val();
              var idElemento = $('#elemento_id' + cont + '').val();
-             console.log('Categoria ' + idCategoria);
+             // console.log('Categoria ' + idCategoria);
              var id = $(this).attr("id");
              var res = id.substring(12);
-             console.log(res);
+             // console.log(res);
              $('#elemento_id' + res + '').html('');
              elementos(idCategoria, res);
          });
@@ -100,8 +100,8 @@
              var idElemento = $('#elemento_id' + cont + '').val();
              var id = $(this).attr("id");
              var res = id.substring(11);
-             console.log(id);
-             console.log(res);
+             // console.log(id);
+             // console.log(res);
              // $('#elemento_id'+res+'').html('');
              existenciasElementos(idElemento, res);
          });
@@ -119,7 +119,7 @@
          $('#cantidad' + cont + '').keyup(function(e) {
              if (isNaN(this.value + String.fromCharCode(e.charCode))) return false;
              $key = $('#cantidad' + cont + '').val();
-             console.log($key);
+             // console.log($key);
          }).on("cut copy paste", function(e) {
              e.preventDefault();
          });
@@ -142,7 +142,7 @@
          type: 'GET',
          dataType: 'JSON',
          success: function(data) {
-             console.log(data);
+             // console.log(data);
              $.each(data, function(i, item) {
                  $('#espacio_id').append('<option value=' + item.id + '>' + item.nombre + '</option>');
              });
@@ -158,7 +158,7 @@
          type: 'GET',
          dataType: 'json',
          success: function(data) {
-             console.log(data);
+             // console.log(data);
              $('#datosEspacio').append('<p class="lead">' + data.nombre + '</p><p>' + data.ubicacion + '</p><p>' + data.descripcion + '</p><p></p>');
              elementosEspacio(value);
          },
@@ -187,7 +187,7 @@
          type: 'GET',
          dataType: 'JSON',
          success: function(data) {
-             console.log(data);
+             // console.log(data);
              $.each(data, function(i, item) {
                  $('#categoria_id' + cont + '').append('<option value=' + item.id + '>' + item.nombre + '</option>');
              });
@@ -196,7 +196,7 @@
  }
 
  function elementos(idCategoria, res) {
-     console.log(res);
+     // console.log(res);
      $('#elemento_id' + res + '').html('');
      $('#elemento_id' + res + '').append('<option>Selecciona un Elemento</option>');
      $.ajax({
@@ -204,7 +204,7 @@
          type: 'GET',
          dataType: 'JSON',
          success: function(data) {
-             console.log(data);
+             // console.log(data);
              $.each(data, function(i, item) {
                  $('#elemento_id' + res + '').append('<option value=' + item.id + '>' + item.nombre + '</option>');
              });
@@ -219,8 +219,7 @@
          type: 'GET',
          dataType: 'JSON',
          success: function(data) {
-             console.log(data.cantidad);
-             $('#existencias' + res + '').val(data.cantidad);
+             $('#existencias' + res + '').val(data.existencias);
          }
      });
  }

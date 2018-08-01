@@ -15,7 +15,7 @@ class PDFController extends Controller
         $this->middleware('auth:usuario,web');
     }
 
-    public function creatPDF($id)
+    public function crearPDF()
     {
         $pdf = PDF::loadView('layouts.pdf');
         return $pdf->stream('archivo.pdf');

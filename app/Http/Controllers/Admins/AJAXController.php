@@ -67,7 +67,7 @@ class AJAXController extends Controller
         return DB::table('elemento_solicitud')
             ->join('elementos', 'elementos.id', '=', 'elemento_solicitud.elemento_id')
             ->join('categoria_elementos', 'categoria_elementos.id', '=', 'elementos.categoria_id')
-            ->select('elemento_solicitud.*', 'elementos.id as idE', 'elementos.nombre as nombreE', 'categoria_elementos.id as idC', 'categoria_elementos.nombre as nombreC', 'elementos.cantidad as existencias')
+            ->select('elemento_solicitud.*', 'elementos.id as idE', 'elementos.nombre as nombreE', 'categoria_elementos.id as idC', 'categoria_elementos.nombre as nombreC', 'elementos.existencias as existencias')
             ->where('solicitud_id', $id)
             ->get();
     }
@@ -254,6 +254,19 @@ class AJAXController extends Controller
             return Solicitud::with('solicitanteAdmin')->with('espacio')->where('id', $id)->first();
         } else {
             return Solicitud::with('solicitante')->with('espacio')->where('id', $id)->first();
+        }
+    }
+
+    // Actualizar elementos al eliminar elemento de solicitud
+    public function editarElemento($id, $cantidad)
+    {
+        $elemento              = Elemento::FindOrFail($id);
+        $elemento->existencias = $elemento->existencias + intval($cantidad);
+        $result                = $elemento->save();
+        if ($result) {
+            return response()->json(['success' => 'true']);
+        } else {
+            return response()->json(['success' => 'false']);
         }
     }
 

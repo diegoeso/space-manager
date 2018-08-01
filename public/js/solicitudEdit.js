@@ -27,7 +27,20 @@ $(document).ready(function() {
     // Eliminar formulario de registro
     $(document).on('click', '.btn_remove', function() {
         var button_id = $(this).attr("id");
-        $('#row' + button_id + '').remove();
+        var el = $('#elemento_id' + button_id + '').val();
+        var cantidad = $('#cantidad' + button_id + '').val();
+        $.ajax({
+            url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(data) {
+                if (data.success == 'true') {
+                    $('#row' + button_id + '').remove();
+                } else {
+                    toastr["error"]('¡No se devolvieron los elementos solicitados!');
+                }
+            }
+        });
     });
     // cierre del metodod e eliminar formulario
     var idE = $('#idSolicitud').val();
@@ -77,6 +90,7 @@ $(document).ready(function() {
         type: 'GET',
         dataType: 'JSON',
         success: function(datos) {
+            console.log(datos);
             $.each(datos, function(i, item) {
                 cont++;
                 $('#categoria_id' + cont + '').append('<option value=' + item.idC + '>' + item.nombreC + '</option>');
@@ -239,8 +253,8 @@ function existenciasElementos(idElemento, res) {
         type: 'GET',
         dataType: 'JSON',
         success: function(data) {
-            console.log(data.cantidad);
-            $('#existencias' + res + '').val(data.cantidad);
+            console.log(data.existencias);
+            $('#existencias' + res + '').val(data.existencias);
         }
     });
 }

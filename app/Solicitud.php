@@ -132,4 +132,17 @@ class Solicitud extends Model
         }
     }
 
+    public function scopeRegistroTranslapado($query, $data)
+    {
+        return $query->where('fechaInicio', $data['fechaInicio'])
+            ->where('estado', $data['estado'])
+            ->where('espacio_id', $data['espacio_id'])
+            ->whereBetween('horaInicio', [$data['horaInicio'], $data['horaFin']])
+            ->orwhereBetween('horaFin', [$data['horaInicio'], $data['horaFin']])
+            ->where('espacio_id', $data['espacio_id'])
+            ->where('estado', $data['estado'])
+            ->where('fechaInicio', $data['fechaInicio'])
+            ->get();
+    }
+
 }

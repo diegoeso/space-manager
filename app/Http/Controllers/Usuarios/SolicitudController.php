@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Area;
+use App\Elemento;
 use App\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Notificacion;
 use App\Solicitud;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Toastr;
 use Yajra\DataTables\DataTables;
@@ -84,14 +86,13 @@ class SolicitudController extends Controller
         if ($solicitud->save()) {
             $id = $solicitud->id;
             $this->notificacion($id);
-            // $notificacion               = new Notificacion;
-            // $notificacion->solicitud_id = $solicitud->id;
-            // $notificacion->uri          = 'solicitudes.ver';
-            // $notificacion->estado       = 0;
-            // $notificacion->save();
-
             $manyToMany = array();
             for ($i = 0; $i < count($request->cantidad); $i++) {
+
+                $elemento              = Elemento::find($request->elemento_id[$i]);
+                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                $elemento->save();
+
                 $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
             }
             $solicitud->elementosSolicitud()->sync($manyToMany);
@@ -158,6 +159,13 @@ class SolicitudController extends Controller
         if ($solicitud->save()) {
             $manyToMany = array();
             for ($i = 0; $i < count($request->cantidad); $i++) {
+                $elemento    = Elemento::find($request->elemento_id[$i]);
+                $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
+                if (count($solicitados) > 0) {
+                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                }
+                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                $elemento->save();
                 $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
             }
             $solicitud->elementosSolicitud()->sync($manyToMany);

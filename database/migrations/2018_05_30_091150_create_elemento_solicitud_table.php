@@ -18,6 +18,7 @@ class CreateElementoSolicitudTable extends Migration
             $table->integer('solicitud_id')->unsigned();
             $table->integer('elemento_id')->unsigned();
             $table->integer('cantidad')->unsigned()->nullable();
+            $table->boolean('estado')->default(false)->nullable();
             $table->foreign('solicitud_id')->references('id')
                 ->on('solicitudes')
                 ->onDelete('cascade')

@@ -55,12 +55,12 @@ trait Alertas
 
     public function solicitudCanceladaAdmin($solicitud)
     {
-        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitanteAdmin->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $solicitud->fechaInicio->format('l j F') . ' ' . $solicitud->horaInicio . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
     }
 
     public function solicitudCanceladaUsu($solicitud)
     {
-        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $fechaI . ' ' . $horaI . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        Toastr::error('Solicitud de' . ' ' . $solicitud->solicitante->nombreCompleto . '<br/>' . ' Espacio:  ' . $solicitud->espacio->nombre . '<br/>' . 'Fecha: ' . $solicitud->fechaInicio->format('l j F') . ' ' . $solicitud->horaInicio . '<br/>', '¡Cancelada!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
     }
 
     public function solicitudAprobada()
