@@ -53,13 +53,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6  col-sm-6 col-xs-12">
                 <a class="btn btn-link" href="{{ route('password.request') }}">
                     ¿Olvidaste tu contraseña?
                 </a>
             </div>
-            <div class="col-md-6">
-                <a href="{{ route('admin.login') }}" class="btn btn-link">Administrador</a>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <a href="{{ route('admin.login') }}" class="btn btn-link">Administrador / <br/> Responsable de Area</a>
             </div>
         </div>
     </form>

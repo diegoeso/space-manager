@@ -28,11 +28,12 @@ class User extends Authenticatable
         'telefono',
         'foto',
         'nombreCompleto',
+        'password',
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
     public function getFullNameAttribute()
     {

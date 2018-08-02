@@ -60,7 +60,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="" class="btn btn-link">Administrador</a>
+                <a href="" class="btn btn-link">Profesor / Alumno</a>
             </div>
         </div>
     </form>

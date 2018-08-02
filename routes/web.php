@@ -19,10 +19,13 @@ Route::prefix('admin')->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
 
     // Password Reset Routes...
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+    // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+    // Restablecer Contraseña
+
     /**
      * controlar para administrador y responsable de area
      */
@@ -98,6 +101,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('reportes', 'Admins\ReportesController');
 
 });
+// Restablecer contraseña
+Route::get('password/reset', 'Auth\RestablecerContraseñaController@showForm')->name('password.request');
+Route::post('password/email', 'Auth\RestablecerContraseñaController@enviarLink')->name('password.email');
 
 Route::get('pdf', 'Admins\PDFController@crearPDF');
 /**

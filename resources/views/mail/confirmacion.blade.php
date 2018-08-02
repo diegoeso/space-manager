@@ -218,17 +218,5 @@
         <script src="{{ asset('dist/js/demo.js') }}">
         </script>
         {!! Toastr::message() !!}
-        <script>
-            // $(document).ready(function($){
-            //     var ventana_ancho = $(window).width();
-            //     var ventana_alto = $(window).height();
-            //     // alert(ventana_ancho);
-            //     console.log(ventana_alto);
-
-            //     // var obj = document.getElementById('confirmar'); obj.style.height = ventana_alto+"px";
-            //     var obj = document.getElementById('imagen'); obj.style.height = ventana_alto+"px";
-            //     var obj = document.getElementById('fondo'); obj.style.height = ventana_alto+"px";
-            // });
-        </script>
     </body>
 </html>

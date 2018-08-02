@@ -5,57 +5,62 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
+                <div class="card-header">
+                    {{ __('Reset Password') }}
+                </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.request') }}">
+                    <form action="{{ route('password.request') }}" method="POST">
                         @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                        <input name="token" type="hidden" value="{{ $token }}">
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right" for="email">
+                                    {{ __('E-Mail Address') }}
+                                </label>
+                                <div class="col-md-6">
+                                    <input autofocus="" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" required="" type="email" value="{{ $email ?? old('email') }}">
+                                        @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $errors->first('email') }}
+                                            </strong>
+                                        </span>
+                                        @endif
+                                    </input>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right" for="password">
+                                    {{ __('Password') }}
+                                </label>
+                                <div class="col-md-6">
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" name="password" required="" type="password">
+                                        @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $errors->first('password') }}
+                                            </strong>
+                                        </span>
+                                        @endif
+                                    </input>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right" for="password-confirm">
+                                    {{ __('Confirm Password') }}
+                                </label>
+                                <div class="col-md-6">
+                                    <input class="form-control" id="password-confirm" name="password_confirmation" required="" type="password">
+                                    </input>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button class="btn btn-primary" type="submit">
+                                        {{ __('Reset Password') }}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </input>
                     </form>
                 </div>
             </div>

@@ -3,7 +3,6 @@
 @section('navegacion')
 <section class="content-header">
     <h1>
-        {{-- @include('general.tipoUsuario') --}}
         <small>
             Panel de Control
         </small>
@@ -30,7 +29,7 @@
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a aria-expanded="false" data-toggle="tab" href="#tab_1">
-                        Ingenieria en software
+                        Ingeniería en software
                     </a>
                 </li>
                 <li class="">
@@ -40,12 +39,12 @@
                 </li>
                 <li class="">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_3">
-                        Produccion Industrial
+                        Producción Industrial
                     </a>
                 </li>
                 <li class="">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_4">
-                        Ingenieria en Plasticos
+                        Ingeniería en Plásticos
                     </a>
                 </li>
                 <li class="pull-right">
@@ -105,7 +104,7 @@
                 <h4 class="modal-title" id="myModalLabel">
                     <i class="fa fa-calendar-check-o">
                     </i>
-                    Informacion
+                    Información
                 </h4>
             </div>
             <div class="box-body" id="infoActividad">

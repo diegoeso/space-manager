@@ -45,7 +45,7 @@
                                             Administrador
                                             @break
                                         @case(1)
-                                            Responsable de Area
+                                            Responsable de Área
                                             @break
                                         @case(2)
                                             Profesor
@@ -168,7 +168,7 @@
                         </div>
                         <p>
                             <strong>
-                                Actividad Academica:
+                                Actividad Académica:
                             </strong>
                             <br/>
                             {{ $solicitud->actividadAcademica }}
@@ -230,7 +230,7 @@
                     <div class="box-body">
                         @foreach ($solicitud->elementosSolicitud as $elemento)
                         <strong>
-                            Categoria:
+                            Categoría:
                         </strong>
                         {{ $elemento->categoriaElemento->nombre }}
                         <div class="row">
@@ -276,7 +276,7 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['solicitudes.cancelar' ,$solicitud->id],'method'=>'PUT'])!!}
                 <div class="form-group">
-                    {!! Form::label('motivo', 'Motivo de la Cancelacion', ['class'=>'control-label']) !!}
+                    {!! Form::label('motivo', 'Motivo de la Cancelación', ['class'=>'control-label']) !!}
                     {!! Form::textArea('motivo', null, ['class'=>'form-control','placeholder'=>'Motivo por el cual la solicitud es cancelada','size' => '30x4','id'=>'motivo']) !!}
                 </div>
                 <button class="btn btn-danger btn-block" type="submit">
@@ -370,7 +370,7 @@
                                             Administrador
                                             @break
                                         @case(1)
-                                            Responsable de Area
+                                            Responsable de Área
                                             @break
                                         @case(2)
                                             Profesor
@@ -489,7 +489,7 @@
                         </div>
                         <p>
                             <strong>
-                                Actividad Academica:
+                                Actividad Académica:
                             </strong>
                             <br/>
                             {{ $solicitud->actividadAcademica }}
@@ -561,7 +561,7 @@
                     <div class="box-body">
                         @foreach ($solicitud->elementosSolicitud as $elemento)
                         <strong>
-                            Categoria:
+                            Categoría:
                         </strong>
                         {{ $elemento->categoriaElemento->nombre }}
                         <div class="row">
@@ -607,7 +607,7 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['solicitudes.cancelar' ,$solicitud->id],'method'=>'PUT'])!!}
                 <div class="form-group">
-                    {!! Form::label('motivo', 'Motivo de la Cancelacion', ['class'=>'control-label']) !!}
+                    {!! Form::label('motivo', 'Motivo de la Cancelación', ['class'=>'control-label']) !!}
                     {!! Form::textArea('motivo', null, ['class'=>'form-control','placeholder'=>'Motivo por el cual la solicitud es cancelada','size' => '30x4','id'=>'motivo']) !!}
                 </div>
                 <button class="btn btn-danger btn-block" type="submit">

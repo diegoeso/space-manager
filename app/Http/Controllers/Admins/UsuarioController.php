@@ -166,9 +166,10 @@ class UsuarioController extends Controller
     {
         $usuarios = Usuario::all();
 
+        return view('admins.usuarios.index', compact('usuarios'));
+
         return Datatables::of($usuarios)
             ->editColumn('nombre', function ($usuarios) {
-                // return $usuarios->nombre . ' ' . $usuarios->apellidoP . ' ' . $usuarios->apellidoM;
                 return $usuarios->FullName;
             })
 

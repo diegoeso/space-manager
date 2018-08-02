@@ -31,11 +31,12 @@ class Usuario extends Authenticatable
         'confirmacion',
         'codigoConfirmacion',
         'envioEmail',
+        'password',
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
     public function getFullNameAttribute()
     {
