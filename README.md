@@ -83,13 +83,13 @@ php artisan serve
 La ejecución de las migraciones crean 4 tipos de usuarios
 
 ```
-	alumno@gmail.com
+	alumno@gdsoft.com.mx
 
-	profesor@gmail.com
+	profesor@gdsoft.com.mx
 	
-	responsable@gmail.com
+	responsable@gdsoft.com.mx
 	
-	admin@gmail.com
+	admin@gdsoft.com.mx
 
 ```
 > password: secret
