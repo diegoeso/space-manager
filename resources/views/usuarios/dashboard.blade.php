@@ -25,7 +25,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="col-lg-4 col-xs-6">
+        <div class="col-lg-4 col-xs-12">
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>
@@ -114,6 +114,7 @@
                         Ingenieria en Plasticos
                     </a>
                 </li>
+                {{--
                 <li class="pull-right">
                     <a class="btn btn-primary" href="{{ route('calendarios.create') }}">
                         <i class="fa fa-calendar-plus-o">
@@ -121,6 +122,7 @@
                         Nuevo
                     </a>
                 </li>
+                --}}
             </ul>
             {{-- {{ Auth::user()->carrera }} --}}
             <div class="tab-content">
