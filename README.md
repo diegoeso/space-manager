@@ -94,6 +94,8 @@ La ejecución de las migraciones crean 4 tipos de usuarios
 ```
 > password: secret
 
+Para el responsable de area es necesario asignar permisos al rol "Responsable de Area" y posteriormente asignar el rol al usuario responsable de area
+
 ## Autor
 
 * **Diego Enrique Sánchez Ordoñez**  - https://www.facebook.com/diego.enriqueSO

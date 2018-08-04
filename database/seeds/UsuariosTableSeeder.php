@@ -14,28 +14,28 @@ class UsuariosTableSeeder extends Seeder
     {
         factory(Usuario::class, 300)->create();
         Usuario::create([
-            'nombre'         => 'Enrique',
-            'apellidoP'      => 'Sanchez',
-            'apellidoM'      => 'Ordoñez',
-            'nickname'       => 'diegokike',
+            'nombre'         => 'Alumno',
+            'apellidoP'      => 'Alumno',
+            'apellidoM'      => 'Alumno',
+            'nickname'       => 'Alumno',
             'email'          => 'alumno@gmail.com',
             'password'       => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
-            'telefono'       => '7131150285',
+            'telefono'       => '',
             'tipoCuenta'     => '3',
             'carrera'        => 'Ing. En Software',
             'semestre'       => '3 semestre',
-            'matricula'      => '1228270',
+            'matricula'      => '',
             'foto'           => 'user.png',
-            'nombreCompleto' => 'Enrique Sanchez Ordoñez',
+            'nombreCompleto' => 'Alumno',
             'confirmacion'   => '1',
             'envioEmail'     => '1',
         ]);
 
         Usuario::create([
-            'nombre'         => 'Mauro',
-            'apellidoP'      => 'Sanchez',
-            'apellidoM'      => 'Sanchez',
-            'nickname'       => 'mauross',
+            'nombre'         => 'Profesor',
+            'apellidoP'      => 'Profesor',
+            'apellidoM'      => 'Profesor',
+            'nickname'       => 'Profesor',
             'email'          => 'profesor@gmail.com',
             'password'       => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
             'telefono'       => '7131150285',
@@ -44,7 +44,7 @@ class UsuariosTableSeeder extends Seeder
             'semestre'       => '',
             'matricula'      => '',
             'foto'           => 'user.png',
-            'nombreCompleto' => 'Mauro Sanchez Sanchez',
+            'nombreCompleto' => 'Profesor',
             'confirmacion'   => '1',
             'envioEmail'     => '1',
         ]);

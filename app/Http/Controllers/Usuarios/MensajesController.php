@@ -16,6 +16,7 @@ class MensajesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:usuario');
+        $this->middleware('completarRegistro');
     }
     /**
      * Display a listing of the resource.

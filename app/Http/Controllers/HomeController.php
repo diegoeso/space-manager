@@ -14,10 +14,12 @@ use Auth;
 
 class HomeController extends Controller
 {
+    // Usuario
     use Email;
     public function __construct()
     {
         $this->middleware('auth:usuario');
+        $this->middleware('completarRegistro')->only('dashboard');
 
     }
 
@@ -36,6 +38,7 @@ class HomeController extends Controller
             if (Auth::user()->nombreCompleto == null || Auth::user()->nickname == null) {
                 // carga la vista
                 return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
+                // return 'hola';
             }
         }
         return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));

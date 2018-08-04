@@ -113,10 +113,10 @@
         <div class="form-group">
             {!! Form::label('carrera', 'Carrera') !!}
             {!! Form::select('carrera', ['1'=>'Ing. en Software','2'=>'Lic. en Seguridad Ciudadana','3'=>'Ing. en Producción Industrial','4'=>'Ing. en Plásticos'], null, ['class'=>'form-control select2','placeholder'=>'Selecciona una Carrera','id'=>'idCarrera','whidth'=>'100%','tabindex'=>'-1']) !!}
-            @if ($errors->has('carrara'))
+            @if ($errors->has('carrera'))
             <span class="label label-danger">
                 <strong>
-                    {{ $errors->first('carrara') }}
+                    {{ $errors->first('carrera') }}
                 </strong>
             </span>
             @endif

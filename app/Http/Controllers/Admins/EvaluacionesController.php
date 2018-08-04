@@ -17,6 +17,7 @@ class EvaluacionesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:web,usuario');
+        $this->middleware('completarRegistro');
     }
     /**
      * Display a listing of the resource.

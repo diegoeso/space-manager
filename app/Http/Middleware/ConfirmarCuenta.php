@@ -2,14 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
+// use Auth;
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
 
 class ConfirmarCuenta
 {
 
     protected $auth;
-    public function __construct(Auth $auth)
+
+    public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
@@ -22,7 +24,10 @@ class ConfirmarCuenta
      */
     public function handle($request, Closure $next)
     {
-
+        if ($this->$auth->$user()->telefono == "") {
+            return redirect('perfil');
+        }
         return $next($request);
+
     }
 }

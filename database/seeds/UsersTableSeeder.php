@@ -12,45 +12,30 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         App\User::create([
-            'nombre'         => 'Diego Enrique',
-            'apellidoP'      => 'Sanchez',
-            'apellidoM'      => 'Ordoñez',
-            'nickname'       => 'diegokike68',
+            'nombre'         => 'Administrador',
+            'apellidoP'      => 'Admin',
+            'apellidoM'      => '',
+            'nickname'       => 'Admin',
             'email'          => 'admin@gmail.com',
             'password'       => bcrypt('secret'),
             'confirmacion'   => 1,
             'tipoCuenta'     => 0,
-            'telefono'       => '7131150285',
+            'telefono'       => '',
             'foto'           => 'user.png',
-            'nombreCompleto' => 'Diego Enrique Sanchez Ordoñez',
+            'nombreCompleto' => 'Administrador',
         ]);
-
-        // App\User::create([
-        //     'nombre'         => 'Areli',
-        //     'apellidoP'      => 'Fuentes',
-        //     'apellidoM'      => 'Vega',
-        //     'nickname'       => 'areli07',
-        //     'email'          => 'areli@gmail.com',
-        //     'password'       => bcrypt('secret'),
-        //     'confirmacion'   => 1,
-        //     'telefono'       => '7131150285',
-        //     'tipoCuenta'     => 1,
-        //     'foto'           => 'userM.png',
-        //     'nombreCompleto' => 'Areli Fuentes Vega',
-        // ]);
-
         App\User::create([
-            'nombre'         => 'Nadia Michelle',
-            'apellidoP'      => 'Sanchez',
-            'apellidoM'      => 'Ordoñez',
-            'nickname'       => 'mich',
+            'nombre'         => 'Responsable de Área',
+            'apellidoP'      => 'Responsable',
+            'apellidoM'      => '',
+            'nickname'       => 'Responsable',
             'email'          => 'responsable@gmail.com',
             'password'       => bcrypt('secret'),
             'confirmacion'   => 1,
-            'telefono'       => '7131150285',
+            'telefono'       => '',
             'tipoCuenta'     => 1,
             'foto'           => 'userM.png',
-            'nombreCompleto' => 'Nadia Michelle Sanchez Ordoñez',
+            'nombreCompleto' => 'Responsable de Área',
         ]);
 
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PerfilUsuarioRequest;
 use App\User;
 use App\Usuario;
 use Auth;
-use Illuminate\Http\Request;
 use Toastr;
 
 class GeneralController extends Controller
@@ -28,7 +28,7 @@ class GeneralController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(PerfilUsuarioRequest $request, $id)
     {
         $usuario            = Usuario::find($id);
         $usuario->nombre    = $request->nombre;
