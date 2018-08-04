@@ -57,7 +57,7 @@
                                     Grupo
                                 </th>
                                 <th>
-                                    Espacio Academico
+                                    Espacio Académico
                                 </th>
                                 <th width="20">
                                     Opciones

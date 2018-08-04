@@ -42,8 +42,8 @@
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            {!! Form::label('telefono', 'Telefono') !!}
-            {!! Form::text('telefono', null, ['class'=>'form-control', 'placeholder'=>'Numero de telefono','id'=>'telefono']) !!}
+            {!! Form::label('telefono', 'Teléfono') !!}
+            {!! Form::text('telefono', null, ['class'=>'form-control', 'placeholder'=>'Numero de Teléfono','id'=>'telefono']) !!}
             @if ($errors->has('telefono'))
             <span class="label label-danger">
                 <strong>
@@ -68,8 +68,8 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            {!! Form::label('email', 'Correo Electronico') !!}
-            {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Correo Electronico Institucional','id'=>'email']) !!}
+            {!! Form::label('email', 'Correo Electrónico') !!}
+            {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Correo Electrónico Institucional','id'=>'email']) !!}
             @if ($errors->has('email'))
             <span class="label label-danger">
                 <strong>
@@ -126,18 +126,19 @@
         <div class="form-group">
             {!! Form::label('semestre', 'Semestre') !!}
             
-            {!! Form::select('semestre', [ '1º Semestre'=>'1º Semestre', 
-            '2º Semestre'=>'2º Semestre', 
-            '3º Semestre'=>'3º Semestre', 
-            '4º Semestre'=>'4º Semestre', 
-            '5º Semestre'=>'5º Semestre', 
-            '6º Semestre'=>'6º Semestre', 
-            '7º Semestre'=>'7º Semestre', 
-            '8º Semestre'=>'8º Semestre', 
-            '9º Semestre'=>'9º Semestre', 
-            '10º Semestre'=>'10º Semestre',
-            'Catedratico'=>'Catedratico',
-            'Maestria'=>'Maestria' ], null, ['class'=>'form-control','placeholder'=>'Selecciona un Semestre']) !!}
+            {!! Form::select('semestre', [ '1'=>'1º Semestre', 
+            '2'=>'2º Semestre', 
+            '3'=>'3º Semestre', 
+            '4'=>'4º Semestre', 
+            '5'=>'5º Semestre', 
+            '6'=>'6º Semestre', 
+            '7'=>'7º Semestre', 
+            '8'=>'8º Semestre', 
+            '9'=>'9º Semestre', 
+            '10'=>'10º Semestre',
+            '11'=>'Catedrático',
+            '12'=>'Maestría',
+            '13'=>'Doctorado' ], null, ['class'=>'form-control','placeholder'=>'Selecciona un Semestre']) !!}
             
             @if ($errors->has('semestre'))
             <span class="label label-danger">
@@ -167,8 +168,7 @@
         <div class="form-group">
             {!! Form::label('foto', 'Fotografia') !!}
             <br/>
-            {{-- {!! Form::file('foto', ['class'=>'form-control']) !!} --}}
-            <input class="form-control" name="foto" onchange="readURL(this);" type="file"/>
+            <input class="form-control" id="foto" name="foto" onchange="readURL(this);" type="file"/>
             @if ($errors->has('foto'))
             <span class="label label-danger">
                 <strong>

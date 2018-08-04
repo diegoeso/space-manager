@@ -29,7 +29,7 @@
                     {{ count($areas) }}
                 </h3>
                 <p>
-                    Areas
+                    Áreas
                 </p>
             </div>
             <div class="icon">
@@ -50,7 +50,7 @@
                     {{ count($espacios) }}
                 </h3>
                 <p>
-                    Espacios Academicos
+                    Espacios Académicos
                 </p>
             </div>
             <div class="icon">
@@ -113,14 +113,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header label-info">
-                {{--
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">
-                        ×
-                    </span>
-                </button>
-                --}}
-                <h4 class="modal-title" id="myModalLabel">
+                <h4 class="modal-title text-center" id="myModalLabel">
                     <i class="fa fa-calendar-check-o">
                     </i>
                     Nuevo Solicitud
@@ -131,7 +124,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('area_id','Tipo de Espacio Academico') !!}
+                            {!! Form::label('area_id','Tipo de Espacio Académico') !!}
                             {!! Form::select('area_id', $areasE, null, ['placeholder' => 'Selecciona un Espacio', 'class'=>'form-control select2','id'=>'area_id','style'=>'width: 100%;','tabindex'=>'-1','required']) !!}
                             @if ($errors->has('area_id'))
                             <span class="label label-danger">
@@ -144,7 +137,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('espacio_id','Espacio Academico') !!}
+                            {!! Form::label('espacio_id','Espacio Académico') !!}
                             <select aria-hidden="true" class="form-control select2 select2-hidden-accessible" id="espacio_id" name="espacio_id" required="true" style="width: 100%;" tabindex="-1">
                             </select>
                             @if ($errors->has('espacio_id'))
@@ -173,8 +166,8 @@
                     </div>
                     <div class="col-md-6" id="fecha-Fin">
                         <div class="form-group">
-                            {!! Form::label('fechaFin', 'Fecha de Finalizacion') !!}
-                                {!! Form::date('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Finalizacion', 'id'=>'fechaFin','required','readonly']) !!}
+                            {!! Form::label('fechaFin', 'Fecha de Finalización') !!}
+                                {!! Form::date('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Finalización', 'id'=>'fechaFin','required','readonly']) !!}
                                 @if ($errors->has('fechaFin'))
                             <span class="label label-danger">
                                 <strong>
@@ -201,8 +194,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('horaFin', 'Hora de finalizacion') !!}
-                                {!! Form::time('horaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Hora de finalizacion', 'id'=>'horaFin','required','readonly']) !!}
+                            {!! Form::label('horaFin', 'Hora de Finalización') !!}
+                                {!! Form::time('horaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Hora de Finalización', 'id'=>'horaFin','required','readonly']) !!}
                                 @if ($errors->has('horaFin'))
                             <span class="label label-danger">
                                 <strong>
@@ -231,8 +224,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('actividadAcademica', 'Actividad Academica') !!}
-                            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Academica','id'=>'actividadAcademica','size' => '30x4' ,'required']) !!}
+                            {!! Form::label('actividadAcademica', 'Actividad Académica') !!}
+                            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Académica','id'=>'actividadAcademica','size' => '30x4' ,'required']) !!}
                             @if ($errors->has('actividadAcademica'))
                             <span class="label label-danger">
                                 <strong>
@@ -248,14 +241,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 btn-block" type="submit">
-                            <i class="md md-check">
+                            <i class="fa fa-plus">
                             </i>
                             Guardar
                         </button>
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-danger btn-rounded waves-effect waves-light m-b-5 btn-block" id="btnCerrar" type="button">
-                            <i class="md md-cancel">
+                            <i class="fa fa-remove">
                             </i>
                             Cancelar
                         </button>
@@ -284,18 +277,12 @@
 </script>
 <script>
     $(document).ready(function() {
-        // calendarioEventos(1,1);
-        // calendarioEventos(2,2);
-        // calendarioEventos(3,3);
-        // calendarioEventos(4,4);
-
-
          // validacion que la fecha de termino no sea menor a la de inicio
         $('#horaFin').change(function(){
             $horaInicio=$('#horaInicio').val();
             $horaFin=$('#horaFin').val();
             if ($horaFin<$horaInicio) {
-               toastr["warning"]('La hora de finalizacion no puede ser menor a la de inicio');
+               toastr["warning"]('La hora de finalización no puede ser menor a la de inicio');
                $('#horaFin').val($horaInicio);
             }
         });
@@ -309,23 +296,23 @@
             console.log(diaI +' '+ diaF +' '+ mesI +' '+mesF);
             if (diaF<diaI && mesF<=mesI || diaF>diaI && mesF<=mesI)
             {
-                toastr["warning"]('La fecha de finalizacion '+fechaFin+' no puede ser menor a la de inicio')
+                toastr["warning"]('La fecha de finalización '+fechaFin+' no puede ser menor a la de inicio')
                 
                 $('#fechaFin').val(fechaInicio);
             }
         });
         var cont=0;
         $('#area_id').select2({
-            placeholder: 'Selecciona un Area',
+            placeholder: 'Selecciona un Área',
         });
         $('#espacio_id').select2({
-          placeholder: 'Selecciona un Espacio Academico'
+          placeholder: 'Selecciona un Espacio Académico'
         });
 
         $("#area_id" ).change(function()
         {
            var idA=$('#area_id').val();
-           console.log('Area : '+idA);
+           console.log('Área : '+idA);
            $('#datosEspacio').html('');
            $('#espacio_id').html('');
            $('#elementosEspacio').html('');
@@ -343,12 +330,12 @@
         $('#add').click(function(event) {
             cont++;
             categorias(cont);
-            $('#dynamic_field').append('<tr id="row'+cont+'"><td><select class="form-control" id="categoria_id'+cont+'" name="categoria_id[]" placeholder="Selecciona una Categoria" style="width: 100%;" tabindex="-1"></select></td><td><select class="form-control" id="elemento_id'+cont+'" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1"></select></td><td><input class="form-control" id="cantidad'+cont+'" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad" style="width: 100%;"/></td><td><button type="button" name="remove" id="'+cont+'" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
+            $('#dynamic_field').append('<tr id="row'+cont+'"><td><select class="form-control" id="categoria_id'+cont+'" name="categoria_id[]" placeholder="Selecciona una Categoría" style="width: 100%;" tabindex="-1"></select></td><td><select class="form-control" id="elemento_id'+cont+'" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1"></select></td><td><input class="form-control" id="cantidad'+cont+'" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad" style="width: 100%;"/></td><td><button type="button" name="remove" id="'+cont+'" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
 
-            $('#categoria_id'+cont+'').append('<option>Selecciona una Categoria</option>');
+            $('#categoria_id'+cont+'').append('<option>Selecciona una Categoría</option>');
             $('#elemento_id'+cont+'').append('<option>Selecciona un Elemento</option>');
             $('#categoria_id'+cont+'').select2({
-            placeholder: 'Selecciona una Categoria',
+            placeholder: 'Selecciona una Categoría',
             });
             $('#elemento_id'+cont+'').select2({
               placeholder: 'Selecciona un Elemento'
@@ -357,7 +344,7 @@
                 event.preventDefault();
                 var idCategoria=$('#categoria_id'+cont+'').val();
                 var idElemento=$('#elemento_id'+cont+'').val();
-                console.log('Categoria '+idCategoria);
+                console.log('Categoría '+idCategoria);
                 var id = $(this).attr("id");
                 var res = id.substring(12);
                 console.log(res);

@@ -25,15 +25,31 @@ class MensajesController extends Controller
     public function index()
     {
 
+        // $entrada = DB::table('mensajes')
+        //     ->join('users', 'users.id', '=', 'mensajes.de')
+        //     ->select('mensajes.*', 'users.nombreCompleto as nombreDe')
+        //     ->where('para', Auth::user()->id)
+        //     ->orderBy('mensajes.id', 'DESC')
+        //     ->get();
+        // $mensajes = Mensaje::where('leido', 0)
+        //     ->where('para', Auth::user()->id)->get();
+
         $entrada = DB::table('mensajes')
-            ->join('users', 'users.id', '=', 'mensajes.de')
-            ->select('mensajes.*', 'users.nombreCompleto as nombreDe')
+            ->join('usuarios', 'usuarios.id', '=', 'mensajes.de')
+            ->select('mensajes.*', 'usuarios.nombreCompleto as nombreDe')
             ->where('para', Auth::user()->id)
             ->orderBy('mensajes.id', 'DESC')
-            ->get();
+            ->paginate();
+
         $mensajes = Mensaje::where('leido', 0)
             ->where('para', Auth::user()->id)->get();
 
+        $salida = DB::table('mensajes')
+            ->join('users', 'users.id', '=', 'mensajes.de')
+            ->select('mensajes.*', 'users.nombreCompleto as nombreDe')
+            ->where('de', Auth::user()->id)
+            ->orderBy('mensajes.id', 'DESC')
+            ->get();
         // dd($salida);
         return view('usuarios.email.index', compact('entrada', 'mensajes', 'salida'));
     }

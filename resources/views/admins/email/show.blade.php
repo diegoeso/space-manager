@@ -52,6 +52,7 @@
                                 </span>
                             </a>
                         </li>
+                        {{--
                         <li>
                             <a href="#">
                                 <i class="fa fa-envelope-o">
@@ -66,6 +67,7 @@
                                 Eliminados
                             </a>
                         </li>
+                        --}}
                     </ul>
                 </div>
             </div>
@@ -77,11 +79,9 @@
                         Mensaje
                     </h3>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <div class="mailbox-read-info">
                         <h3 class="text-capitalize">
-                            {{-- Message Subject Is Placed Here --}}
                             {{ $mensaje[0]->asunto }}
                         </h3>
                         <h5>
@@ -91,7 +91,6 @@
                             </span>
                         </h5>
                     </div>
-                    <!-- /.mailbox-read-info -->
                     <div class="mailbox-controls with-border text-center">
                         <div class="btn-group">
                             <a class="btn btn-default btn-sm" data-container="body" data-original-title="Responder" data-toggle="tooltip" href="{{ route('mensajes.responder',$mensaje[0]->id) }}" title="" type="button">
@@ -100,7 +99,6 @@
                             </a>
                         </div>
                     </div>
-                    <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
                         <p>
                             {{ $mensaje[0]->mensaje }}
@@ -115,13 +113,11 @@
                             Eliminar
                         </a>
                     </div>
-                    <button class="btn btn-default" type="button">
+                    <a class="btn btn-default" href="{{ route('mensajes.responder',$mensaje[0]->id) }}">
                         Responder
-                    </button>
+                    </a>
                 </div>
-                <!-- /.box-footer -->
             </div>
-            <!-- /. box -->
         </div>
     </div>
 </section>

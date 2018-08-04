@@ -83,121 +83,105 @@
     <body class="hold-transition skin-blue layout-top-nav" id="login">
         <div class="wrapper">
             <header class="main-header">
-                <nav class="navbar navbar-static-top">
-                    <div class="container">
+                <nav class="navbar navbar-default ">
+                    <div class="container-fluid">
                         <div class="navbar-header">
+                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" style="color: #fff" type="button">
+                                <span class="sr-only">
+                                    Toggle navigation
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                            </button>
                             <a class="navbar-brand" href="{{ url('/') }}">
                                 <b>
                                     Space
                                 </b>
                                 Manager
                             </a>
-                            {{--
-                            <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                            <button class="navbar-toggle collapsed" data-target="#navbar-collapse" data-toggle="collapse" type="button">
-                                <i class="fa fa-bars">
-                                </i>
-                            </button>
-                            --}}
                         </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="navbar-right">
-                            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                                <ul class="nav navbar-nav">
-                                    {{-- @if (Route::has('login'))
-                                    @auth
-                                    <li>
-                                        @if (Auth::user()->tipoCuenta==0 || Auth::user()->tipoCuenta==1)
-                                        <a href="{{ url('/') }}">
-                                            Inicio
-                                        </a>
-                                        @else
-                                        @if (Auth::user()->confirmacion==0)
-                                        <a class="btn " href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out">
-                                            </i>
-                                            {{ __('Salir') }}
-                                        </a>
-                                        <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                        @else
-                                        <a href="{{ url('/') }}">
-                                            Inicio
-                                        </a>
-                                        @endif
-                                        @endif
-                                    </li>
-                                    @else --}}
-                                    @if (Route::has('login'))
-                                    {{-- @auth --}}
-                                    <li>
-                                        <a href="{{ route('login') }}">
-                                            Iniciar Sesión
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}">
-                                            Registrarse
-                                        </a>
-                                    </li>
-                                    {{-- @endauth --}}
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            @if (Route::has('login'))
+                            <ul class="nav navbar-nav navbar-right">
+                                @auth
+                                <li>
+                                    @if (Auth::user()->tipoCuenta==0 || Auth::user()->tipoCuenta==1)
+                                    <a href="{{ url('/admin') }}">
+                                        Inicio
+                                    </a>
+                                    @else
+                                    <a href="{{ url('/inicio') }}">
+                                        Inicio
+                                    </a>
                                     @endif
-                                </ul>
-                            </div>
+                                </li>
+                                @else
+                                <li>
+                                    <a href="{{ route('login') }}">
+                                        Iniciar Sesión
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}">
+                                        Registrarse
+                                    </a>
+                                </li>
+                                @endauth
+                            </ul>
+                            @endif
                         </div>
                     </div>
                 </nav>
             </header>
-            <!-- Full Width Column -->
-            <div class="content-wrapper">
-                <div class="container">
-                    @yield('content')
-                </div>
-            </div>
-            <footer class="main-footer">
-                <div class="container">
-                    <div class="pull-right hidden-xs">
-                        <b>
-                            Version
-                        </b>
-                        2.0
-                    </div>
-                    <strong>
-                        Copyright © 2017-2018
-                        <a href="https://www.facebook.com/diego.enriqueSO" target="_back">
-                            Diego Enrique Sanchez Ordoñez
-                        </a>
-                        .
-                    </strong>
-                    All rights reserved.
-                </div>
-            </footer>
         </div>
-        <!-- jQuery 3 -->
-        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}">
-        </script>
-        <!-- Bootstrap 3.3.7 -->
-        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
-        </script>
-        {{-- Toastr --}}
-        <script src="{{ asset('plugins/toastr/toastr.min.js') }}">
-        </script>
-        <!-- SlimScroll -->
-        <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
-        </script>
-        <!-- FastClick -->
-        <script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}">
-        </script>
-        <!-- AdminLTE App -->
-        <script src="{{ asset('dist/js/adminlte.min.js') }}">
-        </script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{ asset('dist/js/demo.js') }}">
-        </script>
-        {!! Toastr::message() !!}
     </body>
 </html>
+<div class="content-wrapper">
+    <div class="container">
+        @yield('content')
+    </div>
+</div>
+<footer class="main-footer">
+    <div class="container">
+        <div class="pull-right hidden-xs">
+            <b>
+                Version
+            </b>
+            2.0
+        </div>
+        <strong>
+            Copyright © 2017-2018
+            <a href="https://www.facebook.com/diego.enriqueSO" target="_back">
+                Diego Enrique Sanchez Ordoñez
+            </a>
+            .
+        </strong>
+        All rights reserved.
+    </div>
+</footer>
+<!-- jQuery 3 -->
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}">
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
+</script>
+{{-- Toastr --}}
+<script src="{{ asset('plugins/toastr/toastr.min.js') }}">
+</script>
+<!-- SlimScroll -->
+<script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
+</script>
+<!-- FastClick -->
+<script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}">
+</script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.min.js') }}">
+</script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('dist/js/demo.js') }}">
+</script>
+{!! Toastr::message() !!}

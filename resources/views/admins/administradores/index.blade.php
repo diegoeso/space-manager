@@ -41,7 +41,7 @@
                                     Correo
                                 </th>
                                 <th>
-                                    Telefono
+                                    Teléfono
                                 </th>
                                 <th>
                                     Tipo de Cuenta

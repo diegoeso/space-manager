@@ -55,8 +55,8 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            {!! Form::label('email', 'Correo Electronico') !!}
-            {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Correo Electronico']) !!}
+            {!! Form::label('email', 'Correo Electrónico') !!}
+            {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Correo Electrónico']) !!}
              @if ($errors->has('email'))
             <span class="label label-danger">
                 <strong>
@@ -109,7 +109,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            {!! Form::label('foto', 'Fotografia') !!}
+            {!! Form::label('foto', 'Fotografiá') !!}
             <br/>
             {{-- {!! Form::file('foto', ['class'=>'form-control']) !!} --}}
             <input class="form-control" name="foto" onchange="readURL(this);" type="file"/>

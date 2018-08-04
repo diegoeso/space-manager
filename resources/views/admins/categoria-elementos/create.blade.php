@@ -16,8 +16,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('areas.index') }}">
-                Areas
+            <a href="{{ route('categoria-elementos.index') }}">
+                Categoría de Elementos
             </a>
         </li>
         <li class="active">
@@ -30,7 +30,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            @include('general.botonNuevo',['modulo' => 'Nueva Categoria','ruta'=>''])
+            @include('general.botonNuevo',['modulo' => 'Nueva Categoría','ruta'=>''])
             {!! Form::open(['route'=>'categoria-elementos.store', 'method'=>'POST','files' => true ]) !!}
             <div class="box-body">
                 @include('admins.categoria-elementos.fragmentos.form')

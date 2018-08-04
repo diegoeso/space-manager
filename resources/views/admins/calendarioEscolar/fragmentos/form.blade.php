@@ -114,7 +114,18 @@
     <div class="col-md-3">
         <div class="form-group">
             {!! Form::label('semestre', 'Semestre') !!}
-            {!! Form::text('semestre', null, ['class'=>'form-control', 'placeholder' => 'Semestre','id'=>'semestre']) !!}
+             {!! Form::select('semestre', [ '1'=>'1º Semestre', 
+            '2'=>'2º Semestre', 
+            '3'=>'3º Semestre', 
+            '4'=>'4º Semestre', 
+            '5'=>'5º Semestre', 
+            '6'=>'6º Semestre', 
+            '7'=>'7º Semestre', 
+            '8'=>'8º Semestre', 
+            '9'=>'9º Semestre', 
+            '10'=>'10º Semestre',
+            '11'=>'Maestría',
+            '12'=>'Doctorado' ], null, ['class'=>'form-control','placeholder'=>'Selecciona un Semestre']) !!}
             @if ($errors->has('semestre'))
             <span class="label label-danger">
                 <strong>

@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('categoria-elementos.index') }}">
-                Categoria Elementos
+                Categoría de Elementos
             </a>
         </li>
         <li class="">

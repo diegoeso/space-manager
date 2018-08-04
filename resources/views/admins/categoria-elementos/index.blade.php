@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class="active">
-            Areas
+            Categoría de Elementos
         </li>
     </ol>
 </section>
@@ -26,7 +26,7 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Listado de Categorias','ruta'=>'categoria-elementos.create'])
+            @include('general.botonNuevo', ['modulo' => 'Listado de Categorías','ruta'=>'categoria-elementos.create'])
             <div class="box-body">
                 <div class="table-responsive">
                     <table class="table table-hover" id="categoria-elementos-table">
@@ -41,61 +41,12 @@
                                 <th>
                                     Descripción
                                 </th>
-                                {{--
-                                <th>
-                                    Permisos
-                                </th>
-                                --}}
                                 <th width="20px">
                                     Opciones
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{--                             @foreach ($categorias as $categoria)
-                            <tr>
-                                <td>
-                                    {{ $categoria->id }}
-                                </td>
-                                <td>
-                                    {{ $categoria->nombre }}
-                                </td>
-                                <td>
-                                    @php
-                                       $descripcion= substr($categoria->descripcion, 0,100);
-                                    @endphp
-                                    {{ $descripcion }}...
-                                </td>
-                                @can('categoria-elementos.show')
-                                <td width="10">
-                                    <a class="btn btn-primary btn-xs" href="{{ route('categoria-elementos.show',$categoria->id) }}">
-                                        <span class="fa fa-eye">
-                                        </span>
-                                    </a>
-                                </td>
-                                @endcan
-                                @can('categoria-elementos.edit')
-                                <td width="10">
-                                    <a class="btn btn-success btn-xs" href="{{ route('categoria-elementos.edit',$categoria->id) }}">
-                                        <span class="fa fa-edit">
-                                        </span>
-                                    </a>
-                                </td>
-                                @endcan
-                                @can('categoria-elementos.destroy')
-                                <td width="10">
-                                    <form action="{{ route('categoria-elementos.destroy', $categoria->id) }}" class="form-inline" method="post">
-                                        {{ csrf_field() }}
-                                        <input name="_method" type="hidden" value="DELETE"/>
-                                        <button class=" btn btn-danger btn-xs" type="submit">
-                                            <span class="fa fa-trash">
-                                            </span>
-                                        </button>
-                                    </form>
-                                </td>
-                                @endcan
-                            </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>

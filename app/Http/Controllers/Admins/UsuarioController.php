@@ -165,14 +165,10 @@ class UsuarioController extends Controller
     public function listarUsuarios($id)
     {
         $usuarios = Usuario::all();
-
-        return view('admins.usuarios.index', compact('usuarios'));
-
         return Datatables::of($usuarios)
             ->editColumn('nombre', function ($usuarios) {
                 return $usuarios->FullName;
             })
-
             ->editColumn('carrera', function ($usuarios) {
                 return $usuarios->nombreCarrera($usuarios->carrera);
             })

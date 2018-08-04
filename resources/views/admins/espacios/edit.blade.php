@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('espacios.index') }}">
-                Espacios Academicos
+                Espacios Académicos
             </a>
         </li>
         <li class="">
@@ -33,12 +33,13 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Editar Espacio Academico','ruta'=>''])
+            @include('general.botonNuevo', ['modulo' => 'Editar Espacio Académico','ruta'=>''])
             {!! Form::model($espacio, ['route'=>['espacios.update' ,$espacio->id],'method'=>'PUT','files' => true ])!!}
             <input hidden="" id="idEspacio" name="idEspacio" type="text" value="{{ $espacio->id }}"/>
             <div class="box-body">
                 @include('admins.espacios.fragmentos.form')
                 <table class="table" id="dynamic_field">
+                    {{--
                     <thead>
                         <tr>
                             <th scope="col">
@@ -52,6 +53,7 @@
                             </th>
                         </tr>
                     </thead>
+                    --}}
                     <tbody>
                         @include('admins.espacios.fragmentos.agregarElementos')
                         <?php $cont = 1?>
@@ -83,12 +85,12 @@
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
-                    <i class="md md-check">
+                    <i class="fa fa-plus">
                     </i>
                     Guardar
                 </button>
                 <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('espacios.index') }}">
-                    <i class="md md-cancel">
+                    <i class="fa fa-remove">
                     </i>
                     Cancelar
                 </a>
@@ -116,13 +118,11 @@
             success:function(datos){
                 $.each(datos, function(i, item) {
                     cont++;
+                     // $('#categoria_id'+cont+'').select2();
+                     // $('#elemento_id'+cont+'').select2();
                     $('#categoria_id'+cont+'').append('<option value='+item.idC+'>'+item.nombreC+'</option>');
-
                     $('#elemento_id'+cont+'').append('<option value='+item.idE+'>'+item.nombreE+'</option>');
-
                     $('#cantidad'+cont+'').val(item.cantidad);
-
-
                 });
             }
         });
@@ -134,7 +134,12 @@
 
             $('#categoria_id'+cont+'').append('<option>Selecciona una Categoria</option>');
             $('#elemento_id'+cont+'').append('<option>Selecciona un Elemento</option>');
-
+            // $('#categoria_id'+cont+'').select2({
+            //     placeholder: 'Selecciona una Categoría'
+            // });
+            // $('#elemento_id'+cont+'').select2({
+            //     placeholder: 'Selecciona un Elemento'
+            // });
              $('#categoria_id'+cont+'').change(function(event) {
                 event.preventDefault();
                 var idCategoria=$('#categoria_id'+cont+'').val();

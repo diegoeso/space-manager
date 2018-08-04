@@ -27,8 +27,8 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            {!! Form::label('categoria_id', 'Categoria') !!}
-            {!! Form::select('categoria_id', $categorias, null, ['placeholder' => 'Selecciona una Categoria', 'class'=>'form-control']) !!}
+            {!! Form::label('categoria_id', 'Categoría') !!}
+            {!! Form::select('categoria_id', $categorias, null, ['placeholder' => 'Selecciona una Categoría', 'class'=>'form-control']) !!}
             @if ($errors->has('categoria_id'))
             <span class="label label-danger">
                 <strong>

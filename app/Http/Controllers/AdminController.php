@@ -31,7 +31,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $solicitudes           = Solicitud::all();
+        $solicitudes           = Solicitud::where('tipoRegistro', 0)->get();
         $areas                 = Area::all();
         $espacios              = Espacio::all();
         $usuarios              = Usuario::all();

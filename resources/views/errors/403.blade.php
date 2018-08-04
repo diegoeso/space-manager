@@ -86,11 +86,9 @@
                 <div class="title m-b-md">
                     403 - Accion no autorizada
                 </div>
-                
             </div>
         </div>
         <script defer="" src="{{ asset('js/app.js') }}">
         </script>
     </body>
 </html>
-

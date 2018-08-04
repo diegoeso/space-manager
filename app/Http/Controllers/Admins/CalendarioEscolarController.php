@@ -174,6 +174,9 @@ class CalendarioEscolarController extends Controller
             ->editColumn('espacio_id', function ($calendarios) {
                 return $calendarios->espacio->nombre;
             })
+            ->editColumn('semestre', function ($calendarios) {
+                return $calendarios->nombreSemestre($calendarios->semestre);
+            })
             ->addColumn('action', function ($calendarios) {
                 return '<a href="' . route("calendarios.show", $calendarios->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
                 // '<a href="' . route('calendarios.edit', $calendarios->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .

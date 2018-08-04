@@ -41,7 +41,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        {!! Form::label('foto', 'Fotografia Actual') !!}
+                        {!! Form::label('foto', 'Fotografiá Actual') !!}
                         <br/>
                         <img alt="" height="150" src="{{ Storage::url($user->foto) }}" width=""/>
                     </div>
@@ -49,12 +49,12 @@
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
-                    <i class="md md-check">
+                    <i class="fa fa-plus">
                     </i>
                     Guardar
                 </button>
                 <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('users.index') }}">
-                    <i class="md md-cancel">
+                    <i class="fa fa-remove">
                     </i>
                     Cancelar
                 </a>

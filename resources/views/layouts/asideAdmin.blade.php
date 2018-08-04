@@ -30,7 +30,7 @@
                     </span>
                 </a>
             </li>
-            {{-- Usuarios --}}
+            @can('usuarios.index' || 'users.index')
             <li class="treeview {{ request()->is('admin/users') ? 'active' : '' }}">
                 <a class="nav-link" href="#">
                     <i class="fa fa-users">
@@ -56,24 +56,24 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            @can('users.index')
                             <li>
-                                @can('users.index')
                                 <a href="{{ route('users.index') }}">
                                     <i class="fa fa-circle-o">
                                     </i>
                                     Listar Registros
                                 </a>
-                                @endcan
                             </li>
+                            @endcan                            
+                            @can('users.create')
                             <li class="">
-                                @can('users.create')
                                 <a href="{{ route('users.create') }}">
                                     <i class="fa fa-circle-o">
                                     </i>
                                     Nuevo Registro
                                 </a>
-                                @endcan
                             </li>
+                            @endcan
                         </ul>
                     </li>
                     @endcan                    
@@ -112,6 +112,8 @@
                     @endcan
                 </ul>
             </li>
+            @endcan
+           
             {{-- Areas --}}
             @can('areas.index')
             <li class="treeview">
@@ -150,6 +152,7 @@
             @endcan
             
             {{-- Elementos --}}
+            @can('elementos.index' || 'categoria-elementos.index')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-cubes">
@@ -231,6 +234,7 @@
                     @endcan
                 </ul>
             </li>
+            @endcan
             {{-- Espacios Academicos --}}
             @can('espacios.index')
             <li class="treeview">
@@ -338,6 +342,7 @@
             </li>
             --}}
             {{-- Actividades Academicas --}}
+            @can('horario-escolar.index')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-calendar-times-o">
@@ -353,6 +358,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('horario-escolar.index')
                     <li>
                         <a href="{{ route('calendarios.index') }}">
                             <i class="fa fa-circle-o">
@@ -360,6 +366,8 @@
                             Listar Horarios
                         </a>
                     </li>
+                    @endcan
+                    @can('horario-escolar.index')
                     <li>
                         <a href="{{ route('calendarios.horarios') }}">
                             <i class="fa fa-circle-o">
@@ -367,6 +375,8 @@
                             Listar Tabla de Horarios
                         </a>
                     </li>
+                    @endcan
+                    @can('horario-escolar.create')
                     <li>
                         <a href="{{ route('calendarios.create') }}">
                             <i class="fa fa-circle-o">
@@ -374,8 +384,11 @@
                             Nueva Horario
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            
             {{-- Mensajes --}}
             <li>
                 <a href="{{ route('mensajes.index') }}">

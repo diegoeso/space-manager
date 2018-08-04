@@ -28,7 +28,7 @@ class MensajesController extends Controller
             ->select('mensajes.*', 'usuarios.nombreCompleto as nombreDe')
             ->where('para', Auth::user()->id)
             ->orderBy('mensajes.id', 'DESC')
-            ->get();
+            ->paginate();
 
         $mensajes = Mensaje::where('leido', 0)
             ->where('para', Auth::user()->id)->get();
@@ -52,7 +52,13 @@ class MensajesController extends Controller
     {
         $mensajes = Mensaje::where('leido', 0)
             ->where('para', Auth::user()->id)->get();
-        return view('admins.email.create', compact('mensajes'));
+        $salida = DB::table('mensajes')
+            ->join('users', 'users.id', '=', 'mensajes.de')
+            ->select('mensajes.*', 'users.nombreCompleto as nombreDe')
+            ->where('de', Auth::user()->id)
+            ->orderBy('mensajes.id', 'DESC')
+            ->get();
+        return view('admins.email.create', compact('mensajes', 'salida'));
     }
 
     /**

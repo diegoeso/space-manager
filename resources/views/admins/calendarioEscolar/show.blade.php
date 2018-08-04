@@ -124,7 +124,7 @@
                                         Semestre
                                     </strong>
                                     <p class="lead" id="semestre">
-                                        {{ $horario->semestre }} Semestre
+                                        {{ $horario->nombreSemestre($horario->semestre) }}
                                     </p>
                                 </div>
                             </div>

@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="email">
-                            Categoria
+                            Categoría
                         </label>
                         <p class="text-capitalize" name="encargado">
                             {{ $elemento->categoriaElemento->nombre }}

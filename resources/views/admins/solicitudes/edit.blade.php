@@ -2,7 +2,6 @@
 @section('navegacion')
 <section class="content-header">
     <h1>
-        {{-- @include('general.tipoUsuario') --}}
         <small>
             Panel de Control
         </small>
@@ -17,13 +16,14 @@
         </li>
         <li>
             <a href="{{ route('solicitudes.index') }}">
-                Solcitudes
+                Solicitudes
             </a>
         </li>
         <li class="">
             Editar
         </li>
         <li class="active">
+            {{ $solicitud->tipoUsuario($solicitud)->fullName}}
         </li>
     </ol>
 </section>

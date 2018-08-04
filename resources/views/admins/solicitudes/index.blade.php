@@ -59,10 +59,6 @@
                                 <th>
                                     Creación
                                 </th>
-                                {{--
-                                <th>
-                                </th>
-                                --}}
                                 <th width="20">
                                     Opciones
                                 </th>

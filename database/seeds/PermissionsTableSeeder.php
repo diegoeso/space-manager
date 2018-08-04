@@ -108,65 +108,65 @@ class PermissionsTableSeeder extends Seeder
 
         // Permisos Areas
         Permission::create([
-            'name'        => 'Navegar areas',
+            'name'        => 'Navegar áreas',
             'slug'        => 'areas.index',
-            'description' => 'Lista y navega todos los areas del sistema',
+            'description' => 'Lista y navega todos los áreas del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Ver detalle de un area',
+            'name'        => 'Ver detalle de un área',
             'slug'        => 'areas.show',
-            'description' => 'Ve en detalle cada areas del sistema',
+            'description' => 'Ve en detalle cada área del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Creación de areas',
+            'name'        => 'Creación de áreas',
             'slug'        => 'areas.create',
-            'description' => 'Podría crear nuevos areas en el sistema',
+            'description' => 'Podría crear nuevas áreas en el sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Edición de areas',
+            'name'        => 'Edición de áreas',
             'slug'        => 'areas.edit',
-            'description' => 'Podría editar cualquier dato de un area del sistema',
+            'description' => 'Podría editar cualquier dato de un área del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Eliminar areas',
+            'name'        => 'Eliminar áreas',
             'slug'        => 'areas.destroy',
-            'description' => 'Podría eliminar cualquier areas del sistema',
+            'description' => 'Podría eliminar cualquier áreas del sistema',
         ]);
 
         // Permisos Categoria Elementos
         //
         Permission::create([
-            'name'        => 'Navegar categorias elementos',
+            'name'        => 'Navegar categorías elementos',
             'slug'        => 'categoria-elementos.index',
-            'description' => 'Lista y navega todas las categorias elementos del sistema',
+            'description' => 'Lista y navega todas las categorías elementos del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Ver detalle de una categoria',
+            'name'        => 'Ver detalle de una categoría',
             'slug'        => 'categoria-elementos.show',
-            'description' => 'Ve en detalle cada categoria elementos del sistema',
+            'description' => 'Ve en detalle cada categoría elementos del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Creación de categoria elementos',
+            'name'        => 'Creación de categoría elementos',
             'slug'        => 'categoria-elementos.create',
-            'description' => 'Podría crear nuevos categoria elementos en el sistema',
+            'description' => 'Podría crear nuevos categoría elementos en el sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Edición de categoria elementos',
+            'name'        => 'Edición de categoría elementos',
             'slug'        => 'categoria-elementos.edit',
-            'description' => 'Podría editar cualquier dato de una categoria del sistema',
+            'description' => 'Podría editar cualquier dato de una categoría del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Eliminar categorias elementos',
+            'name'        => 'Eliminar categorías elementos',
             'slug'        => 'categoria-elementos.destroy',
-            'description' => 'Podría eliminar cualquier categorias elementos del sistema',
+            'description' => 'Podría eliminar cualquier categorías elementos del sistema',
         ]);
         //
         //
@@ -206,33 +206,33 @@ class PermissionsTableSeeder extends Seeder
 
         // Permisos  Espacios
         Permission::create([
-            'name'        => 'Navegar espacios academicos',
+            'name'        => 'Navegar espacios académicos',
             'slug'        => 'espacios.index',
-            'description' => 'Lista y navega todos los espacios academico del sistema',
+            'description' => 'Lista y navega todos los espacios académico del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Ver detalle de un espacio academico',
+            'name'        => 'Ver detalle de un espacio académico',
             'slug'        => 'espacios.show',
-            'description' => 'Ve en detalle cada espacio academico del sistema',
+            'description' => 'Ve en detalle cada espacio académico del sistema',
         ]);
 
         Permission::create([
-            'name'        => 'Creación de espacios academicos',
+            'name'        => 'Creación de espacios académicos',
             'slug'        => 'espacios.create',
-            'description' => 'Podría crear nuevos espacios academicos en el sistema',
+            'description' => 'Podría crear nuevos espacios académicos en el sistema',
         ]);
 
         Permission::create([
             'name'        => 'Edición de espacios',
             'slug'        => 'espacios.edit',
-            'description' => 'Podría editar cualquier dato de un espacio academico del sistema',
+            'description' => 'Podría editar cualquier dato de un espacio académico del sistema',
         ]);
 
         Permission::create([
             'name'        => 'Eliminar espacios',
             'slug'        => 'espacios.destroy',
-            'description' => 'Podría eliminar cualquier espacio academico del sistema',
+            'description' => 'Podría eliminar cualquier espacio académico del sistema',
         ]);
         //
 
@@ -289,7 +289,37 @@ class PermissionsTableSeeder extends Seeder
             'slug'        => 'solicitudes.notificar',
             'description' => 'Podría notificar (enviar mensajes) cualquier solicitante del sistema',
         ]);
-        //
 
+        //
+        // Permisos  Espacios
+        Permission::create([
+            'name'        => 'Navegar espacios calendario escolar',
+            'slug'        => 'horario-escolar.index',
+            'description' => 'Lista y navega todos los horarios escolares del sistema',
+        ]);
+
+        Permission::create([
+            'name'        => 'Ver detalle de un horario',
+            'slug'        => 'horario-escolar.show',
+            'description' => 'Ve en detalle cada horario escolar del sistema',
+        ]);
+
+        Permission::create([
+            'name'        => 'Creación de horarios escolares',
+            'slug'        => 'horario-escolar.create',
+            'description' => 'Podría crear nuevos horarios escolares en el sistema',
+        ]);
+
+        Permission::create([
+            'name'        => 'Edición de horarios escolares',
+            'slug'        => 'horario-escolar.edit',
+            'description' => 'Podría editar cualquier dato de un horario escolar del sistema',
+        ]);
+
+        Permission::create([
+            'name'        => 'Eliminar horarios escolares',
+            'slug'        => 'horario-escolar.destroy',
+            'description' => 'Podría eliminar cualquier horario escolar del sistema',
+        ]);
     }
 }

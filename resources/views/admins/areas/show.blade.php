@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('areas.index') }}">
-                Areas
+                Áreas
             </a>
         </li>
         <li class="">
@@ -31,7 +31,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-xs-8 col-md-offset-2">
+    <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">
@@ -51,7 +51,7 @@
                         <label for="nombre">
                             Nombre
                         </label>
-                        <p class="" name="nombre">
+                        <p class="lead" name="nombre">
                             {{ $area->nombre }}
                         </p>
                     </div>
@@ -59,7 +59,7 @@
                         <label for="email">
                             Encargado
                         </label>
-                        <p class="text-capitalize" name="encargado">
+                        <p class="text-capitalize lead" name="encargado">
                             {{ $area->responsables->nombreCompleto }}
                         </p>
                     </div>
@@ -69,7 +69,7 @@
                         <label for="descripcion">
                             Descripción
                         </label>
-                        <p class="" name="descripcion">
+                        <p class="lead" name="descripcion">
                             {{ $area->descripcion}}
                         </p>
                     </div>

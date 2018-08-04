@@ -19,9 +19,9 @@ class RolesTableSeeder extends Seeder
             'special'     => 'all-access',
         ]);
         Role::create([
-            'name'        => 'Resopnsable de Area',
+            'name'        => 'Responsable de Área',
             'slug'        => 'responsable-de-area',
-            'description' => 'Acceso restringido a la eleccion del admin.',
+            'description' => 'Acceso restringido a la elección del administrador.',
         ]);
     }
 }

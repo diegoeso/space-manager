@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('categoria-elementos.index') }}">
-                Categorias
+                Categorías de Elementos
             </a>
         </li>
         <li class="">
@@ -33,7 +33,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Editar Categoria','ruta'=>''])
+            @include('general.botonNuevo', ['modulo' => 'Editar Categoría','ruta'=>''])
             {!! Form::model($categoria, ['route'=>['categoria-elementos.update' ,$categoria->id],'method'=>'PUT','files' => true ])!!}
             <div class="box-body">
                 @include('admins.categoria-elementos.fragmentos.form')

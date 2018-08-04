@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('espacios.index') }}">
-                Espacios Academicos
+                Espacios Académicos
             </a>
         </li>
         <li class="">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="area_id">
-                                    Area
+                                    Área
                                 </label>
                                 <p class="text-capitalize" name="area_id">
                                     {{ $espacio->area->nombre }}
@@ -99,7 +99,7 @@
                                         ID
                                     </th>
                                     <th>
-                                        Categoria
+                                        Categoría
                                     </th>
                                     <th>
                                         Elemento

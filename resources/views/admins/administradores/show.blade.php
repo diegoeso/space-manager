@@ -40,13 +40,13 @@
                         <h3 class="profile-username text-center text-capitalize">
                             {{ $user->nombre .' '.$user->apellidoP }}
                         </h3>
-                        <p class="text-muted text-center">
+                        <p class="text-muted text-center lead">
                             @switch($user->tipoCuenta)
                                 @case(0)
                                     Administrador
                                     @break
                                 @case(1)
-                                    Responsable de Area
+                                    Responsable de Área
                                     @break
                                 @case(2)
                                     Profesor
@@ -56,7 +56,7 @@
                                     @break
 
                                 @default
-                                        Default case...
+                                    Usuario
                             @endswitch
                         </p>
                         <div class="box-tools text-center">
@@ -87,7 +87,7 @@
                                 <dt>
                                     Nombre
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{$user->nombre}}
                                 </dd>
                             </div>
@@ -95,7 +95,7 @@
                                 <dt>
                                     Apellido Paterno
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $user->apellidoP }}
                                 </dd>
                             </div>
@@ -103,7 +103,7 @@
                                 <dt>
                                     Apellido Materno
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $user->apellidoM }}
                                 </dd>
                             </div>
@@ -113,25 +113,25 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <dt>
-                                    Correo Electronico
+                                    Correo Electrónico
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{$user->email}}
                                 </dd>
                             </div>
                             <div class="col-md-4">
                                 <dt>
-                                    Telefono
+                                    Teléfono
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $user->telefono }}
                                 </dd>
                             </div>
                             <div class="col-md-4">
                                 <dt>
-                                    NickName
+                                    Nombre de Usuario
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $user->nickname }}
                                 </dd>
                             </div>
@@ -143,10 +143,10 @@
                                 <dt>
                                     Tipo de Cuenta
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     @switch($user->tipoCuenta)
                                         @case(1)
-                                            Responsable de Area
+                                            Responsable de Área
                                             @break                                    
                                         @default
                                             Administrador
@@ -155,9 +155,9 @@
                             </div>
                             <div class="col-md-4">
                                 <dt>
-                                    Creacion de registro
+                                    Creación de registro
                                 </dt>
-                                <dd class="text-capitalize">
+                                <dd class="text-capitalize lead">
                                     {{ $user->created_at->format('l j F Y') }}
                                 </dd>
                             </div>
@@ -168,94 +168,4 @@
         </div>
     </div>
 </section>
-{{--
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title text-capitalize">
-                    Datos del usuario
-                    <em>
-                        {{ $user->nombre }}
-                    </em>
-                </h3>
-                <div class="box-tools">
-                    <a class="btn btn-success btn-sm" href="{{ route('users.edit',$user->id) }}">
-                        <i class="fa fa-edit">
-                        </i>
-                        Editar
-                    </a>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="nombre">
-                            Nombre
-                        </label>
-                        <p class="text-capitalize" name="nickname">
-                            {{ $user->nombreCompleto }}
-                        </p>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="nickname">
-                            Usuario
-                        </label>
-                        <p class="" name="email">
-                            {{ $user->nickname }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="email">
-                            Correo
-                        </label>
-                        <p class="" name="email">
-                            {{ $user->email }}
-                        </p>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="tipoCuenta">
-                            Tipo de Usuario
-                        </label>
-                        <p class="text-capitalize" name="tipoCuenta">
-                            @if ($user->tipoCuenta==0)
-                              Administrador
-                            @else
-                              Responsable de Area
-                            @endif
-                        </p>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="email">
-                            Estado de la cuenta
-                        </label>
-                        <p class="text-capitalize" name="email">
-                            @if ($user->confirmacion==1)
-                            <span class="label label-success">
-                                Activa
-                            </span>
-                            @else
-                            <span class="label label-danger">
-                                Inactiva
-                            </span>
-                            @endif
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="email">
-                            Fotografia
-                        </label>
-                        <br/>
-                        <img alt="" height="180" src="{{ Storage::url($user->foto) }}" width=""/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
---}}
 @endsection

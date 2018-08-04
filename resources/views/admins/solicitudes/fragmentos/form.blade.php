@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('area_id','Tipo de Espacio Academico') !!}
+            {!! Form::label('area_id','Tipo de Espacio Académico') !!}
             {!! Form::select('area_id', $areas, null, ['placeholder' => 'Selecciona un Espacio', 'class'=>'form-control select2','id'=>'area_id','style'=>'width: 100%;','tabindex'=>'-1']) !!}
             @if ($errors->has('area_id'))
             <span class="label label-danger">
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('espacio_id','Espacio Academico') !!}
+            {!! Form::label('espacio_id','Espacio Académico') !!}
             <select aria-hidden="true" class="form-control select2 select2-hidden-accessible" id="espacio_id" name="espacio_id" style="width: 100%;" tabindex="-1">
             </select>
             @if ($errors->has('espacio_id'))
@@ -43,8 +43,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('fechaFin', 'Fecha de Finalizacion') !!}
-            {!! Form::text('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Finalizacion', 'id'=>'fechaFin']) !!}
+            {!! Form::label('fechaFin', 'Fecha de Finalización') !!}
+            {!! Form::text('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Finalización', 'id'=>'fechaFin']) !!}
             @if ($errors->has('fechaFin'))
             <span class="label label-danger">
                 <strong>
@@ -58,8 +58,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="input-group bootstrap-timepicker timepicker">
-            {!! Form::label('horaInicio', 'Hora de finalizacion') !!}
-            {!! Form::text('horaInicio', null, ['class'=>'form-control text-capitalize input-small', 'placeholder' => 'Hora de inicio', 'id'=>'horaInicio']) !!}
+            {!! Form::label('horaInicio', 'Hora de Inicio') !!}
+            {!! Form::text('horaInicio', null, ['class'=>'form-control text-capitalize input-small', 'placeholder' => 'Hora de Inicio', 'id'=>'horaInicio']) !!}
             @if ($errors->has('horaInicio'))
             <span class="label label-danger">
                 <strong>
@@ -71,8 +71,8 @@
     </div>
     <div class="col-md-6">
         <div class="input-group bootstrap-timepicker timepicker">
-            {!! Form::label('horaFin', 'Hora de finalizacion') !!}
-            {!! Form::text('horaFin', null, ['class'=>'form-control text-capitalize input-small', 'placeholder' => 'Hora de finalizacion', 'id'=>'horaFin']) !!}
+            {!! Form::label('horaFin', 'Hora de Finalización') !!}
+            {!! Form::text('horaFin', null, ['class'=>'form-control text-capitalize input-small', 'placeholder' => 'Hora de Finalización', 'id'=>'horaFin']) !!}
             @if ($errors->has('horaFin'))
             <span class="label label-danger">
                 <strong>
@@ -101,8 +101,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            {!! Form::label('actividadAcademica', 'Actividad Academica') !!}
-            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Academica','id'=>'actividadAcademica','size' => '30x4']) !!}
+            {!! Form::label('actividadAcademica', 'Actividad Académica') !!}
+            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Académica','id'=>'actividadAcademica','size' => '30x4']) !!}
             @if ($errors->has('actividadAcademica'))
             <span class="label label-danger">
                 <strong>

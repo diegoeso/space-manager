@@ -129,12 +129,14 @@
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
+                {{--
                 <li>
                     <a data-toggle="control-sidebar" href="#">
                         <i class="fa fa-gears">
                         </i>
                     </a>
                 </li>
+                --}}
             </ul>
         </div>
     </nav>

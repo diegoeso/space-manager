@@ -29,7 +29,7 @@
             <ul class="nav nav-tabs">
                 <li class="active" id="litab_1">
                     <a aria-expanded="false" data-toggle="tab" href="#tab_1">
-                        Ingenieria en software
+                        Ingeniería en software
                     </a>
                 </li>
                 <li class="" id="litab_2">
@@ -39,12 +39,12 @@
                 </li>
                 <li class="" id="litab_3">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_3">
-                        Produccion Industrial
+                        Producción Industrial
                     </a>
                 </li>
                 <li class="" id="litab_4">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_4">
-                        Ingenieria en Plasticos
+                        Ingeniería en Plásticos
                     </a>
                 </li>
                 <li class="pull-right">
@@ -55,7 +55,6 @@
                     </a>
                 </li>
             </ul>
-            {{-- {{ Auth::user()->carrera }} --}}
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
                     <div class="row">

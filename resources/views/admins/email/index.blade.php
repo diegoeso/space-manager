@@ -60,9 +60,13 @@
                                     <i class="fa fa-envelope-o">
                                     </i>
                                     Enviados
+                                    <span class="label label-primary pull-right">
+                                        {{ count($salida) }}
+                                    </span>
                                 </a>
                             </li>
                         </li>
+                        {{--
                         <li>
                             <a href="#">
                                 <i class="fa fa-trash-o">
@@ -70,6 +74,7 @@
                                 Eliminados
                             </a>
                         </li>
+                        --}}
                     </ul>
                 </div>
             </div>
@@ -82,6 +87,7 @@
                             <h3 class="box-title">
                                 Inbox
                             </h3>
+                            {{--
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
                                     <input class="form-control input-sm" placeholder="Search Mail" type="text">
@@ -90,6 +96,7 @@
                                     </input>
                                 </div>
                             </div>
+                            --}}
                         </div>
                         <div class="box-body no-padding">
                             <div class="table-responsive mailbox-messages">
@@ -133,6 +140,7 @@
                             <h3 class="box-title">
                                 Enviados
                             </h3>
+                            {{--
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
                                     <input class="form-control input-sm" placeholder="Search Mail" type="text">
@@ -141,6 +149,7 @@
                                     </input>
                                 </div>
                             </div>
+                            --}}
                         </div>
                         <div class="box-body no-padding">
                             <div class="table-responsive mailbox-messages">
@@ -172,6 +181,7 @@
                                             <td>
                                                 {{ $mensajeS->created_at }}
                                             </td>
+                                            {{--
                                             <td width="10">
                                                 <form action="{{ route('mensajes.destroy', $mensajeS->id) }}" class="form-inline" method="post">
                                                     {{ csrf_field() }}
@@ -182,6 +192,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            --}}
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -189,8 +200,10 @@
                             </div>
                         </div>
                     </div>
+                    {{--
                     <div class="tab-pane" id="tab_3">
                     </div>
+                    --}}
                 </div>
             </div>
         </div>

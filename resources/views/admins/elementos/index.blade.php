@@ -47,7 +47,7 @@
                                 </th>
                                 --}}
                                 <th>
-                                    Categoria
+                                    Categoría
                                 </th>
                                 <th colspan="" width="20px">
                                     Opciones

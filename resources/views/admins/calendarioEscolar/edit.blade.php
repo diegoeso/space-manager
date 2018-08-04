@@ -17,7 +17,7 @@
         </li>
         <li>
             <a href="{{ route('calendarios.index') }}">
-                Solcitudes
+                Horario Escolar
             </a>
         </li>
         <li class="">

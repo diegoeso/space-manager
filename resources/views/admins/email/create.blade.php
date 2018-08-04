@@ -53,17 +53,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('mensajes.index') }}">
                                 <i class="fa fa-envelope-o">
                                 </i>
+                                <span class="label label-primary pull-right">
+                                    {{ count($salida) }}
+                                </span>
                                 Enviados
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-trash-o">
-                                </i>
-                                Eliminados
                             </a>
                         </li>
                     </ul>
@@ -74,7 +70,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        Compose New Message
+                        Nuevo Mensaje
                     </h3>
                 </div>
                 {!! Form::open(['route'=>'mensajes.store', 'method'=>'POST','files' => true ]) !!}

@@ -5,17 +5,17 @@
         Space Manager
     </div>
     <div class="links">
-        <a href="#">
+        <a href="{{ route('register') }}">
             Registro
         </a>
-        <a href="{{ route('solicitud.index') }}">
+        <a href="{{ url('/inicio') }}">
             Eventos
         </a>
-        <a href="#">
-            Espacios Academicos
+        <a href="{{ route('solicitud.create') }}">
+            Solicitudes
         </a>
-        <a href="#">
-            Calendarios
+        <a href="{{ url('admin/login') }}">
+            Administrativos
         </a>
     </div>
 </div>

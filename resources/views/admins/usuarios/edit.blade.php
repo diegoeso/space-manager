@@ -55,12 +55,12 @@
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
-                    <i class="md md-check">
+                    <i class="fa fa-plus">
                     </i>
                     Guardar
                 </button>
-                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('usuarios.index') }}">
-                    <i class="md md-cancel">
+                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('users.index') }}">
+                    <i class="fa fa-remove">
                     </i>
                     Cancelar
                 </a>

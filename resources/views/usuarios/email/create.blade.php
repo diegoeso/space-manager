@@ -52,6 +52,7 @@
                                 </span>
                             </a>
                         </li>
+                        {{--
                         <li>
                             <a href="#">
                                 <i class="fa fa-envelope-o">
@@ -66,6 +67,7 @@
                                 Eliminados
                             </a>
                         </li>
+                        --}}
                     </ul>
                 </div>
             </div>
@@ -81,7 +83,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     @if (isset($mensaje))
-                    <input id="solicitud_id" name="solicitud_id" type="text" value="{{ $mensaje->solicitud_id }}"/>
+                    <input id="solicitud_id" name="solicitud_id" type="hidden" value="{{ $mensaje->solicitud_id }}"/>
                     <input id="email" name="email" type="hidden" value="{{ $mensaje->email }}"/>
                     <input id="nombreAdmin" name="nombreAdmin" type="hidden" value="{{ $mensaje->nombreCompleto }}"/>
                     <input id="para" name="para" type="hidden" value="{{ $mensaje->id }}"/>

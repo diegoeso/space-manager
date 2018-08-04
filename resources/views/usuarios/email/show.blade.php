@@ -52,6 +52,7 @@
                                 </span>
                             </a>
                         </li>
+                        {{--
                         <li>
                             <a href="#">
                                 <i class="fa fa-envelope-o">
@@ -66,6 +67,7 @@
                                 Eliminados
                             </a>
                         </li>
+                        --}}
                     </ul>
                 </div>
             </div>
@@ -115,13 +117,11 @@
                             Eliminar
                         </a>
                     </div>
-                    <button class="btn btn-default" type="button">
+                    <a class="btn btn-default" href="{{ route('mensaje.responder',$mensaje[0]->id) }}">
                         Responder
-                    </button>
+                    </a>
                 </div>
-                <!-- /.box-footer -->
             </div>
-            <!-- /. box -->
         </div>
     </div>
 </section>

@@ -20,11 +20,8 @@
                 Solicitudes
             </a>
         </li>
-        <li class="">
-            Ver
-        </li>
         <li class="active">
-            Solicitud
+            Ver
         </li>
     </ol>
 </section>
@@ -45,7 +42,7 @@
                                             Administrador
                                             @break
                                         @case(1)
-                                            Responsable de Area
+                                            Responsable de Área
                                             @break
                                         @case(2)
                                             Profesor
@@ -81,7 +78,6 @@
                             <br/>
                             @foreach ($total as $el)
                             @if ($el->evaluado==$solicitud->usuarioSolicitud)
-                                {{-- {{ $el->calificacion($el->evaluado) }} --}}
                             <div class="progress-group">
                                 <span class="progress-text">
                                     Puntuación del usuario
@@ -106,26 +102,6 @@
                             @break
                             @endif
                             @endforeach
-                            {{--
-                            <div class="progress-group">
-                                <span class="progress-text">
-                                    Calificación del usuario
-                                </span>
-                                <span class="progress-number">
-                                    <b>
-                                        {{ $total*100/4 }}
-                                    </b>
-                                    /100
-                                </span>
-                                @php
-                                $barra=$total*100/4;
-                            @endphp
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-aqua" style="width: {{ $barra }}%">
-                                    </div>
-                                </div>
-                            </div>
-                            --}}
                         </div>
                         <div class="box-tools">
                             <a class="btn btn-box-tool" data-original-title="Editar Registro" data-toggle="tooltip" href="{{ route('solicitudes.edit',$solicitud->id) }}" title="" type="button">
@@ -221,7 +197,7 @@
                         </div>
                         <p>
                             <strong>
-                                Actividad Academica:
+                                Actividad Académica:
                             </strong>
                             <br/>
                             {{ $solicitud->actividadAcademica }}
@@ -297,7 +273,7 @@
                     <div class="box-body">
                         @foreach ($solicitud->elementosSolicitud as $elemento)
                         <strong>
-                            Categoria:
+                            Categoría:
                         </strong>
                         {{ $elemento->categoriaElemento->nombre }}
                         <div class="row">
@@ -343,7 +319,7 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['solicitudes.cancelar' ,$solicitud->id],'method'=>'PUT'])!!}
                 <div class="form-group">
-                    {!! Form::label('motivo', 'Motivo de la Cancelacion', ['class'=>'control-label']) !!}
+                    {!! Form::label('motivo', 'Motivo de la Cancelación', ['class'=>'control-label']) !!}
                     {!! Form::textArea('motivo', null, ['class'=>'form-control','placeholder'=>'Motivo por el cual la solicitud es cancelada','size' => '30x4','id'=>'motivo']) !!}
                 </div>
                 <button class="btn btn-danger btn-block" type="submit">
@@ -373,7 +349,7 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['solicitudes.rechazar' ,$solicitud->id],'method'=>'PUT'])!!}
                 <div class="form-group">
-                    {!! Form::label('motivo', 'Motivo del rechazo', ['class'=>'control-label']) !!}
+                    {!! Form::label('motivo', 'Motivo del Rechazo', ['class'=>'control-label']) !!}
                     {!! Form::textArea('motivo', null, ['class'=>'form-control','placeholder'=>'Motivo por el cual la solicitud es rechazada','size' => '30x4']) !!}
                 </div>
                 <button class="btn btn-warning btn-block" type="submit">
@@ -437,7 +413,7 @@
                                             Administrador
                                             @break
                                         @case(1)
-                                            Responsable de Area
+                                            Responsable de Área
                                             @break
                                         @case(2)
                                             Profesor
@@ -498,31 +474,6 @@
                             @break
                             @endif
                             @endforeach
-                            {{--  @foreach ($total as $cal)
-                                @if ($cal->evaluado==$solicitud->solicitante->id)
-                                    
-                                    {{ (($cal->cal1/count($cal) + $cal->cal2/count($cal) +$cal->cal3/count($cal) + $cal->cal4/count($cal) + $cal->cal5/count($cal)) / 5) }}
-                            <br/>
-                            <div class="progress-group">
-                                <span class="progress-text">
-                                    Puntuación del usuario
-                                </span>
-                                <span class="progress-number">
-                                    <b>
-                                        {{ (($cal->cal1/count($cal) + $cal->cal2/count($cal) +$cal->cal3/count($cal) + $cal->cal4/count($cal) + $cal->cal5/count($cal)) / 5) * 100 / 4}}
-                                    </b>
-                                    /100
-                                </span>
-                                @php
-                                $barra=(($cal->cal1/count($cal) + $cal->cal2/count($cal) +$cal->cal3/count($cal) + $cal->cal4/count($cal) + $cal->cal5/count($cal)) / 5) * 100 / 4;
-                            @endphp
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-aqua" style="width: {{ $barra }}%">
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                            @endforeach --}}
                         </div>
                         <div class="box-tools">
                             <button class="btn btn-box-tool" data-widget="collapse" type="button">
@@ -614,7 +565,7 @@
                         </div>
                         <p>
                             <strong>
-                                Actividad Academica:
+                                Actividad Académica:
                             </strong>
                             <br/>
                             {{ $solicitud->actividadAcademica }}
@@ -642,9 +593,9 @@
                                 </button>
                             </div>
                             @endcan
+                            {{-- btn Cancelar --}}
                             @can('solicitudes.cancelar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
-                                <!-- Button trigger modal -->
                                 <button class="btn btn-danger btn-xs btn-block" data-target="#cancelar" data-toggle="modal" type="button">
                                     <i class="fa fa-trash">
                                     </i>
@@ -688,7 +639,7 @@
                     <div class="box-body">
                         @foreach ($solicitud->elementosSolicitud as $elemento)
                         <strong>
-                            Categoria:
+                            Categoría:
                         </strong>
                         {{ $elemento->categoriaElemento->nombre }}
                         <div class="row">
@@ -734,7 +685,7 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['solicitudes.cancelar' ,$solicitud->id],'method'=>'PUT'])!!}
                 <div class="form-group">
-                    {!! Form::label('motivo', 'Motivo de la Cancelacion', ['class'=>'control-label']) !!}
+                    {!! Form::label('motivo', 'Motivo de la Cancelación', ['class'=>'control-label']) !!}
                     {!! Form::textArea('motivo', null, ['class'=>'form-control','placeholder'=>'Motivo por el cual la solicitud es cancelada','size' => '30x4','id'=>'motivo']) !!}
                 </div>
                 <button class="btn btn-danger btn-block" type="submit">

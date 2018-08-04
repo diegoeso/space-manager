@@ -60,12 +60,12 @@
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
-                    <i class="md md-check">
+                    <i class="fa fa-plus">
                     </i>
                     Guardar
                 </button>
                 <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('espacios.index') }}">
-                    <i class="md md-cancel">
+                    <i class="fa fa-remove">
                     </i>
                     Cancelar
                 </a>
@@ -84,6 +84,7 @@
         categorias(cont);
         $('#add').click(function(event) {
             cont++;
+
             categorias(cont);
             $('#dynamic_field').append('<tr id="row'+cont+'"><td><select style="width: 100%;" tabindex="-1" class="form-control select2 select2-hidden-accessible" id="categoria_id'+cont+'" name="categoria_id[]" placeholder="Selecciona una Categoria"></select></td><td><select style="width: 100%;" tabindex="-1" class="form-control select2 select2-hidden-accessible" id="elemento_id'+cont+'" name="elemento_id[]" placeholder="Selecciona un Elemento"></select></td><td><input class="form-control" id="cantidad'+cont+'" name="cantidad[]" placeholder="Cantidad de Elementos" type="number" value="" min="1" pattern="^[0-9]+"></input></td><td><button type="button" name="remove" id="'+cont+'" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
             
@@ -111,6 +112,7 @@
                 var button_id = $(this).attr("id");
                 $('#row'+button_id+'').remove();
             });
+
         });
     });
 

@@ -40,7 +40,7 @@
                         <h3 class="profile-usuarioname text-center text-capitalize">
                             {{ $usuario->nombre .' '.$usuario->apellidoP }}
                         </h3>
-                        <p class="text-muted text-center">
+                        <p class="text-muted text-center lead">
                             @if ($usuario->tipoCuenta==2)
                             Profesor
                             @else
@@ -75,7 +75,7 @@
                                 <dt>
                                     Carrera
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{$usuario->nombreCarrera($usuario->carrera)}}
                                 </dd>
                             </div>
@@ -83,15 +83,15 @@
                                 <dt>
                                     Semestre
                                 </dt>
-                                <dd>
-                                    {{ $usuario->semestre}}º Semestre
+                                <dd class="lead">
+                                    {{ $usuario->nombreSemestre($usuario->semestre)}}
                                 </dd>
                             </div>
                             <div class="col-md-4">
                                 <dt>
                                     No. de Cuenta
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $usuario->matricula }}
                                 </dd>
                             </div>
@@ -103,7 +103,7 @@
                                 <dt>
                                     Nombre
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{$usuario->nombre}}
                                 </dd>
                             </div>
@@ -111,7 +111,7 @@
                                 <dt>
                                     Apellido Paterno
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $usuario->apellidoP }}
                                 </dd>
                             </div>
@@ -119,7 +119,7 @@
                                 <dt>
                                     Apellido Materno
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $usuario->apellidoM }}
                                 </dd>
                             </div>
@@ -131,7 +131,7 @@
                                 <dt>
                                     Correo Electronico
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{$usuario->email}}
                                 </dd>
                             </div>
@@ -139,15 +139,15 @@
                                 <dt>
                                     Telefono
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $usuario->telefono }}
                                 </dd>
                             </div>
                             <div class="col-md-4">
                                 <dt>
-                                    NickName
+                                    Nombre de Usuario
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     {{ $usuario->nickname }}
                                 </dd>
                             </div>
@@ -159,7 +159,7 @@
                                 <dt>
                                     Tipo de Cuenta
                                 </dt>
-                                <dd>
+                                <dd class="lead">
                                     @switch($usuario->tipoCuenta)
                                         @case(1)
                                             Responsable de Area
@@ -173,7 +173,7 @@
                                 <dt>
                                     Creacion de registro
                                 </dt>
-                                <dd class="text-capitalize">
+                                <dd class="text-capitalize lead">
                                     {{ $usuario->created_at->format('l j F Y') }}
                                 </dd>
                             </div>

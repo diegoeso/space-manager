@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="active">
-            Areas
+            Áreas
         </li>
     </ol>
 </section>
@@ -25,7 +25,7 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Listado de Areas','ruta'=>'areas.create'])
+            @include('general.botonNuevo', ['modulo' => 'Listado de Áreas','ruta'=>'areas.create'])
             <div class="box-body">
                 <div class="table-responsive">
                     <table class="table table-hover" id="areas-table">
@@ -49,50 +49,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach($areas as $area)
-                            <tr>
-                                <td>
-                                    {{ $area->id }}
-                                </td>
-                                <td>
-                                    {{ $area->nombre }}
-                                </td>
-                                <td width="400">
-                                    @php
-                                       $descripcion= substr($area->descripcion, 0,100);
-                                    @endphp
-                                    {{ $descripcion }}...
-                                </td>
-                                <td>
-                                    {{ $area->responsables->nombreCompleto }}
-                                </td>
-                                <td width="10">
-                                    <a class="btn btn-primary btn-xs" href="{{ route('areas.show',$area->id) }}">
-                                        <span class="fa fa-eye">
-                                        </span>
-                                    </a>
-                                </td>
-                                <td width="10">
-                                    <a class="btn btn-success btn-xs" href="{{ route('areas.edit',$area->id) }}">
-                                        <span class="fa fa-edit">
-                                        </span>
-                                    </a>
-                                </td>
-                                <td width="10">
-                                    <form action="{{ route('areas.destroy', $area->id) }}" class="form-inline" method="post">
-                                        {{ csrf_field() }}
-                                        <input name="_method" type="hidden" value="DELETE"/>
-                                        <button class=" btn btn-danger btn-xs" type="submit">
-                                            <span class="fa fa-trash">
-                                            </span>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
-                    {{-- {!! $areas->render() !!} --}}
                 </div>
             </div>
         </div>

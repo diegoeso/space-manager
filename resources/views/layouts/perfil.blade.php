@@ -45,9 +45,8 @@
                                 @case(3)
                                     Alumno
                                     @break
-
                                 @default
-                                        Default case...
+                                    Usuario
                             @endswitch
                         </p>
                         @if ($usuario->carrera)
@@ -65,7 +64,7 @@
                                     Semestre:
                                 </label>
                                 <b>
-                                    {{ $usuario->semestre }}
+                                    {{ $usuario->nombreSemestre($usuario->semestre) }}
                                 </b>
                             </li>
                             <li class="list-group-item">
@@ -88,14 +87,6 @@
                 <div class="box-body">
                     @include('admins.usuarios.fragmentos.form')
                     <div class="row">
-                        {{--
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('confirmacion', 'Tipo de Usuario') !!}
-                            {!! Form::select('confirmacion',['1'=>'Activa','0'=>'Inactiva'],null, ['class'=>'form-control', 'placeholder'=>'Estado de la cuenta']) !!}
-                            </div>
-                        </div>
-                        --}}
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -125,6 +116,7 @@
 @endsection
 @section('script')
 <script>
+    $('#foto').hidden();
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
