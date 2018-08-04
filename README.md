@@ -1,9 +1,9 @@
-# Space Manager Unidad Academica Profesional Tianguistenco UAEMex
+# Space Manager Unidad Académica Profesional Tianguistenco UAEMex
 
-Sistema para el control y administracion de los espacios academicos para la Unidad Academica Profesional Tianguistenco.
+Sistema para el control y administración de los espacios académicos para la Unidad Académica Profesional Tianguistenco.
 
 
-### Prerequerimientos
+### Requerimientos
 
 * Laravel
 * PHP >= 7.1.3
@@ -26,7 +26,7 @@ composer install
 ```
 3.- Configurar
 <br/>
-En caso de no existir crear el archivo ".env" en la raiz del proyecto
+En caso de no existir crear el archivo ".env" en la raíz del proyecto
 
 4.- Crear llave de encriptación
 ```
@@ -45,12 +45,12 @@ php artisan migrate:install --seed   ó   php artisan migrate:refresh --seed
 ```
 El cual creara datos ficticios para comprobar el funcionamiento del sistema, no incluir "--seed" para agregar solo las tablas sin datos
 
-7.- Configurar CRONTAB para la ejecucion de las "schedule" (CRONJOB's)
+7.- Configurar CRONTAB para la ejecución de las "schedule" (CRONJOB's)
 Ejecutar en la terminal:
 ```
 crontab -e
 ```
-agregar la siguiente linea de codigo 
+agregar la siguiente linea de código 
 ```
 * * * * * php /nombre-de-la-carpeta-del-proyecto/artisan schedule:run >> /dev/null 2>&1
 ```
@@ -58,6 +58,10 @@ agregar la siguiente linea de codigo
 8.- Ejecutar el siguiente comando en la terminal
 ```
 php artisan schedule:run
+```
+9.- Ejecutar el siguiente comando en la terminal
+```
+php artisan storage:link
 ```
 
 
@@ -76,7 +80,7 @@ php artisan serve
 
 ### Iniciar el sistema
 
-La ejecucion de las migraciones crean 4 tipos de usuarios
+La ejecución de las migraciones crean 4 tipos de usuarios
 
 ```
 	alumno@gmail.com
