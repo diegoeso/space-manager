@@ -60,6 +60,7 @@ agregar la siguiente linea de codigo
 php artisan schedule:run
 ```
 
+
 ## Ejecucion
 
 1.- Iniciar MySQL y Apache
