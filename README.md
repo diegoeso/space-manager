@@ -54,7 +54,7 @@ agregar la siguiente linea de codigo
 ```
 * * * * * php /nombre-de-la-carpeta-del-proyecto/artisan schedule:run >> /dev/null 2>&1
 ```
-<br/>
+
 8.- Ejecutar el siguiente comando en la terminal
 ```
 php artisan schedule:run
