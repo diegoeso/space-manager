@@ -27,9 +27,7 @@ composer install
 3.- Configurar
 <br/>
 En caso de no existir crear el archivo ".env" en la raíz del proyecto
-```
 
-```
 4.- Crear llave de encriptación
 ```
 php artisan key:generate
@@ -92,6 +90,7 @@ La ejecución de las migraciones crean 4 tipos de usuarios
 	responsable@gmail.com
 	
 	admin@gmail.com
+	> password: secret
 ```
 
 ## Autor

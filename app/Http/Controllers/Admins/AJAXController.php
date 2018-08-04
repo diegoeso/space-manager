@@ -18,6 +18,7 @@ class AJAXController extends Controller
         $this->middleware('auth:usuario,web');
     }
     // Espacios
+
     public function elementos($idCategoria)
     {
         return Elemento::where('categoria_id', $idCategoria)->
