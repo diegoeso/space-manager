@@ -90,8 +90,9 @@ La ejecución de las migraciones crean 4 tipos de usuarios
 	responsable@gmail.com
 	
 	admin@gmail.com
-	> password: secret
+
 ```
+> password: secret
 
 ## Autor
 
