@@ -310,17 +310,19 @@ class SolicitudController extends Controller
         $pdf   = App::make('dompdf.wrapper');
         $data  = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
         $pdf   = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
-        return $pdf->stream();
-        return $pdf->download('solicitudes_' . $fecha . '.pdf');
+        // ->setPaper('a4', 'landscape');
+
+        // return $pdf->stream();
+        return $pdf->download('solicitudes_' . $fecha . ' . pdf');
     }
 
     public function solicitud($id)
     {
-        $fecha     = date('d-m-Y/h:i:s');
+        $fecha     = date('d-m-Y / h:i:s');
         $pdf       = App::make('dompdf.wrapper');
         $solicitud = Solicitud::find($id);
         $pdf       = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
         // return $pdf->stream();
-        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
+        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . ' . pdf');
     }
 }

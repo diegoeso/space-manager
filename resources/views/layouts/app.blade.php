@@ -6,26 +6,19 @@
         <title>
             Space Manager | Bienvenido
         </title>
-        <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-        <!-- Bootstrap 3.3.7 -->
         <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet"/>
-        {{-- Toastr --}}
         <link href="{{ asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css"/>
-        <!-- Font Awesome -->
         <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"/>
-        <!-- Ionicons -->
         <link href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet"/>
-        <!-- Theme style -->
         <link href="{{ asset('dist/css/AdminLTE.css') }}" rel="stylesheet"/>
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
         <link href="{{ asset('dist/css/skins/_all-skins.min.css') }}" rel="stylesheet"/>
-        <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
         </link>
+        {{--
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
         </link>
+        --}}
     </head>
     <style>
         html, body {

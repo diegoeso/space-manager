@@ -31,9 +31,9 @@ class HomeController extends Controller
         $mensajes     = Mensaje::where('leido', 0)
             ->where('para', Auth::user()->id)->get();
         if (Auth::user()->confirmacion == 0 && Auth::user()->codigoConfirmacion != null) {
+            // return redirect()->route('confirmacion');
+            // return redirect()->to('/confirmacion');
             return redirect()->route('confirmacion');
-            // return redirect('/confirmacion');
-
         } else {
             if (Auth::user()->nombreCompleto == null || Auth::user()->nickname == null) {
                 return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'evaluaciones', 'mensajes'));

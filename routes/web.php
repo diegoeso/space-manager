@@ -106,8 +106,8 @@ Route::prefix('admin')->group(function () {
     Route::get('pdf/solicitud/{id}', 'Admins\SolicitudController@solicitud')->name('pdf.solicitud');
 
     // Usuarios
-    Route::get('pdf/solicitud', 'Usuarios\SolicitudController@solicitudes')->name('pdf.solicitudesU');
-    Route::get('pdf/solicitud/{id}', 'Usuarios\SolicitudController@solicitud')->name('pdf.solicitudU');
+    Route::get('pdf/solicitud-usuario', 'Usuarios\SolicitudController@solicitudes')->name('pdf.solicitudesU');
+    Route::get('pdf/solicitud-usuario/{id}', 'Usuarios\SolicitudController@solicitud')->name('pdf.solicitudU');
 
 });
 
