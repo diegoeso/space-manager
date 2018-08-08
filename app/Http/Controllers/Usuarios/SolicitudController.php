@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Usuarios;
 
+use App;
 use App\Area;
 use App\Elemento;
 use App\Evaluaciones;
@@ -11,6 +12,7 @@ use App\Solicitud;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+use PDF;
 use Toastr;
 use Yajra\DataTables\DataTables;
 
@@ -300,5 +302,25 @@ class SolicitudController extends Controller
         $notificacion->estadoRes    = 0;
         $notificacion->estadoUsu    = 0;
         $notificacion->save();
+    }
+
+    public function solicitudes()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
+        $pdf   = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
+        return $pdf->stream();
+        return $pdf->download('solicitudes_' . $fecha . '.pdf');
+    }
+
+    public function solicitud($id)
+    {
+        $fecha     = date('d-m-Y/h:i:s');
+        $pdf       = App::make('dompdf.wrapper');
+        $solicitud = Solicitud::find($id);
+        $pdf       = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
+        // return $pdf->stream();
+        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
     }
 }

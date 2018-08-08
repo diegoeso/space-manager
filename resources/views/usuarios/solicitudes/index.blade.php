@@ -26,6 +26,15 @@
         <div class="box box-primary">
             @include('general.botonNuevo', ['modulo' => 'Listado de Solicitudes','ruta'=>'solicitud.create'])
             <div class="box-body">
+                <div class="row" style="padding-bottom: 5px;">
+                    <div class="col-md-12 ">
+                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitudesU') }}" target="_black">
+                            <i class="fa fa-file-pdf-o">
+                            </i>
+                            Descargar PDF
+                        </a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="solicitudes-table">
                         <thead>

@@ -226,6 +226,8 @@
                         <p>
                             {{ $solicitud->actividadAcademica }}
                         </p>
+                        <br/>
+                        <br/>
                         <div class="row">
                             <div class="col-md-4">
                                 @if (!$solicitud->estado==2 || !$solicitud->estado==3)
@@ -246,6 +248,13 @@
                                 </button>
                             </div>
                             @endif
+                            <div class="col-md-12" style="padding-bottom: 5px;">
+                                <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitudU', $solicitud->id) }}" target="_black">
+                                    <i class="fa fa-file-pdf-o">
+                                    </i>
+                                    Descargar PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
