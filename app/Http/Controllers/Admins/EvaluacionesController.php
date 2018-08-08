@@ -26,7 +26,7 @@ class EvaluacionesController extends Controller
      */
     public function index()
     {
-        // 12 Calificacion perfecta
+        // 12 - Calificacion perfecta
         $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)->get();
         $cal1         = $evaluaciones->sum('cal1');
         $cal2         = $evaluaciones->sum('cal2');
@@ -41,14 +41,11 @@ class EvaluacionesController extends Controller
         }
         $puntuacion = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)
             ->select(DB::raw('SUM(cal1) as cal1'), DB::raw('SUM(cal2) as cal2'), DB::raw('SUM(cal3) as cal3'), DB::raw('SUM(cal4) as cal4'), DB::raw('SUM(cal5) as cal5'))->first();
-        // dd($puntuacion);
-        // dd($evaluacion);
         if ($cont == 0) {
             $total = ($cal1 + $cal2 + $cal3 + $cal4 + $cal5) / 5;
         } else {
             $total = ($cal1 / $cont + $cal2 / $cont + $cal3 / $cont + $cal4 / $cont + $cal5 / $cont) / 5;
         }
-        // dd($total);
         return view('evaluaciones.index', compact('total', 'evaluaciones', 'puntuacion', 'cont'));
     }
 

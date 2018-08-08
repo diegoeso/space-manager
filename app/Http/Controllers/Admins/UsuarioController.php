@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Traits\Alertas;
 use App\Usuario;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class UsuarioController extends Controller
@@ -178,5 +180,16 @@ class UsuarioController extends Controller
                 '<a href="#" value="' . $usuarios->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
+    }
+
+    public function usuarios()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        // dd($fecha);
+        $pdf  = App::make('dompdf.wrapper');
+        $data = Usuario::orderBy('carrera', 'ASC')->orderBy('semestre', 'ASC')->get();
+        $pdf  = PDF::loadView('admins.usuarios.pdf', ['data' => $data]);
+        // return $pdf->stream();
+        return $pdf->download('usuarios_' . $fecha . '.pdf');
     }
 }

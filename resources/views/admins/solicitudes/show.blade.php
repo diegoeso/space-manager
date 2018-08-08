@@ -204,7 +204,6 @@
                         </p>
                         @if ($solicitud->estado !=3)
                         <div class="row">
-                            {{-- btn aprobar --}}
                             @can('solicitudes.confirmar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <a class="btn btn-success btn-xs btn-block" href="{{ route('solicitudes.aprobar', $solicitud->id) }}" type="button">
@@ -215,7 +214,6 @@
                             </div>
                             @endcan
                             
-                            {{-- btn rechazar --}}
                             @can('solicitudes.rechazar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <button class="btn btn-warning btn-xs btn-block" data-target="#rechazar" data-toggle="modal" type="button">
@@ -227,7 +225,6 @@
                             @endcan
                             @can('solicitudes.cancelar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
-                                <!-- Button trigger modal -->
                                 <button class="btn btn-danger btn-xs btn-block" data-target="#cancelar" data-toggle="modal" type="button">
                                     <i class="fa fa-trash">
                                     </i>
@@ -236,7 +233,6 @@
                             </div>
                             @endcan
                            
-                            {{-- btn notificar --}}
                             @can('solicitudes.notificar')
                             @if ($solicitud->tipoUsuario==2 ||$solicitud->tipoUsuario==3)
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
@@ -248,6 +244,15 @@
                             </div>
                             @endif
                             @endcan
+                            <br/>
+                            <br/>
+                            <div class="col-md-12" style="padding-bottom: 5px;">
+                                <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitud', $solicitud->id) }}" target="_black">
+                                    <i class="fa fa-file-pdf-o">
+                                    </i>
+                                    Descargar PDF
+                                </a>
+                            </div>
                         </div>
                         @endif
                     </div>
@@ -398,6 +403,7 @@
     </div>
 </div>
 @else
+
 @foreach ($solicitudesPendientes as $solicitud)
 <div class="row">
     <div class="col-xs-12">
@@ -614,6 +620,13 @@
                                 </button>
                             </div>
                             @endcan
+                            <div class="col-md-12" style="padding-bottom: 5px;">
+                                <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitud', $solicitud->id) }}" target="_black">
+                                    <i class="fa fa-file-pdf-o">
+                                    </i>
+                                    Descargar PDF
+                                </a>
+                            </div>
                         </div>
                         @endif
                     </div>

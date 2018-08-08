@@ -193,4 +193,9 @@ class Solicitud extends Model
             ->get();
     }
 
+    public function aproboSolicitud($aproboSolicitud)
+    {
+        return User::find($aproboSolicitud);
+    }
+
 }

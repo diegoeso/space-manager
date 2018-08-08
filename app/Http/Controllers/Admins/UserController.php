@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -10,6 +11,7 @@ use App\User;
 use Auth;
 use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
@@ -187,4 +189,16 @@ class UserController extends Controller
             })
             ->make(true);
     }
+
+    public function administradores()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        // dd($fecha);
+        $pdf  = App::make('dompdf.wrapper');
+        $data = User::all();
+        $pdf  = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
+        // return $pdf->stream();
+        return $pdf->download('administradores_' . $fecha . '.pdf');
+    }
+
 }

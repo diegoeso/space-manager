@@ -27,6 +27,15 @@
         <div class="box box-primary">
             @include('general.botonNuevo', ['modulo' => 'Listado de Usuarios','ruta'=>'usuarios.create'])
             <div class="box-body">
+                <div class="row" style="padding-bottom: 5px;">
+                    <div class="col-md-12 ">
+                        <a class="btn btn-default btn-xs pull-right" href="{{ route('pdf.usuarios') }}" target="_blank">
+                            <i class="fa fa-file-pdf-o">
+                            </i>
+                            Descargar PDF
+                        </a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="usuarios-table">
                         <thead>

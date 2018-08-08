@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\Area;
 use App\CategoriaElemento;
 use App\Espacio;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EspacioRequest;
 use App\Traits\Alertas;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class EspacioController extends Controller
@@ -32,11 +34,7 @@ class EspacioController extends Controller
      */
     public function index()
     {
-
-        $espacios = Espacio::orderBy('id', 'desc')
-            ->paginate();
-
-        return view('admins.espacios.index', compact('espacios'));
+        return view('admins.espacios.index');
     }
 
     /**
@@ -46,7 +44,6 @@ class EspacioController extends Controller
      */
     public function create()
     {
-
         $categorias = CategoriaElemento::pluck('nombre', 'id');
         $areas      = Area::all()->pluck('nombre', 'id');
         return view('admins.espacios.create', compact('areas', 'categorias'));
@@ -155,6 +152,17 @@ class EspacioController extends Controller
                 '<a href="#" value="' . $espacios->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
+    }
+
+    public function espacios()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Espacio::all();
+        // dd($data);
+        $pdf = PDF::loadView('admins.espacios.pdf', ['data' => $data]);
+        // return $pdf->stream();
+        return $pdf->download('espacios_' . $fecha . '.pdf');
     }
 
 }

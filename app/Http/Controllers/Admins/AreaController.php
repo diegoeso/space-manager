@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\Area;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AreaRequest;
 use App\Traits\Alertas;
 use App\User;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class AreaController extends Controller
@@ -31,9 +33,6 @@ class AreaController extends Controller
      */
     public function index()
     {
-
-        // $areas = Area::orderBy('id', 'desc')
-        //     ->paginate();
         return view('admins.areas.index');
     }
 
@@ -143,16 +142,24 @@ class AreaController extends Controller
             ->editColumn('user_id', function ($areas) {
                 return $areas->responsables->nombre . ' ' . $areas->responsables->apellidoP . ' ' . $areas->responsables->apellidoM;
             })
-
             ->addColumn('idShow', function ($areas) {
                 return $areas->id;
             })
-
             ->addColumn('action', function ($areas) {
                 return '<a href="' . route("areas.show", $areas->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
                 '<a href="' . route('areas.edit', $areas->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
                 '<a href="#" value="' . $areas->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
+    }
+
+    public function areas()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Area::all();
+        $pdf   = PDF::loadView('admins.areas.pdf', ['data' => $data]);
+        // return $pdf->stream();
+        return $pdf->download('areas_' . $fecha . '.pdf');
     }
 }

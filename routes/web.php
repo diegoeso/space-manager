@@ -18,29 +18,26 @@ Route::prefix('admin')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('admin.login.submit');
     Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
 
-    // Password Reset Routes...
-    // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-    // Restablecer Contraseña
-
     /**
      * controlar para administrador y responsable de area
      */
+
     Route::resource('users', 'Admins\UserController');
     Route::get('users/listarUsers/{id}', 'Admins\UserController@listarUsers')->name('users.listarUsers');
+    // Route::post('/users/listaUsersPDF', 'Admins\UserController@listaUsersPDF')->name('users.listaUsersPDF');
+
     /**
      *Controlador para los usuarios (profesores y alumnos)
      */
     Route::resource('usuarios', 'Admins\UsuarioController');
     Route::get('usuarios/listarUsuarios/{id}', 'Admins\UsuarioController@listarUsuarios')->name('usuarios.listarUsuarios');
+
     /**
      * ruta para controlar areas
      */
     Route::resource('areas', 'Admins\AreaController');
     Route::get('areas/listarAreas/{id}', 'Admins\AreaController@listarAreas')->name('areas.listarAreas');
+
     /**
      * Controlador para categoria elementos
      */
@@ -51,11 +48,13 @@ Route::prefix('admin')->group(function () {
      */
     Route::resource('elementos', 'Admins\ElementoController');
     Route::get('elementos/listarElementos/{id}', 'Admins\ElementoController@listarElementos')->name('elementos.listarElementos');
+
     /**
      *Controlador para espacios academicos
      */
     Route::resource('espacios', 'Admins\EspacioController');
     Route::get('espacios/listarEspacios/{id}', 'Admins\EspacioController@listarEspacios')->name('espacios.listarEspacios');
+
     /**
      * Controlador para solicitudes
      */
@@ -65,6 +64,7 @@ Route::prefix('admin')->group(function () {
     Route::put('solicitudes/{id}/cancelar', 'Admins\SolicitudController@cancelar')->name('solicitudes.cancelar');
     Route::get('solicitudes/listarSolicitudes/{id}', 'Admins\SolicitudController@listarSolicitudes')->name('solicitudes.listarSolicitudes');
     Route::get('solicitudes/ver/{id}', 'Admins\SolicitudController@ver')->name('solicitudes.ver');
+
     /**
      * Controlador para Roles y permisos
      */
@@ -75,11 +75,6 @@ Route::prefix('admin')->group(function () {
      */
     Route::resource('mensajes', 'Admins\MensajesController');
     Route::get('mensajes/responder/{id}', 'Admins\MensajesController@responder')->name('mensajes.responder');
-
-    /**
-     * Actividades Academicas (Horarios y calendarios de examenes);
-     */
-    Route::resource('actividades', 'Admins\ActividadesController');
 
     /**
      * Actividades Academicas (Horarios y calendarios de examenes);
@@ -98,14 +93,24 @@ Route::prefix('admin')->group(function () {
     Route::put('solicitudes-elementos/{id}/rechazar', 'Admins\SolicitudElementosController@rechazar')->name('solicitudes-elementos.rechazar');
     Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
 
-    Route::resource('reportes', 'Admins\ReportesController');
+    /**
+     * PDF
+     */
+    Route::get('pdf/admin', 'Admins\UserController@administradores')->name('pdf.admin');
+    Route::get('pdf/usuario', 'Admins\UsuarioController@usuarios')->name('pdf.usuarios');
+    Route::get('pdf/area', 'Admins\AreaController@areas')->name('pdf.areas');
+    Route::get('pdf/cateogoria-elementos', 'Admins\CategoriaElementoController@categoria_elementos')->name('pdf.cateogoria-elementos');
+    Route::get('pdf/elemento', 'Admins\ElementoController@elementos')->name('pdf.elementos');
+    Route::get('pdf/espacio', 'Admins\EspacioController@espacios')->name('pdf.espacios');
+    Route::get('pdf/solicitud', 'Admins\SolicitudController@solicitudes')->name('pdf.solicitudes');
+    Route::get('pdf/solicitud/{id}', 'Admins\SolicitudController@solicitud')->name('pdf.solicitud');
 
 });
+
 // Restablecer contraseña
 Route::get('password/reset', 'Auth\RestablecerContraseñaController@showForm')->name('password.request');
 Route::post('password/email', 'Auth\RestablecerContraseñaController@enviarLink')->name('password.email');
 
-Route::get('pdf', 'Admins\PDFController@crearPDF');
 /**
  * Login para usuarios tipo Profesor y Alumnos
  */
@@ -163,19 +168,13 @@ Route::resource('solicitud', 'Usuarios\SolicitudController');
 Route::get('solicitud/ver/{id}', 'Usuarios\SolicitudController@ver')->name('solicitud.ver');
 Route::get('solicitud/listarSolicitudesUsuario/{id}', 'Usuarios\SolicitudController@listarSolicitudes')->name('listarSolicitudes');
 Route::post('solicitud/cancelar', 'Usuarios\SolicitudController@cancelar')->name('solicitud.cancelar');
+
 /**
  * Controlador para mensajes Usuario
  */
 Route::resource('mensaje', 'Usuarios\MensajesController');
 Route::get('mensaje/responder/{id}', 'Usuarios\MensajesController@responder')->name('mensaje.responder');
 
-/**
- * Solicitud de elementos
- */
-
-Route::resource('solicitud-elementos', 'Usuarios\SolicitudElementosController');
-Route::get('solicitud-elementos/listarSolicitudesUsuario/{id}', 'Usuarios\SolicitudElementosController@listarSolicitudes')->name('listarSolicitudes');
-Route::get('solicitud-elementos/cancelar/{id}', 'Usuarios\SolicitudElementosController@cancelar')->name('solicitud-elementos.cancelar');
 /**
  * Evaluaciones de los usuarios
  */

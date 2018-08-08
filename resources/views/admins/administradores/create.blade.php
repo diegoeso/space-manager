@@ -33,7 +33,6 @@
             @include('general.botonNuevo',['modulo' => 'Nuevo Usuarios','ruta'=>''])
             {!! Form::open(['route'=>'users.store', 'method'=>'POST','files' => true ]) !!}
             <div class="box-body">
-                {{-- {!!Form::text('tipoCuenta', '0', ['hidden']) !!} --}}
                 @include('admins.administradores.fragmentos.form')
             </div>
             <div class="box-footer">

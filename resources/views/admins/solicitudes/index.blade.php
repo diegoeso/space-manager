@@ -30,6 +30,15 @@
             {{-- boton y texto de la parte superior de la tabla --}}
             @include('general.botonNuevo', ['modulo' => 'Listado de Solicitudes','ruta'=>'solicitudes.create'])
             <div class="box-body">
+                <div class="row" style="padding-bottom: 5px;">
+                    <div class="col-md-12 ">
+                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitudes') }}" target="_black">
+                            <i class="fa fa-file-pdf-o">
+                            </i>
+                            Descargar PDF
+                        </a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     {{-- @include('general.mensaje') --}}
                     <table class="table table-hover" id="solicitudes-table">

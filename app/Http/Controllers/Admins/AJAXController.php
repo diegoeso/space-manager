@@ -54,8 +54,6 @@ class AJAXController extends Controller
 
     public function elementosEspacio($id)
     {
-        // $espacio = Espacio::with('elementos')->where('id', $id)->get();
-        // return $espacio;
         $elementos = DB::table('elemento_espacio')
             ->join('elementos', 'elementos.id', '=', 'elemento_espacio.elemento_id')
             ->select('elementos.nombre', 'elemento_espacio.cantidad')
@@ -80,9 +78,8 @@ class AJAXController extends Controller
 
     public function solicitudesFullCalendar($estado)
     {
-        $now         = Carbon::now();
-        $fechaActual = $now->format('Y-m-d');
-        // $calendar        = Solicitud::where('fechaFin', '>', $fechaActual)->get();
+        $now             = Carbon::now();
+        $fechaActual     = $now->format('Y-m-d');
         $calendar        = Solicitud::where('tipoRegistro', 0)->get();
         $data            = [];
         $backgroundColor = '';
@@ -114,7 +111,6 @@ class AJAXController extends Controller
             $subArr = [
                 'id'               => $event->id,
                 'title'            => $event->espacio->nombre,
-                // 'start'           => $event->fechaInicio->format('Y-m-d') . ' ' . $event->horaInicio,
                 'start'            => $event->fechaInicio->format('Y-m-d') . ' ' . $event->horaInicio,
                 'end'              => $event->fechaFin->format('Y-m-d') . ' ' . $event->horaFin,
                 'url'              => route('solicitudes.show', $event->id),
@@ -164,7 +160,6 @@ class AJAXController extends Controller
             $subArr = [
                 'id'              => $event->id,
                 'title'           => $event->espacio->nombre,
-                // 'title'           => $title,
                 'start'           => $event->fechaInicio->format('Y-m-d') . ' ' . $event->horaInicio,
                 'end'             => $event->fechaFin->format('Y-m-d') . ' ' . $event->horaFin,
                 'backgroundColor' => $backgroundColor,
@@ -187,32 +182,8 @@ class AJAXController extends Controller
         }
 
         foreach ($calendarioEscolar as $event) {
-            // colores para cada estado de la solicitud
-            // switch ($event->carrera) {
-            //     case '1':
-            //         $backgroundColor = '#F5C01A';
-            //         $borderColor     = '#F5C01A';
-            //         break;
-            //     case '2':
-            //         $backgroundColor = '#f39c12';
-            //         $borderColor     = '#f39c12';
-            //         break;
-            //     case '3':
-            //         $backgroundColor = '#f56954';
-            //         $borderColor     = '#f56954';
-            //         break;
-            //     case '4':
-            //         $backgroundColor = '#d2d6de';
-            //         $borderColor     = '#d2d6de';
-            //         break;
-            //     default:
-            //         $backgroundColor = '#00c0ef';
-            //         $borderColor     = '#00c0ef';
-            //         break;
-            // }
             $subArr = [
                 'id'              => $event->id,
-                // 'title'           => $event->espacio->nombre,
                 'title'           => $event->espacio->nombre . ' - ' . $event->docente . '   -   ' . $event->actividadAcademica . '    ' . 'Grupo: ' . $event->grupo,
                 'start'           => $event->fechaInicio->format('Y-m-d') . ' ' . $event->horaInicio,
                 'end'             => $event->fechaFin->format('Y-m-d') . ' ' . $event->horaFin,
@@ -235,7 +206,6 @@ class AJAXController extends Controller
         foreach ($calendarioEscolar as $event) {
             $subArr = [
                 'id'              => $event->id,
-                // 'title'           => $event->espacio->nombre,
                 'title'           => $event->espacio->nombre . ' - ' . $event->docente . '   -   ' . $event->actividadAcademica . '    ' . 'Grupo: ' . $event->grupo,
                 'start'           => $event->fechaInicio->format('Y-m-d') . ' ' . $event->horaInicio,
                 'end'             => $event->fechaFin->format('Y-m-d') . ' ' . $event->horaFin,
@@ -244,7 +214,6 @@ class AJAXController extends Controller
             ];
             array_push($data, $subArr);
         }
-        // dd($data);
         return $data;
     }
 

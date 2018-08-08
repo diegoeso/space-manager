@@ -116,7 +116,6 @@ class SolicitudController extends Controller
     {
         $evaluacion = Evaluaciones::where('solicitud_id', $id)
             ->where('evaluador', Auth::user()->id)->first();
-        // dd($evaluacion);
         $solicitud = Solicitud::find($id);
         $this->authorize('pass', $solicitud);
         return view('usuarios.solicitudes.show', compact('solicitud', 'evaluacion'));
@@ -221,9 +220,9 @@ class SolicitudController extends Controller
                 ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
                 ->where('espacio_id', $espacio_id)
                 ->where('estado', $estado)
-
                 ->where('fechaInicio', $fechaInicio)
                 ->get();
+
             $bandera = 1;
             return view('usuarios.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'evaluacion'));
         }

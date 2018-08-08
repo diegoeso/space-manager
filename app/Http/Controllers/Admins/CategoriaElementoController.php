@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\CategoriaElemento;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaElementosRequest;
 use App\Traits\Alertas;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class CategoriaElementoController extends Controller
@@ -30,10 +32,7 @@ class CategoriaElementoController extends Controller
      */
     public function index()
     {
-
-        $categorias = CategoriaElemento::orderBy('id', 'DESC')
-            ->paginate();
-        return view('admins.categoria-elementos.index', compact('categorias'));
+        return view('admins.categoria-elementos.index');
     }
 
     /**
@@ -147,5 +146,15 @@ class CategoriaElementoController extends Controller
 
             })
             ->make();
+    }
+
+    public function categoria_elementos()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = CategoriaElemento::all();
+        $pdf   = PDF::loadView('admins.categoria-elementos.pdf', ['data' => $data]);
+        // return $pdf->stream();
+        return $pdf->download('categorias_' . $fecha . '.pdf');
     }
 }

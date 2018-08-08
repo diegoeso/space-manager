@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\Area;
 use App\Elemento;
 use App\Espacio;
@@ -19,6 +20,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
@@ -174,13 +176,7 @@ class SolicitudController extends Controller
     public function show($id)
     {
 
-        $solicitud = Solicitud::find($id);
-        // $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        // $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        // $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
-        // $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
-        // $espacio_id  = $solicitud->espacio_id;
-        // $estado      = $solicitud->estado;
+        $solicitud           = Solicitud::find($id);
         $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
         $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
         $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
@@ -195,16 +191,6 @@ class SolicitudController extends Controller
             $bandera = 0;
             return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
         } else {
-            // $solicitudesPendientes = Solicitud::where('fechaInicio', $fechaInicio)
-            //     ->where('estado', $estado)
-            //     ->where('espacio_id', $espacio_id)
-            //     ->whereBetween('horaInicio', [$horaInicio, $horaFin])
-            //     ->orwhereBetween('horaFin', [$horaInicio, $horaFin])
-            //     ->where('espacio_id', $espacio_id)
-            //     ->where('estado', $estado)
-            //     ->where('fechaInicio', $fechaInicio)
-            //     ->get();
-            // dd($total);
             $solicitudesPendientes = Solicitud::registroTranslapado($data);
             $bandera               = 1;
             return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
@@ -289,8 +275,6 @@ class SolicitudController extends Controller
     public function listarSolicitudes($id)
     {
         $solicitudes = Solicitud::where('tipoRegistro', 0)->get();
-        // $solicitudes = Solicitud::all();
-
         return Datatables::of($solicitudes)
             ->editColumn('usuarioSolicitud', function ($solicitudes) {
                 if ($solicitudes->tipoUsuario == 0 || $solicitudes->tipoUsuario == 1) {
@@ -406,7 +390,6 @@ class SolicitudController extends Controller
                     if ($solicitudRechazada->save()) {
                         // notificacion
                         $this->notificacion($solicitudRechazada->id);
-
                         try {
                             $this->enviarEmailSolicitudRechazada($data);
                         } catch (\Exception $e) {
@@ -563,5 +546,27 @@ class SolicitudController extends Controller
         $notificacion->estadoRes    = 0;
         $notificacion->estadoUsu    = 0;
         $notificacion->save();
+    }
+
+    public function solicitudes()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Solicitud::all();
+        $pdf   = PDF::loadView('admins.solicitudes.pdfSolicitudes', ['data' => $data]);
+        // $pdf = PDF::loadView('admins.dashboard');
+        // return $pdf->stream();
+        return $pdf->download('solicitudes_' . $fecha . '.pdf');
+    }
+
+    public function solicitud($id)
+    {
+
+        $fecha     = date('d-m-Y/h:i:s');
+        $pdf       = App::make('dompdf.wrapper');
+        $solicitud = Solicitud::find($id);
+        $pdf       = PDF::loadView('admins.solicitudes.pdf', ['solicitud' => $solicitud]);
+        // return $pdf->stream();
+        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
     }
 }

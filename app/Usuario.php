@@ -121,4 +121,25 @@ class Usuario extends Authenticatable
                 break;
         }
     }
+
+    public function tipoCuenta($tipoCuenta)
+    {
+        switch ($tipoCuenta) {
+            case 0:
+                return 'Administrador';
+                break;
+            case 1:
+                return 'Responsable de Área';
+                break;
+            case 2:
+                return 'Profesor';
+                break;
+            case 3:
+                return 'Alumno';
+                break;
+            default:
+                return 'Usuario';
+                break;
+        }
+    }
 }

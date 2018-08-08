@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App;
 use App\CategoriaElemento;
 use App\Elemento;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ElementoRequest;
 use App\Traits\Alertas;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class ElementoController extends Controller
@@ -61,7 +63,6 @@ class ElementoController extends Controller
         $elemento->descripcion      = $request->descripcion;
         $elemento->numeroInventario = $request->numeroInventario;
         $elemento->categoria_id     = $request->categoria_id;
-
         if ($elemento->save()) {
             $this->registroExitoso();
             return redirect()->route('elementos.show', $elemento->id);
@@ -152,5 +153,16 @@ class ElementoController extends Controller
                 '<a href="#" value="' . $elementos->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make();
+    }
+
+    public function elementos()
+    {
+        $fecha = date('d-m-Y/h:i:s');
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Elemento::all();
+        $pdf   = PDF::loadView('admins.elementos.pdf', ['data' => $data]);
+        // return $pdf->stream();
+
+        return $pdf->download('elementos_' . $fecha . '.pdf');
     }
 }

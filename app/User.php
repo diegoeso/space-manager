@@ -31,9 +31,9 @@ class User extends Authenticatable
         'password',
     ];
 
-    // protected $hidden = [
-    //     'password', 'remember_token',
-    // ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     public function getFullNameAttribute()
     {
@@ -53,5 +53,27 @@ class User extends Authenticatable
     public function getCreatedAtAttribute($date)
     {
         return new Date($date);
+    }
+
+    public function tipoCuenta($tipoCuenta)
+    {
+        switch ($tipoCuenta) {
+            case 0:
+                return 'Administrador';
+                break;
+            case 1:
+                return 'Responsable de Área';
+                break;
+            case 2:
+                return 'Profesor';
+                break;
+            case 3:
+                return 'Alumno';
+                break;
+
+            default:
+                return 'Usuario';
+                break;
+        }
     }
 }

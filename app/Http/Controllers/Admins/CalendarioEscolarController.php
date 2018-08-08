@@ -62,8 +62,6 @@ class CalendarioEscolarController extends Controller
             //Sacar el dia de la semana con el modificador N de la funcion date
             $dia = date('N', $i);
             if ($dia == $diaSemana) {
-
-                // echo date('Y-m-d   ' . '<br/>', $i);
                 $horario                     = new Solicitud;
                 $horario->fechaInicio        = date("Y-m-d", $i);
                 $horario->fechaFin           = date("Y-m-d", $i);
@@ -179,7 +177,6 @@ class CalendarioEscolarController extends Controller
             })
             ->addColumn('action', function ($calendarios) {
                 return '<a href="' . route("calendarios.show", $calendarios->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
-                // '<a href="' . route('calendarios.edit', $calendarios->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
                 '<a href="#" value="' . $calendarios->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
