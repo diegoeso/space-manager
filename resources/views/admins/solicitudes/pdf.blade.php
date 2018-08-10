@@ -35,11 +35,10 @@
                     <td style="border: inset 0pt">
                         <div class="col-md-12">
                             <dt>
-                                Espacio académico solicitado:
+                                <dd class="lead">
+                                    {{ $solicitud->espacio->nombre .' / '.$solicitud->area->nombre}}
+                                </dd>
                             </dt>
-                            <dd class="lead">
-                                {{ $solicitud->espacio->nombre .' / '.$solicitud->area->nombre}}
-                            </dd>
                         </div>
                     </td>
                 </tr>

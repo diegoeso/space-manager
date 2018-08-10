@@ -102,6 +102,7 @@ Route::prefix('admin')->group(function () {
     Route::get('pdf/cateogoria-elementos', 'Admins\CategoriaElementoController@categoria_elementos')->name('pdf.cateogoria-elementos');
     Route::get('pdf/elemento', 'Admins\ElementoController@elementos')->name('pdf.elementos');
     Route::get('pdf/espacio', 'Admins\EspacioController@espacios')->name('pdf.espacios');
+
     Route::get('pdf/solicitud', 'Admins\SolicitudController@solicitudes')->name('pdf.solicitudes');
     Route::get('pdf/solicitud/{id}', 'Admins\SolicitudController@solicitud')->name('pdf.solicitud');
 
@@ -120,7 +121,10 @@ Route::post('password/email', 'Auth\RestablecerContraseñaController@enviarLink'
  */
 Route::get('login', 'Auth\UsuarioLoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\UsuarioLoginController@login')->name('login');
-Route::get('inicio', 'HomeController@dashboard')->name('dashboard');
+
+// Route::get('inicio', 'HomeController@dashboard')->name('dashboard');
+Route::get('inicio', 'UsuarioController@dashboard')->name('dashboard');
+
 Route::post('logout', 'Auth\UsuarioLoginController@logout')->name('logout');
 
 /**
@@ -132,10 +136,14 @@ Route::post('register', 'Auth\RegisterController@register');
 /**
  * Confirmacion de cuenta
  */
-Route::get('/confirmacion', 'HomeController@index')->name('confirmacion');
-Route::get('/confirmacion/{email}/token/{codigoConfirmacion}', 'HomeController@confirmacion');
-Route::get('/reenviarCorreo/{id}/token/{codigoConfirmacion}', 'HomeController@reenviarCorreo');
+// Route::get('/confirmacion', 'HomeController@index')->name('confirmacion');
+// Route::get('/confirmacion/{email}/token/{codigoConfirmacion}', 'HomeController@confirmacion');
+// Route::get('/reenviarCorreo/{id}/token/{codigoConfirmacion}', 'HomeController@reenviarCorreo');
 
+// Confirmacion de cuenta
+Route::get('confirmacion-de-cuenta', 'UsuarioController@confirmarCuenta')->name('confirmarCuenta');
+Route::get('confirmacion/{email}/token/{codigoConfirmacion}', 'UsuarioController@confirmacion');
+Route::get('reenviar-confirmacion/{id}/token/{codigoConfirmacion}', 'UsuarioController@reenviarCorreo');
 /**
  * Peticiones AJAX
  */

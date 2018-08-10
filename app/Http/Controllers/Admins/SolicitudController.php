@@ -554,7 +554,6 @@ class SolicitudController extends Controller
         $pdf   = App::make('dompdf.wrapper');
         $data  = Solicitud::all();
         $pdf   = PDF::loadView('admins.solicitudes.pdfSolicitudes', ['data' => $data]);
-        // $pdf = PDF::loadView('admins.dashboard');
         // return $pdf->stream();
         return $pdf->download('solicitudes_' . $fecha . '.pdf');
     }

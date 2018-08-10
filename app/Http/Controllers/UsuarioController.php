@@ -12,14 +12,14 @@ use App\Usuario;
 use Auth;
 use Toastr;
 
-class HomeController extends Controller
+class UsuarioController extends Controller
 {
-    // Usuario
+
     use Email;
+
     public function __construct()
     {
         $this->middleware('auth:usuario');
-        // $this->middleware('completarRegistro')->only('dashboard');
     }
 
     public function dashboard()
@@ -30,18 +30,15 @@ class HomeController extends Controller
         $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)->get();
         $mensajes     = Mensaje::where('leido', 0)
             ->where('para', Auth::user()->id)->get();
+
         if (Auth::user()->confirmacion == 0 && Auth::user()->codigoConfirmacion != null) {
-            // return redirect()->route('confirmacion');
-            // return redirect()->to('/confirmacion');
-            return redirect()->route('confirmacion');
+            return redirect()->route('confirmarCuenta');
         } else {
-            if (Auth::user()->nombreCompleto == null || Auth::user()->nickname == null) {
-                return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'evaluaciones', 'mensajes'));
-            }
+            return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
         }
-        return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
     }
-    public function index()
+
+    public function confirmarCuenta()
     {
         $usuario                    = Usuario::find(Auth::user()->id);
         $data['id']                 = $usuario->id;
@@ -51,7 +48,7 @@ class HomeController extends Controller
         $data['confirmacion']       = $usuario->confirmacion;
         $data['codigoConfirmacion'] = $usuario->codigoConfirmacion;
         $data['tipoCuenta']         = $usuario->tipoCuenta;
-        if ($usuario->confirmacion != 0) {
+        if ($usuario->confirmacion == 0) {
             if ($usuario->envioEmail == 1) {
                 return view('mail.confirmacion', compact('usuario'));
             }
@@ -59,10 +56,9 @@ class HomeController extends Controller
             $usuario->envioEmail = 1;
             $usuario->save();
             return view('mail.confirmacion', compact('usuario'));
-        } else {
-            return redirect('/inicio')->with('info', '¡Actualiza tus datos para continuar!');
         }
     }
+
     public function confirmacion($email, $codigoConfirmacion)
     {
         $usuario     = new Usuario;

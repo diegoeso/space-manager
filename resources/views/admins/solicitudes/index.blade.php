@@ -27,7 +27,6 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            {{-- boton y texto de la parte superior de la tabla --}}
             @include('general.botonNuevo', ['modulo' => 'Listado de Solicitudes','ruta'=>'solicitudes.create'])
             <div class="box-body">
                 <div class="row" style="padding-bottom: 5px;">

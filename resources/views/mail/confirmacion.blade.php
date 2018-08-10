@@ -186,7 +186,7 @@
                     <p class="lead text-justify">
                         Para continuar, confirma tu dirección.
                     </p>
-                    <a class="" href="{{ url('/reenviarCorreo/'.$usuario->id.'/token/'.$usuario->codigoConfirmacion) }}">
+                    <a class="" href="{{ url('/reenviar-confirmacion/'.$usuario->id.'/token/'.$usuario->codigoConfirmacion) }}">
                         Reenviar Correo de Confirmación
                     </a>
                 </div>
