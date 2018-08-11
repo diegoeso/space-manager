@@ -21,10 +21,8 @@ Route::prefix('admin')->group(function () {
     /**
      * controlar para administrador y responsable de area
      */
-
     Route::resource('users', 'Admins\UserController');
     Route::get('users/listarUsers/{id}', 'Admins\UserController@listarUsers')->name('users.listarUsers');
-    // Route::post('/users/listaUsersPDF', 'Admins\UserController@listaUsersPDF')->name('users.listaUsersPDF');
 
     /**
      *Controlador para los usuarios (profesores y alumnos)
@@ -102,11 +100,8 @@ Route::prefix('admin')->group(function () {
     Route::get('pdf/cateogoria-elementos', 'Admins\CategoriaElementoController@categoria_elementos')->name('pdf.cateogoria-elementos');
     Route::get('pdf/elemento', 'Admins\ElementoController@elementos')->name('pdf.elementos');
     Route::get('pdf/espacio', 'Admins\EspacioController@espacios')->name('pdf.espacios');
-
     Route::get('pdf/solicitud', 'Admins\SolicitudController@solicitudes')->name('pdf.solicitudes');
     Route::get('pdf/solicitud/{id}', 'Admins\SolicitudController@solicitud')->name('pdf.solicitud');
-
-    // Usuarios
     Route::get('pdf/solicitud-usuario', 'Usuarios\SolicitudController@solicitudes')->name('pdf.solicitudesU');
     Route::get('pdf/solicitud-usuario/{id}', 'Usuarios\SolicitudController@solicitud')->name('pdf.solicitudU');
 
@@ -136,14 +131,10 @@ Route::post('register', 'Auth\RegisterController@register');
 /**
  * Confirmacion de cuenta
  */
-// Route::get('/confirmacion', 'HomeController@index')->name('confirmacion');
-// Route::get('/confirmacion/{email}/token/{codigoConfirmacion}', 'HomeController@confirmacion');
-// Route::get('/reenviarCorreo/{id}/token/{codigoConfirmacion}', 'HomeController@reenviarCorreo');
-
-// Confirmacion de cuenta
 Route::get('confirmacion-de-cuenta', 'UsuarioController@confirmarCuenta')->name('confirmarCuenta');
 Route::get('confirmacion/{email}/token/{codigoConfirmacion}', 'UsuarioController@confirmacion');
 Route::get('reenviar-confirmacion/{id}/token/{codigoConfirmacion}', 'UsuarioController@reenviarCorreo');
+
 /**
  * Peticiones AJAX
  */
@@ -192,3 +183,5 @@ Route::get('mensaje/responder/{id}', 'Usuarios\MensajesController@responder')->n
  */
 Route::resource('evaluaciones', 'Admins\EvaluacionesController');
 Route::get('evaluaciones/listarEvaluaciones/{id}', 'Admins\EvaluacionesController@listarEvaluaciones');
+
+Route::get('grafica/solicitudes', 'Admins\AJAXController@solicitudesGrafica')->name('solicitudesGrafica');

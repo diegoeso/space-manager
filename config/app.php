@@ -171,6 +171,8 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         // PDF
         Barryvdh\DomPDF\ServiceProvider::class,
+        // chart
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
     ],
 
@@ -227,6 +229,7 @@ return [
         'Date'         => Jenssegers\Date\Date::class,
         'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'PDF'          => Barryvdh\DomPDF\Facade::class,
+        'Chart'        => ConsoleTVs\Charts\ChartsServiceProvider::class,
 
     ],
 

@@ -89,8 +89,37 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            <div class="box-body no-padding">
-                <div class="fc fc-unthemed fc-ltr" id="calendar">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Uso de espacios académicos
+                </h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                        <i class="fa fa-minus">
+                        </i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove" type="button">
+                        <i class="fa fa-times">
+                        </i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="chart">
+                            <canvas height="300" id="grafica1">
+                            </canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="direct-chat direct-chat-warning">
+                            <div class="box-body">
+                                <div class="direct-chat-messages" id="info">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,12 +127,10 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        {{--
-        <canvas id="myChart">
-        </canvas>
-        --}}
-        <div class="chart">
-            <div id="grafica" style="height: 100%; width: 100%;">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div class="fc fc-unthemed fc-ltr" id="calendar">
+                </div>
             </div>
         </div>
     </div>
@@ -571,131 +598,47 @@
       "hideMethod": "fadeOut"
     }
 </script>
-{{--
 <script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            datasets: [{
-                label:'Espacio mas solicitado',
-                data: [12, 10, 12, 9, 8, 13],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-    // options: {
-    //     scales: {
-    //         yAxes: [{
-    //             ticks: {
-    //                 beginAtZero:true
-    //             }
-    //         }]
-    //     }
-    // }
-});
-</script>
---}}
-<script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Espacio", "Cantidad de solicitudes", { role: "style" }],
-        @foreach ($graficas as $grafica)
-          @php
-            $ran=rand(1,10);
-        @endphp
-        @switch($ran)
-            @case(1)
-                @php
-                    $color='#0A6187';
-                @endphp
-                @break
-            @case(2)
-                @php
-                    $color='#F25944';
-                @endphp
-                @break
-            @case(3)
-                @php
-                    $color='#F2385A';
-                @endphp
-                @break
-            @case(4)
-                @php
-                    $color='#F5A503';
-                @endphp
-                @break
-            @case(5)
-                @php
-                    $color='#4AD9D9';
-                @endphp
-                @break
-            @case(6)
-                @php
-                    $color='#36B1BF';
-                @endphp
-                @break
-            @case(7)
-                @php
-                    $color='#0376BC';
-                @endphp
-                @break
-            @case(8)
-                @php
-                    $color='#F16623';
-                @endphp
-                @break
-            @case(9)
-                
-                @php
-                    $color='#F8BE15';
-                @endphp
-                @break
-            @case(10)
-                @php
-                    $color= '#4ABF3D';
-                @endphp
-                @break
-        @endswitch
-            ['{{ $grafica->espacio->nombre}}', {{ $grafica->total}}, '{{ $color }}'],
-        @endforeach
-      ]);
+    var espacio = [];
+    var total = [];
+    var colores=[];
+    $.get('/grafica/solicitudes', function(data) {
+        espacio = [];
+        total = [];
+        colores=[];
+        $.each(data, function(i, item) {
+            espacio.push(item.nombre);
+            total.push(item.total);
+            var r = Math.round(Math.random()*255);
+            var g = Math.round(Math.random()*255);
+            var b = Math.round(Math.random()*255);
+            var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
+            colores.push(rgb);
+            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio"># '+item.total+'</span><div class="progress sm"><div class="progress-bar" style="width: '+item.total * 100+'px; background-color: '+rgb+'"></div></div></div>');            
+        });
+        new Chart(document.getElementById("grafica1"), {
+            type: 'pie',
+            data: {
+              labels: espacio,
+              datasets: [
+                {
+                  label: "",
+                  backgroundColor: colores,
+                  data: total
+                }
+              ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Espacio académico mas solicitado.'
+                }
+            }
+        });     
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+        
 
-      var options = {
-        title: "Espacio Academico mas solicitado",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("grafica"));
-      chart.draw(view, options);
-  }
+     });
 </script>
 @endsection

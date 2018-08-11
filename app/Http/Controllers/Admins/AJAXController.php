@@ -240,4 +240,16 @@ class AJAXController extends Controller
         }
     }
 
+    public function solicitudesGrafica()
+    {
+        // $solicitudesG = Solicitud::select(DB::raw('count(*) as total, espacio_id'))->where('tipoRegistro', 0)->groupBy('espacio_id')->get();
+        $solicitudesG = DB::table('solicitudes')
+            ->join('espacios', 'espacios.id', '=', 'solicitudes.espacio_id')
+            ->select('espacios.nombre', DB::raw('count(*) as total'))
+            ->groupBy('espacios.nombre', 'solicitudes.espacio_id')
+            ->orderBy('total', 'DESC')
+            ->get();
+        return $solicitudesG;
+    }
+
 }

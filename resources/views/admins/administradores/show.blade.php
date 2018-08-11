@@ -83,7 +83,7 @@
                 <div class="box-body">
                     <dl>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <dt>
                                     Nombre
                                 </dt>
@@ -99,7 +99,7 @@
                                     {{ $user->apellidoP }}
                                 </dd>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <dt>
                                     Apellido Materno
                                 </dt>
@@ -109,9 +109,10 @@
                             </div>
                         </div>
                     </dl>
+                    <hr/>
                     <dl>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <dt>
                                     Correo Electrónico
                                 </dt>
@@ -119,7 +120,7 @@
                                     {{$user->email}}
                                 </dd>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <dt>
                                     Teléfono
                                 </dt>
@@ -127,7 +128,11 @@
                                     {{ $user->telefono }}
                                 </dd>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                    </dl>
+                    <dl>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <dt>
                                     Nombre de Usuario
                                 </dt>
@@ -135,11 +140,7 @@
                                     {{ $user->nickname }}
                                 </dd>
                             </div>
-                        </div>
-                    </dl>
-                    <dl>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <dt>
                                     Tipo de Cuenta
                                 </dt>
@@ -153,7 +154,7 @@
                                     @endswitch
                                 </dd>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <dt>
                                     Creación de registro
                                 </dt>

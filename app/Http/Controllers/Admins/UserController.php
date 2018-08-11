@@ -193,10 +193,9 @@ class UserController extends Controller
     public function administradores()
     {
         $fecha = date('d-m-Y/h:i:s');
-        // dd($fecha);
-        $pdf  = App::make('dompdf.wrapper');
-        $data = User::all();
-        $pdf  = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = User::all();
+        $pdf   = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('administradores_' . $fecha . '.pdf');
     }

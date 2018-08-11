@@ -29,7 +29,7 @@
             <div class="box-body">
                 <div class="row" style="padding-bottom: 5px;">
                     <div class="col-md-12 ">
-                        <a class="btn btn-default btn-xs pull-right" href="{{ route('pdf.usuarios') }}" target="_blank">
+                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.usuarios') }}" target="_blank">
                             <i class="fa fa-file-pdf-o">
                             </i>
                             Descargar PDF
