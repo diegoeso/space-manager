@@ -32,7 +32,7 @@
                         {{ count($solicitudes) }}
                     </h3>
                     <p>
-                        Tús Solicitudes
+                        Tus Solicitudes
                     </p>
                 </div>
                 <div class="icon">
@@ -92,11 +92,42 @@
 </div>
 <div class="row">
     <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Uso de espacios académicos
+                </h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                        <i class="fa fa-minus">
+                        </i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove" type="button">
+                        <i class="fa fa-times">
+                        </i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart">
+                            <canvas height="250" id="graficaEvaluaciones">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a aria-expanded="false" data-toggle="tab" href="#tab_1">
-                        Ingenieria en software
+                        Ingeniería en software
                     </a>
                 </li>
                 <li class="">
@@ -106,12 +137,12 @@
                 </li>
                 <li class="">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_3">
-                        Produccion Industrial
+                        Producción Industrial
                     </a>
                 </li>
                 <li class="">
                     <a aria-expanded="true" data-toggle="tab" href="#tab_4">
-                        Ingenieria en Plasticos
+                        Ingeniería en Plásticos
                     </a>
                 </li>
                 {{--
@@ -793,5 +824,145 @@
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
     }
+</script>
+<script>
+    // var cal1 = [];
+    // var cal2 = [];
+    // var cal3 = [];
+    // var cal4 = [];
+    // var cal5 = [];
+    // var puntuacion = [];
+    // var colores=[];
+    // $.get('/grafica/evaluaciones-usuario', function(data) {
+    //     console.log(data);
+    //     cal1 = [];
+    //     cal2 = [];
+    //     cal3 = [];
+    //     cal4 = [];
+    //     cal5 = [];
+    //     $.each(data, function(i, item) {
+    //         var r = Math.round(Math.random()*255);
+    //         var g = Math.round(Math.random()*255);
+    //         var b = Math.round(Math.random()*255);
+    //         var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
+    //         colores.push(rgb);
+    //         cal1.push(item.cal1);
+    //         cal2.push(item.cal2);
+    //         cal3.push(item.cal3);
+    //         cal4.push(item.cal4);
+    //         cal5.push(item.cal5);
+    //     });
+    //     new Chart(document.getElementById("graficaEvaluaciones"), {
+    //         type: 'bar',
+    //         data: {
+    //           datasets: [
+    //             {
+    //               label: "Puntuación",
+    //               backgroundColor: "#3e95cd",
+    //               data: cal1
+    //             },
+    //             {
+    //               label: "Limpieza",
+    //               backgroundColor: "#8e5ea2",
+    //               data: cal2
+    //             },
+    //             {
+    //               label: "Atención",
+    //               backgroundColor: "#3cba9f",
+    //               data: cal3
+    //             },
+    //             {
+    //               label: "Cumplio con la actividad a realizar",
+    //               backgroundColor: "#e8c3b9",
+    //               data: cal4
+    //             },
+    //             {
+    //               label: "Condicion de los elementos solicitados",
+    //               backgroundColor: "#c45850",
+    //               data: cal5
+    //             }
+    //           ]
+    //         },
+
+    //         options: {
+    //           legend: { display: true },
+    //           title: {
+    //             display: true,
+    //             text: 'Predicted world population (millions) in 2050'
+    //           }
+    //         }
+    //     });   
+    // });
+    var puntuacion = [];
+    var colores=[];
+    var total;
+    var cal1 = [];
+    var cal2 = [];
+    var cal3 = [];
+    var cal4 = [];
+    var cal5 = [];
+    $.get('/grafica/evaluaciones-usuario', function(data) {
+        puntuacion = [];
+        cal1=[];
+        cal2=[];
+        cal3=[];
+        cal4=[];
+        cal5=[];
+        $.each(data, function(i, item) {
+            // puntuacion.push(item.cal1,item.cal2,item.cal3,item.cal4,item.cal5); 
+            cal1.push(item.cal1);
+            cal2.push(item.cal2);
+            cal3.push(item.cal3);
+            cal4.push(item.cal4);
+            cal5.push(item.cal5);
+        });
+        var ctx = document.getElementById("graficaEvaluaciones").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                datasets: [
+                {
+                  label: "Puntuación",
+                  backgroundColor: "#3e95cd",
+                  data: cal1
+                },
+                {
+                  label: "Limpieza",
+                  backgroundColor: "#8e5ea2",
+                  data: cal2
+                },
+                {
+                  label: "Atención",
+                  backgroundColor: "#3cba9f",
+                  data: cal3
+                },
+                {
+                  label: "Cumplió con la actividad a realizar",
+                  backgroundColor: "#e8c3b9",
+                  data: cal4
+                },
+                {
+                  label: "Condición de los elementos solicitados",
+                  backgroundColor: "#c45850",
+                  data: cal5
+                }
+              ]
+            },
+            options: {
+
+                title: {
+                    display: true,
+                    text: 'Calificación perfecta: 4'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    });
 </script>
 @endsection

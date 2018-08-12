@@ -185,3 +185,5 @@ Route::resource('evaluaciones', 'Admins\EvaluacionesController');
 Route::get('evaluaciones/listarEvaluaciones/{id}', 'Admins\EvaluacionesController@listarEvaluaciones');
 
 Route::get('grafica/solicitudes', 'Admins\AJAXController@solicitudesGrafica')->name('solicitudesGrafica');
+
+Route::get('grafica/evaluaciones-usuario', 'Admins\AJAXController@evaluacionesUsuarios')->name('evaluacionesUsuarios');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Elemento;
 use App\Espacio;
+use App\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Solicitud;
 use Auth;
@@ -250,6 +251,21 @@ class AJAXController extends Controller
             ->orderBy('total', 'DESC')
             ->get();
         return $solicitudesG;
+    }
+
+    public function evaluacionesUsuarios()
+    {
+
+        $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)->get();
+        if (count($evaluaciones) != 0) {
+            $cont = count($evaluaciones);
+        } else {
+            $cont = 1;
+        }
+
+        $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)
+            ->select(DB::raw('SUM(cal1)/' . $cont . ' as cal1'), DB::raw('SUM(cal2)/' . $cont . ' as cal2'), DB::raw('SUM(cal3)/' . $cont . ' as cal3'), DB::raw('SUM(cal4)/' . $cont . ' as cal4'), DB::raw('SUM(cal5)/' . $cont . ' as cal5'))->get();
+        return json_decode($evaluaciones);
     }
 
 }

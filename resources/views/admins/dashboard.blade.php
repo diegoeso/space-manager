@@ -614,7 +614,7 @@
             var b = Math.round(Math.random()*255);
             var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
             colores.push(rgb);
-            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio"># '+item.total+'</span><div class="progress sm"><div class="progress-bar" style="width: '+item.total * 100+'px; background-color: '+rgb+'"></div></div></div>');            
+            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" style="width: '+item.total * 100+'px; background-color: '+rgb+'"></div></div></div>');            
         });
         new Chart(document.getElementById("grafica1"), {
             type: 'pie',
