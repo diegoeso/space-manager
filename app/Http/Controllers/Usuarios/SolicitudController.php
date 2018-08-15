@@ -7,8 +7,10 @@ use App\Area;
 use App\Elemento;
 use App\Evaluaciones;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SolicitudRequest;
 use App\Notificacion;
 use App\Solicitud;
+use App\Traits\Elementos;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -18,6 +20,7 @@ use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
 {
+    use Elementos;
     public function __construct()
     {
         $this->middleware('auth:usuario');
@@ -50,7 +53,7 @@ class SolicitudController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SolicitudRequest $request)
     {
         $fechaInicio = date("Y-m-d", strtotime($request->fechaInicio));
         $fechaFin    = date("Y-m-d", strtotime($request->fechaFin));
@@ -187,7 +190,14 @@ class SolicitudController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $solicitud = Solicitud::FindOrFail($id);
+        $this->debolverElementos($solicitud->id);
+        $result = $solicitud->delete();
+        if ($result) {
+            return response()->json(['success' => 'true']);
+        } else {
+            return response()->json(['success' => 'false']);
+        }
     }
 
     public function ver($id)
@@ -288,7 +298,7 @@ class SolicitudController extends Controller
             ->addColumn('action', function ($solicitudes) {
                 return '<a href="' . route("solicitud.show", $solicitudes->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
                 '<a href="' . route('solicitud.edit', $solicitudes->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
-                '<a onclick="deleteData(' . $solicitudes->id . '" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>';
+                '<a href="#" value="' . $solicitudes->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }

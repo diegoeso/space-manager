@@ -24,17 +24,14 @@ class SolicitudRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'fechaInicio'         => 'required',
-            // 'fechaFin'            => 'required',
+            'fechaInicio'         => 'required|date',
+            'fechaFin'            => 'required|date',
             'horaInicio'          => 'required',
             'horaFin'             => 'required',
             'actividadAcademica'  => 'required',
-            'asistentesEstimados' => 'required',
-            'tipoUsuario'         => 'required',
-            'usuarioSolicitud'    => 'required',
+            'asistentesEstimados' => 'required|numeric',
             'area_id'             => 'required',
             'espacio_id'          => 'required',
-
         ];
     }
 }

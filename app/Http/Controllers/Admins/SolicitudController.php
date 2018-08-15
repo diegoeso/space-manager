@@ -8,10 +8,12 @@ use App\Elemento;
 use App\Espacio;
 use App\Evaluaciones;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SolicitudRequest;
 use App\Notificacion;
 use App\Services\PayUService\Exception;
 use App\Solicitud;
 use App\Traits\Alertas;
+use App\Traits\Elementos;
 use App\Traits\Email;
 use App\User;
 use App\Usuario;
@@ -25,7 +27,7 @@ use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
 {
-
+    use Elementos;
     use Alertas;
     use Email;
     public function __construct()
@@ -68,7 +70,7 @@ class SolicitudController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SolicitudRequest $request)
     {
         $fechaInicio        = date("Y-m-d", strtotime($request->fechaInicio));
         $fechaFin           = date("Y-m-d", strtotime($request->fechaFin));
@@ -264,7 +266,8 @@ class SolicitudController extends Controller
     public function destroy($id)
     {
         $solicitud = Solicitud::FindOrFail($id);
-        $result    = $solicitud->delete();
+        $this->debolverElementos($solicitud->id);
+        $result = $solicitud->delete();
         if ($result) {
             return response()->json(['success' => 'true']);
         } else {
@@ -390,6 +393,7 @@ class SolicitudController extends Controller
                     if ($solicitudRechazada->save()) {
                         // notificacion
                         $this->notificacion($solicitudRechazada->id);
+                        $this->debolverElementos($solicitudRechazada->id);
                         try {
                             $this->enviarEmailSolicitudRechazada($data);
                         } catch (\Exception $e) {
@@ -432,15 +436,16 @@ class SolicitudController extends Controller
             $solicitud->motivo = $request->motivo;
             $data['motivo']    = $solicitud->motivo;
             if ($solicitud->save()) {
-                $id = $solicitud->id;
-                $this->notificacion($id);
-                $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
-                foreach ($elementosSolicitados as $el) {
-                    $elemento              = Elemento::find($el->elemento_id);
-                    $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
-                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
-                    $elemento->save();
-                }
+                // $id = $solicitud->id;
+                $this->notificacion($solicitud->id);
+                $this->debolverElementos($solicitud->id);
+                // $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
+                // foreach ($elementosSolicitados as $el) {
+                //     $elemento              = Elemento::find($el->elemento_id);
+                //     $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
+                //     $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                //     $elemento->save();
+                // }
                 try {
                     $this->enviarEmailSolicitudRechazada($data);
                 } catch (\Exception $e) {
@@ -486,15 +491,9 @@ class SolicitudController extends Controller
             $solicitud->motivo = $request->motivo;
             $data['motivo']    = $solicitud->motivo;
             if ($solicitud->save()) {
-                $id = $solicitud->id;
-                $this->notificacion($id);
-                $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
-                foreach ($elementosSolicitados as $el) {
-                    $elemento              = Elemento::find($el->elemento_id);
-                    $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
-                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
-                    $elemento->save();
-                }
+                // $id = $solicitud->id;
+                $this->notificacion($$solicitud->id);
+                $this->debolverElementos($solicitud->id);
                 try {
                     $this->enviarEmailSolicitudCancelada($data);
                 } catch (\Exception $e) {

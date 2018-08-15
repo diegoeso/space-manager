@@ -602,10 +602,13 @@
     var espacio = [];
     var total = [];
     var colores=[];
+    var max;
     $.get('/grafica/solicitudes', function(data) {
         espacio = [];
         total = [];
         colores=[];
+        max=data[0].total;
+        var res;
         $.each(data, function(i, item) {
             espacio.push(item.nombre);
             total.push(item.total);
@@ -614,7 +617,8 @@
             var b = Math.round(Math.random()*255);
             var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
             colores.push(rgb);
-            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" style="width: '+item.total * 100+'px; background-color: '+rgb+'"></div></div></div>');            
+            res=100*item.total/max;
+            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: '+res+'%; background-color: '+rgb+'"></div></div></div>');            
         });
         new Chart(document.getElementById("grafica1"), {
             type: 'pie',

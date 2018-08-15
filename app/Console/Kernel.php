@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\App\Console\Commands\NotificarSolicitud',
-        // '\App\Console\Commands\CancelarSolicitud',
+        '\App\Console\Commands\CancelarSolicitud',
         '\App\Console\Commands\FinalizaSolicitud',
     ];
 
@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('notifica:solicitud')
             ->everyMinute();
 
-        // $schedule->command('cancelar:solicitud')
-        //     ->everyMinute();
+        $schedule->command('cancelar:solicitud')
+            ->everyMinute();
 
         $schedule->command('finaliza:solicitud')
             ->everyMinute();

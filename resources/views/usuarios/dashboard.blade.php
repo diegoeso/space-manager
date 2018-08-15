@@ -95,7 +95,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    Uso de espacios académicos
+                    Evaluación
                 </h3>
                 <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse" type="button">
@@ -145,15 +145,6 @@
                         Ingeniería en Plásticos
                     </a>
                 </li>
-                {{--
-                <li class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('calendarios.create') }}">
-                        <i class="fa fa-calendar-plus-o">
-                        </i>
-                        Nuevo
-                    </a>
-                </li>
-                --}}
             </ul>
             {{-- {{ Auth::user()->carrera }} --}}
             <div class="tab-content">
@@ -208,7 +199,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('area_id','Tipo de Espacio Academico') !!}
+                            {!! Form::label('area_id','Tipo de Espacio académico') !!}
                             {!! Form::select('area_id', $areasE, null, ['placeholder' => 'Selecciona un Espacio', 'class'=>'form-control select2','id'=>'area_id','style'=>'width: 100%;','tabindex'=>'-1','required']) !!}
                             @if ($errors->has('area_id'))
                             <span class="label label-danger">
@@ -221,7 +212,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('espacio_id','Espacio Academico') !!}
+                            {!! Form::label('espacio_id','Espacio académico') !!}
                             <select aria-hidden="true" class="form-control select2 select2-hidden-accessible" id="espacio_id" name="espacio_id" required="true" style="width: 100%;" tabindex="-1">
                             </select>
                             @if ($errors->has('espacio_id'))
@@ -237,8 +228,8 @@
                 <div class="row">
                     <div class="col-md-6" id="fecha-Inicio">
                         <div class="form-group">
-                            {!! Form::label('fechaInicio', 'Fecha de Inicio') !!}
-                                {!! Form::date('fechaInicio', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Inicio', 'id'=>'fechaInicio','required']) !!}
+                            {!! Form::label('fechaInicio', 'Fecha de inicio') !!}
+                                {!! Form::date('fechaInicio', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de inicio', 'id'=>'fechaInicio','required']) !!}
                                 @if ($errors->has('fechaInicio'))
                             <span class="label label-danger">
                                 <strong>
@@ -250,8 +241,8 @@
                     </div>
                     <div class="col-md-6" id="fecha-Fin">
                         <div class="form-group">
-                            {!! Form::label('fechaFin', 'Fecha de Finalizacion') !!}
-                                {!! Form::date('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de Finalizacion', 'id'=>'fechaFin','required']) !!}
+                            {!! Form::label('fechaFin', 'Fecha de finalización') !!}
+                                {!! Form::date('fechaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Fecha de finalización', 'id'=>'fechaFin','required']) !!}
                                 @if ($errors->has('fechaFin'))
                             <span class="label label-danger">
                                 <strong>
@@ -278,8 +269,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('horaFin', 'Hora de finalizacion') !!}
-                                {!! Form::time('horaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Hora de finalizacion', 'id'=>'horaFin','required']) !!}
+                            {!! Form::label('horaFin', 'Hora de finalización') !!}
+                                {!! Form::time('horaFin', null, ['class'=>'form-control text-capitalize', 'placeholder' => 'Hora de finalización', 'id'=>'horaFin','required']) !!}
                                 @if ($errors->has('horaFin'))
                             <span class="label label-danger">
                                 <strong>
@@ -308,8 +299,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('actividadAcademica', 'Actividad Academica') !!}
-                            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Academica','id'=>'actividadAcademica','size' => '30x4' ,'required']) !!}
+                            {!! Form::label('actividadAcademica', 'Actividad Académica') !!}
+                            {!! Form::textArea('actividadAcademica', null, ['class'=>'form-control', 'placeholder'=>'Actividad Académica','id'=>'actividadAcademica','size' => '30x4' ,'required']) !!}
                             @if ($errors->has('actividadAcademica'))
                             <span class="label label-danger">
                                 <strong>
@@ -377,7 +368,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <strong>
-                                Actividad Academica:
+                                Actividad Académica:
                             </strong>
                             <p class="lead" id="actividadAcademica">
                             </p>
@@ -395,7 +386,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <strong>
-                                Fecha de Finalizacion:
+                                Fecha de Finalización:
                             </strong>
                             <p class="lead" id="fechaFin">
                             </p>
@@ -413,7 +404,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <strong>
-                                Hora de Finalizacion:
+                                Hora de Finalización:
                             </strong>
                             <p class="lead" id="horaFin">
                             </p>
@@ -441,7 +432,7 @@
                 <h4 class="modal-title" id="myModalLabel" style="color: #fff">
                     <i class="fa fa-calendar-check-o">
                     </i>
-                    Info. Horario
+                    Información del horario
                 </h4>
             </div>
             <div class="modal-body">
@@ -512,7 +503,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <strong>
-                                Espacio Academico
+                                Espacio Académico
                             </strong>
                             <p class="lead" id="espacio">
                             </p>
@@ -555,17 +546,17 @@
              if (diaF<diaI && mesF<=mesI || diaF>diaI && mesF<=mesI)
             {
 
-                toastr["warning"]('La fecha de finalizacion '+fechaFin+' no puede ser menor a la de inicio')
+                toastr["warning"]('La fecha de finalización '+fechaFin+' no puede ser menor a la de inicio')
                
                 $('#fechaFin').val(fechaInicio);
             }
         });
         var cont=0;
         $('#area_id').select2({
-            placeholder: 'Selecciona un Area',
+            placeholder: 'Selecciona un Área',
         });
         $('#espacio_id').select2({
-          placeholder: 'Selecciona un Espacio Academico'
+          placeholder: 'Selecciona un Espacio Académico'
         });
         $("#area_id" ).change(function()
         {
@@ -584,7 +575,6 @@
               $('#elementosEspacio').html('');
            }
         });
-        // calendario('',1);
         @switch(Auth::user()->carrera)
             @case(1)
                 $('#tab_1').addClass('active');
@@ -611,8 +601,6 @@
         @endswitch
         
         
-        
-
         // solicitudesFullCalendarUsuariosPendientes
         $('#btnCerrar').click(function(event) {
             document.getElementById("FormE").reset();
@@ -629,8 +617,7 @@
             $('#myModal #horaFin').html('');
             $('#myModal').modal('hide');
         });
-
-            $('#btnCerrar3').click(function(event) {
+        $('#btnCerrar3').click(function(event) {
             $('#infoHorario #actividadAcademica').html('');
             $('#infoHorario #docente').html('');
             $('#infoHorario #fechaInicio').html('');
@@ -642,9 +629,6 @@
             $('#infoHorario #espacio').html('');
             $('#infoHorario').modal('hide');
         });
-
-
-
     });
 
     function calendario($carrera, $cont) {
@@ -671,24 +655,16 @@
                 }
             },
             defaultView: 'agendaWeek',
-            // link a los dias del mes (info)
             navLinks: true,
-            // idioma
             lang: 'es',
-            // hora de inicio
             minTime: "07:00:00",
-            // hora de fin
             maxTime: "18:00",
-            // ocultar dias
             hiddenDays: [ 0 ],
-          
-            // botones de la parte superior
             header    : {
                 left  : 'prev,next today',
                 center: 'title',
                 right : 'month,agendaWeek,agendaDay,listWeek'
             },
-            // texto de los botones
             buttonText: {
                 today: 'Hoy',
                 month: 'Mes',
@@ -696,21 +672,13 @@
                 day  : 'Dia',
                 listWeek :'Lista'
             },
-            // listado de eventos desde un array del controlador
             events : 'admin/solicitudes/solicitudesFullCalendarUsuarios/'+ $carrera,
-            // numero de semana
             weekNumbers: true,
-            // limete de eventos (+3)
-            eventLimit: true, // allow "more" link when too many events
-            // formato de la hora
+            eventLimit: true,
             timeFormat: 'hh(:mm)t',
-            // editable: true,
-            // indicador de la hora actual
             nowIndicator: true,
-            // seleccionar dia u hora
             selectable: true,
             selectHelper: true,
-            // accion al seleccionar un dia u hora
             select: function(start, end) {
                 var fechaActual=moment().format('L');
                 var fechaSeleccionada=moment(start).format('L');
@@ -826,73 +794,6 @@
     }
 </script>
 <script>
-    // var cal1 = [];
-    // var cal2 = [];
-    // var cal3 = [];
-    // var cal4 = [];
-    // var cal5 = [];
-    // var puntuacion = [];
-    // var colores=[];
-    // $.get('/grafica/evaluaciones-usuario', function(data) {
-    //     console.log(data);
-    //     cal1 = [];
-    //     cal2 = [];
-    //     cal3 = [];
-    //     cal4 = [];
-    //     cal5 = [];
-    //     $.each(data, function(i, item) {
-    //         var r = Math.round(Math.random()*255);
-    //         var g = Math.round(Math.random()*255);
-    //         var b = Math.round(Math.random()*255);
-    //         var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
-    //         colores.push(rgb);
-    //         cal1.push(item.cal1);
-    //         cal2.push(item.cal2);
-    //         cal3.push(item.cal3);
-    //         cal4.push(item.cal4);
-    //         cal5.push(item.cal5);
-    //     });
-    //     new Chart(document.getElementById("graficaEvaluaciones"), {
-    //         type: 'bar',
-    //         data: {
-    //           datasets: [
-    //             {
-    //               label: "Puntuación",
-    //               backgroundColor: "#3e95cd",
-    //               data: cal1
-    //             },
-    //             {
-    //               label: "Limpieza",
-    //               backgroundColor: "#8e5ea2",
-    //               data: cal2
-    //             },
-    //             {
-    //               label: "Atención",
-    //               backgroundColor: "#3cba9f",
-    //               data: cal3
-    //             },
-    //             {
-    //               label: "Cumplio con la actividad a realizar",
-    //               backgroundColor: "#e8c3b9",
-    //               data: cal4
-    //             },
-    //             {
-    //               label: "Condicion de los elementos solicitados",
-    //               backgroundColor: "#c45850",
-    //               data: cal5
-    //             }
-    //           ]
-    //         },
-
-    //         options: {
-    //           legend: { display: true },
-    //           title: {
-    //             display: true,
-    //             text: 'Predicted world population (millions) in 2050'
-    //           }
-    //         }
-    //     });   
-    // });
     var puntuacion = [];
     var colores=[];
     var total;
@@ -909,7 +810,6 @@
         cal4=[];
         cal5=[];
         $.each(data, function(i, item) {
-            // puntuacion.push(item.cal1,item.cal2,item.cal3,item.cal4,item.cal5); 
             cal1.push(item.cal1);
             cal2.push(item.cal2);
             cal3.push(item.cal3);
@@ -949,7 +849,7 @@
               ]
             },
             options: {
-
+                responsive: true,
                 title: {
                     display: true,
                     text: 'Calificación perfecta: 4'
