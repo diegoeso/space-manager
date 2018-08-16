@@ -233,6 +233,7 @@ class AJAXController extends Controller
     {
         $elemento              = Elemento::FindOrFail($id);
         $elemento->existencias = $elemento->existencias + intval($cantidad);
+        $elemento->estado      = 1;
         $result                = $elemento->save();
         if ($result) {
             return response()->json(['success' => 'true']);

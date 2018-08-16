@@ -38,7 +38,6 @@
          var mesI = fechaInicio.substring(3, 5);
          var diaF = fechaFin.substring(0, 2);
          var mesF = fechaFin.substring(3, 5);
-         // console.log(diaI + ' ' + diaF + ' ' + mesI + ' ' + mesF);
          if (diaF < diaI) {
              if (mesF <= mesI) {
                  toastr["warning"]('La fecha de finalizacion ' + fechaFin + ' no puede ser menor a la de inicio')
@@ -74,7 +73,7 @@
      $('#add').click(function(event) {
          cont++;
          categorias(cont);
-         $('#dynamic_field').append('<tr id="row' + cont + '"><td><select class="form-control" id="categoria_id' + cont + '" name="categoria_id[]" placeholder="Selecciona una Categoria" style="width: 100%;" tabindex="-1"></select></td><td><select class="form-control" id="elemento_id' + cont + '" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1"></select></td><td><input class="form-control" disabled id="existencias' + cont + '" min="1" name="existencias' + cont + '" placeholder="Existencias" /></td><td><input class="form-control" id="cantidad' + cont + '" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad a solicitar" style="width: 100%;"/></td><td><button type="button" name="remove" id="' + cont + '" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
+         $('#dynamic_field').append('<tr id="row' + cont + '"><td><select class="form-control" id="categoria_id' + cont + '" name="categoria_id[]" placeholder="Selecciona una Categoria" style="width: 100%;" tabindex="-1" required></select></td><td><select class="form-control" id="elemento_id' + cont + '" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1" required></select></td><td><input class="form-control" disabled id="existencias' + cont + '" min="1" name="existencias' + cont + '" placeholder="Existencias" /></td><td><input class="form-control" id="cantidad' + cont + '" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad a solicitar" style="width: 100%;" required/></td><td><button type="button" name="remove" id="' + cont + '" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
          $('#categoria_id' + cont + '').append('<option>Selecciona una Categoria</option>');
          $('#elemento_id' + cont + '').append('<option>Selecciona un Elemento</option>');
          $('#categoria_id' + cont + '').select2({
@@ -100,9 +99,6 @@
              var idElemento = $('#elemento_id' + cont + '').val();
              var id = $(this).attr("id");
              var res = id.substring(11);
-             // console.log(id);
-             // console.log(res);
-             // $('#elemento_id'+res+'').html('');
              existenciasElementos(idElemento, res);
          });
          // Fin de la validacion de pegado en el campo cantidad

@@ -32,6 +32,19 @@
                     </input>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <input class="form-control" id="telefono" name="telefono" placeholder="Teléfono" type="text" value="{{ old('telefono') }}">
+                        @if ($errors->has('telefono'))
+                        <span class="invalid-feedback">
+                            <strong>
+                                {{ $errors->first('telefono') }}
+                            </strong>
+                        </span>
+                        @endif
+                    </input>
+                </div>
+            </div>
             <div class="form-group row mb-0">
                 <div class="col-md-12 offset-md-4">
                     <button class="btn btn-primary btn-block" type="submit">

@@ -439,13 +439,6 @@ class SolicitudController extends Controller
                 // $id = $solicitud->id;
                 $this->notificacion($solicitud->id);
                 $this->debolverElementos($solicitud->id);
-                // $elementosSolicitados = DB::table('elemento_solicitud')->where('solicitud_id', $solicitud->id)->get();
-                // foreach ($elementosSolicitados as $el) {
-                //     $elemento              = Elemento::find($el->elemento_id);
-                //     $solicitados           = DB::table('elemento_solicitud')->where('elemento_id', $el->elemento_id)->first();
-                //     $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
-                //     $elemento->save();
-                // }
                 try {
                     $this->enviarEmailSolicitudRechazada($data);
                 } catch (\Exception $e) {

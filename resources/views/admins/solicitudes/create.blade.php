@@ -46,16 +46,9 @@
                         </div>
                     </div>
                 </div>
-                {{--
-                <button class="btn btn-success" id="add" name="add" type="button">
-                    <i class="fa fa-pencil-square-o">
-                    </i>
-                    Agregar Elemento
-                </button>
-                --}}
                 <div class="table-responsive" id="elementosAdicionales" name="elementosAdicionales">
                     <br/>
-                    <table class="table table-striped" id="dynamic_field">
+                    <table class="table" id="dynamic_field">
                         <tbody>
                             @include('admins.solicitudes.fragmentos.agregarElementos')
                         </tbody>

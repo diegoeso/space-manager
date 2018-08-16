@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\User;
+use App\Usuario;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluaciones extends Model
@@ -20,11 +22,6 @@ class Evaluaciones extends Model
         'tipoCuentaEvaluado',
         'estado',
     ];
-
-    // public function solicitud()
-    // {
-    //     return $this->hasMany(Solicitud::class, 'id', 'solicitud_id');
-    // }
 
     public function calificacion($id)
     {
@@ -50,25 +47,30 @@ class Evaluaciones extends Model
 
     public function evaluadorU()
     {
-        // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
         return $this->belongsTo(Usuario::class, 'evaluador', 'id');
     }
 
     public function evaluadoU()
     {
-        // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
         return $this->belongsTo(Usuario::class, 'evaluado', 'id');
     }
 
     public function evaluadorR()
     {
-        // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
         return $this->belongsTo(User::class, ' evaluador', 'id');
     }
 
     public function evaluadoR()
     {
-        // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
         return $this->belongsTo(User::class, ' evaluado', 'id');
+    }
+
+    public function tipoCuentaEvaluado($evaluacion)
+    {
+        if ($evaluacion->tipoCuentaEvaluado == 0 || $evaluacion->tipoCuentaEvaluado == 1) {
+            return $usuario = User::find($evaluacion->evaluado);
+        } else {
+            return $usuario = Usuario::find($evaluacion->evaluado);
+        }
     }
 }

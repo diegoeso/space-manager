@@ -29,18 +29,22 @@ $(document).ready(function() {
         var button_id = $(this).attr("id");
         var el = $('#elemento_id' + button_id + '').val();
         var cantidad = $('#cantidad' + button_id + '').val();
-        $.ajax({
-            url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '',
-            type: 'GET',
-            dataType: 'JSON',
-            success: function(data) {
-                if (data.success == 'true') {
-                    $('#row' + button_id + '').remove();
-                } else {
-                    toastr["error"]('¡No se devolvieron los elementos solicitados!');
+        if ($('cantidad' + button_id + '' == "")) {
+            $('#row' + button_id + '').remove();
+        } else {
+            $.ajax({
+                url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '',
+                type: 'GET',
+                dataType: 'JSON',
+                success: function(data) {
+                    if (data.success == 'true') {
+                        $('#row' + button_id + '').remove();
+                    } else {
+                        toastr["error"]('¡No se devolvieron los elementos solicitados!');
+                    }
                 }
-            }
-        });
+            });
+        }
     });
     // cierre del metodod e eliminar formulario
     var idE = $('#idSolicitud').val();
@@ -115,7 +119,7 @@ $(document).ready(function() {
     $('#add').click(function(event) {
         cont++;
         categorias(cont);
-        $('#dynamic_field').append('<tr id="row' + cont + '"><td><select class="form-control" id="categoria_id' + cont + '" name="categoria_id[]" placeholder="Selecciona una Categoria" style="width: 100%;" tabindex="-1"></select></td><td><select class="form-control" id="elemento_id' + cont + '" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1"></select></td><td><input class="form-control" id="existencias' + cont + '" min="1" name="existencias' + cont + '" placeholder="Existencias de Elementos" disabled/></td><td><input class="form-control" id="cantidad' + cont + '" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad" style="width: 100%;"/></td><td><button type="button" name="remove" id="' + cont + '" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
+        $('#dynamic_field').append('<tr id="row' + cont + '"><td><select class="form-control" id="categoria_id' + cont + '" name="categoria_id[]" placeholder="Selecciona una Categoria" style="width: 100%;" tabindex="-1"></select></td><td><select class="form-control" id="elemento_id' + cont + '" name="elemento_id[]" placeholder="Selecciona un Elemento" style="width: 100%;" tabindex="-1"></select></td><td><input class="form-control" id="existencias' + cont + '" min="1" name="existencias' + cont + '" placeholder="Existencias de Elementos" disabled/></td><td><input class="form-control" id="cantidad' + cont + '" min="1" name="cantidad[]" pattern="^[0-9]+" type="text"  placeholder="Cantidad" style="width: 100%;" required/></td><td><button type="button" name="remove" id="' + cont + '" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
         $('#categoria_id' + cont + '').append('<option>Selecciona una Categoria</option>');
         $('#elemento_id' + cont + '').append('<option>Selecciona un Elemento</option>');
         $('#categoria_id' + cont + '').select2({

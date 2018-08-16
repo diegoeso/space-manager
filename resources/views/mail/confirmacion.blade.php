@@ -91,14 +91,6 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            {{--
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <b>
-                                    Space
-                                </b>
-                                Manager
-                            </a>
-                            --}}
                             <a class="navbar-brand " href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <b>

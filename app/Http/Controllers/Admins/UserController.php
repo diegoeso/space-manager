@@ -196,8 +196,8 @@ class UserController extends Controller
         $pdf   = App::make('dompdf.wrapper');
         $data  = User::all();
         $pdf   = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
-        // return $pdf->stream();
-        return $pdf->download('administradores_' . $fecha . '.pdf');
+        return $pdf->stream();
+        // return $pdf->download('administradores_' . $fecha . '.pdf');
     }
 
 }

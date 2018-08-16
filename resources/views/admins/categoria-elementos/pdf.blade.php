@@ -10,6 +10,14 @@
         </link>
     </head>
     <body>
+        <img height="80%" src="img/uaemex_banner.png" style="padding-top: 0; padding-bottom: 0; margin: 0" width="70%">
+        </img>
+        <h3 class="text-center" style="padding: 0; margin: 0">
+            Unidad Académica Profesional Tianguistenco
+        </h3>
+        <h4 class="text-center">
+            Características de elementos
+        </h4>
         <table class="table table-condensed">
             <thead>
                 <tr>

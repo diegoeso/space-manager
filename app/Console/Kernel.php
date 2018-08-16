@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         '\App\Console\Commands\NotificarSolicitud',
         '\App\Console\Commands\CancelarSolicitud',
         '\App\Console\Commands\FinalizaSolicitud',
+        '\App\Console\Commands\RecordatorioEvaluaciones',
     ];
 
     /**
@@ -34,6 +35,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('finaliza:solicitud')
             ->everyMinute();
+
+        $schedule->command('notifica:evaluaciones')
+            ->weekly();
     }
 
     /**

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <title>
-            Restablecer Contraseña
+            Evaluaciones Pendientes
         </title>
         @include('layouts.links')
     </head>
@@ -20,32 +20,22 @@
                         ¡Hola {{ $nombre }}!
                     </h2>
                     <p class="lead">
-                        Usted está recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.
+                        Usted está recibiendo este correo electrónico porque notificarle que tiene evaluaciones pendientes, lo cual solicitamos realice dichas evaluaciones para tener mejor control y experiencia en nuestro sistema
+                        <em>
+                            Space Manager
+                        </em>
+                        .
                     </p>
-                    <p class="lead">
-                        Puedes iniciar sesión con esta contraseña:
-                    </p>
-                    <h1 class="text-center" style="font-size: 48px;">
-                        {{ $password }}
-                    </h1>
-                    @if ($tipoCuenta==0 || $tipoCuenta==1)
                     <div class="text-center" style="padding-top: 40px;">
-                        <a class="btn btn-info" href="{{ route('admin.perfil') }}">
-                            Cambiar contraseña
+                        <a class="btn btn-info" href="{{ route('evaluaciones.index') }}">
+                            Realizar Evaluaciones
                         </a>
                     </div>
-                    @else
-                    <div class="text-center" style="padding-top: 40px;">
-                        <a class="btn btn-info" href="{{ route('perfil') }}">
-                            Cambiar contraseña
-                        </a>
-                    </div>
-                    @endif
                     <br/>
                     <br/>
                     <br/>
                     <p class="lead">
-                        Si no solicitó restablecer la contraseña, no se requieren más acciones.
+                        Gracias por la atención.
                     </p>
                     <h3>
                         Saludos,
