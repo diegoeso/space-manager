@@ -26,7 +26,20 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Listado de Espacios Academicos','ruta'=>'espacios.create'])
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Listado de registros
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-primary btn-sm" href="{{ route('espacios.create')}}">
+                        <span class="fa fa-plus">
+                        </span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
             <div class="box-body">
                 <div class="row" style="padding-bottom: 5px;">
                     <div class="col-md-12 ">
@@ -107,7 +120,7 @@
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             },
-            
+
             processing: true,
             serverSide: true,
             info: true,
@@ -143,10 +156,10 @@
                         else
                         {
                             toastr["error"]('¡El registro no se pudo eliminar!');
-                            $datable.ajax.reload();   
+                            $datable.ajax.reload();
                         }
                     }
-                });                
+                });
             }
         });
     });

@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar" name"asideAdmin" id="asideAdmin">
     <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">

@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -8,13 +7,7 @@ use Jenssegers\Date\Date;
 
 class Usuario extends Authenticatable
 {
-    /**
-     * Tipo de usuarios
-     * 2 - Profesores
-     * 3 - Alumnos
-     */
     use Notifiable;
-
     protected $fillable = [
         'nombre',
         'apellidoP',
@@ -33,7 +26,6 @@ class Usuario extends Authenticatable
         'codigoConfirmacion',
         'envioEmail',
     ];
-
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -73,7 +65,6 @@ class Usuario extends Authenticatable
                 break;
         }
     }
-
     public function nombreSemestre($semestre)
     {
         switch ($semestre) {
@@ -121,7 +112,6 @@ class Usuario extends Authenticatable
                 break;
         }
     }
-
     public function tipoCuenta($tipoCuenta)
     {
         switch ($tipoCuenta) {

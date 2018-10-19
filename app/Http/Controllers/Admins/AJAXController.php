@@ -246,6 +246,7 @@ class AJAXController extends Controller
     {
         $solicitudesG = DB::table('solicitudes')
             ->join('espacios', 'espacios.id', '=', 'solicitudes.espacio_id')
+            ->where('tipoRegistro', '0')
             ->select('espacios.nombre', 'espacios.id', DB::raw('count(*) as total'))
             ->groupBy('espacios.id', 'espacios.nombre', 'solicitudes.espacio_id')
             ->orderBy('total', 'DESC')
@@ -267,6 +268,16 @@ class AJAXController extends Controller
         $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)
             ->select(DB::raw('SUM(cal1)/' . $cont . ' as cal1'), DB::raw('SUM(cal2)/' . $cont . ' as cal2'), DB::raw('SUM(cal3)/' . $cont . ' as cal3'), DB::raw('SUM(cal4)/' . $cont . ' as cal4'), DB::raw('SUM(cal5)/' . $cont . ' as cal5'))->get();
         return json_decode($evaluaciones);
+    }
+
+    public function editarEspacio($id, $espacio)
+    {
+        $elemento = Elemento::find($id);
+        $espacio  = Espacio::find($espacio);
+        $espacio->elementos()->detach($id);
+
+        return response()->json($espacio);
+
     }
 
 }

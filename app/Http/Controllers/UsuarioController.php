@@ -52,7 +52,11 @@ class UsuarioController extends Controller
             if ($usuario->envioEmail == 1) {
                 return view('mail.confirmacion', compact('usuario'));
             }
-            $this->enviarEmailRegistro($data);
+            try {
+                $this->enviarEmailRegistro($data);
+            } catch (Exception $e) {
+                return Toastr::error('No se pudo enviar el email de confirmación', '¡Error!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            }
             $usuario->envioEmail = 1;
             $usuario->save();
             return view('mail.confirmacion', compact('usuario'));

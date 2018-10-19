@@ -32,14 +32,26 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Editar Elemento','ruta'=>''])
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                  <i class="fa fa-edit"></i>
+                    Editar elemento
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-link" href="{{ route('elementos.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
+                    </a>
+                </div>
+            </div>
             {!! Form::model($elemento, ['route'=>['elementos.update' ,$elemento->id],'method'=>'PUT','files' => true ])!!}
             <div class="box-body">
                 @include('admins.elementos.fragmentos.form')
             </div>
             <div class="box-footer">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit" name="guardar" id="guardar">
                     <i class="md md-check">
                     </i>
                     Guardar

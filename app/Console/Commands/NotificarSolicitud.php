@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Console\Commands;
 
 use App\Espacio;
@@ -13,35 +12,15 @@ use Mail;
 
 class NotificarSolicitud extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'notifica:solicitud';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Notificar al usuario solicitante el inicio de su actividad 15 min antes de iniciar dicha actividad';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
 
@@ -75,7 +54,6 @@ class NotificarSolicitud extends Command
             $data['horaFin']     = $solicitud->horaFin;
             $data['espacio']     = $espacio->nombre;
 
-            //que no esta aprobada aun
             Mail::send('mail.notificacionSolicitud', $data, function ($message) use ($data) {
                 $message->from('contacto@gdsoft.com.mx', 'Space Manager');
                 $message->to($data['email'], $data['nombre']);
@@ -86,8 +64,6 @@ class NotificarSolicitud extends Command
             } else {
                 Log::info('Solicitud notificada  ' . $solicitud->solicitante->nombreCompleto);
             }
-
         }
-
     }
 }

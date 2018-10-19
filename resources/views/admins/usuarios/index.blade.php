@@ -25,7 +25,21 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Listado de Usuarios','ruta'=>'usuarios.create'])
+            {{-- @include('general.botonNuevo', ['modulo' => 'Listado de Usuarios','ruta'=>'usuarios.create']) --}}
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Listado de registros
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-primary btn-sm" href="{{ route('usuarios.create')}}">
+                        <span class="fa fa-plus">
+                        </span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
             <div class="box-body">
                 <div class="row" style="padding-bottom: 5px;">
                     <div class="col-md-12 ">

@@ -69,7 +69,7 @@ class MensajesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $now   = Carbon::now();
         $fecha = $now->format('Y-m-d');
         $hora  = $now->format('H:i:s');
@@ -84,10 +84,12 @@ class MensajesController extends Controller
 
         if ($mensaje->save()) {
             $this->mensajeExitoso();
-            return redirect()->route('mensajes.index');
+            return back();
+            // return redirect()->route('mensajes.index');
         } else {
             $this->mensajeError();
-            return redirect()->route('mensajes.index');
+            return back();
+            // return redirect()->route('mensajes.index');
         }
     }
 

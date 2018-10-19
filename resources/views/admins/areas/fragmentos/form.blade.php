@@ -26,7 +26,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripción') !!}
-            {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '30x4']) !!}
+            {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '30x5']) !!}
             @if ($errors->has('descripcion'))
             <span class="label label-danger">
                 <strong>

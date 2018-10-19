@@ -16,6 +16,7 @@
         <div class="form-group">
             {!! Form::label('apellidoP', 'Apellido Paterno') !!}
             {!! Form::text('apellidoP', null, ['class'=>'form-control', 'placeholder' => 'Apellido Paterno']) !!}
+            
             @if ($errors->has('apellidoP'))
             <span class="label label-danger">
                 <strong>

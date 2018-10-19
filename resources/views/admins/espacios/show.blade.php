@@ -32,16 +32,18 @@
 @section('content')
 <div class="row">
     <div class="col-xs-12">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title text-capitalize">
-                    Datos del Registro
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Datos del espacio académico
                 </h3>
                 <div class="box-tools">
-                    <a class="btn btn-success btn-sm" href="{{ route('espacios.edit',$espacio->id) }}">
-                        <i class="fa fa-edit">
-                        </i>
-                        Editar
+                    <a class="btn btn-link" href="{{ route('espacios.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
                     </a>
                 </div>
             </div>
@@ -93,6 +95,12 @@
                             <p class="lead">
                                 Elementos asociados al espacio
                             </p>
+
+                            @if ($espacio->elemento)
+                              hpla
+                            @else
+                              si entra
+                            @endif
                             <table class="table">
                                 <tr>
                                     <th>

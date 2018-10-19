@@ -12,24 +12,9 @@
             @endif
         </div>
     </div>
-    {{--
-    <div class="col-md-4">
-        <div class="form-group">
-            {!! Form::label('permisos', 'Permisos') !!}
-            {!! Form::text('permisos',null,['class'=>'form-control', 'placeholder' =>'Permisos'] ) !!}
-            @if ($errors->has('permisos'))
-            <span class="label label-danger">
-                <strong>
-                    {{ $errors->first('permisos') }}
-                </strong>
-            </span>
-            @endif
-        </div>
-    </div>
-    --}}
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripción') !!}
             {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '40x4']) !!}

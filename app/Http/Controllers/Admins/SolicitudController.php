@@ -30,6 +30,7 @@ class SolicitudController extends Controller
     use Elementos;
     use Alertas;
     use Email;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -43,6 +44,7 @@ class SolicitudController extends Controller
         $this->middleware('permission:solicitudes.cancelar')->only('cancelar');
         Carbon::setLocale('es');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -107,21 +109,24 @@ class SolicitudController extends Controller
 
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                // Restar elementos solicitados
-                $elemento              = Elemento::find($request->elemento_id[$i]);
-                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
-                $elemento->save();
+            if ($request->cantidad) {
+                $manyToMany = array();
+                for ($i = 0; $i < count($request->cantidad); $i++) {
+                    // Restar elementos solicitados
+                    $elemento              = Elemento::find($request->elemento_id[$i]);
+                    $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                    $elemento->save();
 
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                }
+                // agrega los elementos a la tabla pivote
+                $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            $solicitud->elementosSolicitud()->sync($manyToMany);
-
             $id = $solicitud->id;
             $this->notificacion($id);
             $this->registroExitoso();
-            return redirect()->route('solicitudes.index');
+            // return redirect()->route('solicitudes.index');
+            return redirect()->route('solicitudes.show', $solicitud->id);
         } else {
             $this->registroError();
             $bandera = false;
@@ -220,6 +225,7 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd(count($request->cantidad));
         $fechaInicio                    = date("Y-m-d", strtotime($request->fechaInicio));
         $fechaFin                       = date("Y-m-d", strtotime($request->fechaFin));
         $solicitud                      = Solicitud::find($id);
@@ -232,21 +238,23 @@ class SolicitudController extends Controller
         $solicitud->area_id             = $request->area_id;
         $solicitud->espacio_id          = $request->espacio_id;
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
+
         if ($solicitud->save()) {
             $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                $elemento    = Elemento::find($request->elemento_id[$i]);
-                $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
-                if (count($solicitados) > 0) {
-                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+            if ($request->cantidad) {
+                for ($i = 0; $i < count($request->cantidad); $i++) {
+                    $elemento    = Elemento::find($request->elemento_id[$i]);
+                    $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
+                    if (count($solicitados) > 0) {
+                        $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+                    }
+                    $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                    $elemento->save();
+
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
                 }
-                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
-                $elemento->save();
-
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            $solicitud->elementosSolicitud()->sync($manyToMany);
-
             $id = $solicitud->id;
             $this->notificacion($id);
             $this->registroExitoso();
@@ -485,7 +493,7 @@ class SolicitudController extends Controller
             $data['motivo']    = $solicitud->motivo;
             if ($solicitud->save()) {
                 // $id = $solicitud->id;
-                $this->notificacion($$solicitud->id);
+                $this->notificacion($solicitud->id);
                 $this->debolverElementos($solicitud->id);
                 try {
                     $this->enviarEmailSolicitudCancelada($data);

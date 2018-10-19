@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 btn-block" type="submit">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 btn-block" type="submit" name="registro" id="registro">
                     <i class="md md-check">
                     </i>
                     Únete ahora

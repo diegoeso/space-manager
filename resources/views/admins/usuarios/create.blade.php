@@ -2,7 +2,6 @@
 @section('navegacion')
 <section class="content-header">
     <h1>
-        {{-- @include('general.tipoUsuario') --}}
         <small>
             Panel de Control
         </small>
@@ -21,7 +20,7 @@
             </a>
         </li>
         <li class="active">
-            Nuevo
+            Nuevo registro
         </li>
     </ol>
 </section>
@@ -29,20 +28,32 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
-            @include('general.botonNuevo',['modulo' => 'Nuevo Usuarios','ruta'=>''])
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                  <i class="fa fa-pencil"></i>
+                    Registrar usuario
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-link" href="{{ route('usuarios.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
+                    </a>
+                </div>
+            </div>
             {!! Form::open(['route'=>'usuarios.store', 'method'=>'POST','files' => true ]) !!}
             <div class="box-body">
                 {!!Form::hidden('tipoCuenta', null, ['id'=>'tipoCuenta']) !!}
                     @include('admins.usuarios.fragmentos.form')
             </div>
             <div class="box-footer">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" id="guardar" name="guardar" type="submit">
                     <i class="fa fa-plus">
                     </i>
                     Guardar
                 </button>
-                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('users.index') }}">
+                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('usuarios.index') }}">
                     <i class="fa fa-remove">
                     </i>
                     Cancelar
@@ -63,16 +74,12 @@
         });
         $('#password').focus(function() {
             $res=$('#email').val()
-            // console.log($res);
             if($res.indexOf("alumno.uaemex.mx") > -1)
             {
-                // console.log('alumno');
                 $('#tipoCuenta').val('3');
                 console.log($('#tipoCuenta').val());
-
             }else{
                 if($res.indexOf("uaemex.mx") > -1){
-                    // console.log('profesor');
                     $('#tipoCuenta').val('2')
                     console.log($('#tipoCuenta').val());
                 }

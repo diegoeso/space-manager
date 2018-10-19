@@ -58,12 +58,14 @@ class EspacioController extends Controller
     public function store(EspacioRequest $request)
     {
         // Attacha con las relaciones
-        $espacio    = Espacio::create($request->all());
-        $manyToMany = array();
-        for ($i = 0; $i < count($request->cantidad); $i++) {
-            $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+        $espacio = Espacio::create($request->all());
+        if ($request->cantidad) {
+            $manyToMany = array();
+            for ($i = 0; $i < count($request->cantidad); $i++) {
+                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+            }
+            $espacio->elementos()->sync($manyToMany);
         }
-        $espacio->elementos()->sync($manyToMany);
         $this->registroExitoso();
         return redirect()->route('espacios.show', $espacio->id);
     }
@@ -109,11 +111,14 @@ class EspacioController extends Controller
         $espacio->area_id     = $request->area_id;
 
         if ($espacio->save()) {
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+            if ($request->cantidad) {
+                $manyToMany = array();
+                for ($i = 0; $i < count($request->cantidad); $i++) {
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                }
+                $espacio->elementos()->sync($manyToMany);
             }
-            $espacio->elementos()->sync($manyToMany);
+
             $this->registroExitoso();
             return redirect()->route('espacios.show', $espacio->id);
         } else {

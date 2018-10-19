@@ -33,27 +33,23 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Editar Espacio Académico','ruta'=>''])
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Editar espacio académico
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-link" href="{{ route('areas.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
+                    </a>
+                </div>
+            </div>
             {!! Form::model($espacio, ['route'=>['espacios.update' ,$espacio->id],'method'=>'PUT','files' => true ])!!}
             <input hidden="" id="idEspacio" name="idEspacio" type="text" value="{{ $espacio->id }}"/>
             <div class="box-body">
                 @include('admins.espacios.fragmentos.form')
                 <table class="table" id="dynamic_field">
-                    {{--
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                {!! Form::label('categoria','Categoría') !!}
-                            </th>
-                            <th scope="col">
-                                {!! Form::label('elemento_id', 'Elemento') !!}
-                            </th>
-                            <th scope="col">
-                                {!! Form::label('cantidad', 'Cantidad:') !!}
-                            </th>
-                        </tr>
-                    </thead>
-                    --}}
                     <tbody>
                         @include('admins.espacios.fragmentos.agregarElementos')
                         <?php $cont = 1?>
@@ -84,7 +80,7 @@
                 </table>
             </div>
             <div class="box-footer">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" id="guardar" name="guardar" type="submit">
                     <i class="fa fa-plus">
                     </i>
                     Guardar
@@ -99,14 +95,56 @@
         </div>
     </div>
 </div>
+{{--
+<style type="text/css">
+    h1{
+        margin-right: 10px;
+    }
+</style>
+--}}
 @endsection
 @section('script')
 <script>
     $(document).ready(function() {
         $(document).on('click', '.btn_remove', function(){
             var button_id = $(this).attr("id");
-            $('#row'+button_id+'').remove();
+            var espacio=$('#idEspacio').val();
+            var el = $('#elemento_id' + button_id + '').val();
+            alertify.confirm("Eliminar elemento","¿Seguro que desea eliminar el elemento asociado al espacio académico?",
+            function(){
+                $.ajax({
+                    url: '/admin/espacios/editarEspacio/'+el+'/'+espacio,
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(data) {
+                        $('#row'+button_id+'').remove();
+                    }
+                });
+            },
+            function(){
+                alertify.notify('Sin acción')
+            });           
         });
+
+      toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": 0,
+          "extendedTimeOut": 0,
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut",
+          "tapToDismiss": false
+        }
+
 
         var idE=$('#idEspacio').val();
         var cont=0;

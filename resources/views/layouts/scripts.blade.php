@@ -79,4 +79,6 @@
 --}}
 <script src="{{ asset('plugins/chart.js/dist/Chart.min.js') }}">
 </script>
+<script src="{{ asset('plugins/alertifyjs/alertify.min.js') }}">
+</script>
 @yield('script')

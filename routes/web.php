@@ -84,12 +84,12 @@ Route::prefix('admin')->group(function () {
     /**
      * Solicitud de elementos
      */
-    Route::resource('solicitudes-elementos', 'Admins\SolicitudElementosController');
-    Route::get('solicitudes-elementos/listarSolicitudesUsuario/{id}', 'Admins\SolicitudElementosController@listarSolicitudes')->name('solicitudes-elementos.listarSolicitudes');
-    Route::get('solicitudes-elementos/cancelar/{id}', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
-    Route::get('solicitudes-elementos/{id}/aprobar', 'Admins\SolicitudElementosController@aprobar')->name('solicitudes-elementos.aprobar');
-    Route::put('solicitudes-elementos/{id}/rechazar', 'Admins\SolicitudElementosController@rechazar')->name('solicitudes-elementos.rechazar');
-    Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
+    // Route::resource('solicitudes-elementos', 'Admins\SolicitudElementosController');
+    // Route::get('solicitudes-elementos/listarSolicitudesUsuario/{id}', 'Admins\SolicitudElementosController@listarSolicitudes')->name('solicitudes-elementos.listarSolicitudes');
+    // Route::get('solicitudes-elementos/cancelar/{id}', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
+    // Route::get('solicitudes-elementos/{id}/aprobar', 'Admins\SolicitudElementosController@aprobar')->name('solicitudes-elementos.aprobar');
+    // Route::put('solicitudes-elementos/{id}/rechazar', 'Admins\SolicitudElementosController@rechazar')->name('solicitudes-elementos.rechazar');
+    // Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
 
     /**
      * PDF
@@ -155,6 +155,9 @@ Route::get('/admin/solicitudes/solicitudesFullCalendarUsuarios/{carrera}', 'Admi
 
 // actualizar inventario de elementos al eliminar elemento de la solicitud
 Route::get('/admin/solicitudes/editarElemento/{id}/cantidad/{cantidad}', 'Admins\AJAXController@editarElemento');
+
+// Eliminar elemento asociado de espacio academico
+Route::get('/admin/espacios/editarEspacio/{id}/{espacio}', 'Admins\AJAXController@editarEspacio');
 
 Route::get('/admin/calendario/calendarioEscolar/{carrera}', 'Admins\AJAXController@calendarioEscolar');
 // Mostrar informacion de la solicitud seleccionada (usuarios)

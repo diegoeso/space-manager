@@ -32,34 +32,36 @@
 @section('content')
 <div class="row">
     <div class="col-xs-12">
-        <div class="box box-primary">
-            <div class="box-header">
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
                 <h3 class="box-title">
-                    Datos del Registro
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Datos del área
                 </h3>
                 <div class="box-tools">
-                    <a class="btn btn-success btn-sm" href="{{ route('areas.edit',$area->id) }}">
-                        <i class="fa fa-edit">
-                        </i>
-                        Editar
+                    <a class="btn btn-link" href="{{ route('areas.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
                     </a>
                 </div>
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="nombre">
                             Nombre
                         </label>
-                        <p class="lead" name="nombre">
+                        <p class="" name="nombre">
                             {{ $area->nombre }}
                         </p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <label for="email">
                             Encargado
                         </label>
-                        <p class="text-capitalize lead" name="encargado">
+                        <p class="text-capitalize " name="encargado">
                             {{ $area->responsables->nombreCompleto }}
                         </p>
                     </div>
@@ -69,7 +71,7 @@
                         <label for="descripcion">
                             Descripción
                         </label>
-                        <p class="lead" name="descripcion">
+                        <p class="" name="descripcion">
                             {{ $area->descripcion}}
                         </p>
                     </div>

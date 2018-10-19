@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('area_id','Área') !!}
-            {!! Form::select('area_id', $areas, null, ['placeholder' => 'Selecciona un área', 'class'=>'form-control']) !!} 
+            {!! Form::select('area_id', $areas, null, ['placeholder' => 'Selecciona un área', 'class'=>'form-control']) !!}
             @if ($errors->has('area_id'))
             <span class="label label-danger">
                 {{ $errors->first('area_id') }}
@@ -30,7 +30,7 @@
             @endif
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripción') !!}
             {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '60x8']) !!}

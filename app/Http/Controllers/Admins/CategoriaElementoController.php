@@ -137,13 +137,13 @@ class CategoriaElementoController extends Controller
         // $descripcion= substr($categoria->descripcion, 0,100);
         $categoria = CategoriaElemento::all();
         return Datatables::of($categoria)
+            ->editColumn('descripcion',function($categoria){
+              return substr($categoria->descripcion, 0,150).'...';
+            })
             ->addColumn('action', function ($categoria) {
                 return '<a href="' . route("categoria-elementos.show", $categoria->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>  ' .
-
                 '<a href="' . route('categoria-elementos.edit', $categoria->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
-
                 '<a href="#" value="' . $categoria->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
-
             })
             ->make();
     }

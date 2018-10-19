@@ -13,8 +13,6 @@
 <link href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet"/>
 <!-- Theme style -->
 <link href="{{ asset('dist/css/AdminLTE.min.css') }}" rel="stylesheet"/>
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
 <link href="{{ asset('dist/css/skins/_all-skins.min.css') }}" rel="stylesheet"/>
 <!-- Morris chart -->
 <link href="{{ asset('bower_components/morris.js/morris.css') }}" rel="stylesheet"/>
@@ -37,5 +35,10 @@
 <!-- iCheck for checkboxes and radio inputs -->
 <link href="{{ asset('plugins/iCheck/all.css') }}" rel="stylesheet">
 </link>
+<link href="{{ asset('plugins/alertifyjs/alertify.min.css') }}" rel="stylesheet"/>
+{{--
+<link href="{{ asset('plugins/alertifyjs/themes/bootstrap.min.css') }}" rel="stylesheet"/>
+--}}
+<link href="{{ asset('plugins/alertifyjs/themes/default.css') }}" rel="stylesheet"/>
 <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript">
 </script>

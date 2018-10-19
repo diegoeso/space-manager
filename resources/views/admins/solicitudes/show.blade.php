@@ -53,7 +53,7 @@
                                         @default
                                              Usuario
                                     @endswitch
-                                    <a href="#">
+                                    <a href="">
                                         @switch($solicitud->tipoUsuario)
                                         @case(0)
                                             {{ $solicitud->solicitanteAdmin->nombre.' '. $solicitud->solicitanteAdmin->apellidoP . ' '. $solicitud->solicitanteAdmin->apellidoM }}
@@ -305,6 +305,29 @@
                 </div>
             </div>
         </div>
+        @if ($solicitud->estado==3)
+        <div class="row">
+            <div class="col-md-7">
+                <div class="box box-widget">
+                    <div class="box-header with-border">
+                        <p class="lead">
+                            Motivo de la
+                            <span class="text-danger">
+                                cancelacion
+                            </span>
+                        </p>
+                        <p>
+                            @if ($solicitud->motivo)
+                                {{ $solicitud->motivo }}
+                            @else
+                            Sin motivo
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 <!-- Modal Cancelar Solicitud -->

@@ -38,10 +38,10 @@
             @endif
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripción') !!}
-            {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '40x6']) !!}
+            {!! Form::textArea('descripcion',null, ['class'=>'form-control','placeholder' =>'Descripción', 'size' => '40x4']) !!}
             @if ($errors->has('descripcion'))
             <span class="label label-danger">
                 <strong>

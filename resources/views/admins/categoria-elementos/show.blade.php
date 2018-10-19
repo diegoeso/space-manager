@@ -31,17 +31,19 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-xs-8 col-md-offset-2">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title text-capitalize">
-                    Datos del Registro
+    <div class="col-xs-12">
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Datos de la categoría
                 </h3>
                 <div class="box-tools">
-                    <a class="btn btn-success btn-sm" href="{{ route('categoria-elementos.edit',$categoria->id) }}">
-                        <i class="fa fa-edit">
-                        </i>
-                        Editar
+                    <a class="btn btn-link" href="{{ route('categoria-elementos.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
                     </a>
                 </div>
             </div>

@@ -34,7 +34,8 @@ class PerfilUsuarioRequest extends FormRequest
             'password'  => 'confirmed',
             'foto'      => 'image',
             'matricula' => 'numeric',
-            'carrera'   => 'required_if:' . Auth::user()->tipoCuenta . ',3',
+            // 'carrera'   => 'required_if:' . Auth::user()->tipoCuenta . ',3',
+
         ];
     }
 }

@@ -37,10 +37,10 @@
             <div class="box box-primary">
                 <div class="box-body box-profile user-header">
                     <img alt="User profile picture" class="profile-user-img user-image img-responsive" src="{{ Storage::url($user->foto) }}">
-                        <h3 class="profile-username text-center text-capitalize">
+                        <h4 class="profile-username text-center text-capitalize">
                             {{ $user->nombre .' '.$user->apellidoP }}
-                        </h3>
-                        <p class="text-muted text-center lead">
+                        </h4>
+                        <p class="text-muted text-center">
                             @switch($user->tipoCuenta)
                                 @case(0)
                                     Administrador
@@ -71,23 +71,29 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="box box-solid">
+            <div class="box box-solid box-primary">
                 <div class="box-header with-border">
-                    <i class="fa fa-list-ul">
-                    </i>
                     <h3 class="box-title">
-                        Datos del registro
+                        <i class="fa fa-list-ul">
+                        </i>
+                        Datos del usuario
                     </h3>
+                    <div class="box-tools">
+                        <a class="btn btn-link" href="{{ route('users.index')}}">
+                            <span class="fa fa-mail-reply">
+                            </span>
+                            Volver
+                        </a>
+                    </div>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body">
                     <dl>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <dt>
                                     Nombre
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{$user->nombre}}
                                 </dd>
                             </div>
@@ -95,15 +101,15 @@
                                 <dt>
                                     Apellido Paterno
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{ $user->apellidoP }}
                                 </dd>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <dt>
                                     Apellido Materno
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{ $user->apellidoM }}
                                 </dd>
                             </div>
@@ -116,7 +122,7 @@
                                 <dt>
                                     Correo Electrónico
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{$user->email}}
                                 </dd>
                             </div>
@@ -124,7 +130,7 @@
                                 <dt>
                                     Teléfono
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{ $user->telefono }}
                                 </dd>
                             </div>
@@ -136,7 +142,7 @@
                                 <dt>
                                     Nombre de Usuario
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     {{ $user->nickname }}
                                 </dd>
                             </div>
@@ -144,25 +150,29 @@
                                 <dt>
                                     Tipo de Cuenta
                                 </dt>
-                                <dd class="lead">
+                                <dd class="">
                                     @switch($user->tipoCuenta)
                                         @case(1)
                                             Responsable de Área
-                                            @break                                    
+                                            @break
                                         @default
                                             Administrador
                                     @endswitch
                                 </dd>
                             </div>
-                            <div class="col-md-6">
-                                <dt>
-                                    Creación de registro
-                                </dt>
-                                <dd class="text-capitalize lead">
-                                    {{ $user->created_at->format('l j F Y') }}
-                                </dd>
-                            </div>
                         </div>
+                    </dl>
+                    <dl class="">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <dt>
+                                Creación de registro
+                            </dt>
+                            <dd class="text-capitalize ">
+                                {{ $user->created_at->format('l j F Y') }}
+                            </dd>
+                        </div>
+                      </div>
                     </dl>
                 </div>
             </div>

@@ -324,7 +324,7 @@
             if (diaF<diaI && mesF<=mesI || diaF>diaI && mesF<=mesI)
             {
                 toastr["warning"]('La fecha de finalización '+fechaFin+' no puede ser menor a la de inicio')
-                
+
                 $('#fechaFin').val(fechaInicio);
             }
         });
@@ -393,7 +393,7 @@
                 myInput.onpaste = function(e) {
                 e.preventDefault();
                 toastr["error"]("¡No se puede realizar esta acción!")
-                
+
             }
 
         });
@@ -409,23 +409,23 @@
                 var minDate = moment(),
                 maxDate = moment().add(2,'weeks');
                 if (minDate >= currentView.start && minDate <= currentView.end) {
-                    $(".fc-prev-button").prop('disabled', true); 
-                    $(".fc-prev-button").addClass('fc-state-disabled'); 
+                    $(".fc-prev-button").prop('disabled', true);
+                    $(".fc-prev-button").addClass('fc-state-disabled');
                 }
                 else {
-                    $(".fc-prev-button").removeClass('fc-state-disabled'); 
-                    $(".fc-prev-button").prop('disabled', false); 
+                    $(".fc-prev-button").removeClass('fc-state-disabled');
+                    $(".fc-prev-button").prop('disabled', false);
                 }
                 // futuro
                 if (maxDate >= currentView.start && maxDate <= currentView.end) {
-                    $(".fc-next-button").prop('disabled', true); 
-                    $(".fc-next-button").addClass('fc-state-disabled'); 
+                    $(".fc-next-button").prop('disabled', true);
+                    $(".fc-next-button").addClass('fc-state-disabled');
                 } else {
-                    $(".fc-next-button").removeClass('fc-state-disabled'); 
-                    $(".fc-next-button").prop('disabled', false); 
+                    $(".fc-next-button").removeClass('fc-state-disabled');
+                    $(".fc-next-button").prop('disabled', false);
                 }
             },
-            
+
             defaultView: 'agendaWeek',
             navLinks: true,
             lang: 'es',
@@ -449,7 +449,7 @@
                 day  : 'Dia',
                 listWeek :'Lista'
             },
-            events : 'admin/solicitudes/solicitudesFullCalendar/2',            
+            events : 'admin/solicitudes/solicitudesFullCalendar/2',
             // selectOverlap: function(event) {
             //      return event.rendering === 'background';
             // },
@@ -467,7 +467,7 @@
                 var horaSeleccionada=moment(start).format('HHmm');
                 if (fechaSeleccionada==fechaSeleccionadaFin) {
                     if (fechaSeleccionada<=fechaActual && horaActual>horaSeleccionada || fechaSeleccionada<fechaActual ) {
-                    toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");    
+                    toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
                     }else{
                         $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
                         var fecha = new Date(end);
@@ -475,14 +475,14 @@
                         $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
                         $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
                         $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
-                        $('#ModalAdd').modal('show');    
+                        $('#ModalAdd').modal('show');
                     }
                 }else{
-                    toastr["error"]("Rango de fechas no valido.");   
+                    toastr["error"]("Rango de fechas no valido.");
                 }
-                
+
             },
-        }); 
+        });
 
         // Cerrar ventana modal y resetear el formulario para borrar los datos que tienen los input
         $('#btnCerrar').click(function(event) {
@@ -493,7 +493,7 @@
         });
 
     });
-    
+
 
     function espaciosAcademicos(idA)
     {
@@ -618,7 +618,7 @@
             var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
             colores.push(rgb);
             res=100*item.total/max;
-            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: '+res+'%; background-color: '+rgb+'"></div></div></div>');            
+            $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: '+res+'%; background-color: '+rgb+'"></div></div></div>');
         });
         new Chart(document.getElementById("grafica1"), {
             type: 'pie',
@@ -639,9 +639,9 @@
                     text: 'Espacio académico mas solicitado.'
                 }
             }
-        });     
+        });
 
-        
+
 
      });
 </script>

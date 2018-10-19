@@ -174,6 +174,7 @@ return [
         // chart
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
+        Laravel\Dusk\DuskServiceProvider::class,
     ],
 
     /*

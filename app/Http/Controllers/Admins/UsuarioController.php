@@ -8,7 +8,6 @@ use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Traits\Alertas;
 use App\Usuario;
-use Illuminate\Http\Request;
 use PDF;
 use Yajra\DataTables\DataTables;
 
@@ -26,32 +25,17 @@ class UsuarioController extends Controller
         $this->middleware('permission:usuarios.destroy')->only('destroy');
 
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('admins.usuarios.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admins.usuarios.create');
     }
 
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- */
     public function store(UsuarioRequest $request)
     {
         $usuario                     = new Usuario;
@@ -73,23 +57,16 @@ class UsuarioController extends Controller
         $usuario->semestre  = $request->semestre;
         $usuario->matricula = $request->matricula;
         if ($usuario->save()) {
-            $this->regsitroExitoso();
+            $this->registroExitoso();
             return redirect()->route('usuarios.show', $usuario->id);
         } else {
-            $this->regsitroError();
+            $this->registroError();
             return back();
         }
     }
 
-/**
- * Display the specified resource.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
     public function show($id)
     {
-
         $usuario = Usuario::find($id);
         if (!isset($usuario)) {
             return abort(404);
@@ -97,26 +74,12 @@ class UsuarioController extends Controller
         return view('admins.usuarios.show', compact('usuario'));
     }
 
-/**
- * Show the form for editing the specified resource.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
     public function edit($id)
     {
-
         $usuario = Usuario::find($id);
         return view('admins.usuarios.edit', compact('usuario'));
     }
 
-/**
- * Update the specified resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
     public function update(UsuarioUpdateRequest $request, $id)
     {
         $usuario            = Usuario::find($id);
@@ -128,7 +91,6 @@ class UsuarioController extends Controller
         if (!empty($request->password)) {
             $usuario->password = bcrypt($request->password);
         }
-        // $usuario->tipoCuenta = $request->tipoCuenta;
         if ($request->hasFile('foto')) {
             $usuario->foto = $request->file('foto')->store('public');
         }
@@ -139,20 +101,14 @@ class UsuarioController extends Controller
         $usuario->matricula      = $request->matricula;
 
         if ($usuario->save()) {
-            $this->regsitroExitoso();
+            $this->registroExitoso();
             return redirect()->route('usuarios.show', $usuario->id);
         } else {
-            $this->regsitroError();
+            $this->registroError();
             return back();
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $usuario = Usuario::FindOrFail($id);
@@ -185,10 +141,9 @@ class UsuarioController extends Controller
     public function usuarios()
     {
         $fecha = date('d-m-Y/h:i:s');
-        // dd($fecha);
-        $pdf  = App::make('dompdf.wrapper');
-        $data = Usuario::orderBy('carrera', 'ASC')->orderBy('semestre', 'ASC')->get();
-        $pdf  = PDF::loadView('admins.usuarios.pdf', ['data' => $data]);
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Usuario::orderBy('carrera', 'ASC')->orderBy('semestre', 'ASC')->get();
+        $pdf   = PDF::loadView('admins.usuarios.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('usuarios_' . $fecha . '.pdf');
     }

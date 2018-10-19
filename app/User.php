@@ -12,10 +12,6 @@ class User extends Authenticatable
 {
     use Notifiable, ShinobiTrait;
 
-    // protected $fillable = [
-    //     'name', 'email', 'password',
-    // ];
-    //
     protected $fillable = [
         'nombre',
         'apellidoP',

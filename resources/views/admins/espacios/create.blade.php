@@ -29,8 +29,20 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
-            @include('general.botonNuevo',['modulo' => 'Nuevo Espacio Academico','ruta'=>''])
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                  <i class="fa fa-pencil"></i>
+                    Registrar espacio académico
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-link" href="{{ route('espacios.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
+                    </a>
+                </div>
+            </div>
             {!! Form::open(['route'=>'espacios.store', 'method'=>'POST','files' => true ]) !!}
             <div class="box-body">
                 {!!Form::text('tipoCuenta', null, ['hidden','id'=>'tipoCuenta']) !!}
@@ -38,28 +50,13 @@
             </div>
             <div class="box-body">
                 <table class="table" id="dynamic_field">
-                    {{--
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                {!! Form::label('categoria','Categoría') !!}
-                            </th>
-                            <th scope="col">
-                                {!! Form::label('elemento_id', 'Elemento') !!}
-                            </th>
-                            <th scope="col">
-                                {!! Form::label('cantidad', 'Cantidad:') !!}
-                            </th>
-                        </tr>
-                    </thead>
-                    --}}
                     <tbody>
                         @include('admins.espacios.fragmentos.agregarElementos')
                     </tbody>
                 </table>
             </div>
             <div class="box-footer">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5" type="submit" name="guardar" id="guardar">
                     <i class="fa fa-plus">
                     </i>
                     Guardar
@@ -84,13 +81,12 @@
         categorias(cont);
         $('#add').click(function(event) {
             cont++;
-
             categorias(cont);
             $('#dynamic_field').append('<tr id="row'+cont+'"><td><select style="width: 100%;" tabindex="-1" class="form-control select2 select2-hidden-accessible" id="categoria_id'+cont+'" name="categoria_id[]" placeholder="Selecciona una Categoria"></select></td><td><select style="width: 100%;" tabindex="-1" class="form-control select2 select2-hidden-accessible" id="elemento_id'+cont+'" name="elemento_id[]" placeholder="Selecciona un Elemento"></select></td><td><input class="form-control" id="cantidad'+cont+'" name="cantidad[]" placeholder="Cantidad de Elementos" type="number" value="" min="1" pattern="^[0-9]+"></input></td><td><button type="button" name="remove" id="'+cont+'" class="btn btn-danger btn_remove btn-sm"><span class="fa fa-trash"></span></button></td></tr>');
-            
-            $('#categoria_id'+cont+'').append('<option>Selecciona una Categoria</option>'); 
-            $('#elemento_id'+cont+'').append('<option>Selecciona un Elemento</option>'); 
-            
+
+            $('#categoria_id'+cont+'').append('<option>Selecciona una Categoria</option>');
+            $('#elemento_id'+cont+'').append('<option>Selecciona un Elemento</option>');
+
             $('#categoria_id'+cont+'').select2({
                 placeholder: 'Selecciona una Categoria'
             });

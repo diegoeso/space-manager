@@ -2,7 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+
         <meta content="{{ csrf_token() }}" name="csrf-token"/>
+        
         <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
         <title>
             Space Manager

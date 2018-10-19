@@ -71,7 +71,7 @@
         </div>
         --}}
         <div class="input-group bootstrap-timepicker timepicker">
-            {!! Form::label('horaInicio', 'Hora de finalizacion') !!}
+            {!! Form::label('horaInicio', 'Hora de inicio') !!}
             {!! Form::text('horaInicio', null, ['class'=>'form-control text-capitalize input-small', 'placeholder' => 'Hora de inicio', 'id'=>'horaInicio']) !!}
             @if ($errors->has('horaInicio'))
             <span class="label label-danger">
