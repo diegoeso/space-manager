@@ -90,19 +90,19 @@ class SolicitudController extends Controller
 
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
-            $id = $solicitud->id;
-            $this->notificacion($id);
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
+            $this->notificacion($solicitud->id);
+            if ($request->cantidad){
+                $manyToMany = array();
+                for ($i = 0; $i < count($request->cantidad); $i++) {
 
-                $elemento              = Elemento::find($request->elemento_id[$i]);
-                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
-                $elemento->save();
+                    $elemento              = Elemento::find($request->elemento_id[$i]);
+                    $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                    $elemento->save();
 
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                }
+                $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            $solicitud->elementosSolicitud()->sync($manyToMany);
-
             Toastr::success('¡Registro exitoso!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
             return redirect()->route('solicitud.show', $solicitud->id);
         } else {

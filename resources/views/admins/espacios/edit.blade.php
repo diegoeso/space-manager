@@ -32,13 +32,14 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
+        <div class="box box-solid box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
+                    <i class="fa fa-edit"></i>
                     Editar espacio académico
                 </h3>
                 <div class="box-tools">
-                    <a class="btn btn-link" href="{{ route('areas.index')}}">
+                    <a class="btn btn-link" href="{{ route('espacios.index')}}">
                         <span class="fa fa-mail-reply">
                         </span>
                         Volver
@@ -63,7 +64,7 @@
                                 <select class="form-control" id="elemento_id<?php echo $cont ?>" name="elemento_id[]" placeholder="Selecciona un Elemento">
                                 </select>
                             </td>
-                            <td>
+                            <td width="200px">
                                 <input class="form-control" id="cantidad<?php echo $cont ?>" name="cantidad[]" placeholder="Cantidad de Elementos" type="text" value="">
                                 </input>
                             </td>
@@ -95,13 +96,6 @@
         </div>
     </div>
 </div>
-{{--
-<style type="text/css">
-    h1{
-        margin-right: 10px;
-    }
-</style>
---}}
 @endsection
 @section('script')
 <script>
@@ -125,25 +119,6 @@
                 alertify.notify('Sin acción')
             });           
         });
-
-      toastr.options = {
-          "closeButton": false,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": false,
-          "positionClass": "toast-top-right",
-          "preventDuplicates": false,
-          "onclick": null,
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "timeOut": 0,
-          "extendedTimeOut": 0,
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut",
-          "tapToDismiss": false
-        }
 
 
         var idE=$('#idEspacio').val();

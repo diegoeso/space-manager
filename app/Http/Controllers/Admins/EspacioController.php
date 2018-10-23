@@ -57,9 +57,10 @@ class EspacioController extends Controller
      */
     public function store(EspacioRequest $request)
     {
-        // Attacha con las relaciones
         $espacio = Espacio::create($request->all());
+        //Si existe input cantidad agregara las relaciones de elementos
         if ($request->cantidad) {
+            // Attacha con las relaciones
             $manyToMany = array();
             for ($i = 0; $i < count($request->cantidad); $i++) {
                 $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
@@ -118,7 +119,6 @@ class EspacioController extends Controller
                 }
                 $espacio->elementos()->sync($manyToMany);
             }
-
             $this->registroExitoso();
             return redirect()->route('espacios.show', $espacio->id);
         } else {

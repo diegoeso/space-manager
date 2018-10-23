@@ -125,7 +125,6 @@ class SolicitudController extends Controller
             $id = $solicitud->id;
             $this->notificacion($id);
             $this->registroExitoso();
-            // return redirect()->route('solicitudes.index');
             return redirect()->route('solicitudes.show', $solicitud->id);
         } else {
             $this->registroError();
@@ -182,7 +181,6 @@ class SolicitudController extends Controller
      */
     public function show($id)
     {
-
         $solicitud           = Solicitud::find($id);
         $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
         $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
@@ -190,10 +188,8 @@ class SolicitudController extends Controller
         $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
         $data['espacio_id']  = $solicitud->espacio_id;
         $data['estado']      = $solicitud->estado;
-
-        $total = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
-
-        $bandera = null;
+        $total               = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
+        $bandera             = null;
         if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
             $bandera = 0;
             return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
@@ -240,25 +236,33 @@ class SolicitudController extends Controller
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
 
         if ($solicitud->save()) {
-            $manyToMany = array();
+            // Relaciones
             if ($request->cantidad) {
+                $manyToMany = array();
                 for ($i = 0; $i < count($request->cantidad); $i++) {
-                    $elemento    = Elemento::find($request->elemento_id[$i]);
-                    $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
-                    if (count($solicitados) > 0) {
-                        $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
-                    }
-                    $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
-                    $elemento->save();
+                    //----resta el elemento seleccionado de las existencias
+                    $elemento = Elemento::find($request->elemento_id[$i]);
 
+                    $el = DB::table('elemento_solicitud')->select('cantidad')->where('elemento_id', $request->elemento_id[$i])->first();
+                    if ($el != null) {
+                        if ($el->cantidad != $request->cantidad[$i]) {
+                            $elemento->existencias = $elemento->existencias + $el->cantidad;
+                            $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                            $elemento->save();
+                        }
+                    } else {
+                        $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                        $elemento->save();
+                    }
+                    //----Fin
                     $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
                 }
                 $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            $id = $solicitud->id;
-            $this->notificacion($id);
+            // Registro exitoso
+            $this->notificacion($solicitud->id);
             $this->registroExitoso();
-            return redirect()->route('solicitudes.index');
+            return redirect()->route('solicitudes.show', $solicitud->id);
         } else {
             $this->registroError();
             return back();

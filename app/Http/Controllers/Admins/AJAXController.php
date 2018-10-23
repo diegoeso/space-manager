@@ -229,11 +229,13 @@ class AJAXController extends Controller
     }
 
     // Actualizar elementos al eliminar elemento de solicitud
-    public function editarElemento($id, $cantidad)
+    public function editarElemento($id, $cantidad, $solicitud)
     {
+        $solicitud=Solicitud::find($solicitud);
+        $solicitud->elementos()->detach($id);
         $elemento              = Elemento::FindOrFail($id);
         $elemento->existencias = $elemento->existencias + intval($cantidad);
-        $elemento->estado      = 1;
+        //$elemento->estado      = 1;
         $result                = $elemento->save();
         if ($result) {
             return response()->json(['success' => 'true']);

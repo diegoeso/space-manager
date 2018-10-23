@@ -29,8 +29,21 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
-            @include('general.botonNuevo',['modulo' => 'Nueva Solicitud','ruta'=>''])
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-pencil">
+                    </i>
+                    Registrar solicitud
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-link" href="{{ route('solicitudes.index')}}">
+                        <span class="fa fa-mail-reply">
+                        </span>
+                        Volver
+                    </a>
+                </div>
+            </div>
             {!! Form::open(['route'=>'solicitudes.store', 'method'=>'POST','files' => true ]) !!}
             <div class="box-body">
                 <div class="row">

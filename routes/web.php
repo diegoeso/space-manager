@@ -154,7 +154,7 @@ Route::get('/admin/solicitudes/solicitudesFullCalendar/{estado}', 'Admins\AJAXCo
 Route::get('/admin/solicitudes/solicitudesFullCalendarUsuarios/{carrera}', 'Admins\AJAXController@solicitudesFullCalendarUsuarios');
 
 // actualizar inventario de elementos al eliminar elemento de la solicitud
-Route::get('/admin/solicitudes/editarElemento/{id}/cantidad/{cantidad}', 'Admins\AJAXController@editarElemento');
+Route::get('/admin/solicitudes/editarElemento/{id}/cantidad/{cantidad}/solicitud/{solicitud}', 'Admins\AJAXController@editarElemento');
 
 // Eliminar elemento asociado de espacio academico
 Route::get('/admin/espacios/editarEspacio/{id}/{espacio}', 'Admins\AJAXController@editarEspacio');

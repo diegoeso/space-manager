@@ -3,7 +3,6 @@
 @section('navegacion')
 <section class="content-header">
     <h1>
-        {{-- @include('general.tipoUsuario') --}}
         <small>
             Panel de Control
         </small>

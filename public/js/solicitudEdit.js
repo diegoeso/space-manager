@@ -29,27 +29,32 @@ $(document).ready(function() {
         var button_id = $(this).attr("id");
         var el = $('#elemento_id' + button_id + '').val();
         var cantidad = $('#cantidad' + button_id + '').val();
-        if ($('cantidad' + button_id + '' == "")) {
+        var idE = $('#idSolicitud').val();
+        if ($('#cantidad' + button_id + '').val() <= 0) {
             $('#row' + button_id + '').remove();
         } else {
-            $.ajax({
-                url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '',
-                type: 'GET',
-                dataType: 'JSON',
-                success: function(data) {
-                    if (data.success == 'true') {
-                        $('#row' + button_id + '').remove();
-                    } else {
-                        toastr["error"]('¡No se devolvieron los elementos solicitados!');
+            alertify.confirm("Eliminar elemento", "¿Seguro que desea eliminar el elemento asociado al espacio académico?", function() {
+                $.ajax({
+                    url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '/solicitud/' + idE,
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(data) {
+                        if (data.success == 'true') {
+                            $('#row' + button_id + '').remove();
+                        } else {
+                            alertify.notify('Sin acción')
+                        }
                     }
-                }
+                });
+            }, function() {
+                alertify.notify('Sin acción')
             });
         }
     });
     // cierre del metodod e eliminar formulario
     var idE = $('#idSolicitud').val();
     var cont = 0;
-    console.log(idE);
+    // console.log(idE);
     $('#fechaFin').change(function() {
         var fechaInicio = $('#fechaInicio').val();
         var fechaFin = $('#fechaFin').val()
@@ -57,7 +62,7 @@ $(document).ready(function() {
         var mesI = fechaInicio.substring(3, 5);
         var diaF = fechaFin.substring(0, 2);
         var mesF = fechaFin.substring(3, 5);
-        console.log(diaI + ' ' + diaF + ' ' + mesI + ' ' + mesF);
+        // console.log(diaI + ' ' + diaF + ' ' + mesI + ' ' + mesF);
         if (diaF < diaI) {
             if (mesF <= mesI) {
                 toastr["warning"]('La fecha de finalizacion ' + fechaFin + ' no puede ser menor a la de inicio')
@@ -74,7 +79,7 @@ $(document).ready(function() {
     });
     $("#area_id").change(function() {
         var idA = $('#area_id').val();
-        console.log('Area : ' + idA);
+        // console.log('Area : ' + idA);
         $('#datosEspacio').html('');
         $('#espacio_id').html('');
         $('#elementosEspacio').html('');
@@ -85,7 +90,7 @@ $(document).ready(function() {
         if (value == 0) {
             $('#elementosEspacio').html('');
         }
-        console.log(value);
+        // console.log(value);
         infoEspacio(value);
         // elementosEspacio(value);
     });
@@ -94,7 +99,7 @@ $(document).ready(function() {
         type: 'GET',
         dataType: 'JSON',
         success: function(datos) {
-            console.log(datos);
+            // console.log(datos);
             $.each(datos, function(i, item) {
                 cont++;
                 $('#categoria_id' + cont + '').append('<option value=' + item.idC + '>' + item.nombreC + '</option>');
@@ -104,7 +109,7 @@ $(document).ready(function() {
                 $('#cantidad' + cont + '').keyup(function(e) {
                     if (isNaN(this.value + String.fromCharCode(e.charCode))) return false;
                     $key = $('#cantidad' + cont + '').val();
-                    console.log($key);
+                    // console.log($key);
                 }).on("cut copy paste", function(e) {
                     e.preventDefault();
                 });
@@ -132,10 +137,10 @@ $(document).ready(function() {
             event.preventDefault();
             var idCategoria = $('#categoria_id' + cont + '').val();
             var idElemento = $('#elemento_id' + cont + '').val();
-            console.log('Categoria ' + idCategoria);
+            // console.log('Categoria ' + idCategoria);
             var id = $(this).attr("id");
             var res = id.substring(12);
-            console.log(res);
+            // console.log(res);
             $('#elemento_id' + res + '').html('');
             elementos(idCategoria, res);
         });
@@ -145,8 +150,8 @@ $(document).ready(function() {
             var idElemento = $('#elemento_id' + cont + '').val();
             var id = $(this).attr("id");
             var res = id.substring(11);
-            console.log(id);
-            console.log(res);
+            // console.log(id);
+            // console.log(res);
             existenciasElementos(idElemento, res);
         });
         $('#cantidad' + cont + '').keyup(function(e) {
@@ -161,7 +166,7 @@ $(document).ready(function() {
         $('#cantidad' + cont + '').keyup(function(e) {
             if (isNaN(this.value + String.fromCharCode(e.charCode))) return false;
             $key = $('#cantidad' + cont + '').val();
-            console.log($key);
+            // console.log($key);
         }).on("cut copy paste", function(e) {
             e.preventDefault();
         });
@@ -180,7 +185,7 @@ function espaciosAcademicos(idA) {
         type: 'GET',
         dataType: 'JSON',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             $.each(data, function(i, item) {
                 $('#espacio_id').append('<option value=' + item.id + '>' + item.nombre + '</option>');
             });
@@ -196,7 +201,7 @@ function infoEspacio(value) {
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             $('#datosEspacio').append('<p class="lead">' + data.nombre + '</p><p>' + data.ubicacion + '</p><p>' + data.descripcion + '</p><p></p>');
             elementosEspacio(value);
         },
@@ -210,7 +215,7 @@ function categorias(cont) {
         type: 'GET',
         dataType: 'JSON',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             $.each(data, function(i, item) {
                 $('#categoria_id' + cont + '').append('<option value=' + item.id + '>' + item.nombre + '</option>');
             });
@@ -219,8 +224,8 @@ function categorias(cont) {
 }
 
 function elementos(idCategoria, res) {
-    console.log('contador elementos :' + res);
-    console.log('categoria :' + idCategoria);
+    // console.log('contador elementos :' + res);
+    // console.log('categoria :' + idCategoria);
     $('#elemento_id' + res + '').html('');
     $('#elemento_id' + res + '').append('<option>Selecciona un Elemento</option>');
     $.ajax({
@@ -257,7 +262,7 @@ function existenciasElementos(idElemento, res) {
         type: 'GET',
         dataType: 'JSON',
         success: function(data) {
-            console.log(data.existencias);
+            // console.log(data.existencias);
             $('#existencias' + res + '').val(data.existencias);
         }
     });
