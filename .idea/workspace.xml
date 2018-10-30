@@ -2,54 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca1dc00c-d909-4066-bcfa-78de99fdcb05" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admins/email/basura.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admins/email/fragmentos/correo_menu.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/basura.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/fragmentos/correo_menu.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/salida.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admins/MensajesController.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admins/AJAXController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admins/AJAXController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Usuarios/MensajesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Usuarios/MensajesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Usuarios/SolicitudController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Usuarios/SolicitudController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/UserUpdateRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/UserUpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Mensaje.php" afterPath="$PROJECT_DIR$/app/Mensaje.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_06_03_210238_create_mensajes_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_06_03_210238_create_mensajes_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/solicitudEdit.js" afterPath="$PROJECT_DIR$/public/js/solicitudEdit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/administradores/fragmentos/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/administradores/fragmentos/form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/administradores/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/administradores/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/areas/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/areas/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/datatable.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/datatable.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/categoria-elementos/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/categoria-elementos/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/elementos/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/elementos/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/email/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/email/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/email/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/email/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/email/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/email/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/espacios/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/espacios/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/solicitudes/fragmentos/agregarElementos.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/solicitudes/fragmentos/agregarElementos.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/solicitudes/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/solicitudes/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/solicitudes/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/solicitudes/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admins/usuarios/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admins/usuarios/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/loginU.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/loginU.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/registro.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/registro.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/headerAdmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/headerAdmin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/headerUser.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/headerUser.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/dashboard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/email/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/email/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/email/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/email/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/usuarios/solicitudes/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,9 +33,14 @@
       <file leaf-file-name="asideAdmin.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="33" column="44" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="44" />
-              <folding />
+            <state relative-caret-position="225">
+              <caret line="394" column="107" lean-forward="false" selection-start-line="394" selection-start-column="107" selection-end-line="394" selection-end-column="107" />
+              <folding>
+                <marker date="1540864485321" expanded="true" signature="1349:1367" ph="..." />
+                <marker date="1540864485321" expanded="true" signature="7608:7635" ph="..." />
+                <marker date="1540864485321" expanded="true" signature="15878:15906" ph="..." />
+                <marker date="1540864485321" expanded="true" signature="18092:18112" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,7 +119,6 @@
         <option value="$PROJECT_DIR$/app/Providers/CorreoServiceProvider.php" />
         <option value="$PROJECT_DIR$/resources/views/usuarios/email/fragmentos/correo_menu.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admins/email/fragmentos/correo_menu.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admins/administradores/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admins/areas/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admins/calendarioEscolar/index.blade.php" />
@@ -178,6 +136,7 @@
         <option value="$PROJECT_DIR$/resources/views/admins/email/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admins/CorreosController.php" />
         <option value="$PROJECT_DIR$/resources/views/admins/email/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php" />
       </list>
     </option>
   </component>
@@ -345,20 +304,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -400,112 +345,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Usuarios" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space-manager" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admins" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -628,12 +467,12 @@
       <workItem from="1540575989362" duration="396000" />
       <workItem from="1540583058356" duration="6780000" />
       <workItem from="1540756281827" duration="12546000" />
-      <workItem from="1540828108858" duration="13084000" />
+      <workItem from="1540828108858" duration="16316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48707000" />
+    <option name="totallyTimeSpent" value="51939000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1103,9 +942,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/asideAdmin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="33" column="44" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="225">
+          <caret line="394" column="107" lean-forward="false" selection-start-line="394" selection-start-column="107" selection-end-line="394" selection-end-column="107" />
+          <folding>
+            <marker date="1540864485321" expanded="true" signature="1349:1367" ph="..." />
+            <marker date="1540864485321" expanded="true" signature="7608:7635" ph="..." />
+            <marker date="1540864485321" expanded="true" signature="15878:15906" ph="..." />
+            <marker date="1540864485321" expanded="true" signature="18092:18112" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
