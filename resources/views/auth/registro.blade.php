@@ -11,7 +11,7 @@
     </div>
     <div class="register-box-body">
         <p class="lead text-center">
-            <img src="{{ asset('img/userR.png') }}" width="80px">
+            <img src="{{ asset('img/register.png') }}" width="80px">
             </img>
             <br/>
             Registrarse
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 btn-block" type="submit" name="registro" id="registro">
+                <button class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 btn-block" id="registro" name="registro" type="submit">
                     <i class="md md-check">
                     </i>
                     Únete ahora

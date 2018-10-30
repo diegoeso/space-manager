@@ -56,20 +56,20 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Notificacion de mensajes a usuarios (profesor y alumnos)
-        view()->composer('layouts.headerUser', function ($view) {
+       /* view()->composer('layouts.headerUser', function ($view) {
             $view->with('mensajes', \App\Mensaje::where('para', Auth::user()->id)
                     ->where('leido', 0)
                     ->orderBy('id', 'DESC')
                     ->get());
-        });
+        });*/
 
         // Notificacion de mensajes a usuarios administrativos
-        view()->composer('layouts.headerAdmin', function ($view) {
-            $view->with('mensajes', \App\Mensaje::where('para', Auth::user()->id)
-                    ->where('leido', 0)
-                    ->orderBy('id', 'DESC')
-                    ->get());
-        });
+         /*view()->composer('layouts.headerAdmin', function ($view) {
+             $view->with('mensajes', \App\Mensaje::where('para', Auth::user()->id)
+                     ->where('leido', 0)
+                     ->orderBy('id', 'DESC')
+                     ->get());
+         });*/
 
         view()->composer('layouts.asideUser', function ($view) {
             $view->with('evaluaciones', \App\Evaluaciones::where('evaluador', Auth::user()->id)->where('estado', 0)->get());

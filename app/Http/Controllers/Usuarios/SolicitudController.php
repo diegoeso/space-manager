@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SolicitudRequest;
 use App\Notificacion;
 use App\Solicitud;
+use App\Traits\Alertas;
 use App\Traits\Elementos;
 use Auth;
 use DB;
@@ -20,7 +21,7 @@ use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
 {
-    use Elementos;
+    use Elementos, Alertas;
     public function __construct()
     {
         $this->middleware('auth:usuario');
@@ -72,7 +73,7 @@ class SolicitudController extends Controller
             ->get();
 
         if (count($solicitudAprobadas) > 0) {
-            Toastr::error('¡Ya hay una actividad programana en este espacio, fecha y hora!', '¡Error!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true', "showDuration" => "6000"]);
+            $this->solicitudExistente();
             return back();
         }
 
@@ -91,22 +92,23 @@ class SolicitudController extends Controller
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
             $this->notificacion($solicitud->id);
-            if ($request->cantidad){
+            if ($request->cantidad) {
                 $manyToMany = array();
                 for ($i = 0; $i < count($request->cantidad); $i++) {
-
+                    // Restar elementos solicitados
                     $elemento              = Elemento::find($request->elemento_id[$i]);
                     $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
                     $elemento->save();
 
                     $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
                 }
+                // agrega los elementos a la tabla pivote
                 $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            Toastr::success('¡Registro exitoso!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            $this->registroExitoso();
             return redirect()->route('solicitud.show', $solicitud->id);
         } else {
-            Toastr::error('¡Error al realizar el registro!', '¡Error!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            $this->registroError();
             return back();
         }
     }
@@ -162,22 +164,35 @@ class SolicitudController extends Controller
         $solicitud->espacio_id          = $request->espacio_id;
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                $elemento    = Elemento::find($request->elemento_id[$i]);
-                $solicitados = DB::table('elemento_solicitud')->where('elemento_id', $request->elemento_id[$i])->first();
-                if (count($solicitados) > 0) {
-                    $elemento->existencias = $elemento->existencias + $solicitados->cantidad;
+            // Relaciones
+            if ($request->cantidad) {
+                $manyToMany = array();
+                for ($i = 0; $i < count($request->cantidad); $i++) {
+                    //----resta el elemento seleccionado de las existencias
+                    $elemento = Elemento::find($request->elemento_id[$i]);
+
+                    $el = DB::table('elemento_solicitud')->select('cantidad')->where('elemento_id', $request->elemento_id[$i])->first();
+                    if ($el != null) {
+                        if ($el->cantidad != $request->cantidad[$i]) {
+                            $elemento->existencias = $elemento->existencias + $el->cantidad;
+                            $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                            $elemento->save();
+                        }
+                    } else {
+                        $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
+                        $elemento->save();
+                    }
+                    //----Fin
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
                 }
-                $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
-                $elemento->save();
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                $solicitud->elementosSolicitud()->sync($manyToMany);
             }
-            $solicitud->elementosSolicitud()->sync($manyToMany);
-            Toastr::success('¡Registro exitoso!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
-            return redirect()->route('solicitud.index');
+            // Registro exitoso
+            $this->notificacion($solicitud->id);
+            $this->registroExitoso();
+            return redirect()->route('solicitud.show', $solicitud->id);
         } else {
-            Toastr::error('¡Error al realizar el registro!', '¡Error!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            $this->registroError();
             return back();
         }
     }

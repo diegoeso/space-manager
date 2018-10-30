@@ -71,25 +71,23 @@ Route::prefix('admin')->group(function () {
     /**
      * Controlador para mensaje de administrador
      */
-    Route::resource('mensajes', 'Admins\MensajesController');
-    Route::get('mensajes/responder/{id}', 'Admins\MensajesController@responder')->name('mensajes.responder');
+    // Mensajes
+    Route::resource('correo', 'Admins\CorreosController');
+    Route::get('correo/entrada/{email}', 'Admins\CorreosController@entrada');
+    Route::get('correo-enviados', 'Admins\CorreosController@enviados')->name('correo.enviados');
+    Route::get('correo/salida/{email}', 'Admins\CorreosController@salida');
+    Route::get('correo-borrados', 'Admins\CorreosController@eliminados')->name('correo.eliminados');
+    Route::get('correo/basura/{email}', 'Admins\CorreosController@correo_eliminado');
+    Route::post('correo-fetch', 'Admins\CorreosController@fetch')->name('correo.fetch');
+    Route::get('correo/delete/{id}','Admins\CorreosController@delete')->name('correo.delete');
+    Route::get('correo/delete/salida/{id}','Admins\CorreosController@delete_de')->name('correo.delete_de');
+    Route::get('correo/responder/{id}', 'Admins\CorreosController@responder')->name('correo.responder');
 
-    /**
-     * Actividades Academicas (Horarios y calendarios de examenes);
+     /* Actividades Academicas (Horarios y calendarios de examenes);
      */
     Route::resource('calendarios', 'Admins\CalendarioEscolarController');
     Route::get('calendarios-horarios', 'Admins\CalendarioEscolarController@horarios')->name('calendarios.horarios');
     Route::get('calendarios/listarHorarios/{id}', 'Admins\CalendarioEscolarController@listarHorarios')->name('calendarios.listarHorarios');
-
-    /**
-     * Solicitud de elementos
-     */
-    // Route::resource('solicitudes-elementos', 'Admins\SolicitudElementosController');
-    // Route::get('solicitudes-elementos/listarSolicitudesUsuario/{id}', 'Admins\SolicitudElementosController@listarSolicitudes')->name('solicitudes-elementos.listarSolicitudes');
-    // Route::get('solicitudes-elementos/cancelar/{id}', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
-    // Route::get('solicitudes-elementos/{id}/aprobar', 'Admins\SolicitudElementosController@aprobar')->name('solicitudes-elementos.aprobar');
-    // Route::put('solicitudes-elementos/{id}/rechazar', 'Admins\SolicitudElementosController@rechazar')->name('solicitudes-elementos.rechazar');
-    // Route::put('solicitudes-elementos/{id}/cancelar', 'Admins\SolicitudElementosController@cancelar')->name('solicitudes-elementos.cancelar');
 
     /**
      * PDF
@@ -179,8 +177,14 @@ Route::post('solicitud/cancelar', 'Usuarios\SolicitudController@cancelar')->name
  * Controlador para mensajes Usuario
  */
 Route::resource('mensaje', 'Usuarios\MensajesController');
+Route::get('mensaje/entrada/{email}', 'Usuarios\MensajesController@entrada');
+Route::get('mensaje-enviados', 'Usuarios\MensajesController@enviados')->name('mensaje.enviados');
+Route::get('mensaje/salida/{email}', 'Usuarios\MensajesController@salida');
 Route::get('mensaje/responder/{id}', 'Usuarios\MensajesController@responder')->name('mensaje.responder');
-
+Route::get('mensaje/delete/{id}','Usuarios\MensajesController@delete')->name('mensaje.delete');
+Route::get('mensaje/delete/salida/{id}','Usuarios\MensajesController@delete_de')->name('mensaje.delete_de');
+Route::get('mensajes-borrados', 'Usuarios\MensajesController@eliminados')->name('mensaje.eliminados');
+Route::get('mensaje/basura/{email}', 'Usuarios\MensajesController@correo_eliminado');
 /**
  * Evaluaciones de los usuarios
  */

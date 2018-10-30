@@ -1,4 +1,4 @@
-<aside class="main-sidebar" name"asideAdmin" id="asideAdmin">
+<aside class="main-sidebar" id="asideAdmin" name"asideadmin"="">
     <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
@@ -45,37 +45,37 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('users.index')
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-circle-o">
-                            </i>
-                            Administrador
-                            <span class="pull-right-container">
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-circle-o">
+                                </i>
+                                Administradores
+                                <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right">
                                 </i>
                             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            @can('users.index')
-                            <li>
-                                <a href="{{ route('users.index') }}">
-                                    <i class="fa fa-circle-o">
-                                    </i>
-                                    Listar Registros
-                                </a>
-                            </li>
-                            @endcan                            
-                            @can('users.create')
-                            <li class="">
-                                <a href="{{ route('users.create') }}">
-                                    <i class="fa fa-circle-o">
-                                    </i>
-                                    Nuevo Registro
-                                </a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </li>
+                            </a>
+                            <ul class="treeview-menu">
+                                @can('users.index')
+                                    <li>
+                                        <a href="{{ route('users.index') }}">
+                                            <i class="fa fa-circle-o">
+                                            </i>
+                                            Listar Registros
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('users.create')
+                                    <li>
+                                        <a href="{{ route('users.create') }}">
+                                            <i class="fa fa-circle-o">
+                                            </i>
+                                            Nuevo Registro
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </li>
                     @endcan                    
                     @can('usuarios.index')
                     <li class="treeview">
@@ -391,7 +391,7 @@
             
             {{-- Mensajes --}}
             <li>
-                <a href="{{ route('mensajes.index') }}">
+                <a href="{{ route('correo.index') }}">
                     <i class="fa fa-envelope">
                     </i>
                     <span>

@@ -79,12 +79,14 @@
             @endif
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-3">
         <div class="form-group">
             {!! Form::label('password', 'Contraseña') !!}
             {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Contraseña']) !!}
             @if ($errors->has('password'))
-            <span class="label label-danger">
+                <span class="label label-danger">
                 <strong>
                     {{ $errors->first('password') }}
                 </strong>
@@ -97,7 +99,7 @@
             {!! Form::label('password_confirmation', 'Confirmar Contraseña') !!}
             {!! Form::password('password_confirmation', ['class'=>'form-control', 'placeholder'=>'Confirmar Contraseña']) !!}
             @if ($errors->has('password_confirmation'))
-            <span class="label label-danger">
+                <span class="label label-danger">
                 <strong>
                     {{ $errors->first('password_confirmation') }}
                 </strong>
@@ -105,6 +107,7 @@
             @endif
         </div>
     </div>
+
 </div>
 <div class="row">
     <div class="col-md-4">

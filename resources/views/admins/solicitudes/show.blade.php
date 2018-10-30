@@ -35,7 +35,8 @@
                 <div class="box box-widget">
                     <div class="box-header with-border">
                         <div class="user-block">
-                            <img alt="User Image" class="img-circle" src="{{ Storage::url($solicitud->solicitante->foto) }}">
+                            <img alt="User Image" class="img-circle" src="{{ Storage::url($solicitud->tipoUsuario($solicitud)
+                            ->foto) }}">
                                 <span class="username">
                                     @switch($solicitud->tipoUsuario)
                                         @case(0)
@@ -56,13 +57,13 @@
                                     <a href="">
                                         @switch($solicitud->tipoUsuario)
                                         @case(0)
-                                            {{ $solicitud->solicitanteAdmin->nombre.' '. $solicitud->solicitanteAdmin->apellidoP . ' '. $solicitud->solicitanteAdmin->apellidoM }}
+                                            {{$solicitud->tipoUsuario($solicitud)->fullName}}
                                             @break
                                         @case(1)
-                                            {{ $solicitud->solicitanteAdmin->nombre.' '. $solicitud->solicitanteAdmin->apellidoP . ' '. $solicitud->solicitanteAdmin->apellidoM }}
+                                            {{$solicitud->tipoUsuario($solicitud)->fullName}}
                                                 @break
                                         @default
-                                            {{ $solicitud->solicitante->nombre.' '. $solicitud->solicitante->apellidoP . ' '. $solicitud->solicitante->apellidoM }}
+                                            {{$solicitud->tipoUsuario($solicitud)->fullName}}
                                     @endswitch
                                     </a>
                                 </span>
@@ -405,11 +406,11 @@
                 </h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(['route'=>['mensajes.store'],'method'=>'POST'])!!}
+                {!! Form::open(['route'=>['correo.store'],'method'=>'POST'])!!}
                 <div class="form-group">
                     {!! Form::text('solicitud_id',$solicitud->id)  !!}
                     {!! Form::text('de', Auth::user()->id) !!}
-                    {!! Form::text('para', $solicitud->solicitante->id) !!}
+                    {!! Form::text('para_email', $solicitud->tipoUsuario($solicitud)->email) !!}
                     {!! Form::label('asunto', 'Asunto', ['class'=>'control-label']) !!}
                     {!! Form::text('asunto', null, ['class'=>'form-control','placeholder'=>'Asunto']) !!}
                     {!! Form::label('mensaje', 'Mensaje', ['class'=>'control-label']) !!}
@@ -435,7 +436,8 @@
                 <div class="box box-widget">
                     <div class="box-header with-border">
                         <div class="user-block">
-                            <img alt="User Image" class="img-circle" src="{{ Storage::url($solicitud->solicitante->foto) }}">
+                            <img alt="User Image" class="img-circle" src="{{ Storage::url
+                            ($solicitud->tipoUsuario($solicitud)->foto) }}">
                                 <span class="username">
                                     @switch($solicitud->tipoUsuario)
                                         @case(0)
@@ -456,13 +458,13 @@
                                     <a class="text-capitalize" href="#">
                                         @switch($solicitud->tipoUsuario)
                                         @case(0)
-                                            {{ $solicitud->solicitanteAdmin->nombre.' '. $solicitud->solicitanteAdmin->apellidoP . ' '. $solicitud->solicitanteAdmin->apellidoM }}
+                                            {{$solicitud->tipoUsuario($solicitud)->fullName}}
                                             @break
                                         @case(1)
-                                            {{ $solicitud->solicitanteAdmin->nombre.' '. $solicitud->solicitanteAdmin->apellidoP . ' '. $solicitud->solicitanteAdmin->apellidoM }}
-                                                @break
+                                            {{$solicitud->tipoUsuario($solicitud)->fullName}}
+                                            @break
                                         @default
-                                            {{ $solicitud->solicitante->nombre.' '. $solicitud->solicitante->apellidoP . ' '. $solicitud->solicitante->apellidoM }}
+                                        {{$solicitud->tipoUsuario($solicitud)->fullName}}
                                     @endswitch
                                     </a>
                                 </span>
@@ -477,7 +479,6 @@
                             </img>
                             @foreach ($total as $el)
                             @if ($el->evaluado==$solicitud->usuarioSolicitud)
-                                {{-- {{ $el->calificacion($el->evaluado) }} --}}
                             <div class="progress-group">
                                 <span class="progress-text">
                                     Puntuación del usuario
@@ -779,11 +780,11 @@
                 </h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(['route'=>['mensajes.store'],'method'=>'POST'])!!}
+                {!! Form::open(['route'=>['correo.store'],'method'=>'POST'])!!}
                 <div class="form-group">
                     {!! Form::hidden('solicitud_id',$solicitud->id)  !!}
-                    {!! Form::hidden('de', Auth::user()->id) !!}
-                    {!! Form::hidden('para', $solicitud->solicitante->id) !!}
+                    {!! Form::hidden('de', Auth::user()->email) !!}
+                    {!! Form::hidden('para_email', $solicitud->solicitante->email) !!}
                     {!! Form::label('asunto', 'Asunto', ['class'=>'control-label']) !!}
                     {!! Form::text('asunto', null, ['class'=>'form-control','placeholder'=>'Asunto']) !!}
                     {!! Form::label('mensaje', 'Mensaje', ['class'=>'control-label']) !!}

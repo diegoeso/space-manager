@@ -200,7 +200,8 @@ class AJAXController extends Controller
     // actividades Academicas
     public function calendarioEscolar($carrera)
     {
-        $calendarioEscolar = Solicitud::where('carrera', $carrera)->where('tipoRegistro', 1)->get();
+        $calendarioEscolar = Solicitud::where('carrera', $carrera)->where('tipoRegistro', 1)->orderBy('fechaInicio','ACS')
+            ->get();
         $data              = [];
         $backgroundColor   = '';
         $borderColor       = '';

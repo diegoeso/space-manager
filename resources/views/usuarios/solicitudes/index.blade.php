@@ -158,10 +158,10 @@
 
         $("body").on("click", "#solicitudes-table #btnEliminar", function(event) {
             event.preventDefault();
-            var r = confirm('¿Desea eliminar el registro? ¡Al eliminar este registro, se eliminaran todos los datos asociados al mismo!');
-            if (r == true) {
-                var idsele = $(this).attr("value");
-                var token = $("#token").val();
+            var idsele = $(this).attr("value");
+            var token = $("#token").val();
+
+            alertify.confirm("Eliminar elemento", "¿Seguro que desea eliminar la solicitud seleccionada?", function() {
                 $.ajax({
                     url: 'solicitud/'+idsele,
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -179,8 +179,34 @@
                             $datable.ajax.reload();   
                         }
                     }
-                });                
-            }
+                });        
+            }, function() {
+                alertify.notify('Sin acción')
+            });
+
+            // var r = confirm('¿Desea eliminar el registro? ¡Al eliminar este registro, se eliminaran todos los datos asociados al mismo!');
+            // if (r == true) {
+            //     var idsele = $(this).attr("value");
+            //     var token = $("#token").val();
+            //     $.ajax({
+            //         url: 'solicitud/'+idsele,
+            //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            //         type: 'DELETE',
+            //         dataType: 'json',
+            //         success: function(data){
+            //             if (data.success == 'true')
+            //             {
+            //                 toastr["success"]('¡El registro se elimino exitosamente!');
+            //                 $datable.ajax.reload();
+            //             }
+            //             else
+            //             {
+            //                 toastr["error"]('¡El registro no se pudo eliminar!');
+            //                 $datable.ajax.reload();   
+            //             }
+            //         }
+            //     });                
+            // }
         });
     });
 </script>

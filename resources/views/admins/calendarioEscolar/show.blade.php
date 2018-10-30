@@ -73,7 +73,7 @@
                                     <strong>
                                         Materia:
                                     </strong>
-                                    <p class="lead" id="actividadAcademica">
+                                    <p class="" id="actividadAcademica">
                                         {{ $horario->actividadAcademica }}
                                     </p>
                                 </div>
@@ -83,7 +83,7 @@
                                     <strong>
                                         Docente:
                                     </strong>
-                                    <p class="lead text-capitalize" id="docente">
+                                    <p class="text-capitalize" id="docente">
                                         {{ $horario->docente }}
                                     </p>
                                 </div>
@@ -93,8 +93,8 @@
                                     <strong>
                                         Horario:
                                     </strong>
-                                    <p class="lead" id="horario">
-                                        {{ $horario->horaInicio }} - {{ $horario->horaFin }}
+                                    <p class="" id="horario">
+                                        {{ $horario->horaInicio }} a {{ $horario->horaFin }}
                                     </p>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                     <strong>
                                         Fecha:
                                     </strong>
-                                    <p class="lead" id="fechaInicio">
+                                    <p class="" id="fechaInicio">
                                         {{ $horario->fechaInicio->format('l j F Y') }}
                                     </p>
                                 </div>
@@ -113,7 +113,7 @@
                                     <strong>
                                         Carrera:
                                     </strong>
-                                    <p class="lead" id="carrera">
+                                    <p class="" id="carrera">
                                         {{ $horario->nombreCarrera($horario->carrera) }}
                                     </p>
                                 </div>
@@ -123,7 +123,7 @@
                                     <strong>
                                         Semestre
                                     </strong>
-                                    <p class="lead" id="semestre">
+                                    <p class="" id="semestre">
                                         {{ $horario->nombreSemestre($horario->semestre) }}
                                     </p>
                                 </div>
@@ -133,7 +133,7 @@
                                     <strong>
                                         Grupo:
                                     </strong>
-                                    <p class="lead" id="grupo">
+                                    <p class="" id="grupo">
                                         {{ $horario->grupo }}
                                     </p>
                                 </div>
@@ -143,7 +143,7 @@
                                     <strong>
                                         Espacio Academico
                                     </strong>
-                                    <p class="lead" id="espacio">
+                                    <p class="" id="espacio">
                                         {{ $horario->espacio->nombre }}
                                     </p>
                                 </div>

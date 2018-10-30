@@ -8,7 +8,7 @@
 
   <div class="login-box-body">
     <div class="text-center">
-        <img src="{{ asset('img/user.png') }}" width="100">
+        <img src="{{ asset('img/admin.png') }}" width="100">
     </div>
     <p class="login-box-msg">Inicia Sesión</p>
 

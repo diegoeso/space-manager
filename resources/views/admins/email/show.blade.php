@@ -24,76 +24,36 @@
 @section('content')
 <section class="content">
     <div class="row">
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-block margin-bottom" href="{{ route('mensajes.create') }}">
-                Nuevo
-            </a>
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        Correo
-                    </h3>
-                    <div class="box-tools">
-                        <button class="btn btn-box-tool" data-widget="collapse" type="button">
-                            <i class="fa fa-minus">
-                            </i>
-                        </button>
-                    </div>
-                </div>
-                <div class="box-body no-padding">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <a href="{{ route('mensajes.index') }}">
-                                <i class="fa fa-inbox">
-                                </i>
-                                Inbox
-                                <span class="label label-primary pull-right">
-                                    {{ count($mensajes) }}
-                                </span>
-                            </a>
-                        </li>
-                        {{--
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-envelope-o">
-                                </i>
-                                Enviados
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-trash-o">
-                                </i>
-                                Eliminados
-                            </a>
-                        </li>
-                        --}}
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @include('admins.email.fragmentos.correo_menu')
         <div class="col-md-9">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        Mensaje
+                        Correo entrante
                     </h3>
                 </div>
                 <div class="box-body no-padding">
                     <div class="mailbox-read-info">
-                        <h3 class="text-capitalize">
-                            {{ $mensaje[0]->asunto }}
+                        <h3>
+                            {{ $mensaje->asunto }}
                         </h3>
                         <h5>
-                            De: {{ $mensaje[0]->email }}
+                            De: {{ $de->nombre }} ({{ $mensaje->de }})
                             <span class="mailbox-read-time pull-right">
-                                {{ $mensaje[0]->created_at->format('l j F Y  H:i:s') }}
+                                {{ $mensaje->created_at->format('l j F Y - H:m:s A') }}
                             </span>
                         </h5>
                     </div>
                     <div class="mailbox-controls with-border text-center">
                         <div class="btn-group">
-                            <a class="btn btn-default btn-sm" data-container="body" data-original-title="Responder" data-toggle="tooltip" href="{{ route('mensajes.responder',$mensaje[0]->id) }}" title="" type="button">
+                            <button class="btn btn-default btn-sm" data-container="body" data-original-title="Eliminar" data-toggle="tooltip" title="" type="button">
+                                <i class="fa fa-trash-o">
+                                </i>
+                            </button>
+                            <a href="{{route('correo.responder',$mensaje->id)}}" class="btn btn-default btn-sm"
+                               data-container="body"
+                               data-original-title="Responder"
+                               data-toggle="tooltip" title="" type="button">
                                 <i class="fa fa-reply">
                                 </i>
                             </a>
@@ -101,27 +61,29 @@
                     </div>
                     <div class="mailbox-read-message">
                         <p>
-                            {{ $mensaje[0]->mensaje }}
+                            {{ $mensaje->mensaje }}
                         </p>
                     </div>
                 </div>
                 <div class="box-footer">
                     <div class="pull-right">
-                        <a class="btn btn-default" href="">
-                            <i class="fa fa-trash-o">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-reply">
                             </i>
-                            Eliminar
-                        </a>
+                            Responder
+                        </button>
                     </div>
-                    <a class="btn btn-default" href="{{ route('mensajes.responder',$mensaje[0]->id) }}">
-                        Responder
-                    </a>
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-trash-o">
+                        </i>
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </section>
-@endsection
+@endsection 
 @section('script')
 <script>
 </script>

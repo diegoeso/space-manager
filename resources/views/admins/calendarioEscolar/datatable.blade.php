@@ -125,7 +125,7 @@
             order: [[0, 'desc']]
         });
 
-        $("body").on("click", "#horarios-table #btnEliminar", function(event) {
+        /*$("body").on("click", "#horarios-table #btnEliminar", function(event) {
             event.preventDefault();
             var r = confirm('¿Desea eliminar el registro?');
             if (r == true) {
@@ -150,6 +150,39 @@
                     }
                 });                
             }
+        });*/
+
+        $("body").on("click", "#horarios-table #btnEliminar", function (event) {
+            event.preventDefault();
+            var idsele = $(this).attr("value");
+            var token = $("#token").val();
+            alertify.confirm("Eliminar registro ", "¿Desea eliminar el registro? ¡Al eliminar este registro, se " +
+                "eliminaran todos los datos relacionados al mismo!",
+                function () {
+                    $.ajax({
+                        url: 'solicitudes/'+idsele,
+                        headers: {'X-CSRF-TOKEN': token},
+                        type: 'DELETE',
+                        dataType: 'json',
+                        success: function(data){
+                            if (data.success == 'true')
+                            {
+                                toastr["success"]('¡El registro se elimino exitosamente!');
+                                $datable.ajax.reload();
+                            }
+                            else
+                            {
+                                toastr["error"]('¡El registro no se pudo eliminar!');
+                                $datable.ajax.reload();
+                            }
+                        }
+                    });
+                },
+                function () {
+                    alertify.notify('Sin acción')
+                }
+                //).set({'closableByDimmer': false});
+            );
         });
     });
 

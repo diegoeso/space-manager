@@ -1,59 +1,58 @@
 @extends('layouts.admin')
 @section('navegacion')
-    <section class="content-header">
-        <h1>
-            {{-- @include('general.tipoUsuario') --}}
-            <small>
-                Panel de Control
-            </small>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <a href="{{ url('/admin') }}">
-                    <i class="fa fa-dashboard">
-                    </i>
-                    Home
-                </a>
-            </li>
-            <li class="active">
-                Espacios Academicos
-            </li>
-        </ol>
-    </section>
+<section class="content-header">
+    <h1>
+        {{-- @include('general.tipoUsuario') --}}
+        <small>
+            Panel de Control
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('/admin') }}">
+                <i class="fa fa-dashboard">
+                </i>
+                Home
+            </a>
+        </li>
+        <li class="active">
+            Espacios Academicos
+        </li>
+    </ol>
+</section>
 @endsection
 @section('content')
-    <div class="row">
-        <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
-        <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        <i class="fa fa-list-ul">
-                        </i>
-                        Listado de registros
-                    </h3>
-                    <div class="box-tools">
-                        <a class="btn btn-primary btn-sm" href="{{ route('espacios.create')}}">
+<div class="row">
+    <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
+    <div class="col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Listado de registros
+                </h3>
+                <div class="box-tools">
+                    <a class="btn btn-primary btn-sm" href="{{ route('espacios.create')}}">
                         <span class="fa fa-plus">
                         </span>
-                            Nuevo
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row" style="padding-bottom: 5px;">
+                    <div class="col-md-12 ">
+                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.espacios') }}" target="_black">
+                            <i class="fa fa-file-pdf-o">
+                            </i>
+                            Descargar PDF
                         </a>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div class="row" style="padding-bottom: 5px;">
-                        <div class="col-md-12 ">
-                            <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.espacios') }}"
-                               target="_black">
-                                <i class="fa fa-file-pdf-o">
-                                </i>
-                                Descargar PDF
-                            </a>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover" id="espacios-table">
-                            <thead>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="espacios-table">
+                        <thead>
                             <tr>
                                 <th width="10">
                                     ID
@@ -71,31 +70,31 @@
                                     Opciones
                                 </th>
                             </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    {{--
-    <td width="10">
-        <form action="{{ route('espacios.destroy', $espacio->id) }}" class="form-inline" method="post">
-            {{ csrf_field() }}
-            <input name="_method" type="hidden" value="DELETE"/>
-            <button class=" btn btn-danger btn-xs" type="submit">
-                <span class="fa fa-trash">
-                </span>
-            </button>
-        </form>
-    </td>
-    --}}
+</div>
+{{--
+<td width="10">
+    <form action="{{ route('espacios.destroy', $espacio->id) }}" class="form-inline" method="post">
+        {{ csrf_field() }}
+        <input name="_method" type="hidden" value="DELETE"/>
+        <button class=" btn btn-danger btn-xs" type="submit">
+            <span class="fa fa-trash">
+            </span>
+        </button>
+    </form>
+</td>
+--}}
 @endsection
 @section('script')
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
             $datable = $('#espacios-table').DataTable({
                 language: {
                     "sProcessing": "Procesando...",
@@ -147,7 +146,7 @@
                             url: 'espacios/' + idsele,
                             headers: {'X-CSRF-TOKEN': token},
                             type: 'DELETE',
-                            dataType: 'json',
+                            dataType: 'json',     
                             success: function (data) {
                                 if (data.success == 'true') {
                                     toastr["success"]('¡El registro se elimino exitosamente!');
@@ -166,5 +165,5 @@
                 );
             });
         });
-    </script>
+</script>
 @endsection

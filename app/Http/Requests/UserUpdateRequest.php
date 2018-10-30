@@ -28,9 +28,11 @@ class UserUpdateRequest extends FormRequest
             'apellidoP' => 'required|string|alpha',
             'apellidoM' => 'required|string|alpha',
             'nickname'  => 'required',
+            'telefono'  => 'numeric|digits:10',
             'email'     => 'required|email',
             'password'  => 'confirmed',
             'foto'      => 'image',
+
         ];
     }
 }

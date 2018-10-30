@@ -33,7 +33,7 @@ $(document).ready(function() {
         if ($('#cantidad' + button_id + '').val() <= 0) {
             $('#row' + button_id + '').remove();
         } else {
-            alertify.confirm("Eliminar elemento", "¿Seguro que desea eliminar el elemento asociado al espacio académico?", function() {
+            alertify.confirm("Eliminar elemento", "¿Seguro que desea eliminar el elemento asociado a la solicitud?", function() {
                 $.ajax({
                     url: '/admin/solicitudes/editarElemento/' + el + '/cantidad/' + cantidad + '/solicitud/' + idE,
                     type: 'GET',

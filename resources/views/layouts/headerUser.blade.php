@@ -74,7 +74,7 @@
                         <i class="fa fa-envelope-o">
                         </i>
                         <span class="label label-success">
-                            {{ count($mensajes) }}
+                            {{ count($correo_usuarios) }}
                         </span>
                     </a>
                     <ul class="dropdown-menu" style="width: 300px;">
@@ -84,7 +84,7 @@
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                @foreach ($mensajes as $mensaje)
+                                @foreach ($correo_usuarios as $mensaje)
                                 <li>
                                     <a href="{{ route('mensaje.show',$mensaje->id) }}">
                                         <strong>

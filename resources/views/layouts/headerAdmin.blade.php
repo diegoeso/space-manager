@@ -38,7 +38,7 @@
                         <i class="fa fa-envelope-o">
                         </i>
                         <span class="label label-success">
-                            {{ count($mensajes) }}
+                            {{ count($correo) }}
                         </span>
                     </a>
                     <ul class="dropdown-menu" style="width: 300px;">
@@ -46,11 +46,10 @@
                             Mensajes nuevos
                         </li>
                         <li>
-                            <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                @foreach ($mensajes as $mensaje)
+                                @foreach ($correo as $mensaje)
                                 <li>
-                                    <a href="{{ route('mensajes.show',$mensaje->id) }}">
+                                    <a href="{{ route('correo.show',$mensaje->id) }}">
                                         <strong>
                                             {{ $mensaje->asunto }}
                                         </strong>

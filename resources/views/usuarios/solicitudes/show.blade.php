@@ -30,6 +30,22 @@
 </section>
 @endsection
 @section('content')
+<div class="box box-solid box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <i class="fa fa-edit">
+            </i>
+            Información de la solicitud
+        </h3>
+        <div class="box-tools">
+            <a class="btn btn-link" href="{{ route('solicitud.index')}}">
+                <span class="fa fa-mail-reply">
+                </span>
+                Volver
+            </a>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
@@ -72,65 +88,59 @@
                     </div>
                     <div class="box-body">
                         <div class="collapse" id="collapseExample">
-                            {{--
-                            <div class="well">
-                                --}}
-                                @switch($solicitud->estado)
+                            @switch($solicitud->estado)
                                 @case(0)
-                                <span class="label label-info pull-right">
-                                    Pendiente
-                                </span>
-                                @break
+                            <span class="label label-info pull-right">
+                                Pendiente
+                            </span>
+                            @break
                                 @case(1)
-                                <span class="label label-success pull-right">
-                                    Aceptada
-                                </span>
-                                @break
+                            <span class="label label-success pull-right">
+                                Aceptada
+                            </span>
+                            @break
                                 @case(2)
-                                <div class="callout callout-warning">
-                                    <h4>
-                                        <strong>
-                                            Estado:
-                                        </strong>
-                                        <br/>
-                                        Rechazada
-                                    </h4>
-                                    <p>
-                                        <strong>
-                                            Motivo:
-                                        </strong>
-                                        <br/>
-                                        {{ $solicitud->motivo }}
-                                    </p>
-                                </div>
-                                @break
-                                @case(3)
-                                <div class="callout callout-danger">
-                                    <h4>
-                                        <strong>
-                                            Estado:
-                                        </strong>
-                                        <br/>
-                                        Cancelada
-                                    </h4>
-                                    <p>
-                                        <strong>
-                                            Motivo:
-                                        </strong>
-                                        <br/>
-                                        {{ $solicitud->motivo }}
-                                    </p>
-                                </div>
-                                @break
-                                @case(4)
-                                <span class="label pull-right" style="background-color:#d2d6de ">
-                                    Finalizada
-                                </span>
-                                @break
-                            @endswitch
-                            {{--
+                            <div class="callout callout-warning">
+                                <h4>
+                                    <strong>
+                                        Estado:
+                                    </strong>
+                                    <br/>
+                                    Rechazada
+                                </h4>
+                                <p>
+                                    <strong>
+                                        Motivo:
+                                    </strong>
+                                    <br/>
+                                    {{ $solicitud->motivo }}
+                                </p>
                             </div>
-                            --}}
+                            @break
+                                @case(3)
+                            <div class="callout callout-danger">
+                                <h4>
+                                    <strong>
+                                        Estado:
+                                    </strong>
+                                    <br/>
+                                    Cancelada
+                                </h4>
+                                <p>
+                                    <strong>
+                                        Motivo:
+                                    </strong>
+                                    <br/>
+                                    {{ $solicitud->motivo }}
+                                </p>
+                            </div>
+                            @break
+                                @case(4)
+                            <span class="label pull-right" style="background-color:#d2d6de ">
+                                Finalizada
+                            </span>
+                            @break
+                            @endswitch
                         </div>
                         <div class="row">
                             <div class="col-md-8">

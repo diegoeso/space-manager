@@ -25,7 +25,6 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            {{-- @include('general.botonNuevo', ['modulo' => 'Listado de Usuarios','ruta'=>'usuarios.create']) --}}
             <div class="box-header with-border">
                 <h3 class="box-title">
                     <i class="fa fa-list-ul">
@@ -78,7 +77,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- data Datatables --}}
                         </tbody>
                     </table>
                 </div>
@@ -145,31 +143,34 @@
             ]
         });
 
-        $("body").on("click", "#usuarios-table #btnEliminar", function(event) {
+
+        $("body").on("click", "#usuarios-table #btnEliminar", function (event) {
             event.preventDefault();
-            var r = confirm('Desea eliminar el registro');
-            if (r == true) {
-                var idsele = $(this).attr("value");
-                var token = $("#token").val();
-                $.ajax({
-                    url: 'usuarios/'+idsele,
-                    headers: {'X-CSRF-TOKEN': token},
-                    type: 'DELETE',
-                    dataType: 'json',
-                    success: function(data){
-                        if (data.success == 'true')
-                        {
-                            toastr["success"]('¡El registro se elimino exitosamente!');
-                            $datable.ajax.reload();
+            var idsele = $(this).attr("value");
+            var token = $("#token").val();
+            alertify.confirm("Eliminar registro ", "¿Desea eliminar el registro? ¡Al eliminar este registro, se eliminaran todos los datos asociados al mismo!",
+                function () {
+                    $.ajax({
+                        url: 'usuarios/'+idsele,
+                        headers: {'X-CSRF-TOKEN': token},
+                        type: 'DELETE',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.success == 'true') {
+                                toastr["success"]('¡El registro se elimino exitosamente!');
+                                $datable.ajax.reload();
+                            }
+                            else {
+                                toastr["error"]('¡El registro no se pudo eliminar!');
+                                $datable.ajax.reload();
+                            }
                         }
-                        else
-                        {
-                            toastr["error"]('¡El registro no se pudo eliminar!');
-                            $datable.ajax.reload();   
-                        }
-                    }
-                });                
-            }
+                    });
+                },
+                function () {
+                    alertify.notify('Sin acción')
+                }
+            );
         });
     });
 </script>

@@ -24,193 +24,120 @@
 @section('content')
 <section class="content">
     <div class="row">
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-block margin-bottom" href="{{ route('mensajes.create') }}">
-                Nuevo
-            </a>
-            <div class="box box-solid">
+        @include('admins.email.fragmentos.correo_menu')
+        <div class="col-md-9">
+            <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        Correo
+                        Bandeja de entrada
                     </h3>
-                    <div class="box-tools">
-                        <button class="btn btn-box-tool" data-widget="collapse" type="button">
-                            <i class="fa fa-minus">
-                            </i>
-                        </button>
-                    </div>
                 </div>
-                <div class="box-body no-padding">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <li class="">
-                                <a aria-expanded="false" data-toggle="tab" href="#tab_1">
-                                    <i class="fa fa-inbox">
-                                    </i>
-                                    Inbox
-                                    <span class="label label-primary pull-right">
-                                        {{ count($mensajes) }}
-                                    </span>
-                                </a>
-                            </li>
-                        </li>
-                        <li>
-                            <li class="">
-                                <a aria-expanded="false" data-toggle="tab" href="#tab_2">
-                                    <i class="fa fa-envelope-o">
-                                    </i>
-                                    Enviados
-                                    <span class="label label-primary pull-right">
-                                        {{ count($salida) }}
-                                    </span>
-                                </a>
-                            </li>
-                        </li>
-                        {{--
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-trash-o">
-                                </i>
-                                Eliminados
-                            </a>
-                        </li>
-                        --}}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="nav-tabs-custom">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                Inbox
-                            </h3>
-                            {{--
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input class="form-control input-sm" placeholder="Search Mail" type="text">
-                                        <span class="glyphicon glyphicon-search form-control-feedback">
-                                        </span>
-                                    </input>
-                                </div>
-                            </div>
-                            --}}
-                        </div>
-                        <div class="box-body no-padding">
-                            <div class="table-responsive mailbox-messages">
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                        @foreach ($entrada as $mensaje)
-                                        <tr>
-                                            @if ($mensaje->leido==1)
-                                            <td width="50">
-                                                <i class="fa fa-check text-primary">
-                                                </i>
-                                                <i class="fa fa-check text-primary">
-                                                </i>
-                                            </td>
-                                            @else
-                                            <td width="50">
-                                                <i class="fa fa-check">
-                                                </i>
-                                            </td>
-                                            @endif
-                                            <td>
-                                                <a href="{{ route('mensajes.show', $mensaje->id) }}">
-                                                    {{ $mensaje->nombreDe }}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                {{ $mensaje->asunto }}
-                                            </td>
-                                            <td>
-                                                {{ $mensaje->created_at }}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="box-body">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover" id="entrada-table">
+                            <thead>
+                                <tr>
+                                    <th width="10">
+                                    </th>
+                                    <th width="200">
+                                        De
+                                    </th>
+                                    <th>
+                                        Asunto
+                                    </th>
+                                    <th width="80"></th>
+                                    <th colspan="" width="20">
+                                        Opciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-pane" id="tab_2">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                Enviados
-                            </h3>
-                            {{--
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input class="form-control input-sm" placeholder="Search Mail" type="text">
-                                        <span class="glyphicon glyphicon-search form-control-feedback">
-                                        </span>
-                                    </input>
-                                </div>
-                            </div>
-                            --}}
-                        </div>
-                        <div class="box-body no-padding">
-                            <div class="table-responsive mailbox-messages">
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                        @foreach ($salida as $mensajeS)
-                                        <tr>
-                                            @if ($mensajeS->leido==1)
-                                            <td width="50">
-                                                <i class="fa fa-check text-primary">
-                                                </i>
-                                                <i class="fa fa-check text-primary">
-                                                </i>
-                                            </td>
-                                            @else
-                                            <td width="50">
-                                                <i class="fa fa-check">
-                                                </i>
-                                            </td>
-                                            @endif
-                                            <td>
-                                                <a href="{{ route('mensajes.show', $mensajeS->id) }}">
-                                                    {{ $mensajeS->nombreDe }}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                {{ $mensajeS->asunto }}
-                                            </td>
-                                            <td>
-                                                {{ $mensajeS->created_at }}
-                                            </td>
-                                            {{--
-                                            <td width="10">
-                                                <form action="{{ route('mensajes.destroy', $mensajeS->id) }}" class="form-inline" method="post">
-                                                    {{ csrf_field() }}
-                                                    <input name="_method" type="hidden" value="DELETE"/>
-                                                    <button class=" btn btn-danger btn-xs" type="submit">
-                                                        <span class="fa fa-trash">
-                                                        </span>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            --}}
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {{--
-                    <div class="tab-pane" id="tab_3">
-                    </div>
-                    --}}
                 </div>
             </div>
         </div>
     </div>
 </section>
-@endsection
+@endsection 
 @section('script')
 <script>
+    $(document).ready(function() {
+        $datable = $('#entrada-table').DataTable({
+            language: {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            processing: true,
+            serverSide: true,
+            info: true,
+            autoWidth: true,
+            select: true,
+            ajax: "correo/entrada/"+'{{ Auth::user()->email }}',
+            columns: [
+                {data: 'leido', render:function ($leido) {
+                    if($leido==0){
+                        return '<i class="fa fa-star-o text-yellow"></i>'
+                    }else
+                    {
+                        return '<i class="fa fa-star text-yellow"></i>'
+                    }
+                }},
+                {data: 'de', name: 'de'},
+                {data: 'mensaje_res', name: 'mensaje_res'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'action', name: 'action', orderable: true, searchable: true}
+            ]
+        });
+        $("body").on("click", "#entrada-table #btnEliminar", function(event) {
+            event.preventDefault();
+            var idsele = $(this).attr("value");
+            var token = $("#token").val();
+            alertify.confirm("Eliminar Correo ", "¿Desea eliminar el mensaje?",
+                function () {
+                    $.ajax({
+                        url: 'correo/delete/' + idsele,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.success == 'true') {
+                                toastr["success"]('¡El registro se elimino exitosamente!');
+                                $datable.ajax.reload();
+                            }
+                            else {
+                                toastr["error"]('¡El registro no se pudo eliminar!');
+                                $datable.ajax.reload();
+                            }
+                        }
+                    });
+                },
+                function () {
+                    alertify.notify('Sin acción')
+                }
+            );
+        });
+    });
 </script>
 @endsection

@@ -113,7 +113,6 @@
         calendario(3,3);
         calendario(4,4);
     });
-
      function calendario($cont, $carrera) {
          //Calendario de eventos
         $('#calendar'+$cont+'').fullCalendar({
