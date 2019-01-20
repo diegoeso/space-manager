@@ -75,8 +75,8 @@ class CategoriaElementoController extends Controller
      */
     public function show($id)
     {
-
         $categoria = CategoriaElemento::find($id);
+        if(!$categoria) return abort(404);
         return view('admins.categoria-elementos.show', compact('categoria'));
     }
 
@@ -89,6 +89,7 @@ class CategoriaElementoController extends Controller
     public function edit($id)
     {
         $categoria = CategoriaElemento::find($id);
+        if(!$categoria) return abort(404);
         return view('admins.categoria-elementos.edit', compact('categoria'));
     }
 

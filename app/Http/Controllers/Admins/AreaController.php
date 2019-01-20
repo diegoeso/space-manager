@@ -78,6 +78,10 @@ class AreaController extends Controller
     {
 
         $area = Area::find($id);
+        if(!$area)
+        {
+            return abort(404);
+        }
         return view('admins.areas.show', compact('area'));
     }
 
@@ -92,6 +96,10 @@ class AreaController extends Controller
 
         $responsables = User::where('tipoCuenta', '1')->pluck('nombreCompleto', 'id');
         $area         = Area::find($id);
+        if(!$area)
+        {
+            return abort(404);
+        }
         return view('admins.areas.edit', compact('area', 'responsables'));
     }
 

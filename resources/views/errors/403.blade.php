@@ -1,100 +1,49 @@
-<!DOCTYPE doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-        <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <title>
-            Laravel
-        </title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"/>
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
-    </head>
-    <style>
-        html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-    </style>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                 @if (Auth::user()->tipoCuenta==0 || Auth::user()->tipoCuenta==1)
+@extends('layouts.admin')
+@section('navegacion')
+    <section class="content-header">
+        <h1>
+            <small>
+                Panel de Control
+            </small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
                 <a href="{{ url('/admin') }}">
+                    <i class="fa fa-dashboard">
+                    </i>
                     Home
                 </a>
-                @else
-                <a href="{{ url('/inicio') }}">
-                    Home
+            </li>
+            <li class="active">
+                URL no encontrada
+            </li>
+        </ol>
+    </section>
+@endsection
+
+@section('content')
+    <section class="content">
+        <div class="error-page" style="padding-top: 80px">
+            <h2 class="headline text-info" style="font-size: 60px;">
+                <i class="fa fa-building">
+                </i>
+                403
+            </h2>
+            <div class="error-content" style="padding-top: 5px;">
+                <h3 style="font-size: 30px">
+                    <i class="fa fa-warning text-info">
+                    </i>
+                    Acción no autorizada.
+                </h3>
+                <p class="lead">
+                    No tienes acceso a esta URL, consulta con el administrador del sistema.
+                </p>
+                <a class="btn btn-primary" href="{{ Request::root() }}/{{ Request::segment(1)}}">
+                    <i class="fa fa-arrow-left">
+                    </i>
+                    Volver
                 </a>
-                @endif
-                @else
-                <a href="{{ route('login') }}">
-                    Login
-                </a>
-                <a href="{{ route('register') }}">
-                    Register
-                </a>
-                @endauth
-            </div>
-            @endif
-            <div class="content">
-                <div class="title m-b-md">
-                    403 - Accion no autorizada
-                </div>
             </div>
         </div>
-        <script defer="" src="{{ asset('js/app.js') }}">
-        </script>
-    </body>
-</html>
+    </section>
+@endsection

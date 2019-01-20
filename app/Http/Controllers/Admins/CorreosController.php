@@ -79,8 +79,8 @@ class CorreosController extends Controller
         $para = User::where('email', $mensaje->para)->first();
         $mensaje->leido = 1;
         $mensaje->save();
-
         $mensajes_sin_leer = Mensaje::where('leido', 0)->get();
+        if(!$mensaje) return abort(404);
         return view('admins.email.show', compact('mensaje', 'de', 'para', 'mensajes_sin_leer'));
     }
 

@@ -142,6 +142,7 @@ class SolicitudController extends Controller
     public function ver($id)
     {
         $notificacion = Notificacion::where('id', $id)->first();
+        if(!$notificacion) return abort(404);
         if ($notificacion->estado == 0) {
             if (Auth::user()->tipoCuenta == 0) {
                 $notificacion->estadoAdmin = 1;
@@ -182,6 +183,7 @@ class SolicitudController extends Controller
     public function show($id)
     {
         $solicitud           = Solicitud::find($id);
+        if(!$solicitud) return abort(404);
         $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
         $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
         $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
@@ -209,6 +211,7 @@ class SolicitudController extends Controller
     {
         $solicitud = Solicitud::find($id);
         $areas     = Area::pluck('nombre', 'id');
+        if(!$solicitud) return abort(404);
         return view('admins.solicitudes.edit', compact('solicitud', 'areas'));
     }
 

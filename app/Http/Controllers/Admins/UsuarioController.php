@@ -68,7 +68,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = Usuario::find($id);
-        if (!isset($usuario)) {
+        if (!$usuario) {
             return abort(404);
         }
         return view('admins.usuarios.show', compact('usuario'));
@@ -77,6 +77,9 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario = Usuario::find($id);
+        if (!$usuario) {
+            return abort(404);
+        }
         return view('admins.usuarios.edit', compact('usuario'));
     }
 

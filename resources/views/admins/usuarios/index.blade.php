@@ -113,12 +113,15 @@
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             },
-            
             processing: true,
             serverSide: true,
             info: false,
             autoWidth: true,
             select: true,
+            // dom: 'Bfrtip',
+            // buttons: [
+            //     'copy', 'csv', 'excel', 'pdf', 'print'
+            // ],
             ajax: "usuarios/listarUsuarios/1",
             columns: [
                 {data: 'id', name: 'id'},

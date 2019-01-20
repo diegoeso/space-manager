@@ -81,6 +81,7 @@ class ElementoController extends Controller
     public function show($id)
     {
         $elemento = Elemento::find($id);
+        if(!$elemento) return abort(404);
         return view('admins.elementos.show', compact('elemento'));
     }
 
@@ -95,6 +96,7 @@ class ElementoController extends Controller
 
         $elemento   = Elemento::find($id);
         $categorias = CategoriaElemento::pluck('nombre', 'id');
+        if(!$elemento) return abort(404);
         return view('admins.elementos.edit', compact('elemento', 'categorias'));
     }
 

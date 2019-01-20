@@ -80,6 +80,7 @@ class EspacioController extends Controller
     public function show($id)
     {
         $espacio = Espacio::find($id);
+        if(!$espacio) return abort(404);
         return view('admins.espacios.show', compact('espacio'));
     }
 
@@ -93,6 +94,7 @@ class EspacioController extends Controller
     {
         $espacio = Espacio::find($id);
         $areas   = Area::pluck('nombre', 'id');
+        if(!$espacio) return abort(404);
         return view('admins.espacios.edit', compact('espacio', 'areas'));
     }
 

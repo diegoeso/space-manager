@@ -41,9 +41,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-
         $permissions = Permission::get();
-
         return view('admins.roles.create', compact('permissions'));
     }
 
@@ -56,7 +54,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role = Role::create($request->all());
-
         $role->permissions()->sync($request->get('permissions'));
         $this->registroExitoso();
         return redirect()->route('roles.index');
@@ -71,6 +68,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
+        if(!$role) return abort(404);
         return view('admins.roles.show', compact('role'));
     }
 
@@ -84,6 +82,7 @@ class RoleController extends Controller
     {
         $role        = Role::find($id);
         $permissions = Permission::get();
+        if(!$role) return abort(404);
         return view('admins.roles.edit', compact('role', 'permissions'));
     }
 

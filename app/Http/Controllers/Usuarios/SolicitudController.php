@@ -22,11 +22,13 @@ use Yajra\DataTables\DataTables;
 class SolicitudController extends Controller
 {
     use Elementos, Alertas;
+
     public function __construct()
     {
         $this->middleware('auth:usuario');
         $this->middleware('completarRegistro');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,16 +53,16 @@ class SolicitudController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(SolicitudRequest $request)
     {
         $fechaInicio = date("Y-m-d", strtotime($request->fechaInicio));
-        $fechaFin    = date("Y-m-d", strtotime($request->fechaFin));
-        $horaInicio  = date("H:i:s", strtotime($request->horaInicio));
-        $horaFin     = date("H:i:s", strtotime($request->horaFin));
-        $espacio     = $request->espacio_id;
+        $fechaFin = date("Y-m-d", strtotime($request->fechaFin));
+        $horaInicio = date("H:i:s", strtotime($request->horaInicio));
+        $horaFin = date("H:i:s", strtotime($request->horaFin));
+        $espacio = $request->espacio_id;
 
         $solicitudAprobadas = Solicitud::where('fechaInicio', $fechaInicio)
             ->where('estado', 1)
@@ -77,17 +79,17 @@ class SolicitudController extends Controller
             return back();
         }
 
-        $solicitud                      = new Solicitud;
-        $solicitud->fechaInicio         = $fechaInicio;
-        $solicitud->fechaFin            = $fechaFin;
-        $solicitud->horaInicio          = $request->horaInicio;
-        $solicitud->horaFin             = $request->horaFin;
-        $solicitud->actividadAcademica  = $request->actividadAcademica;
+        $solicitud = new Solicitud;
+        $solicitud->fechaInicio = $fechaInicio;
+        $solicitud->fechaFin = $fechaFin;
+        $solicitud->horaInicio = $request->horaInicio;
+        $solicitud->horaFin = $request->horaFin;
+        $solicitud->actividadAcademica = $request->actividadAcademica;
         $solicitud->asistentesEstimados = $request->asistentesEstimados;
-        $solicitud->usuarioSolicitud    = Auth::user()->id;
-        $solicitud->tipoUsuario         = Auth::user()->tipoCuenta;
-        $solicitud->area_id             = $request->area_id;
-        $solicitud->espacio_id          = $request->espacio_id;
+        $solicitud->usuarioSolicitud = Auth::user()->id;
+        $solicitud->tipoUsuario = Auth::user()->tipoCuenta;
+        $solicitud->area_id = $request->area_id;
+        $solicitud->espacio_id = $request->espacio_id;
 
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
@@ -96,7 +98,7 @@ class SolicitudController extends Controller
                 $manyToMany = array();
                 for ($i = 0; $i < count($request->cantidad); $i++) {
                     // Restar elementos solicitados
-                    $elemento              = Elemento::find($request->elemento_id[$i]);
+                    $elemento = Elemento::find($request->elemento_id[$i]);
                     $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
                     $elemento->save();
 
@@ -116,7 +118,7 @@ class SolicitudController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -124,20 +126,20 @@ class SolicitudController extends Controller
         $evaluacion = Evaluaciones::where('solicitud_id', $id)
             ->where('evaluador', Auth::user()->id)->first();
         $solicitud = Solicitud::find($id);
-        $this->authorize('pass', $solicitud);
+        $bandera=$this->authorize('pass', $solicitud);
         return view('usuarios.solicitudes.show', compact('solicitud', 'evaluacion'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $solicitud = Solicitud::find($id);
-        $areas     = Area::pluck('nombre', 'id');
+        $areas = Area::pluck('nombre', 'id');
         $this->authorize('pass', $solicitud);
         return view('usuarios.solicitudes.edit', compact('solicitud', 'areas'));
     }
@@ -145,23 +147,23 @@ class SolicitudController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $fechaInicio                    = date("Y-m-d", strtotime($request->fechaInicio));
-        $fechaFin                       = date("Y-m-d", strtotime($request->fechaFin));
-        $solicitud                      = Solicitud::find($id);
-        $solicitud->fechaInicio         = $fechaInicio;
-        $solicitud->fechaFin            = $fechaFin;
-        $solicitud->horaInicio          = $request->horaInicio;
-        $solicitud->horaFin             = $request->horaFin;
-        $solicitud->actividadAcademica  = $request->actividadAcademica;
+        $fechaInicio = date("Y-m-d", strtotime($request->fechaInicio));
+        $fechaFin = date("Y-m-d", strtotime($request->fechaFin));
+        $solicitud = Solicitud::find($id);
+        $solicitud->fechaInicio = $fechaInicio;
+        $solicitud->fechaFin = $fechaFin;
+        $solicitud->horaInicio = $request->horaInicio;
+        $solicitud->horaFin = $request->horaFin;
+        $solicitud->actividadAcademica = $request->actividadAcademica;
         $solicitud->asistentesEstimados = $request->asistentesEstimados;
-        $solicitud->area_id             = $request->area_id;
-        $solicitud->espacio_id          = $request->espacio_id;
+        $solicitud->area_id = $request->area_id;
+        $solicitud->espacio_id = $request->espacio_id;
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
             // Relaciones
@@ -200,7 +202,7 @@ class SolicitudController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -223,14 +225,14 @@ class SolicitudController extends Controller
             $notificacion->save();
         }
 
-        $solicitud   = Solicitud::find($notificacion->solicitud->id);
+        $solicitud = Solicitud::find($notificacion->solicitud->id);
         $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
-        $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
-        $espacio_id  = $solicitud->espacio_id;
-        $estado      = $solicitud->estado;
-        $bandera     = null;
+        $fechaFin = date("Y-m-d", strtotime($solicitud->fechaFin));
+        $horaInicio = date("H:i:s", strtotime($solicitud->horaInicio));
+        $horaFin = date("H:i:s", strtotime($solicitud->horaFin));
+        $espacio_id = $solicitud->espacio_id;
+        $estado = $solicitud->estado;
+        $bandera = null;
 
         $evaluacion = Evaluaciones::where('solicitud_id', $id)
             ->where('evaluador', Auth::user()->id)->first();
@@ -312,29 +314,29 @@ class SolicitudController extends Controller
             })
             ->addColumn('action', function ($solicitudes) {
                 return '<a href="' . route("solicitud.show", $solicitudes->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
-                '<a href="' . route('solicitud.edit', $solicitudes->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
-                '<a href="#" value="' . $solicitudes->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
+                    '<a href="' . route('solicitud.edit', $solicitudes->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
+                    '<a href="#" value="' . $solicitudes->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }
 
     public function notificacion($id)
     {
-        $notificacion               = new Notificacion;
+        $notificacion = new Notificacion;
         $notificacion->solicitud_id = $id;
-        $notificacion->uri          = 'solicitudes.ver';
-        $notificacion->estadoAdmin  = 0;
-        $notificacion->estadoRes    = 0;
-        $notificacion->estadoUsu    = 0;
+        $notificacion->uri = 'solicitudes.ver';
+        $notificacion->estadoAdmin = 0;
+        $notificacion->estadoRes = 0;
+        $notificacion->estadoUsu = 0;
         $notificacion->save();
     }
 
     public function solicitudes()
     {
         $fecha = date('d-m-Y/h:i:s');
-        $pdf   = App::make('dompdf.wrapper');
-        $data  = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
-        $pdf   = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
+        $pdf = App::make('dompdf.wrapper');
+        $data = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
+        $pdf = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
         // ->setPaper('a4', 'landscape');
 
         // return $pdf->stream();
@@ -343,11 +345,11 @@ class SolicitudController extends Controller
 
     public function solicitud($id)
     {
-        $fecha     = date('d-m-Y / h:i:s');
-        $pdf       = App::make('dompdf.wrapper');
+        $fecha = date('d-m-Y / h:i:s');
+        $pdf = App::make('dompdf.wrapper');
         $solicitud = Solicitud::find($id);
-        $pdf       = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
+        $pdf = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
         // return $pdf->stream();
-        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . ' . pdf');
+        return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
     }
 }

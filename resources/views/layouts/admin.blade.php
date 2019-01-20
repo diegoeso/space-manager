@@ -38,8 +38,8 @@
                     2.0
                 </div>
                 <strong>
-                    Copyright © 2017-2018
-                    <a href="https://www.gdsoft.com.mx" target="blank">
+                    Copyright © 2017-2019
+                    <a href="https://www.facebook.com/diego.enriqueSO" target="blank">
                         Diego Enrique Sánchez Ordoñez
                     </a>
                     .
