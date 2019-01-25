@@ -79,18 +79,6 @@
         </div>
     </div>
 </div>
-{{--
-<td width="10">
-    <form action="{{ route('espacios.destroy', $espacio->id) }}" class="form-inline" method="post">
-        {{ csrf_field() }}
-        <input name="_method" type="hidden" value="DELETE"/>
-        <button class=" btn btn-danger btn-xs" type="submit">
-            <span class="fa fa-trash">
-            </span>
-        </button>
-    </form>
-</td>
---}}
 @endsection
 @section('script')
 <script>

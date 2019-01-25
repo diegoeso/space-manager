@@ -126,20 +126,6 @@
                                 @endauth
                             </ul>
                             @endif
-                          {{--
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#tab_1">
-                                        Iniciar Sesión
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab_2">
-                                        Registrarse
-                                    </a>
-                                </li>
-                            </ul>
-                            --}}
                         </div>
                     </div>
                 </nav>
@@ -184,4 +170,5 @@
 </script>
 <script src="{{ asset('dist/js/demo.js') }}">
 </script>
+@yield('script')
 {!! Toastr::message() !!}

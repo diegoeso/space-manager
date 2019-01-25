@@ -80,13 +80,6 @@ class Solicitud extends Model
             ->withTimestamps();
     }
 
-    // public static function solicitudes()
-    // {
-    //     return static::orderBy('id', 'DESC')
-    //         ->where('estado', 0)
-    //         ->get();
-    // }
-
     public function notificacion()
     {
         return $this->belongsTo(Notificacion::class);
@@ -177,6 +170,17 @@ class Solicitud extends Model
             return $usuario = User::find($solicitud->usuarioSolicitud);
         } else {
             return $usuario = Usuario::find($solicitud->usuarioSolicitud);
+        }
+    }
+
+    public function nombreUsuarioSolicitante($solicitud)
+    {
+        if ($solicitud->tipoUsuario == 0 || $solicitud->tipoUsuario == 1) {
+            $usuario = User::find($solicitud->usuarioSolicitud);
+            return $usuario->nombre . ' ' . $usuario->apellidoP . ' ' . $usuario->apellidoM;
+        } else {
+            $usuario = Usuario::find($solicitud->usuarioSolicitud);
+            return $usuario->nombre . ' ' . $usuario->apellidoP . ' ' . $usuario->apellidoM;
         }
     }
 

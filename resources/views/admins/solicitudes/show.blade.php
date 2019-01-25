@@ -408,9 +408,9 @@
             <div class="modal-body">
                 {!! Form::open(['route'=>['correo.store'],'method'=>'POST'])!!}
                 <div class="form-group">
-                    {!! Form::text('solicitud_id',$solicitud->id)  !!}
-                    {!! Form::text('de', Auth::user()->id) !!}
-                    {!! Form::text('para_email', $solicitud->tipoUsuario($solicitud)->email) !!}
+                    {!! Form::hidden('solicitud_id',$solicitud->id)  !!}
+                    {!! Form::hidden('de', Auth::user()->id) !!}
+                    {!! Form::hidden('para_email', $solicitud->tipoUsuario($solicitud)->email) !!}
                     {!! Form::label('asunto', 'Asunto', ['class'=>'control-label']) !!}
                     {!! Form::text('asunto', null, ['class'=>'form-control','placeholder'=>'Asunto']) !!}
                     {!! Form::label('mensaje', 'Mensaje', ['class'=>'control-label']) !!}

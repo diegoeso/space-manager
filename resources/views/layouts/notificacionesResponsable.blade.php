@@ -14,6 +14,7 @@
         <li>
             <ul class="menu">
                 @foreach ($notificacionesAprobadas as $notificacion)
+                {{-- @if ($notificacion->solicitud->area->user_id == Auth::user()->id) --}}
                 <li>
                     <input name="notifiacion_id" type="hidden" value="{{ $notificacion->id }}"/>
                     <a href="{{ route('solicitudes.ver',$notificacion->id) }}">
@@ -36,11 +37,12 @@
                                     {{ $notificacion->solicitud->solicitante->nombre.' '. $notificacion->solicitud->solicitante->apellidoP . ' '. $notificacion->solicitud->solicitante->apellidoM }}
                                 @endif
                                 <br/>
-                                {{ $notificacion->solicitud->fechaInicio->format('l j F') .'... '. $notificacion->solicitud->created_at->diffForHumans() }}
+                                {{ $notificacion->solicitud->fechaInicio->format('l j F') .'... '. $notificacion->solicitud->updated_at->diffForHumans() }}
                             </div>
                         </div>
                     </a>
                 </li>
+                {{-- @endif --}}
                 @endforeach
             </ul>
         </li>

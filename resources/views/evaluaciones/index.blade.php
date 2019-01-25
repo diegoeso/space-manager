@@ -294,13 +294,6 @@
                         </i>
                         Guardar
                     </button>
-                    {{--
-                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" href="{{ route('evaluaciones.index') }}">
-                        <i class="md md-cancel">
-                        </i>
-                        Cancelar
-                    </a>
-                    --}}
                     <button class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" id="btnCerrar" type="button">
                         <i class="md md-cancel">
                         </i>

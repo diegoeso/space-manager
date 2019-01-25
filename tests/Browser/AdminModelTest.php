@@ -2,12 +2,14 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class AdminModelTest extends DuskTestCase
 {
+
+    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -46,16 +48,15 @@ class AdminModelTest extends DuskTestCase
                 ->type('email', 'diego.sanchez@uaemex.mx')
                 ->type('password', 'secret')
                 ->type('password_confirmation', 'secret')
-                ->select('roles','1')
+                ->select('roles', '1')
                 ->press('guardar')
                 ->screenshot('store-admin');
         });
     }
 
-
     public function test_vista_ver_admin()
     {
-        $id = (int)random_int(1, 2);
+        $id = (int) random_int(1, 2);
         $this->browse(function (Browser $first) use ($id) {
             $first->visit('/admin/login')
                 ->type('email', 'admin@gdsoft.com.mx')
@@ -71,7 +72,7 @@ class AdminModelTest extends DuskTestCase
     public function test_vista_editar_admin()
     {
         // $id = (int)random_int(1, 2);
-        $id=1;
+        $id = 1;
         $this->browse(function (Browser $first) use ($id) {
             $first->visit('/admin/login')
                 ->type('email', 'admin@gdsoft.com.mx')
@@ -84,13 +85,12 @@ class AdminModelTest extends DuskTestCase
                 ->type('nombre', 'Diego Enrique')
                 ->type('apellidoP', 'Sanchez')
                 ->type('apellidoM', 'Perez')
-                ->select('roles','2')
+                ->select('roles', '2')
                 ->screenshot('edit-data-admin')
                 ->press('guardar')
                 ->screenshot('edit-admin');
         });
     }
-
 
     // public function test_eliminar_usuario()
     // {

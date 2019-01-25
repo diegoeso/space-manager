@@ -31,7 +31,23 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $solicitudes           = Solicitud::where('tipoRegistro', 0)->get();
+        // $solicitudes = Solicitud::where('tipoRegistro', 0)
+        //     ->whereHas('area', function ($query) {
+        //         $query->where('user_id', Auth::user()->id)
+        //             ->groupBy('user_id')
+        //         ;})
+        //     ->get();
+
+        if (Auth::user()->tipoCuenta === 0) {
+            $solicitudes = Solicitud::where('tipoRegistro', 0)->get();
+        } else {
+            $solicitudes = Solicitud::where('tipoRegistro', 0)
+                ->whereHas('area', function ($query) {
+                    $query->where('user_id', Auth::user()->id)
+                        ->groupBy('user_id')
+                    ;})
+                ->get();
+        }
         $areas                 = Area::all();
         $espacios              = Espacio::all();
         $usuarios              = Usuario::all();
@@ -41,7 +57,6 @@ class AdminController extends Controller
             ->paginate(5);
         $graficas = Solicitud::select(DB::raw('count(*) as total, espacio_id'))
             ->where('tipoRegistro', 0)->groupBy('espacio_id')->get();
-        // dd($graficas);
         return view('admins.dashboard', compact('solicitudes', 'areas', 'areasE', 'usuarios', 'solicitudesPendientes', 'espacios', 'graficas'));
     }
 

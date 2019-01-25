@@ -2,14 +2,12 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Usuario;
+use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    // use DatabaseMigrations;
     /**
      * A Dusk test example.
      * @test
@@ -19,15 +17,15 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/login')
-            ->type('email','admin@gdsoft.com.mx')
-            ->type('password','secret')
-            ->press('entrar')
+                ->type('email', 'admin@gdsoft.com.mx')
+                ->type('password', 'secret')
+                ->press('entrar')
                 ->screenshot('login-admin')
                 ->assertPathIs('/admin');
         });
     }
 
-    function test_registro_nuevo_usuario()
+    public function test_registro_nuevo_usuario()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')

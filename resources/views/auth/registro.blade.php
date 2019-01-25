@@ -17,7 +17,7 @@
             Registrarse
         </p>
         {!! Form::open(['route'=>'register', 'method'=>'POST','files' => true ]) !!}
-        {!!Form::text('tipoCuenta', null, ['hidden','id'=>'tipoCuenta']) !!}
+        {!!Form::hidden('tipoCuenta', null, ['id'=>'tipoCuenta']) !!}
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group has-feedback">
@@ -96,7 +96,7 @@
                 <div class="form-group has-feedback">
                     {{-- {!! Form::label('password_confirmation', 'Confirmar Contraseña') !!} --}}
                 {!! Form::password('password_confirmation', ['class'=>'form-control', 'placeholder'=>'Confirmar Contraseña']) !!}
-                    <span class="glyphicon glyphicon-lock form-control-feedback" id="password" name="password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback" id="password1" name="password1">
                     </span>
                     @if ($errors->has('password_confirmation'))
                     <span class="label label-danger">
@@ -122,4 +122,28 @@
     </div>
     <!-- /.form-box -->
 </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        // $('#tipoCuenta').val(3);
+        $('#email').keypress(function(){
+            $res=$('#email').val()
+            console.log($res);
+        });
+        $('#password').focus(function() {
+            $res=$('#email').val()
+            if($res.indexOf("alumno.uaemex.mx") > -1)
+            {
+                $('#tipoCuenta').val('3');
+                console.log($('#tipoCuenta').val());
+            }else{
+                if($res.indexOf("uaemex.mx") > -1){
+                    $('#tipoCuenta').val('2')
+                    console.log($('#tipoCuenta').val());
+                }
+            }
+        });
+    });
+</script>
 @endsection

@@ -8,7 +8,7 @@
                     {{ count($solicitudes) }}
                 </h3>
                 <p>
-                    Solicitudes
+                    Solicitudes por área
                 </p>
             </div>
             <div class="icon">

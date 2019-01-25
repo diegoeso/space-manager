@@ -22,7 +22,7 @@ class CreateUsuariosTable extends Migration
             $table->string('email', 120)->unique();
             $table->string('password', 120);
             $table->string('telefono', 12)->unzigned()->nullable();
-            $table->integer('tipoCuenta');
+            $table->integer('tipoCuenta')->default(3);
             $table->string('carrera', 120)->nullable();
             $table->string('semestre', 120)->nullable();
             $table->string('matricula', 120)->nullable();

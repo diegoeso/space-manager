@@ -67,6 +67,7 @@ class EvaluacionesController extends Controller
      */
     public function store(Request $request)
     {
+
         $evaluacion         = Evaluaciones::find($request->idE);
         $evaluacion->cal1   = $request->cal1;
         $evaluacion->cal2   = $request->cal2;
