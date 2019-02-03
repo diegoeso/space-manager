@@ -27,6 +27,7 @@ class SolicitudController extends Controller
     {
         $this->middleware('auth:usuario');
         $this->middleware('completarRegistro');
+
     }
 
     /**
@@ -59,10 +60,10 @@ class SolicitudController extends Controller
     public function store(SolicitudRequest $request)
     {
         $fechaInicio = date("Y-m-d", strtotime($request->fechaInicio));
-        $fechaFin = date("Y-m-d", strtotime($request->fechaFin));
-        $horaInicio = date("H:i:s", strtotime($request->horaInicio));
-        $horaFin = date("H:i:s", strtotime($request->horaFin));
-        $espacio = $request->espacio_id;
+        $fechaFin    = date("Y-m-d", strtotime($request->fechaFin));
+        $horaInicio  = date("H:i:s", strtotime($request->horaInicio));
+        $horaFin     = date("H:i:s", strtotime($request->horaFin));
+        $espacio     = $request->espacio_id;
 
         $solicitudAprobadas = Solicitud::where('fechaInicio', $fechaInicio)
             ->where('estado', 1)
@@ -79,17 +80,17 @@ class SolicitudController extends Controller
             return back();
         }
 
-        $solicitud = new Solicitud;
-        $solicitud->fechaInicio = $fechaInicio;
-        $solicitud->fechaFin = $fechaFin;
-        $solicitud->horaInicio = $request->horaInicio;
-        $solicitud->horaFin = $request->horaFin;
-        $solicitud->actividadAcademica = $request->actividadAcademica;
+        $solicitud                      = new Solicitud;
+        $solicitud->fechaInicio         = $fechaInicio;
+        $solicitud->fechaFin            = $fechaFin;
+        $solicitud->horaInicio          = $request->horaInicio;
+        $solicitud->horaFin             = $request->horaFin;
+        $solicitud->actividadAcademica  = $request->actividadAcademica;
         $solicitud->asistentesEstimados = $request->asistentesEstimados;
-        $solicitud->usuarioSolicitud = Auth::user()->id;
-        $solicitud->tipoUsuario = Auth::user()->tipoCuenta;
-        $solicitud->area_id = $request->area_id;
-        $solicitud->espacio_id = $request->espacio_id;
+        $solicitud->usuarioSolicitud    = Auth::user()->id;
+        $solicitud->tipoUsuario         = Auth::user()->tipoCuenta;
+        $solicitud->area_id             = $request->area_id;
+        $solicitud->espacio_id          = $request->espacio_id;
 
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
@@ -98,7 +99,7 @@ class SolicitudController extends Controller
                 $manyToMany = array();
                 for ($i = 0; $i < count($request->cantidad); $i++) {
                     // Restar elementos solicitados
-                    $elemento = Elemento::find($request->elemento_id[$i]);
+                    $elemento              = Elemento::find($request->elemento_id[$i]);
                     $elemento->existencias = $elemento->existencias - $request->cantidad[$i];
                     $elemento->save();
 
@@ -126,7 +127,7 @@ class SolicitudController extends Controller
         $evaluacion = Evaluaciones::where('solicitud_id', $id)
             ->where('evaluador', Auth::user()->id)->first();
         $solicitud = Solicitud::find($id);
-        $bandera=$this->authorize('pass', $solicitud);
+        $bandera   = $this->authorize('pass', $solicitud);
         return view('usuarios.solicitudes.show', compact('solicitud', 'evaluacion'));
     }
 
@@ -139,9 +140,29 @@ class SolicitudController extends Controller
     public function edit($id)
     {
         $solicitud = Solicitud::find($id);
-        $areas = Area::pluck('nombre', 'id');
-        $this->authorize('pass', $solicitud);
-        return view('usuarios.solicitudes.edit', compact('solicitud', 'areas'));
+        if ($solicitud->estado == 0) {
+            $areas = Area::pluck('nombre', 'id');
+            $this->authorize('pass', $solicitud);
+            return view('usuarios.solicitudes.edit', compact('solicitud', 'areas'));
+        } else {
+            switch ($solicitud->estado) {
+                case 1:
+                    $estado = "aprobada";
+                    break;
+                case 2:
+                    $estado = "rechazada";
+                    break;
+                case 3:
+                    $estado = "cancelada";
+                    break;
+                case 4:
+                    $estado = "finalizada";
+                    break;
+            }
+            Toastr::info('¡No puedes editar el registro por que la solicitud ya ha sido ' . $estado . '!', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            return back();
+        }
+
     }
 
     /**
@@ -153,17 +174,17 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fechaInicio = date("Y-m-d", strtotime($request->fechaInicio));
-        $fechaFin = date("Y-m-d", strtotime($request->fechaFin));
-        $solicitud = Solicitud::find($id);
-        $solicitud->fechaInicio = $fechaInicio;
-        $solicitud->fechaFin = $fechaFin;
-        $solicitud->horaInicio = $request->horaInicio;
-        $solicitud->horaFin = $request->horaFin;
-        $solicitud->actividadAcademica = $request->actividadAcademica;
+        $fechaInicio                    = date("Y-m-d", strtotime($request->fechaInicio));
+        $fechaFin                       = date("Y-m-d", strtotime($request->fechaFin));
+        $solicitud                      = Solicitud::find($id);
+        $solicitud->fechaInicio         = $fechaInicio;
+        $solicitud->fechaFin            = $fechaFin;
+        $solicitud->horaInicio          = $request->horaInicio;
+        $solicitud->horaFin             = $request->horaFin;
+        $solicitud->actividadAcademica  = $request->actividadAcademica;
         $solicitud->asistentesEstimados = $request->asistentesEstimados;
-        $solicitud->area_id = $request->area_id;
-        $solicitud->espacio_id = $request->espacio_id;
+        $solicitud->area_id             = $request->area_id;
+        $solicitud->espacio_id          = $request->espacio_id;
         // si guarda el registro en solicitudes añade las relaciones de los elementos solicitados
         if ($solicitud->save()) {
             // Relaciones
@@ -225,14 +246,14 @@ class SolicitudController extends Controller
             $notificacion->save();
         }
 
-        $solicitud = Solicitud::find($notificacion->solicitud->id);
+        $solicitud   = Solicitud::find($notificacion->solicitud->id);
         $fechaInicio = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $fechaFin = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $horaInicio = date("H:i:s", strtotime($solicitud->horaInicio));
-        $horaFin = date("H:i:s", strtotime($solicitud->horaFin));
-        $espacio_id = $solicitud->espacio_id;
-        $estado = $solicitud->estado;
-        $bandera = null;
+        $fechaFin    = date("Y-m-d", strtotime($solicitud->fechaFin));
+        $horaInicio  = date("H:i:s", strtotime($solicitud->horaInicio));
+        $horaFin     = date("H:i:s", strtotime($solicitud->horaFin));
+        $espacio_id  = $solicitud->espacio_id;
+        $estado      = $solicitud->estado;
+        $bandera     = null;
 
         $evaluacion = Evaluaciones::where('solicitud_id', $id)
             ->where('evaluador', Auth::user()->id)->first();
@@ -267,6 +288,7 @@ class SolicitudController extends Controller
             $solicitud->estado = 3;
             $solicitud->motivo = $request->motivo;
             if ($solicitud->save()) {
+                $this->debolverElementos($solicitud->id);
                 Toastr::success('¡Cancelacion exitosa!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
                 return back();
             } else {
@@ -314,29 +336,29 @@ class SolicitudController extends Controller
             })
             ->addColumn('action', function ($solicitudes) {
                 return '<a href="' . route("solicitud.show", $solicitudes->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
-                    '<a href="' . route('solicitud.edit', $solicitudes->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
-                    '<a href="#" value="' . $solicitudes->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
+                '<a href="' . route('solicitud.edit', $solicitudes->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
+                '<a href="#" value="' . $solicitudes->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }
 
     public function notificacion($id)
     {
-        $notificacion = new Notificacion;
+        $notificacion               = new Notificacion;
         $notificacion->solicitud_id = $id;
-        $notificacion->uri = 'solicitudes.ver';
-        $notificacion->estadoAdmin = 0;
-        $notificacion->estadoRes = 0;
-        $notificacion->estadoUsu = 0;
+        $notificacion->uri          = 'solicitudes.ver';
+        $notificacion->estadoAdmin  = 0;
+        $notificacion->estadoRes    = 0;
+        $notificacion->estadoUsu    = 0;
         $notificacion->save();
     }
 
     public function solicitudes()
     {
         $fecha = date('d-m-Y/h:i:s');
-        $pdf = App::make('dompdf.wrapper');
-        $data = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
-        $pdf = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = Solicitud::where('usuarioSolicitud', Auth::user()->id)->get();
+        $pdf   = PDF::loadView('usuarios.solicitudes.pdfSolicitudes', ['data' => $data]);
         // ->setPaper('a4', 'landscape');
 
         // return $pdf->stream();
@@ -345,10 +367,10 @@ class SolicitudController extends Controller
 
     public function solicitud($id)
     {
-        $fecha = date('d-m-Y / h:i:s');
-        $pdf = App::make('dompdf.wrapper');
+        $fecha     = date('d-m-Y / h:i:s');
+        $pdf       = App::make('dompdf.wrapper');
         $solicitud = Solicitud::find($id);
-        $pdf = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
+        $pdf       = PDF::loadView('usuarios.solicitudes.pdf', ['solicitud' => $solicitud]);
         // return $pdf->stream();
         return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
     }

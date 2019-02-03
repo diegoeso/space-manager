@@ -59,14 +59,14 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
 
-        $user = new User;
-        $user->nombre = $request->nombre;
-        $user->apellidoP = $request->apellidoP;
-        $user->apellidoM = $request->apellidoM;
-        $user->nickname = $request->nickname;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-        $user->password = bcrypt($request->password);
+        $user               = new User;
+        $user->nombre       = $request->nombre;
+        $user->apellidoP    = $request->apellidoP;
+        $user->apellidoM    = $request->apellidoM;
+        $user->nickname     = $request->nickname;
+        $user->email        = $request->email;
+        $user->telefono     = $request->telefono;
+        $user->password     = bcrypt($request->password);
         $user->confirmacion = 1;
         if ($request->roles == 1) {
             $user->tipoCuenta = 0;
@@ -97,8 +97,7 @@ class UserController extends Controller
     {
 
         $user = User::with('roles')->find($id);
-        if(!$user)
-        {
+        if (!$user) {
             return abort(404);
         }
         return view('admins.administradores.show', compact('user'));
@@ -113,9 +112,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $roles = Role::pluck('name', 'id');
-        $user = User::with('roles')->find($id);
-        if(!$user)
-        {
+        $user  = User::with('roles')->find($id);
+        if (!$user) {
             return abort(404);
         }
         return view('admins.administradores.edit', compact('user', 'roles'));
@@ -131,14 +129,16 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         // dd($request->role);
-        $user = User::find($id);
-        $user->nombre = $request->nombre;
+        $user            = User::find($id);
+        $user->nombre    = $request->nombre;
         $user->apellidoP = $request->apellidoP;
         $user->apellidoM = $request->apellidoM;
-        $user->nickname = $request->nickname;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-        $user->password = bcrypt($request->password);
+        $user->nickname  = $request->nickname;
+        $user->email     = $request->email;
+        $user->telefono  = $request->telefono;
+        if (!empty($request->password)) {
+            $usuario->password = bcrypt($request->password);
+        }
         $user->confirmacion = 1;
         if ($request->roles == 1) {
             $user->tipoCuenta = 0;
@@ -167,7 +167,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::FindOrFail($id);
+        $user   = User::FindOrFail($id);
         $result = $user->delete();
         if ($result) {
             return response()->json(['success' => 'true']);
@@ -192,8 +192,8 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($users) {
                 return '<a href="' . route("users.show", $users->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a> ' .
-                    '<a href="' . route('users.edit', $users->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
-                    '<a href="#" value="' . $users->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
+                '<a href="' . route('users.edit', $users->id) . '" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a> ' .
+                '<a href="#" value="' . $users->id . '" class="btn btn-danger btn-xs" id="btnEliminar"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }
@@ -201,9 +201,9 @@ class UserController extends Controller
     public function administradores()
     {
         $fecha = date('d-m-Y/h:i:s');
-        $pdf = App::make('dompdf.wrapper');
-        $data = User::all();
-        $pdf = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
+        $pdf   = App::make('dompdf.wrapper');
+        $data  = User::all();
+        $pdf   = PDF::loadView('admins.administradores.pdf', ['data' => $data]);
         return $pdf->stream();
         // return $pdf->download('administradores_' . $fecha . '.pdf');
     }

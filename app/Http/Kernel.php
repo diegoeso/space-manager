@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'permission'        => \Caffeinated\Shinobi\Middleware\UserHasPermission::class,
         'confirmarCuenta'   => \App\Http\Middleware\ConfirmarCuenta::class,
         'completarRegistro' => \App\Http\Middleware\CompletarRegistro::class,
+
     ];
 }

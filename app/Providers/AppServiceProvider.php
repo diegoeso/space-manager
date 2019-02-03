@@ -34,18 +34,6 @@ class AppServiceProvider extends ServiceProvider
                     ->get());
         });
 
-        //Solicitudes Responsables de Area
-        // view()->composer('layouts.headerAdmin', function ($view) {
-        //     $view->with('notificaciones', \App\Notificacion::whereHas('solicitud', function ($query) {
-        //         $query->where('usuarioSolicitud', '!=', Auth::user()->id)
-        //             ->where('estado', 0);
-        //     })
-        //             ->where('estadoAdmin', 0)
-        //             ->orderBy('id', 'DESC')
-        //             ->get());
-        // });
-
-        //
 
         // notificar a responsables de area
         view()->composer('layouts.headerAdmin', function ($view) {

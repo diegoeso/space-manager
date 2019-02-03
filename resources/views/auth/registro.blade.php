@@ -126,24 +126,24 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        // $('#tipoCuenta').val(3);
-        $('#email').keypress(function(){
-            $res=$('#email').val()
-            console.log($res);
-        });
-        $('#password').focus(function() {
-            $res=$('#email').val()
-            if($res.indexOf("alumno.uaemex.mx") > -1)
-            {
-                $('#tipoCuenta').val('3');
-                console.log($('#tipoCuenta').val());
-            }else{
-                if($res.indexOf("uaemex.mx") > -1){
-                    $('#tipoCuenta').val('2')
-                    console.log($('#tipoCuenta').val());
-                }
-            }
-        });
+        $('#tipoCuenta').val(3);
+        // $('#email').keypress(function(){
+        //     $res=$('#email').val()
+        //     console.log($res);
+        // });
+        // $('#password').focus(function() {
+        //     $res=$('#email').val()
+        //     if($res.indexOf("alumno.uaemex.mx") > -1)
+        //     {
+        //         $('#tipoCuenta').val('3');
+        //         console.log($('#tipoCuenta').val());
+        //     }else{
+        //         if($res.indexOf("uaemex.mx") > -1){
+        //             $('#tipoCuenta').val('2')
+        //             console.log($('#tipoCuenta').val());
+        //         }
+        //     }
+        // });
     });
 </script>
 @endsection

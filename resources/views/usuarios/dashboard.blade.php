@@ -23,7 +23,6 @@
 </section>
 @endsection
 @section('content')
-
 <div class="row">
     <div class="col-md-12">
         <div class="col-lg-4 col-xs-12">
@@ -682,12 +681,17 @@
             selectHelper: true,
             select: function(start, end) {
                 var fechaActual=moment().format('L');
+                var fechaActual2 = moment(fechaActual, "DD-MM-YYYY");
                 var fechaSeleccionada=moment(start).format('L');
+                var fechaSeleccionada2=moment(fechaSeleccionada, "DD-MM-YYYY");
                 var fechaSeleccionadaFin=moment(end).format('L');
                 var horaActual=moment().format('HHmm');
                 var horaSeleccionada=moment(start).format('HHmm');
+                //console.log(fechaActual2, fechaSeleccionada2, fechaSeleccionadaFin);
+                
                 if (fechaSeleccionada==fechaSeleccionadaFin) {
-                    if (fechaSeleccionada<=fechaActual && horaActual>horaSeleccionada || fechaSeleccionada<fechaActual ) {
+                    // if (fechaSeleccionada<fechaActual && horaActual>horaSeleccionada || fechaSeleccionada<=fechaActual ) {
+                    if (fechaSeleccionada2<=fechaActual2) {
                     toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");    
                     }else{
                         $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
