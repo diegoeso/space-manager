@@ -187,7 +187,12 @@ function espaciosAcademicos(idA) {
         success: function(data) {
             // console.log(data);
             $.each(data, function(i, item) {
-                $('#espacio_id').append('<option value=' + item.id + '>' + item.nombre + '</option>');
+              if (item.disponible==0) {
+                $('#espacio_id').append('<option value='+item.id+'>'+item.nombre+'</option>');
+              }else {
+                $('#espacio_id').append('<option disabled value='+item.id+'>'+item.nombre+' - no disponible</option>');
+              }
+                // $('#espacio_id').append('<option value=' + item.id + '>' + item.nombre + '</option>');
             });
         }
     })

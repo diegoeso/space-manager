@@ -28,6 +28,7 @@ class EspacioRequest extends FormRequest
             'descripcion' => 'required',
             'ubicacion'   => 'required',
             'area_id'     => 'required',
+            'disponible'     => 'required',
         ];
     }
 }

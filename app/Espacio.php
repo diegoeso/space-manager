@@ -10,7 +10,9 @@ class Espacio extends Model
         'nombre',
         'descripcion',
         'ubicacion',
+        'disponible',
         'area_id',
+
     ];
 
     public function area()

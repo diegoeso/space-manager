@@ -137,7 +137,7 @@ class UserController extends Controller
         $user->email     = $request->email;
         $user->telefono  = $request->telefono;
         if (!empty($request->password)) {
-            $usuario->password = bcrypt($request->password);
+            $user->password = bcrypt($request->password);
         }
         $user->confirmacion = 1;
         if ($request->roles == 1) {

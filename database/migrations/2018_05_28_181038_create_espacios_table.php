@@ -18,6 +18,7 @@ class CreateEspaciosTable extends Migration
             $table->string('nombre', 45);
             $table->text('descripcion')->nullable();
             $table->string('ubicacion', 129);
+            $table->enum('disponible', ['0', '1'])->default(0);
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')
                 ->on('areas')

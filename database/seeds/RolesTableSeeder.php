@@ -23,5 +23,12 @@ class RolesTableSeeder extends Seeder
             'slug'        => 'responsable-de-area',
             'description' => 'Acceso restringido a la elección del administrador.',
         ]);
+        // admin
+        $user = App\User::find(1);
+        $user->roles()->attach(1);
+        // responsable de área
+        $user = App\User::find(2);
+        $user->roles()->attach(2);
+
     }
 }

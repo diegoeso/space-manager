@@ -29,6 +29,18 @@
             </span>
             @endif
         </div>
+        <div class="form-group">
+            {!! Form::label('disponible','Estado') !!}
+            {!! Form::select('disponible',['0'=>'Disponible', '1'=>'No diponible'],null, ['placeholder' => 'Selecciona el
+             estado',
+            'class'=>'form-control'])
+             !!}
+            @if ($errors->has('estado'))
+            <span class="label label-danger">
+                {{ $errors->first('estado') }}
+            </span>
+            @endif
+        </div>
     </div>
     <div class="col-md-8">
         <div class="form-group">

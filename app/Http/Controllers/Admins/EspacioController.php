@@ -57,16 +57,29 @@ class EspacioController extends Controller
      */
     public function store(EspacioRequest $request)
     {
-        $espacio = Espacio::create($request->all());
-        if ($request->cantidad) {
-            $manyToMany = array();
-            for ($i = 0; $i < count($request->cantidad); $i++) {
-                $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+        // $espacio              = Espacio::create($request->all());
+        $espacio              = new Espacio();
+        $espacio->nombre      = $request->nombre;
+        $espacio->ubicacion   = $request->ubicacion;
+        $espacio->area_id     = $request->area_id;
+        $espacio->disponible  = $request->disponible;
+        $espacio->descripcion = $request->descripcion;
+
+        if ($espacio->save()) {
+            if ($request->cantidad) {
+                $manyToMany = array();
+                for ($i = 0; $i < count($request->cantidad); $i++) {
+                    $manyToMany[$request->elemento_id[$i]] = ['cantidad' => $request->cantidad[$i]];
+                }
+                $espacio->elementos()->sync($manyToMany);
             }
-            $espacio->elementos()->sync($manyToMany);
+            $this->registroExitoso();
+            return redirect()->route('espacios.show', $espacio->id);
+        } else {
+            return back();
+            $this->registroError();
         }
-        $this->registroExitoso();
-        return redirect()->route('espacios.show', $espacio->id);
+
     }
 
     /**
@@ -115,6 +128,7 @@ class EspacioController extends Controller
         $espacio->nombre      = $request->nombre;
         $espacio->descripcion = $request->descripcion;
         $espacio->ubicacion   = $request->ubicacion;
+        $espacio->disponible  = $request->disponible;
         $espacio->area_id     = $request->area_id;
 
         if ($espacio->save()) {

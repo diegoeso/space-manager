@@ -87,7 +87,7 @@ class Solicitud extends Model
 
     public function evaluacion()
     {
-        return $this->belongsTo(Evaluaciones::class);
+        return $this->belongsTo(Evaluaciones::class, 'id', 'solicitud_id');
     }
 
     public function getFechaInicioAttibute()

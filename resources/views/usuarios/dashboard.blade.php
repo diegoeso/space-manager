@@ -547,7 +547,7 @@
             {
 
                 toastr["warning"]('La fecha de finalización '+fechaFin+' no puede ser menor a la de inicio')
-               
+
                 $('#fechaFin').val(fechaInicio);
             }
         });
@@ -599,8 +599,8 @@
                 calendario(3,3);
                 calendario(4,4);
         @endswitch
-        
-        
+
+
         // solicitudesFullCalendarUsuariosPendientes
         $('#btnCerrar').click(function(event) {
             document.getElementById("FormE").reset();
@@ -638,20 +638,20 @@
                 var minDate = moment(),
                 maxDate = moment().add(2,'weeks');
                 if (minDate >= currentView.start && minDate <= currentView.end) {
-                    $(".fc-prev-button").prop('disabled', true); 
-                    $(".fc-prev-button").addClass('fc-state-disabled'); 
+                    $(".fc-prev-button").prop('disabled', true);
+                    $(".fc-prev-button").addClass('fc-state-disabled');
                 }
                 else {
-                    $(".fc-prev-button").removeClass('fc-state-disabled'); 
-                    $(".fc-prev-button").prop('disabled', false); 
+                    $(".fc-prev-button").removeClass('fc-state-disabled');
+                    $(".fc-prev-button").prop('disabled', false);
                 }
                 // futuro
                 if (maxDate >= currentView.start && maxDate <= currentView.end) {
-                    $(".fc-next-button").prop('disabled', true); 
-                    $(".fc-next-button").addClass('fc-state-disabled'); 
+                    $(".fc-next-button").prop('disabled', true);
+                    $(".fc-next-button").addClass('fc-state-disabled');
                 } else {
-                    $(".fc-next-button").removeClass('fc-state-disabled'); 
-                    $(".fc-next-button").prop('disabled', false); 
+                    $(".fc-next-button").removeClass('fc-state-disabled');
+                    $(".fc-next-button").prop('disabled', false);
                 }
             },
             defaultView: 'agendaWeek',
@@ -688,11 +688,11 @@
                 var horaActual=moment().format('HHmm');
                 var horaSeleccionada=moment(start).format('HHmm');
                 //console.log(fechaActual2, fechaSeleccionada2, fechaSeleccionadaFin);
-                
+
                 if (fechaSeleccionada==fechaSeleccionadaFin) {
                     // if (fechaSeleccionada<fechaActual && horaActual>horaSeleccionada || fechaSeleccionada<=fechaActual ) {
                     if (fechaSeleccionada2<=fechaActual2) {
-                    toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");    
+                    toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
                     }else{
                         $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
                         var fecha = new Date(end);
@@ -700,12 +700,12 @@
                         $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
                         $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
                         $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
-                        $('#ModalAdd').modal('show');    
+                        $('#ModalAdd').modal('show');
                     }
                 }else{
-                    toastr["error"]("Rango de fechas no valido.");   
+                    toastr["error"]("Rango de fechas no valido.");
                 }
-                
+
             },
             eventClick: function(calEvent, jsEvent) {
                 if (calEvent.url) {
@@ -718,12 +718,12 @@
                         success:function(data) {
                             if (data.tipoRegistro==0) {
                                  if (data.tipoUsuario==0||data.tipoUsuario==1) {
-                                    $('#myModal #solicitante').append(data.solicitante_admin.nombre +'  '+ data.solicitante_admin.apellidoP +' '+ data.solicitante_admin.apellidoM)    
+                                    $('#myModal #solicitante').append(data.solicitante_admin.nombre +'  '+ data.solicitante_admin.apellidoP +' '+ data.solicitante_admin.apellidoM)
                                 }else
                                 {
                                     $('#myModal #solicitante').append(data.solicitante.nombre+' '+data.solicitante.apellidoP+' '+data.solicitante.apellidoM)
                                 }
-                                
+
                                 $('#myModal #espacio').append(data.espacio.nombre);
                                 $('#myModal #fechaInicio').append(moment(data.fechaInicio).format('dddd D [de] MMMM YYYY'));
                                 $('#myModal #fechaFin').append(moment(data.fechaFin).format('dddd D [de] MMMM YYYY'));
@@ -752,7 +752,7 @@
                                     case 4:
                                         $('#infoHorario #carrera').append('Ing. En Plasticos');
                                         break;
-                                } 
+                                }
                                 $('#infoHorario #semestre').append(data.semestre);
                                 $('#infoHorario #grupo').append(data.grupo);
                                 $('#infoHorario #espacio').append(data.espacio.nombre);
@@ -761,7 +761,7 @@
                         }
                     });
                 }
-            },       
+            },
         });
 
     }
@@ -774,7 +774,12 @@
             success:function(data){
                 console.log(data);
                 $.each(data, function(i, item) {
-                     $('#espacio_id').append('<option value='+item.id+'>'+item.nombre+'</option>');
+                  if (item.disponible==0) {
+                    $('#espacio_id').append('<option value='+item.id+'>'+item.nombre+'</option>');
+                  }else {
+                    $('#espacio_id').append('<option disabled value='+item.id+'>'+item.nombre+' - no disponible</option>');
+                  }
+                     // $('#espacio_id').append('<option value='+item.id+'>'+item.nombre+'</option>');
                 });
             }
         })
