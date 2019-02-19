@@ -48,7 +48,7 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary btn-block" name="entrar">
+                <button type="submit" class="btn btn-primary btn-block" name="entrar" id="entrar">
                     Entrar
                 </button>
             </div>

@@ -34,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
                     ->get());
         });
 
-
         // notificar a responsables de area
         view()->composer('layouts.headerAdmin', function ($view) {
             $view->with('notificacionesAprobadas', \App\Notificacion::whereHas('solicitud', function ($query) {
@@ -77,6 +76,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->environment(\Laravel\Dusk\DuskServiceProvider::class);
+        }
     }
 }

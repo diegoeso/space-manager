@@ -2,14 +2,13 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class AdminModelTest extends DuskTestCase
 {
 
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -21,11 +20,12 @@ class AdminModelTest extends DuskTestCase
             $browser->visit('/admin/login')
                 ->type('email', 'admin@gdsoft.com.mx')
                 ->type('password', 'secret')
-                ->press('entrar');
+                ->screenshot('Mostrar Registros')
+                ->press('#entrar');
 
             $browser->visit('/admin/users')
                 ->assertSee('Listado de registros')
-                ->screenshot('admin');
+                ->screenshot('Listar Registros');
         });
     }
 

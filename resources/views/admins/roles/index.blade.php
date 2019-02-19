@@ -30,7 +30,6 @@
             <div class="box-body">
                 <div class="table-responsive">
                     @include('general.mensaje')
-                    @include('general.buscar')
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>

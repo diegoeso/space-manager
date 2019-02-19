@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+// use App\Traits\Alertas;
+
 class RegisterController extends Controller
 {
     /*
@@ -81,6 +83,7 @@ class RegisterController extends Controller
             'confirmacion'       => $data['confirmacion'],
             'codigoConfirmacion' => $data['codigoConfirmacion'],
         ]);
+
         return $usuario;
     }
 }

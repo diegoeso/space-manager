@@ -2,19 +2,18 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\DuskTestCase;
 
 class AreaModelTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
     /**
      * A Dusk test example.
      * @test
      * @return void
      */
-    
+
     public function test_vista_listar_registros_areas()
     {
         $this->browse(function (Browser $first) {
@@ -64,7 +63,7 @@ class AreaModelTest extends DuskTestCase
 
     public function test_vista_ver_area()
     {
-        $id = (int)random_int(1, 7);
+        $id = (int) random_int(1, 7);
         $this->browse(function (Browser $first) use ($id) {
             $first->visit('/admin/login')
                 ->type('email', 'admin@gdsoft.com.mx')
@@ -79,7 +78,7 @@ class AreaModelTest extends DuskTestCase
 
     public function test_vista_editar_area()
     {
-        $id = (int)random_int(1, 7);
+        $id = (int) random_int(1, 7);
         $this->browse(function (Browser $first) use ($id) {
             $first->visit('/admin/login')
                 ->type('email', 'admin@gdsoft.com.mx')
