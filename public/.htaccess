@@ -19,17 +19,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType jpg "access 1 mouth"
-    ExpiresByType jpeg "access 1 mouth"
-    ExpiresByType gif "access 1 mouth"
-    ExpiresByType png "access 1 mouth"
-    ExpiresByType css "access 1 month"
-    ExpiresByType js "access 1 month"
-    ExpiresByType mp4 "access 1 month"
-    ExpiresByType /html "access 1 month"
-    ExpiresDefault "access 1 month"
-</IfModule>

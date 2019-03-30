@@ -30,7 +30,6 @@ class RegisterController extends Controller
     
     public function showRegistrationForm()
     {
-        //return view('auth.register');
         return view('auth.registro');
     }
     /**
@@ -88,7 +87,6 @@ class RegisterController extends Controller
             'confirmacion'       => $data['confirmacion'],
             'codigoConfirmacion' => $data['codigoConfirmacion'],
         ]);
-
         return $usuario;
     }
 }
