@@ -687,10 +687,7 @@
                 var fechaSeleccionadaFin=moment(end).format('L');
                 var horaActual=moment().format('HHmm');
                 var horaSeleccionada=moment(start).format('HHmm');
-                //console.log(fechaActual2, fechaSeleccionada2, fechaSeleccionadaFin);
-
                 if (fechaSeleccionada==fechaSeleccionadaFin) {
-                    // if (fechaSeleccionada<fechaActual && horaActual>horaSeleccionada || fechaSeleccionada<=fechaActual ) {
                     if (fechaSeleccionada2<=fechaActual2) {
                     toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
                     }else{
