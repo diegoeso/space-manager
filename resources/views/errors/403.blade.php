@@ -34,7 +34,7 @@
                     <i class="fa fa-warning text-info">
                     </i>
                     Acción no autorizada.
-                </h3>
+                    </h3>
                 <p class="lead">
                     No tienes acceso a esta URL, consulta con el administrador del sistema.
                 </p>
