@@ -53,7 +53,7 @@ class RecordatorioEvaluaciones extends Command
             $data['email']  = $evaluacion->tipoCuentaEvaluado($evaluacion)->email;
             try {
                 Mail::send('mail.evaluacionesPendientes', $data, function ($message) use ($data) {
-                    $message->from('contacto@gdsoft.com.mx', 'Space Manager');
+                    $message->from('diego.sanchez@gdsoft.com.mx', 'Space Manager');
                     $message->to($data['email'], $data['nombre']);
                     $message->subject('Evaluaciones Pendientes');
                 });

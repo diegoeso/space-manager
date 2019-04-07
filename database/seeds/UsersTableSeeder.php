@@ -37,6 +37,5 @@ class UsersTableSeeder extends Seeder
             'foto'           => 'userM.png',
             'nombreCompleto' => 'Responsable de Área',
         ]);
-
     }
 }

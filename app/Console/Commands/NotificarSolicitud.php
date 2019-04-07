@@ -55,7 +55,7 @@ class NotificarSolicitud extends Command
             $data['espacio']     = $espacio->nombre;
 
             Mail::send('mail.notificacionSolicitud', $data, function ($message) use ($data) {
-                $message->from('contacto@gdsoft.com.mx', 'Space Manager');
+                $message->from('diego.sanchez@gdsoft.com.mx', 'Space Manager');
                 $message->to($data['email'], $data['nombre']);
                 $message->subject('Solicitud');
             });

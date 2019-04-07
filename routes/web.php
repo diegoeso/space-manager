@@ -1,7 +1,26 @@
 <?php
 
 Route::get('/', function () {
+    // $user = App\User::where('email', 'admin@gdsoft.com.mx')->first();
+    // if ($user) {
+    //     return view('welcome');
+    // } else {
+    //     App\User::create([
+    //         'nombre'         => 'Administrador',
+    //         'apellidoP'      => 'Admin',
+    //         'apellidoM'      => '',
+    //         'nickname'       => 'Admin',
+    //         'email'          => 'admin@gdsoft.com.mx',
+    //         'password'       => bcrypt('secret'),
+    //         'confirmacion'   => 1,
+    //         'tipoCuenta'     => 0,
+    //         'telefono'       => '',
+    //         'foto'           => 'user.png',
+    //         'nombreCompleto' => 'Administrador',
+    //     ]);
     return view('welcome');
+    // }
+
 });
 
 Route::get('/admin', 'AdminController@index')->name('admin');
@@ -79,11 +98,11 @@ Route::prefix('admin')->group(function () {
     Route::get('correo-borrados', 'Admins\CorreosController@eliminados')->name('correo.eliminados');
     Route::get('correo/basura/{email}', 'Admins\CorreosController@correo_eliminado');
     Route::post('correo-fetch', 'Admins\CorreosController@fetch')->name('correo.fetch');
-    Route::get('correo/delete/{id}','Admins\CorreosController@delete')->name('correo.delete');
-    Route::get('correo/delete/salida/{id}','Admins\CorreosController@delete_de')->name('correo.delete_de');
+    Route::get('correo/delete/{id}', 'Admins\CorreosController@delete')->name('correo.delete');
+    Route::get('correo/delete/salida/{id}', 'Admins\CorreosController@delete_de')->name('correo.delete_de');
     Route::get('correo/responder/{id}', 'Admins\CorreosController@responder')->name('correo.responder');
 
-     /* Actividades Academicas (Horarios y calendarios de examenes);
+    /* Actividades Academicas (Horarios y calendarios de examenes);
      */
     Route::resource('calendarios', 'Admins\CalendarioEscolarController');
     Route::get('calendarios-horarios', 'Admins\CalendarioEscolarController@horarios')->name('calendarios.horarios');
@@ -181,8 +200,8 @@ Route::get('mensaje/entrada/{email}', 'Usuarios\MensajesController@entrada');
 Route::get('mensaje-enviados', 'Usuarios\MensajesController@enviados')->name('mensaje.enviados');
 Route::get('mensaje/salida/{email}', 'Usuarios\MensajesController@salida');
 Route::get('mensaje/responder/{id}', 'Usuarios\MensajesController@responder')->name('mensaje.responder');
-Route::get('mensaje/delete/{id}','Usuarios\MensajesController@delete')->name('mensaje.delete');
-Route::get('mensaje/delete/salida/{id}','Usuarios\MensajesController@delete_de')->name('mensaje.delete_de');
+Route::get('mensaje/delete/{id}', 'Usuarios\MensajesController@delete')->name('mensaje.delete');
+Route::get('mensaje/delete/salida/{id}', 'Usuarios\MensajesController@delete_de')->name('mensaje.delete_de');
 Route::get('mensajes-borrados', 'Usuarios\MensajesController@eliminados')->name('mensaje.eliminados');
 Route::get('mensaje/basura/{email}', 'Usuarios\MensajesController@correo_eliminado');
 /**
