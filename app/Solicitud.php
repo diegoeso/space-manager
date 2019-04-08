@@ -73,6 +73,15 @@ class Solicitud extends Model
         return new Date($date);
     }
 
+    // public function getHoraInicioAttribute($date)
+    // {
+    //     return new Date($date);
+    // }
+    // public function getHoraFinAttribute($date)
+    // {
+    //     return new Date($date);
+    // }
+
     public function elementosSolicitud()
     {
         return $this->belongsToMany(Elemento::class)

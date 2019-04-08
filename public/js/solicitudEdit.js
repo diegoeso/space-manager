@@ -24,6 +24,29 @@ $(document).ready(function() {
         inline: true,
         language: 'es-mx'
     });
+
+
+    $('#horaInicio').change(function() {
+         $horaInicio = $('#horaInicio').val();
+         $horaFin = $('#horaFin').val();
+         if ($horaInicio < '07:00:00' || $horaInicio > '18:00:00') {
+             $('#horaInicio').val('07:00:00')
+             toastr["info"]('Recuerda que solo puedes realizar solicitudes de algun espacio en un horario de 07:00 Hrs a las 16:00 Hrs');
+         }
+     });
+     $('#horaFin').change(function() {
+         $horaInicio = $('#horaInicio').val();
+         $horaFin = $('#horaFin').val();
+         if ($horaFin < $horaInicio) {
+             toastr["warning"]('La hora de finalizacion no puede ser menor a la de inicio');
+             $('#horaFin').val($horaInicio);
+         }
+         if ($horaFin > '18:00:00') {
+             $('#horaFin').val('18:00:00')
+             toastr["info"]('Recuerda que solo puedes realizar solicitudes de algun espacio en un horario de 07:00 hrs a las 16:00 hrs');
+         }
+     });
+    
     // Eliminar formulario de registro
     $(document).on('click', '.btn_remove', function() {
         var button_id = $(this).attr("id");

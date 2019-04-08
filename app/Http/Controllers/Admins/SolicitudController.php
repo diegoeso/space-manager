@@ -131,6 +131,7 @@ class SolicitudController extends Controller
             $bandera = false;
             return back();
         }
+
     }
 
     /**
@@ -340,6 +341,9 @@ class SolicitudController extends Controller
             })
             ->editColumn('fechaInicio', function ($solicitudes) {
                 return $solicitudes->fechaInicio->format('l j  F');
+            })
+            ->editColumn('horaInicio', function ($solicitudes) {
+                return $solicitudes->horaInicio . ' a ' . $solicitudes->horaFin;
             })
             ->editColumn('created_at', function ($solicitudes) {
                 return $solicitudes->created_at->diffForHumans();
