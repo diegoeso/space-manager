@@ -1,26 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    // $user = App\User::where('email', 'admin@gdsoft.com.mx')->first();
-    // if ($user) {
-    //     return view('welcome');
-    // } else {
-    //     App\User::create([
-    //         'nombre'         => 'Administrador',
-    //         'apellidoP'      => 'Admin',
-    //         'apellidoM'      => '',
-    //         'nickname'       => 'Admin',
-    //         'email'          => 'admin@gdsoft.com.mx',
-    //         'password'       => bcrypt('secret'),
-    //         'confirmacion'   => 1,
-    //         'tipoCuenta'     => 0,
-    //         'telefono'       => '',
-    //         'foto'           => 'user.png',
-    //         'nombreCompleto' => 'Administrador',
-    //     ]);
     return view('welcome');
-    // }
-
 });
 
 Route::get('/admin', 'AdminController@index')->name('admin');

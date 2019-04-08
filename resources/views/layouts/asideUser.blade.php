@@ -6,7 +6,7 @@
                 <img alt="User Image" class="img-circle" src="{{ Storage::url(Auth::user()->foto) }}">
                 </img>
                 --}}
-                <img alt="User Image" class="user-image" src="{{ Storage::url(Auth::user()->foto) }}">
+                <img alt="User Image" class="user-image" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/user.png') }}">
                 </img>
             </div>
             <div class="pull-left info">
@@ -191,5 +191,4 @@
             --}}
         </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

@@ -27,7 +27,7 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img alt="User profile picture" class="profile-user-img img-responsive" src="{{ Storage::url($usuario->foto) }}">
+                    <img alt="User profile picture" class="profile-user-img img-responsive" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/user.png') }}">
                         <h3 class="profile-username text-center text-capitalize">
                             {{ $usuario->nombre .' '.$usuario->apellidoP }}
                         </h3>

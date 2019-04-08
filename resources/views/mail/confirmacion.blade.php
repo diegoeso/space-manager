@@ -161,26 +161,30 @@
                     <p class="lead text-justify">
                         Hola
                         <strong class="text-capitalize">
-                            {{ $usuario->nombre }},
+                            {{ $usuario->nombre }} {{ $usuario->apellidoP }},
                         </strong>
                         hemos enviado un correo a
                         <strong>
                             {{ $usuario->email }}
                         </strong>
-                        con las instucciones para que confirmes tu cuenta en
+                        con las instrucciones para que confirmes tu cuenta en
                         <em>
                             Space Manager.
                         </em>
                     </p>
                     <p class="lead text-justify">
-                        Necesitamos que verifiques tu direccion de correo electronico institucional para que puedar terminar de crear la cuenta.
+                        Necesitamos que verifiques tu dirección de correo electrónico institucional para que puedas terminar de crear la cuenta.
                     </p>
                     <p class="lead text-justify">
                         Para continuar, confirma tu dirección.
                     </p>
-                    <a class="" href="{{ url('/reenviar-confirmacion/'.$usuario->id.'/token/'.$usuario->codigoConfirmacion) }}">
+                    <a class="btn btn-info btn-block" href="{{ url('/reenviar-confirmacion/'.$usuario->id.'/token/'.$usuario->codigoConfirmacion) }}">
                         Reenviar Correo de Confirmación
                     </a>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <label class="text text-danger">*Si no vez el correo de confirmación, revisa tu carpeta de correo no deseado (spam)*</label>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 hidden-xs">
                     <img class="img-responsive" src="{{ asset('img/sobre.png') }}">

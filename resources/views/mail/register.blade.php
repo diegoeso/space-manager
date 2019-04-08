@@ -52,17 +52,17 @@
                     <p class="text-center">
                         Con nuestra plataforma de
                         <em>
-                            Administracion de Espacios
+                            Administración de Espacios
                         </em>
-                        podras solicitar algun espacio que requieras de una forma muy sencilla.
+                        podrás solicitar algún espacio que requieras de una forma muy sencilla.
                     </p>
                     <br/>
                     <a class="btn btn-success btn-block" href="{{ url('/confirmacion/'.$email.'/token/'.$codigoConfirmacion) }}">
-                        ¡Click para confirmar cuenta!
+                        ¡Clic para confirmar cuenta!
                     </a>
                     <br/>
                     <p>
-                        En caso de que el boton no funcione, simplemente copia y pega el siguiente enlace en tu navegador.
+                        En caso de que el botón no funcione, simplemente copia y pega el siguiente enlace en tu navegador.
                     </p>
                     <br/>
                     <a href="#">

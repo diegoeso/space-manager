@@ -28,7 +28,7 @@
                         <strong class="text-capitalize">
                             {{ $nombre }}
                         </strong>
-                        tu actividad academica en
+                        tu actividad académica en
                         <strong>
                             <em>
                                 {{ $espacio }}
@@ -47,7 +47,7 @@
                     </p>
                     <br/>
                     <p class="lead text-center">
-                        Al finalizar tu actividad no olvides evaluar al responsable de area para tener un control sobre la atencion a las solicitudes de nuestra comunidad universitaria.
+                        Al finalizar tu actividad no olvides evaluar al responsable de área para tener un control sobre la atención a las solicitudes de nuestra comunidad universitaria.
                         <br/>
                         <strong>
                             Equipo de ¡Space Manager!

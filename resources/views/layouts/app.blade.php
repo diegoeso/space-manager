@@ -15,10 +15,6 @@
         <link href="{{ asset('dist/css/skins/_all-skins.min.css') }}" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
         </link>
-        {{--
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
-        </link>
-        --}}
     </head>
     <style>
         html, body {
@@ -100,30 +96,31 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             @if (Route::has('login'))
                             <ul class="nav navbar-nav navbar-right">
-                                @auth
-                                <li>
-                                    @if (Auth::user()->tipoCuenta==0 || Auth::user()->tipoCuenta==1)
-                                    <a href="{{ url('/admin') }}">
-                                        Inicio
-                                    </a>
-                                    @else
-                                    <a href="{{ url('/inicio') }}">
-                                        Inicio
-                                    </a>
-                                    @endif
-                                </li>
+
+                                @if (Auth::guard('web')->check())
+                                    <li>
+                                        <a href="{{ url('/admin') }}">
+                                            Inicio
+                                        </a>
+                                    </li>
+                                @elseif(Auth::guard('usuario')->check())
+                                    <li>
+                                        <a href="{{ url('/inicio') }}">
+                                            Inicio
+                                        </a>
+                                    </li>
                                 @else
-                                <li>
-                                    <a href="{{ route('login') }}">
-                                        Iniciar Sesión
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('register') }}">
-                                        Registrarse
-                                    </a>
-                                </li>
-                                @endauth
+                                    <li>
+                                        <a href="{{ route('login') }}">
+                                            Iniciar Sesión
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register') }}">
+                                            Registrarse
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                             @endif
                         </div>
@@ -147,13 +144,11 @@
             2.0
         </div>
         <strong>
-            Copyright © 2017-2018
+            Copyright © 2017-2019
             <a href="https://www.facebook.com/diego.enriqueSO" target="_back">
                 Diego Enrique Sanchez Ordoñez
             </a>
-            .
         </strong>
-        All rights reserved.
     </div>
 </footer>
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}">

@@ -7,14 +7,27 @@ use App\User;
 use App\Usuario;
 use Auth;
 // use Hash;
-use Illuminate\Foundation\Auth\RegistersUsers;
+// use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Toastr;
 
 // use App\Traits\Alertas;
 
 class RegisterController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -26,8 +39,8 @@ class RegisterController extends Controller
     |
      */
 
-    use RegistersUsers;
-    
+    // use RegistersUsers;
+
     public function showRegistrationForm()
     {
         return view('auth.registro');
@@ -37,17 +50,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/inicio';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+    protected $redirectTo = 'inicio';
 
     /**
      * Get a validator for an incoming registration request.
@@ -60,7 +63,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nombre'    => 'required|string|max:255',
             'apellidoP' => 'required|string|max:255',
-            // 'email'     => 'required|string|email|max:255|unique:usuarios,email|regex:/(.*)uaemex\.mx/i',
+            'email'     => 'required|string|email|max:255|unique:usuarios,email|regex:/(.*)uaemex\.mx/i',
             'password'  => 'required|string|min:6|confirmed',
         ]);
     }
@@ -83,10 +86,39 @@ class RegisterController extends Controller
             'email'              => $data['email'],
             'password'           => Hash::make($data['password']),
             'tipoCuenta'         => $data['tipoCuenta'],
-            'foto'               => 'user.png',
             'confirmacion'       => $data['confirmacion'],
             'codigoConfirmacion' => $data['codigoConfirmacion'],
         ]);
         return $usuario;
+    }
+
+    // Login
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+        $this->guard()->login($user);
+
+        // return $this->registered($request, $user)
+        // ?: redirect($this->redirectPath());
+        Toastr::info('¡Te hemos enviado un nuevo correo de confirmacion!', '¡Hecho!', ["positionClass" => "toast-bottom-full-width", "closeButton" => 'true', "progressBar" => 'true']);
+        return $this->registered($request, $user)
+        ?: redirect()->route('dashboard');
+    }
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('usuario');
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        //
     }
 }

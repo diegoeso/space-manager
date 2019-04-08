@@ -40,9 +40,7 @@
                     <a href="https://www.facebook.com/diego.enriqueSO" target="blank">
                         Diego Enrique Sánchez Ordoñez
                     </a>
-                    .
                 </strong>
-                All rights reserved.
             </footer>
         </div>
         @include('layouts.scripts')

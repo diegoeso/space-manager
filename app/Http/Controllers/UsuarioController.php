@@ -20,6 +20,7 @@ class UsuarioController extends Controller
     public function __construct()
     {
         $this->middleware('auth:usuario');
+        $this->middleware('confirmarCuenta:usuario')->only('dashboard');
     }
 
     public function dashboard()
@@ -28,14 +29,8 @@ class UsuarioController extends Controller
         $areasE       = Area::pluck('nombre', 'id');
         $solicitudes  = Solicitud::where('usuarioSolicitud', $id)->get();
         $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)->get();
-        $mensajes     = Mensaje::where('leido', 0)
-            ->where('para', Auth::user()->id)->get();
-
-        if (Auth::user()->confirmacion == 0 && Auth::user()->codigoConfirmacion != null) {
-            return redirect()->route('confirmarCuenta');
-        } else {
-            return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
-        }
+        $mensajes     = Mensaje::where('leido', 0)->where('para', Auth::user()->id)->get();
+        return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
     }
 
     public function confirmarCuenta()
