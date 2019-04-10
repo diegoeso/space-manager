@@ -27,56 +27,46 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img alt="User profile picture" class="profile-user-img img-responsive" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/user.png') }}">
-                        <h3 class="profile-username text-center text-capitalize">
-                            {{ $usuario->nombre .' '.$usuario->apellidoP }}
-                        </h3>
-                        <p class="text-muted text-center">
-                            @switch($usuario->tipoCuenta)
-                                @case(0)
-                                    Administrador
-                                    @break
-                                @case(1)
-                                    Responsable de Area
-                                    @break
-                                @case(2)
-                                    Profesor
-                                    @break
-                                @case(3)
-                                    Alumno
-                                    @break
-                                @default
-                                    Usuario
-                            @endswitch
-                        </p>
-                        @if ($usuario->carrera)
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <label>
-                                    Carrera:
-                                </label>
-                                <b>
-                                    {{ $usuario->nombreCarrera($usuario->carrera) }}
-                                </b>
-                            </li>
-                            <li class="list-group-item">
-                                <label>
-                                    Semestre:
-                                </label>
-                                <b>
-                                    {{ $usuario->nombreSemestre($usuario->semestre) }}
-                                </b>
-                            </li>
-                            <li class="list-group-item">
-                                <label>
-                                    Numero de cuenta:
-                                </label>
-                                <b>
-                                    {{ $usuario->matricula }}
-                                </b>
-                            </li>
-                        </ul>
-                        @endif
+                    @if ($usuario->tipoCuenta==0 || $usuario->tipoCuenta==1)
+                    <img alt="User profile picture" class="profile-user-img img-responsive" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/userA.png') }}">
+                        @else
+                        <img alt="User profile picture" class="profile-user-img img-responsive" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/user.png') }}">
+                            @endif
+                            <h3 class="profile-username text-center text-capitalize">
+                                {{ $usuario->nombre .' '.$usuario->apellidoP }}
+                            </h3>
+                            <p class="text-muted text-center">
+                                {{ $usuario->tipoCuenta($usuario->tipoCuenta) }}
+                            </p>
+                            @if ($usuario->carrera)
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <label>
+                                        Carrera:
+                                    </label>
+                                    <b>
+                                        {{ $usuario->nombreCarrera($usuario->carrera) }}
+                                    </b>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>
+                                        Semestre:
+                                    </label>
+                                    <b>
+                                        {{ $usuario->nombreSemestre($usuario->semestre) }}
+                                    </b>
+                                </li>
+                                <li class="list-group-item">
+                                    <label>
+                                        Numero de cuenta:
+                                    </label>
+                                    <b>
+                                        {{ $usuario->matricula }}
+                                    </b>
+                                </li>
+                            </ul>
+                            @endif
+                        </img>
                     </img>
                 </div>
             </div>

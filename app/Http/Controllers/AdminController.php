@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-            $this->middleware('auth:web');
+        $this->middleware('auth:web');
     }
 
     /**
@@ -31,12 +31,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // $solicitudes = Solicitud::where('tipoRegistro', 0)
-        //     ->whereHas('area', function ($query) {
-        //         $query->where('user_id', Auth::user()->id)
-        //             ->groupBy('user_id')
-        //         ;})
-        //     ->get();
 
         if (Auth::user()->tipoCuenta === 0) {
             $solicitudes = Solicitud::where('tipoRegistro', 0)->get();
@@ -52,12 +46,13 @@ class AdminController extends Controller
         $espacios              = Espacio::all();
         $usuarios              = Usuario::all();
         $areasE                = Area::pluck('nombre', 'id');
+        $espaciosE             = Espacio::pluck('nombre', 'id');
         $solicitudesPendientes = Solicitud::where('estado', 0)
             ->orderBy('created_at', 'ASC')
             ->paginate(5);
         $graficas = Solicitud::select(DB::raw('count(*) as total, espacio_id'))
             ->where('tipoRegistro', 0)->groupBy('espacio_id')->get();
-        return view('admins.dashboard', compact('solicitudes', 'areas', 'areasE', 'usuarios', 'solicitudesPendientes', 'espacios', 'graficas'));
+        return view('admins.dashboard', compact('solicitudes', 'areas', 'areasE', 'usuarios', 'solicitudesPendientes', 'espacios', 'graficas', 'espaciosE'));
     }
 
     public function perfil()

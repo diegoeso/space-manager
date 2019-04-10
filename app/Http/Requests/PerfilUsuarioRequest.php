@@ -28,7 +28,7 @@ class PerfilUsuarioRequest extends FormRequest
             'nombre'    => 'required|string',
             'apellidoP' => 'required|string',
             'apellidoM' => 'required|string',
-            'nickname'  => 'required',
+            'nickname'  => 'required|unique:usuarios,nickname',
             'email'     => 'required|email|unique:usuarios,email,' . Auth::user()->id,
             'telefono'  => 'numeric|digits:10',
             'password'  => 'confirmed',

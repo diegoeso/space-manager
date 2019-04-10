@@ -1,8 +1,8 @@
-<aside class="main-sidebar" id="asideAdmin" name"asideadmin"="">
+<aside class="main-sidebar" id="asideAdmin" name="asideadmin">
 <section class="sidebar">
     <div class="user-panel">
         <div class="pull-left image">
-            <img alt="User Image" class="" src="{{ Storage::url(Auth::user()->foto) }}">
+            <img alt="User Image" class="" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/userA.png') }}">
             </img>
         </div>
         <div class="pull-left info">
@@ -32,8 +32,7 @@
             </a>
         </li>
         @can('usuarios.index' || 'users.index')
-            <li @if(request()->is('admin/users') || request()->is('admin/usuarios')||request()->is('admin/users/*') || request()->is
-            ('admin/usuarios/*')) class="treeview active"
+            <li @if(request()->is('admin/users') || request()->is('admin/usuarios')||request()->is('admin/users/*') || request()->is('admin/usuarios/*')) class="treeview active"
                 @else
                 class="treeview"
                     @endif>
@@ -286,6 +285,13 @@
                             </a>
                         </li>
                     @endcan
+
+                   {{--  <li>
+                        <a href="{{ route('espacios.mostrar_estadisticas') }}">
+                            <i class="fa fa-circle-o"></i>
+                            Estadisticas
+                        </a>
+                    </li> --}}
                 </ul>
             </li>
         @endcan

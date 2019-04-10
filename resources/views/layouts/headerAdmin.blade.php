@@ -72,7 +72,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img alt="User Image" class="user-image" src="{{ Storage::url(Auth::user()->foto) }}">
+                        <img alt="User Image" class="user-image" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/userA.png') }}">
                             <span class="hidden-xs text-capitalize">
                                 {{ Auth::user()->nombre .' '. Auth::user()->apellidoP}}
                             </span>
@@ -80,7 +80,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img alt="User Image" class="img-circle" src="{{ Storage::url(Auth::user()->foto) }}">
+                            <img alt="User Image" class="img-circle" src="{{ Auth::user()->foto ? Storage::url(Auth::user()->foto) : asset('img/userA.png') }}">
                                 <p class="text-capitalize">
                                     {{ Auth::user()->nombreCompleto }}
                                     <small class="lead">

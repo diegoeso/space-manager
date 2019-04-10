@@ -200,11 +200,11 @@ class AJAXController extends Controller
     // actividades Academicas
     public function calendarioEscolar($carrera)
     {
-        $calendarioEscolar = Solicitud::where('carrera', $carrera)->where('tipoRegistro', 1)->orderBy('fechaInicio','ACS')
+        $calendarioEscolar = Solicitud::where('carrera', $carrera)->where('tipoRegistro', 1)->orderBy('fechaInicio', 'ACS')
             ->get();
-        $data              = [];
-        $backgroundColor   = '';
-        $borderColor       = '';
+        $data            = [];
+        $backgroundColor = '';
+        $borderColor     = '';
         foreach ($calendarioEscolar as $event) {
             $subArr = [
                 'id'              => $event->id,
@@ -232,12 +232,12 @@ class AJAXController extends Controller
     // Actualizar elementos al eliminar elemento de solicitud
     public function editarElemento($id, $cantidad, $solicitud)
     {
-        $solicitud=Solicitud::find($solicitud);
+        $solicitud = Solicitud::find($solicitud);
         $solicitud->elementos()->detach($id);
         $elemento              = Elemento::FindOrFail($id);
         $elemento->existencias = $elemento->existencias + intval($cantidad);
         //$elemento->estado      = 1;
-        $result                = $elemento->save();
+        $result = $elemento->save();
         if ($result) {
             return response()->json(['success' => 'true']);
         } else {

@@ -8,9 +8,12 @@ use App\CategoriaElemento;
 use App\Espacio;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EspacioRequest;
+use App\Solicitud;
 use App\Traits\Alertas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDF;
+use Toastr;
 use Yajra\DataTables\DataTables;
 
 class EspacioController extends Controller
@@ -26,6 +29,7 @@ class EspacioController extends Controller
         $this->middleware('permission:espacios.show')->only('show');
         $this->middleware('permission:espacios.edit')->only(['edit', 'update']);
         $this->middleware('permission:espacios.destroy')->only('destroy');
+        Carbon::setLocale('es');
     }
     /**
      * Display a listing of the resource.
@@ -188,6 +192,40 @@ class EspacioController extends Controller
         $pdf = PDF::loadView('admins.espacios.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('espacios_' . $fecha . '.pdf');
+    }
+
+    public function estadisticas(Request $request)
+    {
+        $data = [];
+        for ($i = 0; $i < count($request->espacio_e); $i++) {
+            $subArr = $request->espacio_e[$i];
+            array_push($data, $subArr);
+        }
+        $fechaInicio = Carbon::parse($request->fechaI)->format('Y-m-d');
+        $fechaFin    = Carbon::parse($request->fechaF)->format('Y-m-d');
+        $espacios    = Solicitud::where('tipoRegistro', 0)
+            ->where(function ($query) {
+                $query->where('estado', '=', 1)
+                    ->orWhere('estado', '=', 4);
+            })
+            ->whereIn('espacio_id', $data)
+            ->whereBetween('fechaInicio', [$fechaInicio, $fechaFin])->get();
+        if (count($espacios) > 0) {
+            $fecha = date('d-m-Y/h:i:s');
+            $pdf   = App::make('dompdf.wrapper');
+            $pdf   = PDF::loadView('admins.espacios.espacios_utilizados_pdf', ['espacios' => $espacios])->setPaper('a4', 'landscape');
+            return $pdf->stream();
+        } else {
+            Toastr::warning('¡No se encontraron registros!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            return back();
+        }
+
+    }
+
+    public function mostrar_estadisticas(Request $request)
+    {
+        $espaciosE = Espacio::pluck('nombre', 'id');
+        return view('admins.espacios.estadisticas', compact('espaciosE'));
     }
 
 }

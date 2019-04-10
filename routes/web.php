@@ -52,7 +52,9 @@ Route::prefix('admin')->group(function () {
      */
     Route::resource('espacios', 'Admins\EspacioController');
     Route::get('espacios/listarEspacios/{id}', 'Admins\EspacioController@listarEspacios')->name('espacios.listarEspacios');
-
+    Route::post('espacios/estadisticas', 'Admins\EspacioController@estadisticas')->name('espacios.estadisticas');
+    // Route::get('espacios/estadisticas/uso', 'Admins\EspacioController@mostrar_estadisticas')->name('espacios.mostrar_estadisticas');
+    // Route::post('espacios/estadisticas-espacios-usados', 'Admins\EspacioController@grafica_espacios_usados')->name('espacios.estadisticas_espacios');
     /**
      * Controlador para solicitudes
      */

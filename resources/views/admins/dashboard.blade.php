@@ -94,6 +94,10 @@
                     Uso de espacios académicos
                 </h3>
                 <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-target="#myModal" data-toggle="modal" type="button">
+                        <i class="fa fa-file-pdf-o">
+                        </i>
+                    </button>
                     <button class="btn btn-box-tool" data-widget="collapse" type="button">
                         <i class="fa fa-minus">
                         </i>
@@ -121,6 +125,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary pull-right" data-target="#myModal" data-toggle="modal" type="button">
+                    <i class="fa fa-file-pdf-o">
+                    </i>
+                    Exportar Datos
+                </button>
             </div>
         </div>
     </div>
@@ -286,10 +296,59 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">
+                        ×
+                    </span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Estadisticas de los espacios academicos.
+                </h4>
+            </div>
+            {!! Form::open(['route'=>'espacios.estadisticas', 'method'=>'POST','target'=>"_blank"]) !!}
+            <div class="modal-body">
+                <input id="fechaI" name="fechaI" type="hidden">
+                </input>
+                <input id="fechaF" name="fechaF" type="hidden">
+                </input>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label>
+                            Seleccione los espacios que desea consultar
+                        </label>
+                        {!! Form::select('espacio_e[]', $espaciosE, null, ['class'=>'form-control select2','multiple','id'=>'espacio_e','style'=>'width: 100%;','tabindex'=>'-1','required']) !!}
+                    </div>
+                    <div class="col-md-4">
+                        <label>
+                            Rango de fechas a consultar
+                        </label>
+                        {!! Form::text('rangoFechas', null, ['class'=>'form-control','id'=>'rangoFechas']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    Cerrar
+                </button>
+                <button class="btn btn-primary" type="submit">
+                    Generar
+                </button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
+{{--
 <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript">
 </script>
+--}}
 <script src="{{ asset('bower_components/moment/moment.js') }}">
 </script>
 <script src="{{ asset('bower_components/fullcalendar/dist/fullcalendar.min.js') }}">
@@ -304,6 +363,48 @@
 </script>
 <script>
     $(document).ready(function() {
+
+         $('input[name="rangoFechas"]').daterangepicker({
+            "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " - ",
+            "applyLabel": "Guardar",
+            "cancelLabel": "Cancelar",
+            "fromLabel": "Desde",
+            "toLabel": "Hasta",
+            "customRangeLabel": "Personalizar",
+            "daysOfWeek": [
+                "Do",
+                "Lu",
+                "Ma",
+                "Mi",
+                "Ju",
+                "Vi",
+                "Sa"
+            ],
+            "monthNames": [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Setiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            ],
+            "firstDay": 1
+        },
+        opens: 'left',
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+            $('#fechaI').val(start.format('DD-MM-YYYY'));
+            $('#fechaF').val(end.format('DD-MM-YYYY'));
+        });
+
          // validacion que la fecha de termino no sea menor a la de inicio
         $('#horaFin').change(function(){
             $horaInicio=$('#horaInicio').val();
@@ -334,6 +435,10 @@
         });
         $('#espacio_id').select2({
           placeholder: 'Selecciona un Espacio Académico'
+        });
+
+        $('#espacio_e').select2({
+            placeholder:'Selecciona un Espacio Académico'
         });
 
         $("#area_id" ).change(function()
@@ -618,7 +723,7 @@
             var r = Math.round(Math.random()*255);
             var g = Math.round(Math.random()*255);
             var b = Math.round(Math.random()*255);
-            var rgb="rgba("+r+", "+g+", "+b+", "+1+")";
+            var rgb="rgba("+r+", "+g+", "+b+", "+.8+")";
             colores.push(rgb);
             res=100*item.total/max;
             $('#info').append('<div class="progress-group"><span class="progress-text">'+item.nombre+'</span><span class="progress-number" id="espacio">Solicitudes: '+item.total+'</span><div class="progress sm"><div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: '+res+'%; background-color: '+rgb+'"></div></div></div>');
@@ -639,7 +744,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: 'Espacio académico mas solicitado.'
+                    text: 'Espacio académico mas solicitados.'
                 }
             }
         });
