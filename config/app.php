@@ -174,7 +174,7 @@ return [
         // chart
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
-        Laravel\Dusk\DuskServiceProvider::class,
+        //Laravel\Dusk\DuskServiceProvider::class,
         // Correo
         App\Providers\CorreoServiceProvider::class,
         //CorreoUsuarios
