@@ -42,11 +42,30 @@
             <div class="box-body">
                 <div class="row" style="padding-bottom: 5px;">
                     <div class="col-md-12 ">
-                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.usuarios') }}" target="_blank">
-                            <i class="fa fa-file-pdf-o">
-                            </i>
-                            Descargar PDF
-                        </a>
+                        <!-- -->
+                        <div class="btn-group">
+                            <button class="btn btn-info dropdown-toggle pull-right" data-toggle="dropdown" type="button">
+                                Opciones
+                                <span class="caret">
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="" href="{{ route('pdf.usuarios') }}" target="_blank">
+                                        <i class="fa fa-file-pdf-o">
+                                        </i>
+                                        Exportar PDF
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ route('admin.export') }}">
+                                        <i class="fa fa-file-excel-o">
+                                        </i>
+                                        Exportar Excel
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">

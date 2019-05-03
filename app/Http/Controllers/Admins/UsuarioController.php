@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admins;
 
 use App;
+use App\Exports\ExportUsuarios;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Traits\Alertas;
 use App\Usuario;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Yajra\DataTables\DataTables;
 
@@ -38,7 +40,7 @@ class UsuarioController extends Controller
 
     public function store(UsuarioRequest $request)
     {
-      
+
         $usuario                     = new Usuario;
         $usuario->nombre             = $request->nombre;
         $usuario->apellidoP          = $request->apellidoP;
@@ -103,7 +105,7 @@ class UsuarioController extends Controller
         $usuario->carrera        = $request->carrera;
         $usuario->semestre       = $request->semestre;
         $usuario->matricula      = $request->matricula;
-
+        $usuario->telefono       = $request->telefono;
         if ($usuario->save()) {
             $this->registroExitoso();
             return redirect()->route('usuarios.show', $usuario->id);
@@ -150,5 +152,10 @@ class UsuarioController extends Controller
         $pdf   = PDF::loadView('admins.usuarios.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('usuarios_' . $fecha . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ExportUsuarios, 'users.xlsx');
     }
 }

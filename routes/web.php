@@ -105,6 +105,7 @@ Route::prefix('admin')->group(function () {
     Route::get('pdf/solicitud-usuario', 'Usuarios\SolicitudController@solicitudes')->name('pdf.solicitudesU');
     Route::get('pdf/solicitud-usuario/{id}', 'Usuarios\SolicitudController@solicitud')->name('pdf.solicitudU');
 
+    Route::get('export-usuarios', 'Admins\UsuarioController@export')->name('admin.export');
 });
 
 // Restablecer contraseña

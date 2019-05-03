@@ -179,6 +179,9 @@ return [
         App\Providers\CorreoServiceProvider::class,
         //CorreoUsuarios
         App\Providers\CorreoUsuariosServiceProvider::class,
+
+        //Excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -235,6 +238,7 @@ return [
         'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'PDF'          => Barryvdh\DomPDF\Facade::class,
         'Chart'        => ConsoleTVs\Charts\ChartsServiceProvider::class,
+        'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
