@@ -21,7 +21,6 @@ class UsersTableSeeder extends Seeder
             'confirmacion'   => 1,
             'tipoCuenta'     => 0,
             'telefono'       => '',
-            'foto'           => 'user.png',
             'nombreCompleto' => 'Administrador',
         ]);
         App\User::create([
@@ -34,7 +33,6 @@ class UsersTableSeeder extends Seeder
             'confirmacion'   => 1,
             'telefono'       => '',
             'tipoCuenta'     => 1,
-            'foto'           => 'userM.png',
             'nombreCompleto' => 'Responsable de Área',
         ]);
     }

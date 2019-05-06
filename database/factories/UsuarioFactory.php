@@ -18,7 +18,6 @@ $factory->define(App\Usuario::class, function (Faker $faker) {
         'carrera'            => rand(1, 4),
         'semestre'           => rand(1, 10),
         'matricula'          => rand(10, 10000000),
-        'foto'               => 'user.png',
         'nombreCompleto'     => $nombre . ' ' . $apellidoP . ' ' . $apellidoM,
         'confirmacion'       => 1,
         'codigoConfirmacion' => null,

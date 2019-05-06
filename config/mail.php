@@ -90,7 +90,7 @@ return [
 
     'username'   => env('MAIL_USERNAME', 'contacto@gdsoft.com.mx'),
 
-    'password'   => env('MAIL_PASSWORD', 'EsQa?^F0s]'),
+    'password'   => env('MAIL_PASSWORD', 'diegokike68**'),
 
     /*
     |--------------------------------------------------------------------------

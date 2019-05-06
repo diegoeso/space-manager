@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Admins;
 use App;
 use App\CategoriaElemento;
 use App\Elemento;
+use App\Exports\ElementosExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ElementoRequest;
+use App\Imports\ElementosImport;
 use App\Traits\Alertas;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Toastr;
 use Yajra\DataTables\DataTables;
 
 class ElementoController extends Controller
@@ -81,7 +85,10 @@ class ElementoController extends Controller
     public function show($id)
     {
         $elemento = Elemento::find($id);
-        if(!$elemento) return abort(404);
+        if (!$elemento) {
+            return abort(404);
+        }
+
         return view('admins.elementos.show', compact('elemento'));
     }
 
@@ -96,7 +103,10 @@ class ElementoController extends Controller
 
         $elemento   = Elemento::find($id);
         $categorias = CategoriaElemento::pluck('nombre', 'id');
-        if(!$elemento) return abort(404);
+        if (!$elemento) {
+            return abort(404);
+        }
+
         return view('admins.elementos.edit', compact('elemento', 'categorias'));
     }
 
@@ -166,5 +176,17 @@ class ElementoController extends Controller
         // return $pdf->stream();
 
         return $pdf->download('elementos_' . $fecha . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ElementosExport, 'elementos.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new ElementosImport, $request->file('file'));
+        Toastr::success('¡Importación exitosa!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        return back();
     }
 }

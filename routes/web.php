@@ -106,6 +106,25 @@ Route::prefix('admin')->group(function () {
     Route::get('pdf/solicitud-usuario/{id}', 'Usuarios\SolicitudController@solicitud')->name('pdf.solicitudU');
 
     Route::get('export-usuarios', 'Admins\UsuarioController@export')->name('admin.export');
+    // Export Import Areas
+    Route::get('export-areas', 'Admins\AreaController@export')->name('admin.export-area');
+    Route::post('import-areas', 'Admins\AreaController@import')->name('admin.import-area');
+
+    // Export Import Elementos
+    Route::get('export-elementos', 'Admins\ElementoController@export')->name('admin.export-elemento');
+    Route::post('import-elementos', 'Admins\ElementoController@import')->name('admin.import-elemento');
+
+    // Export Import CategoriaElementos
+    Route::get('export-categoria-elementos', 'Admins\CategoriaElementoController@export')->name('admin.export-categoriaE');
+    Route::post('import-categoria-elementos', 'Admins\CategoriaElementoController@import')->name('admin.import-categoriaE');
+
+    // Export Import Espacios
+    Route::get('export-espacios', 'Admins\EspacioController@export')->name('admin.export-espacios');
+    Route::post('import-espacios', 'Admins\EspacioController@import')->name('admin.import-espacios');
+
+    // Export Solicitudes
+    Route::get('export-solicitudes', 'Admins\SolicitudController@export')->name('admin.export-solicitud');
+
 });
 
 // Restablecer contraseña

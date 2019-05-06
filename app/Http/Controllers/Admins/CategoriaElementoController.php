@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admins;
 
 use App;
 use App\CategoriaElemento;
+use App\Exports\CategoriasElementoExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaElementosRequest;
+use App\Imports\CategoriasElementoImport;
 use App\Traits\Alertas;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Toastr;
 use Yajra\DataTables\DataTables;
 
 class CategoriaElementoController extends Controller
@@ -76,7 +80,10 @@ class CategoriaElementoController extends Controller
     public function show($id)
     {
         $categoria = CategoriaElemento::find($id);
-        if(!$categoria) return abort(404);
+        if (!$categoria) {
+            return abort(404);
+        }
+
         return view('admins.categoria-elementos.show', compact('categoria'));
     }
 
@@ -89,7 +96,10 @@ class CategoriaElementoController extends Controller
     public function edit($id)
     {
         $categoria = CategoriaElemento::find($id);
-        if(!$categoria) return abort(404);
+        if (!$categoria) {
+            return abort(404);
+        }
+
         return view('admins.categoria-elementos.edit', compact('categoria'));
     }
 
@@ -138,8 +148,8 @@ class CategoriaElementoController extends Controller
         // $descripcion= substr($categoria->descripcion, 0,100);
         $categoria = CategoriaElemento::all();
         return Datatables::of($categoria)
-            ->editColumn('descripcion',function($categoria){
-              return substr($categoria->descripcion, 0,150).'...';
+            ->editColumn('descripcion', function ($categoria) {
+                return substr($categoria->descripcion, 0, 150) . '...';
             })
             ->addColumn('action', function ($categoria) {
                 return '<a href="' . route("categoria-elementos.show", $categoria->id) . '" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>  ' .
@@ -157,5 +167,17 @@ class CategoriaElementoController extends Controller
         $pdf   = PDF::loadView('admins.categoria-elementos.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('categorias_' . $fecha . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new CategoriasElementoExport, 'categorias.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new CategoriasElementoImport, $request->file('file'));
+        Toastr::success('¡Importación exitosa!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        return back();
     }
 }

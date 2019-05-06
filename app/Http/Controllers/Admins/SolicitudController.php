@@ -7,6 +7,7 @@ use App\Area;
 use App\Elemento;
 use App\Espacio;
 use App\Evaluaciones;
+use App\Exports\SolicitudExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SolicitudRequest;
 use App\Notificacion;
@@ -22,6 +23,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Yajra\DataTables\DataTables;
 
@@ -312,7 +314,9 @@ class SolicitudController extends Controller
                     ;})
                 ->get();
         }
+
         return Datatables::of($solicitudes)
+
             ->editColumn('usuarioSolicitud', function ($solicitudes) {
                 return $solicitudes->nombreUsuarioSolicitante($solicitudes);
             })
@@ -593,4 +597,10 @@ class SolicitudController extends Controller
         // return $pdf->stream();
         return $pdf->download('solicitud_' . $solicitud->tipoUsuario($solicitud)->fullName . '_' . $fecha . '.pdf');
     }
+
+    public function export()
+    {
+        return Excel::download(new SolicitudExport, 'solicitudes.xlsx');
+    }
+
 }

@@ -33,23 +33,46 @@
                     Listado de registros
                 </h3>
                 <div class="box-tools">
-                    <a class="btn btn-primary btn-sm" href="{{ route('espacios.create')}}">
-                        <span class="fa fa-plus">
-                        </span>
-                        Nuevo
-                    </a>
+                     <div class="btn-group pull-right">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" type="button">
+                            Opciones
+                            <span class="caret">
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="" href="{{ route('espacios.create')}}">
+                                    <span class="fa fa-plus">
+                                    </span>
+                                    Nuevo Registro
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" href="{{ route('pdf.espacios') }}" target="_black">
+                                    <i class="fa fa-file-pdf-o">
+                                    </i>
+                                    Descargar PDF
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" href="{{ route('admin.export-espacios') }}">
+                                    <i class="fa fa-file-excel-o">
+                                    </i>
+                                    Exportar Excel
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#myModal" data-toggle="modal">
+                                    <i class="fa fa-upload">
+                                    </i>
+                                    Importar Excel
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="box-body">
-                <div class="row" style="padding-bottom: 5px;">
-                    <div class="col-md-12">
-                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.espacios') }}" target="_black">
-                            <i class="fa fa-file-pdf-o">
-                            </i>
-                            Descargar PDF
-                        </a>
-                    </div>
-                </div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="espacios-table">
                         <thead>
@@ -76,6 +99,42 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">
+                        ×
+                    </span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Importar Datos
+                </h4>
+            </div>
+            <form action="{{ route('admin.import-espacios') }}" enctype="multipart/form-data" method="post">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div>
+                        <label for="file">
+                            Archivo:
+                        </label>
+                        <input class="form-control" id="file" name="file" type="file"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                        Cerrar
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                        Importar
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

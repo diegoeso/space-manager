@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->boolean('confirmacion')->default(0)->nullable();
             $table->integer('tipoCuenta');
             $table->string('telefono', 12)->unzigned()->nullable();
-            $table->string('foto', 120)->dafualt('avatar.png');
+            $table->string('foto', 120)->nullable();
             $table->string('nombreCompleto', 191)->nullable();
             $table->rememberToken();
             $table->timestamps();

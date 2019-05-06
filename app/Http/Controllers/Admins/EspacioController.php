@@ -6,12 +6,15 @@ use App;
 use App\Area;
 use App\CategoriaElemento;
 use App\Espacio;
+use App\Exports\EspaciosExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EspacioRequest;
+use App\Imports\EspaciosImport;
 use App\Solicitud;
 use App\Traits\Alertas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Toastr;
 use Yajra\DataTables\DataTables;
@@ -226,6 +229,18 @@ class EspacioController extends Controller
     {
         $espaciosE = Espacio::pluck('nombre', 'id');
         return view('admins.espacios.estadisticas', compact('espaciosE'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new EspaciosExport, 'espacios.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new EspaciosImport, $request->file('file'));
+        Toastr::success('¡Importación exitosa!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+        return back();
     }
 
 }

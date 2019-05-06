@@ -17,7 +17,7 @@
             Registrarse
         </p>
         {!! Form::open(['route'=>'register', 'method'=>'POST','files' => true ]) !!}
-        {!!Form::text('tipoCuenta', null, ['id'=>'tipoCuenta']) !!}
+        {!!Form::hidden('tipoCuenta', null, ['id'=>'tipoCuenta']) !!}
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group has-feedback">

@@ -26,7 +26,7 @@ class CreateUsuariosTable extends Migration
             $table->string('carrera', 120)->nullable();
             $table->string('semestre', 120)->nullable();
             $table->string('matricula', 120)->nullable();
-            $table->string('foto', 120)->dafualt('avatar.png');
+            $table->string('foto', 120)->nullable();
             $table->string('nombreCompleto', 191)->nullable();
             $table->boolean('confirmacion')->default(0)->nullable();
             $table->string('codigoConfirmacion', 55)->nullable();

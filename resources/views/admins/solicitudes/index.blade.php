@@ -26,24 +26,54 @@
     <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="col-xs-12">
         <div class="box box-primary">
-            @include('general.botonNuevo', ['modulo' => 'Listado de Solicitudes','ruta'=>'solicitudes.create'])
-            <div class="box-body">
-                <div class="row" style="padding-bottom: 5px;">
-                    <div class="col-md-12 ">
-                        <a class="btn bg-navy margin btn-xs pull-right" href="{{ route('pdf.solicitudes') }}" target="_black">
-                            <i class="fa fa-file-pdf-o">
-                            </i>
-                            Descargar PDF
-                        </a>
+
+             <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-list-ul">
+                    </i>
+                    Listado de registros
+                </h3>
+                <div class="box-tools">
+                     <div class="btn-group pull-right">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" type="button">
+                            Opciones
+                            <span class="caret">
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="" href="{{ route('solicitudes.create')}}">
+                                    <span class="fa fa-plus">
+                                    </span>
+                                    Nuevo Registro
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" href="{{ route('pdf.solicitudes') }}" target="_black">
+                                    <i class="fa fa-file-pdf-o">
+                                    </i>
+                                    Descargar PDF
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" href="{{ route('admin.export-solicitud') }}">
+                                    <i class="fa fa-file-excel-o">
+                                    </i>
+                                    Exportar Excel
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+            <div class="box-body">
                 <div class="table-responsive">
                     {{-- @include('general.mensaje') --}}
                     <table class="table table-hover" id="solicitudes-table">
                         <thead>
                             <tr>
                                 <th width="10">
-                                    ID
+                                    No
                                 </th>
                                 <th>
                                     Solicitante
@@ -79,6 +109,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 @section('script')
 <script>

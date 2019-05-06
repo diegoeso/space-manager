@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admins;
 
 use App;
 use App\Area;
+use App\Exports\AreasExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AreaRequest;
+use App\Imports\AreasImport;
 use App\Traits\Alertas;
 use App\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Toastr;
 use Yajra\DataTables\DataTables;
 
 class AreaController extends Controller
@@ -18,7 +22,7 @@ class AreaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['export', 'import']);
         $this->middleware('permission:areas.index')->only('index');
         $this->middleware('permission:areas.create')->only(['create', 'store']);
         $this->middleware('permission:areas.show')->only('show');
@@ -78,8 +82,7 @@ class AreaController extends Controller
     {
 
         $area = Area::find($id);
-        if(!$area)
-        {
+        if (!$area) {
             return abort(404);
         }
         return view('admins.areas.show', compact('area'));
@@ -96,8 +99,7 @@ class AreaController extends Controller
 
         $responsables = User::where('tipoCuenta', '1')->pluck('nombreCompleto', 'id');
         $area         = Area::find($id);
-        if(!$area)
-        {
+        if (!$area) {
             return abort(404);
         }
         return view('admins.areas.edit', compact('area', 'responsables'));
@@ -146,6 +148,7 @@ class AreaController extends Controller
     public function listarAreas($id)
     {
         $areas = Area::all();
+        $cont  = 0;
         return Datatables::of($areas)
             ->editColumn('user_id', function ($areas) {
                 return $areas->responsables->nombre . ' ' . $areas->responsables->apellidoP . ' ' . $areas->responsables->apellidoM;
@@ -169,5 +172,23 @@ class AreaController extends Controller
         $pdf   = PDF::loadView('admins.areas.pdf', ['data' => $data]);
         // return $pdf->stream();
         return $pdf->download('areas_' . $fecha . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new AreasExport, 'areas.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new AreasImport, $request->file('file'));
+            Toastr::success('¡Importación exitosa!', '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            return back();
+        } catch (Exception $e) {
+            Toastr::warning('¡Fallo la importación! Verifique los datos.' . $e, '¡Hecho!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+            return back();
+        }
+
     }
 }

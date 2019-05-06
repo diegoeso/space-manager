@@ -12,6 +12,8 @@ class Elemento extends Model
         'numeroInventario',
         'categoria_id',
         'cantidad',
+        'solicitados',
+        'existencias',
     ];
 
     public function categoriaElemento()

@@ -12,7 +12,7 @@ $factory->define(App\Solicitud::class, function (Faker $faker) {
         'asistentesEstimados' => rand(1, 40),
         'tipoUsuario'         => rand(1, 3),
         'aproboSolicitud'     => 1,
-        'usuarioSolicitud'    => rand(1, 300),
+        'usuarioSolicitud'    => rand(1, 100),
         'area_id'             => rand(1, 6),
         'espacio_id'          => rand(1, 10),
         'estado'              => rand(0, 3),

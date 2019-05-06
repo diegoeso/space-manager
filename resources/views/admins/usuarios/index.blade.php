@@ -43,7 +43,7 @@
                 <div class="row" style="padding-bottom: 5px;">
                     <div class="col-md-12 ">
                         <!-- -->
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button class="btn btn-info dropdown-toggle pull-right" data-toggle="dropdown" type="button">
                                 Opciones
                                 <span class="caret">

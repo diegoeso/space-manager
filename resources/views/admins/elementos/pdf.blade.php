@@ -30,6 +30,9 @@
                     <th>
                         Descripción
                     </th>
+                    <th>
+                        Categoria
+                    </th>
                 </tr>
                 <tbody>
                     @foreach ($data as $elemento)
@@ -42,6 +45,9 @@
                         </td>
                         <td>
                             {{ $elemento->descripcion }}
+                        </td>
+                        <td>
+                            {{ $elemento->categoriaElemento->nombre }}
                         </td>
                     </tr>
                     @endforeach
