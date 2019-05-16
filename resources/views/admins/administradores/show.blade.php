@@ -163,16 +163,32 @@
                         </div>
                     </dl>
                     <dl class="">
-                      <div class="row">
-                        <div class="col-md-6">
-                            <dt>
-                                Creación de registro
-                            </dt>
-                            <dd class="text-capitalize ">
-                                {{ $user->created_at->format('l j F Y') }}
-                            </dd>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <dt>
+                                    Creación de registro
+                                </dt>
+                                <dd class="text-capitalize ">
+                                    {{ $user->created_at->format('l j F Y') }}
+                                </dd>
+                            </div>
+                            <div class="col-md-6">
+                                <dt>
+                                    Areas
+                                </dt>
+                                <dd class="">
+                                    <td>
+                                        <ul>
+                                            @foreach ($user->area as $area)
+                                            <li>
+                                                {{ $area->nombre }}
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                </dd>
+                            </div>
                         </div>
-                      </div>
                     </dl>
                 </div>
             </div>

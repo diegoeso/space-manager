@@ -15,6 +15,11 @@
         <link href="{{ asset('dist/css/skins/_all-skins.min.css') }}" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
         </link>
+        <!-- Morris chart -->
+        <link href="{{ asset('bower_components/morris.js/morris.css') }}" rel="stylesheet"/>
+        <!-- fullCalendar -->
+        <link href="{{ asset('bower_components/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('bower_components/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print" rel="stylesheet"/>
     </head>
     <style>
         html, body {
@@ -96,30 +101,44 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             @if (Route::has('login'))
                             <ul class="nav navbar-nav navbar-right">
-
                                 @if (Auth::guard('web')->check())
-                                    <li>
-                                        <a href="{{ url('/admin') }}">
-                                            Inicio
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="{{ url('/admin') }}">
+                                        Inicio
+                                    </a>
+                                </li>
                                 @elseif(Auth::guard('usuario')->check())
-                                    <li>
-                                        <a href="{{ url('/inicio') }}">
-                                            Inicio
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="{{ url('/inicio') }}">
+                                        Inicio
+                                    </a>
+                                </li>
                                 @else
-                                    <li>
-                                        <a href="{{ route('login') }}">
-                                            Iniciar Sesión
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}">
-                                            Registrarse
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="{{ url('/inicio') }}">
+                                        Eventos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('solicitud.create') }}">
+                                        Solicitudes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('login') }}">
+                                        Iniciar Sesión
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}">
+                                        Registrarse
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('admin/login') }}">
+                                        Administrativos
+                                    </a>
+                                </li>
                                 @endif
                             </ul>
                             @endif
@@ -134,6 +153,9 @@
     <div class="container">
         @yield('content')
     </div>
+    <div>
+        @yield('calendar')
+    </div>
 </div>
 <footer class="main-footer">
     <div class="container">
@@ -144,7 +166,10 @@
             2.0
         </div>
         <strong>
-            Copyright © 2017-2019
+            Copyright © 
+            @php
+               echo date("Y");
+            @endphp
             <a href="https://www.facebook.com/diego.enriqueSO" target="_back">
                 Diego Enrique Sanchez Ordoñez
             </a>

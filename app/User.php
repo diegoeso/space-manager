@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function area()
     {
-        return $this->hasMany(Area::class);
+        return $this->hasMany(Area::class,'user_id');
     }
 
     public function roles()

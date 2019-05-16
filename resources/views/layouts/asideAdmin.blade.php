@@ -435,6 +435,34 @@
                 </span>
             </a>
         </li>
+        @if (Auth::user()->tipoCuenta!=0)
+
+
+         <li>
+            <div class="box box-primary box-solid collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Áreas administradas
+                </h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                        <i class="fa fa-plus">
+                        </i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body" style="display: none;">
+                <ul>
+                    @foreach (Auth::user()->area as $area)
+                    <li>
+                        {{ $area->nombre }}
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        </li>
+        @endif
     </ul>
 </section>
 <!-- /.sidebar -->

@@ -192,7 +192,8 @@ class SolicitudController extends Controller
         if (!$solicitud) {
             return abort(404);
         }
-
+        
+        $bandera   = $this->authorize('res_pass', $solicitud);
         $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
         $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
         $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));

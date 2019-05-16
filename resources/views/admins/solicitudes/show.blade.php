@@ -203,6 +203,7 @@
                             <br/>
                             {{ $solicitud->actividadAcademica }}
                         </p>
+
                         @if ($solicitud->estado !=3)
                         <div class="row">
                             @can('solicitudes.confirmar')
@@ -436,6 +437,7 @@
                 <div class="box box-widget">
                     <div class="box-header with-border">
                         <div class="user-block">
+                            {{-- {{ $solicitud->area->nombre }} --}}
                             <img alt="User Image" class="img-circle" src="{{ Storage::url
                             ($solicitud->tipoUsuario($solicitud)->foto) }}">
                                 <span class="username">
