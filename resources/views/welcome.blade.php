@@ -7,15 +7,15 @@
 @section('calendar')
 <div class="container-fluid">
     <div class="row">
-    <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-body no-padding">
-                <div class="fc fc-unthemed fc-ltr" id="calendar">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body no-padding">
+                    <div class="fc fc-unthemed fc-ltr" id="calendar">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 @endsection
@@ -47,13 +47,13 @@
                     $(".fc-prev-button").prop('disabled', false);
                 }
                 // futuro
-                if (maxDate >= currentView.start && maxDate <= currentView.end) {
-                    $(".fc-next-button").prop('disabled', true);
-                    $(".fc-next-button").addClass('fc-state-disabled');
-                } else {
-                    $(".fc-next-button").removeClass('fc-state-disabled');
-                    $(".fc-next-button").prop('disabled', false);
-                }
+                // if (maxDate >= currentView.start && maxDate <= currentView.end) {
+                //     $(".fc-next-button").prop('disabled', true);
+                //     $(".fc-next-button").addClass('fc-state-disabled');
+                // } else {
+                //     $(".fc-next-button").removeClass('fc-state-disabled');
+                //     $(".fc-next-button").prop('disabled', false);
+                // }
             },
 
             defaultView: 'agendaWeek',
@@ -87,43 +87,44 @@
             selectable: true,
             selectHelper: true,
             select: function(start, end) {
-                var fechaActual=moment().format('L');
-                var fechaActual2 = moment(fechaActual, "DD-MM-YYYY");
+                toastr["info"]("Inicia sesion para realizar la solicitud <br/><a href='{{ route('login') }}' type='button' class='btn btn-primary'>Login</button>");
+                // var fechaActual=moment().format('L');
+                // var fechaActual2 = moment(fechaActual, "DD-MM-YYYY");
                 
-                var fechaActual3 = moment(fechaActual, "DD-MM-YYYY HHmm");
+                // var fechaActual3 = moment(fechaActual, "DD-MM-YYYY HHmm");
 
-                var fechaSeleccionada=moment(start).format('L');
-                var fechaSeleccionada2=moment(fechaSeleccionada, "DD-MM-YYYY");
-                var fechaSeleccionadaFin=moment(end).format('L');
-                var horaActual=moment().format('HHmm');
-                var horaSeleccionada=moment(start).format('HHmm');
-                var horaSeleccionadaFin=moment(end).format('HHmm');
+                // var fechaSeleccionada=moment(start).format('L');
+                // var fechaSeleccionada2=moment(fechaSeleccionada, "DD-MM-YYYY");
+                // var fechaSeleccionadaFin=moment(end).format('L');
+                // var horaActual=moment().format('HHmm');
+                // var horaSeleccionada=moment(start).format('HHmm');
+                // var horaSeleccionadaFin=moment(end).format('HHmm');
                 
-                if (fechaSeleccionada==fechaSeleccionadaFin) {
-                    if (fechaSeleccionada2<=fechaActual2) {
-                        if(horaSeleccionada<=horaActual){
-                            toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
-                        }else{
-                            $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
-                            var fecha = new Date(end);
-                            var fin = fecha.setDate(fecha.getDate());
-                            $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
-                            $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
-                            $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
-                            $('#ModalAdd').modal('show');
-                        }
-                    }else{
-                        $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
-                        var fecha = new Date(end);
-                        var fin = fecha.setDate(fecha.getDate());
-                        $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
-                        $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
-                        $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
-                        $('#ModalAdd').modal('show');
-                    }
-                }else{
-                    toastr["error"]("Rango de fechas no valido.");
-                }
+                // if (fechaSeleccionada==fechaSeleccionadaFin) {
+                //     if (fechaSeleccionada2<=fechaActual2) {
+                //         if(horaSeleccionada<=horaActual){
+                //             toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
+                //         }else{
+                //             $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
+                //             var fecha = new Date(end);
+                //             var fin = fecha.setDate(fecha.getDate());
+                //             $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
+                //             $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
+                //             $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
+                //             $('#ModalAdd').modal('show');
+                //         }
+                //     }else{
+                //         $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
+                //         var fecha = new Date(end);
+                //         var fin = fecha.setDate(fecha.getDate());
+                //         $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
+                //         $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
+                //         $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
+                //         $('#ModalAdd').modal('show');
+                //     }
+                // }else{
+                //     toastr["error"]("Rango de fechas no valido.");
+                // }
             },
         });
 </script>
