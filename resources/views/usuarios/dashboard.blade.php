@@ -659,6 +659,7 @@
             lang: 'es',
             minTime: "07:00:00",
             maxTime: "18:00",
+            contentHeight: auto,
             hiddenDays: [ 0 ],
             header    : {
                 left  : 'prev,next today',
@@ -687,18 +688,7 @@
                 var fechaSeleccionadaFin=moment(end).format('L');
                 var horaActual=moment().format('HHmm');
                 var horaSeleccionada=moment(start).format('HHmm');
-                // if (fechaSeleccionada==fechaSeleccionadaFin) {
-                //     if (fechaSeleccionada2<=fechaActual2) {
-                //     toastr["error"]("No se pueden realizar solicitud de espacios con fechas u hora pasadas.");
-                //     }else{
-                //         $('#ModalAdd #fechaInicio').val(moment(start).format('YYYY-MM-DD'));
-                //         var fecha = new Date(end);
-                //         var fin = fecha.setDate(fecha.getDate());
-                //         $('#ModalAdd #fechaFin').val(moment(fin).format('YYYY-MM-DD'));
-                //         $('#ModalAdd #horaInicio').val(moment(start).format('HH:mm'));
-                //         $('#ModalAdd #horaFin').val(moment(end).format('HH:mm'));
-                //         $('#ModalAdd').modal('show');
-                //     }
+
                 if (fechaSeleccionada==fechaSeleccionadaFin) {
                     if (fechaSeleccionada2<=fechaActual2) {
                         if(horaSeleccionada<=horaActual){

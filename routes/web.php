@@ -216,3 +216,7 @@ Route::get('evaluaciones/listarEvaluaciones/{id}', 'Admins\EvaluacionesControlle
 Route::get('grafica/solicitudes', 'Admins\AJAXController@solicitudesGrafica')->name('solicitudesGrafica');
 
 Route::get('grafica/evaluaciones-usuario', 'Admins\AJAXController@evaluacionesUsuarios')->name('evaluacionesUsuarios');
+
+// Calendario en vista welcome
+Route::get('calendar/{carrera}', 'CalendarController@welcome_calendar')->name('calendar');
+Route::get('mostrar_evento/{id}', 'CalendarController@mostrar_evento')->name('evento');

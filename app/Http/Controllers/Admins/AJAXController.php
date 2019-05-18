@@ -16,7 +16,7 @@ class AJAXController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:usuario,web')->except('solicitudesFullCalendar');
+        $this->middleware('auth:usuario,web')->except(['solicitudesFullCalendar', 'mostrarSolicitud']);
     }
     // Espacios
 
