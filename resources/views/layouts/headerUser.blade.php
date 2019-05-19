@@ -42,7 +42,7 @@
                                     <a href="{{ route('solicitud.ver',$notificacion->id) }}">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="{{ Storage::url($notificacion->solicitud->aprobo->foto) }}" width="35px"/>
+                                                <img src="{{ Storage::url($notificacion->solicitud->aprobo->foto) ? Storage::url($notificacion->solicitud->aprobo->foto) : asset('img/userA.png') }}" width="35px"/>
                                             </div>
                                             <div class="col-md-6">
                                                 <strong>

@@ -659,7 +659,6 @@
             lang: 'es',
             minTime: "07:00:00",
             maxTime: "18:00",
-            contentHeight: auto,
             hiddenDays: [ 0 ],
             header    : {
                 left  : 'prev,next today',

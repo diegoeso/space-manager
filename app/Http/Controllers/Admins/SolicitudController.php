@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use Toastr;
 use Yajra\DataTables\DataTables;
 
 class SolicitudController extends Controller
@@ -41,7 +42,7 @@ class SolicitudController extends Controller
         $this->middleware('permission:solicitudes.show')->only('show');
         $this->middleware('permission:solicitudes.edit')->only(['edit', 'update']);
         $this->middleware('permission:solicitudes.destroy')->only('destroy');
-        $this->middleware('permission:solicitudes.aprobar')->only('aprobar');
+        $this->middleware('permission:solicitudes.confirmar')->only('aprobar');
         $this->middleware('permission:solicitudes.rechazar')->only('rechazar');
         $this->middleware('permission:solicitudes.cancelar')->only('cancelar');
         Carbon::setLocale('es');
@@ -192,25 +193,60 @@ class SolicitudController extends Controller
         if (!$solicitud) {
             return abort(404);
         }
-        
-        $bandera   = $this->authorize('res_pass', $solicitud);
-        $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
-        $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
-        $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
-        $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
-        $data['espacio_id']  = $solicitud->espacio_id;
-        $data['estado']      = $solicitud->estado;
-        $total               = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
-        $bandera             = null;
-        if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
-            $bandera = 0;
-            return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
-        } else {
-            $solicitudesPendientes = Solicitud::registroTranslapado($data);
-            $bandera               = 1;
-            return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
+
+        // dd(Auth::user()->area);
+
+        // $bandera   = $this->authorize('res_pass', $solicitud);
+        switch (Auth::user()->tipoCuenta) {
+            case 0:
+                $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
+                $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
+                $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
+                $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
+                $data['espacio_id']  = $solicitud->espacio_id;
+                $data['estado']      = $solicitud->estado;
+                $total               = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
+                $bandera             = null;
+                if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
+                    $bandera = 0;
+                    return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
+                } else {
+                    $solicitudesPendientes = Solicitud::registroTranslapado($data);
+                    $bandera               = 1;
+                    return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
+                }
+                break;
+
+            case 1:
+
+                for ($i = 0; $i < count(Auth::user()->area); $i++) {
+                    if (Auth::user()->area[$i]->id == $solicitud->area_id) {
+                        $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
+                        $data['fechaFin']    = date("Y-m-d", strtotime($solicitud->fechaFin));
+                        $data['horaInicio']  = date("H:i:s", strtotime($solicitud->horaInicio));
+                        $data['horaFin']     = date("H:i:s", strtotime($solicitud->horaFin));
+                        $data['espacio_id']  = $solicitud->espacio_id;
+                        $data['estado']      = $solicitud->estado;
+                        $total               = Evaluaciones::where('estado', 1)->orderBy('evaluado')->orderBy('solicitud_id')->get();
+                        $bandera             = null;
+                        if ($solicitud->estado == 1 || $solicitud->estado == 2 || $solicitud->estado == 3) {
+                            $bandera = 0;
+                            return view('admins.solicitudes.show', compact('solicitud', 'bandera', 'total'));
+                        } else {
+                            $solicitudesPendientes = Solicitud::registroTranslapado($data);
+                            $bandera               = 1;
+                            return view('admins.solicitudes.show', compact('solicitudesPendientes', 'bandera', 'total'));
+                        }
+                    } 
+               }
+
+                Toastr::warning('Esta solicitud no corresponde al área que administra', '¡Alerta!', ["positionClass" => "toast-top-right", "closeButton" => 'true', "progressBar" => 'true']);
+                        return back();
+                
+                break;
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -2,7 +2,6 @@
 @section('navegacion')
 <section class="content-header">
     <h1>
-        {{-- @include('general.tipoUsuario') --}}
         <small>
             Panel de Control
         </small>
@@ -203,9 +202,9 @@
                             <br/>
                             {{ $solicitud->actividadAcademica }}
                         </p>
-
                         @if ($solicitud->estado !=3)
                         <div class="row">
+                            
                             @can('solicitudes.confirmar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <a class="btn btn-success btn-xs btn-block" href="{{ route('solicitudes.aprobar', $solicitud->id) }}" type="button">
@@ -214,7 +213,7 @@
                                     Aprobar
                                 </a>
                             </div>
-                            @endcan
+                            @endcan    
                             
                             @can('solicitudes.rechazar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">

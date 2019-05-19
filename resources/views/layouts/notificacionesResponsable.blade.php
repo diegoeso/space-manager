@@ -14,16 +14,15 @@
         <li>
             <ul class="menu">
                 @foreach ($notificacionesAprobadas as $notificacion)
-                {{-- @if ($notificacion->solicitud->area->user_id == Auth::user()->id) --}}
                 <li>
                     <input name="notifiacion_id" type="hidden" value="{{ $notificacion->id }}"/>
                     <a href="{{ route('solicitudes.ver',$notificacion->id) }}">
                         <div class="row">
                             <div class="col-md-2">
                                 @if ($notificacion->solicitud->tipoUsuario==0||$notificacion->solicitud->tipoUsuario==1)
-                                <img src="{{ Storage::url($notificacion->solicitud->solicitanteAdmin->foto) }}" width="35px"/>
+                                <img src="{{ Storage::url($notificacion->solicitud->solicitanteAdmin->foto) ?: asset('img/user.png') }}" width="35px"/>
                                 @else
-                                <img src="{{ Storage::url($notificacion->solicitud->solicitante->foto) }}" width="35px"/>
+                                <img src="{{ Storage::url($notificacion->solicitud->solicitante->foto) ?: asset('img/user.png') }}" width="35px"/>
                                 @endif
                             </div>
                             <div class="col-md-6">

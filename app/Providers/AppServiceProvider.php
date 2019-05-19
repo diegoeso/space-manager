@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Schema::defaultStringLength(120);
+
         // notificaciones de solicitudes para administrativos
         view()->composer('layouts.headerAdmin', function ($view) {
             $view->with('notificaciones', \App\Notificacion::whereHas('solicitud', function ($query) {
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('notificacionesAprobadas', \App\Notificacion::whereHas('solicitud', function ($query) {
                 $query->where('usuarioSolicitud', '!=', Auth::user()->id)
                     ->where('estado', 1)
+                    ->Orwhere('estado', 0)
                     ->whereHas('area', function ($query) {
                         $query->where('user_id', Auth::user()->id)
                             ->groupBy('user_id')
