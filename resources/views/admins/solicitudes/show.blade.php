@@ -204,7 +204,7 @@
                         </p>
                         @if ($solicitud->estado !=3)
                         <div class="row">
-                            
+                            @if (!$solicitud->estado==1)
                             @can('solicitudes.confirmar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <a class="btn btn-success btn-xs btn-block" href="{{ route('solicitudes.aprobar', $solicitud->id) }}" type="button">
@@ -213,8 +213,8 @@
                                     Aprobar
                                 </a>
                             </div>
-                            @endcan    
-                            
+                            @endcan        
+                            @endif
                             @can('solicitudes.rechazar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <button class="btn btn-warning btn-xs btn-block" data-target="#rechazar" data-toggle="modal" type="button">
@@ -604,6 +604,7 @@
                         @if ($solicitud->estado !=4)
                         <div class="row">
                             {{-- btn aprobar --}}
+                            @if (!$solicitud->estado==1)
                             @can('solicitudes.confirmar')
                             <div class="col-md-3 col-xs-6 col-sm-3" style="margin-top: 5px">
                                 <a class="btn btn-success btn-xs btn-block" href="{{ route('solicitudes.aprobar', $solicitud->id) }}" type="button">
@@ -612,7 +613,8 @@
                                     Aprobar
                                 </a>
                             </div>
-                            @endcan
+                            @endcan        
+                            @endif
                             
                             {{-- btn rechazar --}}
                             @can('solicitudes.rechazar')
