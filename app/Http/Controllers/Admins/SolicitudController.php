@@ -193,10 +193,6 @@ class SolicitudController extends Controller
         if (!$solicitud) {
             return abort(404);
         }
-
-        // dd(Auth::user()->area);
-
-        // $bandera   = $this->authorize('res_pass', $solicitud);
         switch (Auth::user()->tipoCuenta) {
             case 0:
                 $data['fechaInicio'] = date("Y-m-d", strtotime($solicitud->fechaInicio));
