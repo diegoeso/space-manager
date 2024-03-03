@@ -48,7 +48,7 @@ class SolicitudController extends Controller
     public function create()
     {
         $areas = Area::pluck('nombre', 'id');
-        return view('usuarios.solicitudes.create', compact('areas', 'solicitudes'));
+        return view('usuarios.solicitudes.create', compact('areas'));
     }
 
     /**
