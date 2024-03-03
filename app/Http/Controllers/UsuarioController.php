@@ -30,7 +30,7 @@ class UsuarioController extends Controller
         $solicitudes  = Solicitud::where('usuarioSolicitud', $id)->get();
         $evaluaciones = Evaluaciones::where('evaluado', Auth::user()->id)->where('estado', 1)->get();
         $mensajes     = Mensaje::where('leido', 0)->where('para', Auth::user()->id)->get();
-        return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'solicitudElementos', 'evaluaciones', 'mensajes'));
+        return view('usuarios.dashboard', compact('solicitudes', 'areasE', 'evaluaciones', 'mensajes'));
     }
 
     public function confirmarCuenta()

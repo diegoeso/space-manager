@@ -6,7 +6,7 @@ use Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-
+use DB;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        DB::connection()
+            ->getDoctrineSchemaManager()
+            ->getDatabasePlatform()
+            ->registerDoctrineTypeMapping('enum', 'string');
 
         Route::resourceVerbs([
             'create' => 'crear',
