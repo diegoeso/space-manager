@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'telefono'       => '',
             'nombreCompleto' => 'Administrador',
         ]);
+        
         App\User::create([
             'nombre'         => 'Responsable de Área',
             'apellidoP'      => 'Responsable',

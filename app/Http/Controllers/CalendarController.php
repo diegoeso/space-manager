@@ -11,6 +11,7 @@ class CalendarController extends Controller
         $calendar = Solicitud::where('estado', 1)
             ->where('tipoRegistro', 0)
             ->get();
+        
         $calendarioEscolar = Solicitud::where('carrera', $carrera)
             ->where('tipoRegistro', 1)
             ->orderBy('fechaInicio', 'ACS')
